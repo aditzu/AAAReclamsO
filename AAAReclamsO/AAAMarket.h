@@ -14,12 +14,19 @@
 //@end
 
 @interface AAAMarket : NSObject
+{
+    
+}
+
+@property(nonatomic, strong) NSString* identifier;
+@property(nonatomic, strong) NSString* logoURL;
+@property(nonatomic, strong) NSString* miniLogoURL;
 
 @property(nonatomic, strong) NSString* name;
-@property(nonatomic, strong) UIImage* imgLogo;
-@property(nonatomic, strong) UIImage* imgLogoLandscape;
+//@property(nonatomic, strong) UIImage* imgLogo;
+//@property(nonatomic, strong) UIImage* imgLogoLandscape;
 @property(nonatomic, strong) NSMutableArray* catalogs;
 
-+(instancetype)marketWithName:(NSString *)title andLogoImage:(UIImage*) img;
+//+(instancetype)marketWithName:(NSString *)title andLogoImage:(UIImage*) img;
 
 @end

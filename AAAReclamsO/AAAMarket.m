@@ -10,13 +10,15 @@
 
 @implementation AAAMarket
 
-+(instancetype)marketWithName:(NSString *)title andLogoImage:(UIImage*) img
-{
-    AAAMarket* market = [[AAAMarket alloc] init];
-    market.name = title;
-    market.imgLogo = img;
-    market.catalogs = [NSMutableArray array];
-    return market;
-}
+@synthesize name, miniLogoURL, logoURL, identifier;
+
+//+(instancetype)marketWithName:(NSString *)title andLogoImageName:(UIImage*) img
+//{
+//    AAAMarket* market = [[AAAMarket alloc] init];
+//    market.name = title;
+//    market.imgLogo = img;
+//    market.catalogs = [NSMutableArray array];
+//    return market;
+//}
 
 @end

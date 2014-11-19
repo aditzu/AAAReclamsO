@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AAACatalogVC.h"
-#import "AAAJsObjCWrapper.h"
 
 @interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents>
 

@@ -9,6 +9,7 @@
 #import "AAAMarketsCatalogsVC.h"
 #import "AAACatalog.h"
 #import "AAAMarket.h"
+#import "AAAwww.h"
 
 @interface AAAMarketsCatalogsVC()
 {
@@ -20,7 +21,7 @@
     NSMutableArray* currentShowingCatalogs;
     UIView* containerViewOfShownCatalog;
     
-    AAAJsObjCWrapper* jsWrapper;
+    AAAwww* www;
 }
 @end
 
@@ -30,50 +31,51 @@
 {
     [super viewDidLoad];
     
-    markets = [NSMutableArray array];
-    NSArray* coraImgs = @[@"cora-01 11:17:2014.jpeg",@"cora 2-02 11:17:2014.jpeg",@"cora 3-03 11:17:2014.jpeg",@"cora 4-04 11:17:2014.jpeg", @"cora 5-05 11:17:2014.jpeg", @"cora 6-06 11:17:2014.jpeg", @"cora 7-07 11:17:2014.jpeg"];
-    AAACatalog* coraCatalog = [AAACatalog catalogWithCover:[UIImage imageNamed:@"cora-01 11:17:2014.jpeg"] andImageUrls:coraImgs];
-    AAAMarket* coraMarket = [AAAMarket marketWithName:@"Cora" andLogoImage:[UIImage imageNamed:@"cora_logo_squared.jpeg"]];
-    coraMarket.imgLogoLandscape = [UIImage imageNamed:@"cora_logo_horizontal.png"];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [coraMarket.catalogs addObject:coraCatalog];
-    [markets addObject:coraMarket];
+//    markets = [NSMutableArray array];
+//    NSArray* coraImgs = @[@"cora-01 11:17:2014.jpeg",@"cora 2-02 11:17:2014.jpeg",@"cora 3-03 11:17:2014.jpeg",@"cora 4-04 11:17:2014.jpeg", @"cora 5-05 11:17:2014.jpeg", @"cora 6-06 11:17:2014.jpeg", @"cora 7-07 11:17:2014.jpeg"];
+//    AAACatalog* coraCatalog = [AAACatalog catalogWithCover:[UIImage imageNamed:@"cora-01 11:17:2014.jpeg"] andImageUrls:coraImgs];
+//    AAAMarket* coraMarket = [AAAMarket marketWithName:@"Cora" andLogoImage:[UIImage imageNamed:@"cora_logo_squared.jpeg"]];
+////    coraMarket.imgLogoLandscape = [UIImage imageNamed:@"cora_logo_horizontal.png"];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [coraMarket.catalogs addObject:coraCatalog];
+//    [markets addObject:coraMarket];
+//    
+//    NSArray* carrefourImgs = @[@"carrefour-01 11:17:2014.jpeg", @"carrefour 2-02 11:17:2014.jpeg", @"carrefour 3-03 11:17:2014.jpeg", @"carrefour 4-04 11:17:2014.jpeg", @"carrefour 5-05 11:17:2014.jpeg", @"carrefour 6-06 11:17:2014.jpeg", @"carrefour 7-07 11:17:2014.jpeg"];
+//    
+//    AAAMarket* carrefourMarket = [AAAMarket marketWithName:@"Carrefour" andLogoImage:[UIImage imageNamed:@"carrefour_logo_squared.jpeg"]];
+////    carrefourMarket.imgLogoLandscape = [UIImage imageNamed:@"carrefour_logo_horizontal.png"];
+//    AAACatalog* carrefourCatalog = [AAACatalog catalogWithCover:[UIImage imageNamed:@"carrefour-01 11:17:2014.jpeg"] andImageUrls:carrefourImgs];
+//    [carrefourMarket.catalogs addObject:carrefourCatalog];
+//    [carrefourMarket.catalogs addObject:carrefourCatalog];
+//    [markets addObject:carrefourMarket];
+//    
+//    NSArray* kauflandImags = @[@"kaufland 225-01 11:17:2014.jpeg", @"kaufland 226-02 11:17:2014.jpeg", @"kaufland 227-03 11:17:2014.jpeg", @"kaufland 228-04 11:17:2014.jpeg", @"kaufland 229-05 11:17:2014.jpeg", @"kaufland 230-06 11:17:2014.jpeg", @"kaufland 231-07 11:17:2014.jpeg"];
+//    
+//    AAAMarket* kauflandMarket = [AAAMarket marketWithName:@"Kaufland" andLogoImage:[UIImage imageNamed:@"kaufland_logo_squared.jpg"]];
+////    kauflandMarket.imgLogoLandscape = [UIImage imageNamed:@"kaufland_logo_horizontal.png"];
+//    AAACatalog* kauflandCatalog = [AAACatalog catalogWithCover:[UIImage imageNamed:@"kaufland 225-01 11:17:2014.jpeg"] andImageUrls:kauflandImags];
+//    [kauflandMarket.catalogs addObject:kauflandCatalog];
+//    [markets addObject:kauflandMarket];
+//    [markets addObject:kauflandMarket];
+//    [markets addObject:kauflandMarket];
     
-    NSArray* carrefourImgs = @[@"carrefour-01 11:17:2014.jpeg", @"carrefour 2-02 11:17:2014.jpeg", @"carrefour 3-03 11:17:2014.jpeg", @"carrefour 4-04 11:17:2014.jpeg", @"carrefour 5-05 11:17:2014.jpeg", @"carrefour 6-06 11:17:2014.jpeg", @"carrefour 7-07 11:17:2014.jpeg"];
-    
-    AAAMarket* carrefourMarket = [AAAMarket marketWithName:@"Carrefour" andLogoImage:[UIImage imageNamed:@"carrefour_logo_squared.jpeg"]];
-    carrefourMarket.imgLogoLandscape = [UIImage imageNamed:@"carrefour_logo_horizontal.png"];
-    AAACatalog* carrefourCatalog = [AAACatalog catalogWithCover:[UIImage imageNamed:@"carrefour-01 11:17:2014.jpeg"] andImageUrls:carrefourImgs];
-    [carrefourMarket.catalogs addObject:carrefourCatalog];
-    [carrefourMarket.catalogs addObject:carrefourCatalog];
-    [markets addObject:carrefourMarket];
-    
-    NSArray* kauflandImags = @[@"kaufland 225-01 11:17:2014.jpeg", @"kaufland 226-02 11:17:2014.jpeg", @"kaufland 227-03 11:17:2014.jpeg", @"kaufland 228-04 11:17:2014.jpeg", @"kaufland 229-05 11:17:2014.jpeg", @"kaufland 230-06 11:17:2014.jpeg", @"kaufland 231-07 11:17:2014.jpeg"];
-    
-    AAAMarket* kauflandMarket = [AAAMarket marketWithName:@"Kaufland" andLogoImage:[UIImage imageNamed:@"kaufland_logo_squared.jpg"]];
-    kauflandMarket.imgLogoLandscape = [UIImage imageNamed:@"kaufland_logo_horizontal.png"];
-    AAACatalog* kauflandCatalog = [AAACatalog catalogWithCover:[UIImage imageNamed:@"kaufland 225-01 11:17:2014.jpeg"] andImageUrls:kauflandImags];
-    [kauflandMarket.catalogs addObject:kauflandCatalog];
-    [markets addObject:kauflandMarket];
-    [markets addObject:kauflandMarket];
-    [markets addObject:kauflandMarket];
-    
-    [self addTheMarkets];
-    currentShowingMarket = markets[0];
-    [self setTheCatalogsForMarket:currentShowingMarket];
-    [self addTapGestureRecognizerToScrollView];
-    
-    jsWrapper = [AAAJsObjCWrapper instance];
-    [jsWrapper downloadMarketsWithCompletionHandler:^(NSArray *markets) {
-        NSLog(@"YOlo ca merge:D ");
+    www = [AAAwww instance];
+    [www downloadMarketsWithCompletionHandler:^(NSArray *_markets, NSError* error) {
+        markets = [NSMutableArray arrayWithArray:_markets];
+        NSLog(@"YOlo ca merge:D %i, Error:%@", _markets.count, error);
+        [self addTheMarkets];
+        currentShowingMarket = markets[0];
+        [self setTheCatalogsForMarket:currentShowingMarket];
+        [self addTapGestureRecognizerToScrollView];
     }];
+    
 }
 
 -(void) addTheMarkets
@@ -87,7 +89,7 @@
         UIView* marketView = [[UIView alloc] initWithFrame:CGRectMake(i * viewSize.width + border, border, viewSize.width - (border*2), viewSize.height - (border*2))];
         UIButton* btn = [[UIButton alloc] initWithFrame:marketView.bounds];
         [btn setBackgroundColor:[UIColor grayColor]];
-        [btn setBackgroundImage:market.imgLogo forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:market.miniLogoURL] forState:UIControlStateNormal];
         btn.tag = i;
         [btn addTarget:self action:@selector(marketButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [marketView addSubview:btn];
