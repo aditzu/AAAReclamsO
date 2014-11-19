@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AAACatalogVC.h"
-#import "AAAJsObjCBridge.h"
+#import "AAAJsObjCWrapper.h"
 
-@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, AAAJsCallbacksDelegate>
+@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents>
 
 @end

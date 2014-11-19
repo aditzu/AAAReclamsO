@@ -19,6 +19,8 @@
     AAAMarket* currentShowingMarket;
     NSMutableArray* currentShowingCatalogs;
     UIView* containerViewOfShownCatalog;
+    
+    AAAJsObjCWrapper* jsWrapper;
 }
 @end
 
@@ -68,15 +70,10 @@
     [self setTheCatalogsForMarket:currentShowingMarket];
     [self addTapGestureRecognizerToScrollView];
     
-    [[AAAJsObjCBridge instance] addDelegate:self];
-    [[AAAJsObjCBridge instance] registerForFunctionCallbackWithSelector:@selector(callbackFromJS:)];
-//    [[AAAJsObjCBridge instance] callJsFunction:@"getMarkets" withArguments:@[] onGlobalObject:@"marks"];
-//    [[AAAJsObjCBridge instance] callJsFunction:@"getMarkets" withParams:@[]];
-}
-
--(void) callbackFromJS:(NSString*) data
-{
-    
+    jsWrapper = [AAAJsObjCWrapper instance];
+    [jsWrapper downloadMarketsWithCompletionHandler:^(NSArray *markets) {
+        NSLog(@"YOlo ca merge:D ");
+    }];
 }
 
 -(void) addTheMarkets
@@ -123,7 +120,9 @@
         AAACatalogVC* catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
         catalogVC.catalog = catalog;
         UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(i * viewSize.width + (border * (2 * i + 1)), border/2, viewSize.width, viewSize.height)];
-        CGSize scaleSize = CGSizeMake(containerView.frame.size.width/catalogVC.view.frame.size.width, containerView.frame.size.height/catalogVC.view.frame.size.height);
+        CGRect catalogVCFrame = catalogVC.view.frame;
+//        catalogVCFrame.size.height = 519;//hardcoded, it is not loaded here yet. it's 568
+        CGSize scaleSize = CGSizeMake(containerView.frame.size.width/catalogVCFrame.size.width, containerView.frame.size.height/catalogVCFrame.size.height);
         catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
         catalogVC.view.frame = containerView.bounds;
         [containerView addSubview:catalogVC.view];
@@ -164,8 +163,6 @@
 
 -(void)closeCatalogVC:(AAACatalogVC *)catalogVC
 {
-    
-        [[AAAJsObjCBridge instance] callJsFunction:@"getMarkets" withParams:@[]];
     for (UITapGestureRecognizer* tapGesture in catalogsScrollView.gestureRecognizers) {
         tapGesture.enabled = YES;
     }
@@ -179,5 +176,4 @@
         [containerViewOfShownCatalog addSubview:catalogVC.view];
     }];
 }
-
 @end

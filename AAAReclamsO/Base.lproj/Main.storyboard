@@ -96,7 +96,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Pm5-MQ-5Fa">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
@@ -114,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WBk-JE-1YY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="-1208"/>
+            <point key="canvasLocation" x="1259" y="-1168"/>
         </scene>
         <!--Item-->
         <scene sceneID="JvL-ch-6YE">
@@ -189,7 +189,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="S1g-0i-mn7">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="310" height="20"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1gd-HH-aKl">
@@ -216,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iBv-1Z-RQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1913" y="-1040"/>
+            <point key="canvasLocation" x="1785" y="-1144"/>
         </scene>
         <!--Item-->
         <scene sceneID="NNA-v4-Kk5">
@@ -254,7 +254,6 @@
         <!--Item-->
         <scene sceneID="jqU-co-kac">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uVl-g4-tJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="idf-CE-c5f" customClass="AAAMarketsTableVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yjp-ra-mFU"/>
@@ -329,8 +328,9 @@
                         <outlet property="containerView" destination="e4Z-dh-clC" id="MxW-VC-vrV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uVl-g4-tJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1330" y="363"/>
+            <point key="canvasLocation" x="162" y="-1122"/>
         </scene>
         <!--Item-->
         <scene sceneID="OtW-N7-FkU">
@@ -422,7 +422,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="4uG-Av-5Np"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -433,7 +433,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRm-jp-EpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008" y="-329.5"/>
+            <point key="canvasLocation" x="1180" y="338.5"/>
         </scene>
         <!--Catalog PageVC-->
         <scene sceneID="KxC-Fd-Xtc">
@@ -452,7 +452,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.9450981021" green="0.2117647231" blue="0.31764706970000001" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="519"/>
@@ -462,7 +462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRU-lX-aWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2464" y="-514"/>
+            <point key="canvasLocation" x="1665" y="322.5"/>
         </scene>
     </scenes>
     <resources>

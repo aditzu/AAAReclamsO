@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9E2650CA1A11192F005B546B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2650C91A11192F005B546B /* main.m */; };
 		9E2650CD1A11192F005B546B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2650CC1A11192F005B546B /* AppDelegate.m */; };
-		9E2650D01A11192F005B546B /* AAAMarketsTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2650CF1A11192F005B546B /* AAAMarketsTableVC.m */; };
-		9E2650D31A11192F005B546B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2650D21A11192F005B546B /* SecondViewController.m */; };
 		9E2650D61A11192F005B546B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E2650D41A11192F005B546B /* Main.storyboard */; };
 		9E2650D81A11192F005B546B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E2650D71A11192F005B546B /* Images.xcassets */; };
 		9E2650DB1A11192F005B546B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2650D91A11192F005B546B /* LaunchScreen.xib */; };
@@ -19,7 +17,6 @@
 		9E2650F51A1119CE005B546B /* interface.js in Resources */ = {isa = PBXBuildFile; fileRef = 9E2650F21A1119CE005B546B /* interface.js */; };
 		9E2650F61A1119CE005B546B /* markets.js in Resources */ = {isa = PBXBuildFile; fileRef = 9E2650F31A1119CE005B546B /* markets.js */; };
 		9E2651411A120B60005B546B /* AAAMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651401A120B60005B546B /* AAAMarket.m */; };
-		9E2651471A127239005B546B /* AAAMarketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651461A127239005B546B /* AAAMarketTableViewCell.m */; };
 		9E2651531A127396005B546B /* AAACatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651521A127396005B546B /* AAACatalog.m */; };
 		9E26515E1A134C64005B546B /* carrefour_logo_squared.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515A1A134C64005B546B /* carrefour_logo_squared.jpeg */; };
 		9E26515F1A134C64005B546B /* catalog_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515B1A134C64005B546B /* catalog_cover.png */; };
@@ -27,9 +24,22 @@
 		9E2651611A134C64005B546B /* kaufland_logo_squared.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515D1A134C64005B546B /* kaufland_logo_squared.jpg */; };
 		9E2651631A134C7C005B546B /* kaufland.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9E2651621A134C7C005B546B /* kaufland.pdf */; };
 		9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651651A136FD6005B546B /* AAACatalogVC.m */; };
+		9E7172D61A1C92410078870E /* AAAJsObjCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAJsObjCWrapper.m */; };
+		9E7172F71A1CAD340078870E /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D91A1CAD340078870E /* Base64.m */; };
+		9E7172F81A1CAD340078870E /* UNIBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172DC1A1CAD340078870E /* UNIBaseRequest.m */; };
+		9E7172F91A1CAD340078870E /* UNIBodyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172DE1A1CAD340078870E /* UNIBodyRequest.m */; };
+		9E7172FA1A1CAD340078870E /* UNISimpleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172E01A1CAD340078870E /* UNISimpleRequest.m */; };
+		9E7172FB1A1CAD340078870E /* UNIHTTPBinaryResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172E31A1CAD340078870E /* UNIHTTPBinaryResponse.m */; };
+		9E7172FC1A1CAD340078870E /* UNIHTTPJsonResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172E51A1CAD340078870E /* UNIHTTPJsonResponse.m */; };
+		9E7172FD1A1CAD340078870E /* UNIHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172E71A1CAD340078870E /* UNIHTTPResponse.m */; };
+		9E7172FE1A1CAD340078870E /* UNIHTTPStringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172E91A1CAD340078870E /* UNIHTTPStringResponse.m */; };
+		9E7172FF1A1CAD340078870E /* UNIJsonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172EB1A1CAD340078870E /* UNIJsonNode.m */; };
+		9E7173001A1CAD340078870E /* UNIHTTPClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172ED1A1CAD340078870E /* UNIHTTPClientHelper.m */; };
+		9E7173011A1CAD340078870E /* UNIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172EF1A1CAD340078870E /* UNIHTTPRequest.m */; };
+		9E7173021A1CAD340078870E /* UNIHTTPRequestWithBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172F11A1CAD340078870E /* UNIHTTPRequestWithBody.m */; };
+		9E7173031A1CAD340078870E /* UNIRest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172F41A1CAD340078870E /* UNIRest.m */; };
+		9E7173041A1CAD340078870E /* UNIUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172F61A1CAD340078870E /* UNIUrlConnection.m */; };
 		9EB427911A14B11B00700D96 /* AAAJsObjCBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427901A14B11B00700D96 /* AAAJsObjCBridge.m */; };
-		9EB427941A14CF7500700D96 /* AAAMarketCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427931A14CF7500700D96 /* AAAMarketCollectionViewCell.m */; };
-		9EB427971A174EF600700D96 /* AAAMarketCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427961A174EF600700D96 /* AAAMarketCollectionVC.m */; };
 		9EB4279F1A17580E00700D96 /* carrefour_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4279E1A17580E00700D96 /* carrefour_logo_horizontal.png */; };
 		9EB427A11A17581B00700D96 /* cora_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427A01A17581B00700D96 /* cora_logo_horizontal.png */; };
 		9EB427A31A17582900700D96 /* kaufland_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427A21A17582900700D96 /* kaufland_logo_horizontal.png */; };
@@ -138,10 +148,6 @@
 		9E2650C91A11192F005B546B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9E2650CB1A11192F005B546B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E2650CC1A11192F005B546B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9E2650CE1A11192F005B546B /* AAAMarketsTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAAMarketsTableVC.h; sourceTree = "<group>"; };
-		9E2650CF1A11192F005B546B /* AAAMarketsTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAAMarketsTableVC.m; sourceTree = "<group>"; };
-		9E2650D11A11192F005B546B /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		9E2650D21A11192F005B546B /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		9E2650D51A11192F005B546B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E2650D71A11192F005B546B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E2650DA1A11192F005B546B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -153,8 +159,6 @@
 		9E2650F31A1119CE005B546B /* markets.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = markets.js; sourceTree = "<group>"; };
 		9E26513F1A120B60005B546B /* AAAMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarket.h; sourceTree = "<group>"; };
 		9E2651401A120B60005B546B /* AAAMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarket.m; sourceTree = "<group>"; };
-		9E2651451A127239005B546B /* AAAMarketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketTableViewCell.h; sourceTree = "<group>"; };
-		9E2651461A127239005B546B /* AAAMarketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketTableViewCell.m; sourceTree = "<group>"; };
 		9E2651511A127396005B546B /* AAACatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalog.h; sourceTree = "<group>"; };
 		9E2651521A127396005B546B /* AAACatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalog.m; sourceTree = "<group>"; };
 		9E26515A1A134C64005B546B /* carrefour_logo_squared.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = carrefour_logo_squared.jpeg; sourceTree = "<group>"; };
@@ -164,12 +168,39 @@
 		9E2651621A134C7C005B546B /* kaufland.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = kaufland.pdf; sourceTree = "<group>"; };
 		9E2651641A136FD6005B546B /* AAACatalogVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogVC.h; sourceTree = "<group>"; };
 		9E2651651A136FD6005B546B /* AAACatalogVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalogVC.m; sourceTree = "<group>"; };
+		9E7172D41A1C92410078870E /* AAAJsObjCWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAJsObjCWrapper.h; sourceTree = "<group>"; };
+		9E7172D51A1C92410078870E /* AAAJsObjCWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAJsObjCWrapper.m; sourceTree = "<group>"; };
+		9E7172D81A1CAD340078870E /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		9E7172D91A1CAD340078870E /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		9E7172DB1A1CAD340078870E /* UNIBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIBaseRequest.h; sourceTree = "<group>"; };
+		9E7172DC1A1CAD340078870E /* UNIBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIBaseRequest.m; sourceTree = "<group>"; };
+		9E7172DD1A1CAD340078870E /* UNIBodyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIBodyRequest.h; sourceTree = "<group>"; };
+		9E7172DE1A1CAD340078870E /* UNIBodyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIBodyRequest.m; sourceTree = "<group>"; };
+		9E7172DF1A1CAD340078870E /* UNISimpleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNISimpleRequest.h; sourceTree = "<group>"; };
+		9E7172E01A1CAD340078870E /* UNISimpleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNISimpleRequest.m; sourceTree = "<group>"; };
+		9E7172E21A1CAD340078870E /* UNIHTTPBinaryResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPBinaryResponse.h; sourceTree = "<group>"; };
+		9E7172E31A1CAD340078870E /* UNIHTTPBinaryResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPBinaryResponse.m; sourceTree = "<group>"; };
+		9E7172E41A1CAD340078870E /* UNIHTTPJsonResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPJsonResponse.h; sourceTree = "<group>"; };
+		9E7172E51A1CAD340078870E /* UNIHTTPJsonResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPJsonResponse.m; sourceTree = "<group>"; };
+		9E7172E61A1CAD340078870E /* UNIHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPResponse.h; sourceTree = "<group>"; };
+		9E7172E71A1CAD340078870E /* UNIHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPResponse.m; sourceTree = "<group>"; };
+		9E7172E81A1CAD340078870E /* UNIHTTPStringResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPStringResponse.h; sourceTree = "<group>"; };
+		9E7172E91A1CAD340078870E /* UNIHTTPStringResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPStringResponse.m; sourceTree = "<group>"; };
+		9E7172EA1A1CAD340078870E /* UNIJsonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIJsonNode.h; sourceTree = "<group>"; };
+		9E7172EB1A1CAD340078870E /* UNIJsonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIJsonNode.m; sourceTree = "<group>"; };
+		9E7172EC1A1CAD340078870E /* UNIHTTPClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPClientHelper.h; sourceTree = "<group>"; };
+		9E7172ED1A1CAD340078870E /* UNIHTTPClientHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPClientHelper.m; sourceTree = "<group>"; };
+		9E7172EE1A1CAD340078870E /* UNIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPRequest.h; sourceTree = "<group>"; };
+		9E7172EF1A1CAD340078870E /* UNIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPRequest.m; sourceTree = "<group>"; };
+		9E7172F01A1CAD340078870E /* UNIHTTPRequestWithBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPRequestWithBody.h; sourceTree = "<group>"; };
+		9E7172F11A1CAD340078870E /* UNIHTTPRequestWithBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPRequestWithBody.m; sourceTree = "<group>"; };
+		9E7172F21A1CAD340078870E /* Unirest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Unirest-Prefix.pch"; sourceTree = "<group>"; };
+		9E7172F31A1CAD340078870E /* UNIRest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIRest.h; sourceTree = "<group>"; };
+		9E7172F41A1CAD340078870E /* UNIRest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIRest.m; sourceTree = "<group>"; };
+		9E7172F51A1CAD340078870E /* UNIUrlConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIUrlConnection.h; sourceTree = "<group>"; };
+		9E7172F61A1CAD340078870E /* UNIUrlConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIUrlConnection.m; sourceTree = "<group>"; };
 		9EB4278F1A14B11B00700D96 /* AAAJsObjCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAJsObjCBridge.h; sourceTree = "<group>"; };
 		9EB427901A14B11B00700D96 /* AAAJsObjCBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAJsObjCBridge.m; sourceTree = "<group>"; };
-		9EB427921A14CF7500700D96 /* AAAMarketCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketCollectionViewCell.h; sourceTree = "<group>"; };
-		9EB427931A14CF7500700D96 /* AAAMarketCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketCollectionViewCell.m; sourceTree = "<group>"; };
-		9EB427951A174EF600700D96 /* AAAMarketCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketCollectionVC.h; sourceTree = "<group>"; };
-		9EB427961A174EF600700D96 /* AAAMarketCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketCollectionVC.m; sourceTree = "<group>"; };
 		9EB4279E1A17580E00700D96 /* carrefour_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carrefour_logo_horizontal.png; sourceTree = "<group>"; };
 		9EB427A01A17581B00700D96 /* cora_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cora_logo_horizontal.png; sourceTree = "<group>"; };
 		9EB427A21A17582900700D96 /* kaufland_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kaufland_logo_horizontal.png; sourceTree = "<group>"; };
@@ -304,16 +335,13 @@
 		9E2650C61A11192F005B546B /* AAAReclamsO */ = {
 			isa = PBXGroup;
 			children = (
+				9E7172D71A1CAD340078870E /* Unirest */,
 				9EB4278E1A14B0E800700D96 /* Service */,
 				9E2650F01A1119CE005B546B /* js */,
 				9E2650CB1A11192F005B546B /* AppDelegate.h */,
 				9E2650CC1A11192F005B546B /* AppDelegate.m */,
-				9E2650CE1A11192F005B546B /* AAAMarketsTableVC.h */,
-				9E2650CF1A11192F005B546B /* AAAMarketsTableVC.m */,
 				9E2651641A136FD6005B546B /* AAACatalogVC.h */,
 				9E2651651A136FD6005B546B /* AAACatalogVC.m */,
-				9E2650D11A11192F005B546B /* SecondViewController.h */,
-				9E2650D21A11192F005B546B /* SecondViewController.m */,
 				9E2650D71A11192F005B546B /* Images.xcassets */,
 				9E2650D41A11192F005B546B /* Main.storyboard */,
 				9E2650D91A11192F005B546B /* LaunchScreen.xib */,
@@ -322,12 +350,6 @@
 				9E2651401A120B60005B546B /* AAAMarket.m */,
 				9E2651511A127396005B546B /* AAACatalog.h */,
 				9E2651521A127396005B546B /* AAACatalog.m */,
-				9E2651451A127239005B546B /* AAAMarketTableViewCell.h */,
-				9E2651461A127239005B546B /* AAAMarketTableViewCell.m */,
-				9EB427921A14CF7500700D96 /* AAAMarketCollectionViewCell.h */,
-				9EB427931A14CF7500700D96 /* AAAMarketCollectionViewCell.m */,
-				9EB427951A174EF600700D96 /* AAAMarketCollectionVC.h */,
-				9EB427961A174EF600700D96 /* AAAMarketCollectionVC.m */,
 				9EB427A41A1785EC00700D96 /* AAAMarketsCatalogsVC.h */,
 				9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */,
 				9EB4288B1A1A1DC900700D96 /* AAACatalogPageVC.h */,
@@ -400,9 +422,63 @@
 			path = gfx;
 			sourceTree = "<group>";
 		};
+		9E7172D71A1CAD340078870E /* Unirest */ = {
+			isa = PBXGroup;
+			children = (
+				9E7172D81A1CAD340078870E /* Base64.h */,
+				9E7172D91A1CAD340078870E /* Base64.m */,
+				9E7172DA1A1CAD340078870E /* HttpRequest */,
+				9E7172E11A1CAD340078870E /* HttpResponse */,
+				9E7172EC1A1CAD340078870E /* UNIHTTPClientHelper.h */,
+				9E7172ED1A1CAD340078870E /* UNIHTTPClientHelper.m */,
+				9E7172EE1A1CAD340078870E /* UNIHTTPRequest.h */,
+				9E7172EF1A1CAD340078870E /* UNIHTTPRequest.m */,
+				9E7172F01A1CAD340078870E /* UNIHTTPRequestWithBody.h */,
+				9E7172F11A1CAD340078870E /* UNIHTTPRequestWithBody.m */,
+				9E7172F21A1CAD340078870E /* Unirest-Prefix.pch */,
+				9E7172F31A1CAD340078870E /* UNIRest.h */,
+				9E7172F41A1CAD340078870E /* UNIRest.m */,
+				9E7172F51A1CAD340078870E /* UNIUrlConnection.h */,
+				9E7172F61A1CAD340078870E /* UNIUrlConnection.m */,
+			);
+			path = Unirest;
+			sourceTree = "<group>";
+		};
+		9E7172DA1A1CAD340078870E /* HttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				9E7172DB1A1CAD340078870E /* UNIBaseRequest.h */,
+				9E7172DC1A1CAD340078870E /* UNIBaseRequest.m */,
+				9E7172DD1A1CAD340078870E /* UNIBodyRequest.h */,
+				9E7172DE1A1CAD340078870E /* UNIBodyRequest.m */,
+				9E7172DF1A1CAD340078870E /* UNISimpleRequest.h */,
+				9E7172E01A1CAD340078870E /* UNISimpleRequest.m */,
+			);
+			path = HttpRequest;
+			sourceTree = "<group>";
+		};
+		9E7172E11A1CAD340078870E /* HttpResponse */ = {
+			isa = PBXGroup;
+			children = (
+				9E7172E21A1CAD340078870E /* UNIHTTPBinaryResponse.h */,
+				9E7172E31A1CAD340078870E /* UNIHTTPBinaryResponse.m */,
+				9E7172E41A1CAD340078870E /* UNIHTTPJsonResponse.h */,
+				9E7172E51A1CAD340078870E /* UNIHTTPJsonResponse.m */,
+				9E7172E61A1CAD340078870E /* UNIHTTPResponse.h */,
+				9E7172E71A1CAD340078870E /* UNIHTTPResponse.m */,
+				9E7172E81A1CAD340078870E /* UNIHTTPStringResponse.h */,
+				9E7172E91A1CAD340078870E /* UNIHTTPStringResponse.m */,
+				9E7172EA1A1CAD340078870E /* UNIJsonNode.h */,
+				9E7172EB1A1CAD340078870E /* UNIJsonNode.m */,
+			);
+			path = HttpResponse;
+			sourceTree = "<group>";
+		};
 		9EB4278E1A14B0E800700D96 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9E7172D41A1C92410078870E /* AAAJsObjCWrapper.h */,
+				9E7172D51A1C92410078870E /* AAAJsObjCWrapper.m */,
 				9EB4278F1A14B11B00700D96 /* AAAJsObjCBridge.h */,
 				9EB427901A14B11B00700D96 /* AAAJsObjCBridge.m */,
 			);
@@ -711,19 +787,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E7172D61A1C92410078870E /* AAAJsObjCWrapper.m in Sources */,
+				9E7172F71A1CAD340078870E /* Base64.m in Sources */,
+				9E7172FB1A1CAD340078870E /* UNIHTTPBinaryResponse.m in Sources */,
+				9E7173011A1CAD340078870E /* UNIHTTPRequest.m in Sources */,
 				9E2651411A120B60005B546B /* AAAMarket.m in Sources */,
-				9E2651471A127239005B546B /* AAAMarketTableViewCell.m in Sources */,
-				9E2650D31A11192F005B546B /* SecondViewController.m in Sources */,
+				9E7173021A1CAD340078870E /* UNIHTTPRequestWithBody.m in Sources */,
+				9E7172FF1A1CAD340078870E /* UNIJsonNode.m in Sources */,
+				9E7172FE1A1CAD340078870E /* UNIHTTPStringResponse.m in Sources */,
 				9E2650CD1A11192F005B546B /* AppDelegate.m in Sources */,
+				9E7173031A1CAD340078870E /* UNIRest.m in Sources */,
+				9E7172FA1A1CAD340078870E /* UNISimpleRequest.m in Sources */,
 				9EB427911A14B11B00700D96 /* AAAJsObjCBridge.m in Sources */,
+				9E7172FC1A1CAD340078870E /* UNIHTTPJsonResponse.m in Sources */,
 				9E2651531A127396005B546B /* AAACatalog.m in Sources */,
 				9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */,
-				9E2650D01A11192F005B546B /* AAAMarketsTableVC.m in Sources */,
 				9E2650CA1A11192F005B546B /* main.m in Sources */,
+				9E7172FD1A1CAD340078870E /* UNIHTTPResponse.m in Sources */,
+				9E7172F81A1CAD340078870E /* UNIBaseRequest.m in Sources */,
 				9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */,
-				9EB427941A14CF7500700D96 /* AAAMarketCollectionViewCell.m in Sources */,
+				9E7173001A1CAD340078870E /* UNIHTTPClientHelper.m in Sources */,
+				9E7173041A1CAD340078870E /* UNIUrlConnection.m in Sources */,
 				9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */,
-				9EB427971A174EF600700D96 /* AAAMarketCollectionVC.m in Sources */,
+				9E7172F91A1CAD340078870E /* UNIBodyRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

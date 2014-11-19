@@ -11,7 +11,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol AAAJsCallbacksDelegate <NSObject>
-
+@optional
+-(void) aaaJsObjCBridgeWebViewFinishLoading;
+-(void) aaaJsObjCBridgeWebViewFinishLoadingWithError:(NSError*) error;
 @end
 
 @interface AAAJsObjCBridge : NSObject<UIWebViewDelegate>
@@ -22,6 +24,7 @@
 -(void) addDelegate:(id<AAAJsCallbacksDelegate>) del;
 -(void) removeDelegate:(id<AAAJsCallbacksDelegate>) del;
 
+-(void) loadJavascriptFile:(NSString*) filename;
 -(void) registerJsCallbackObject:(id<JSExport>) obj callbackObjVariableName:(NSString*)varName;
 -(void) callJsFunction:(NSString*) functionName withParams:(NSArray*) params;
 -(void) callJsFunction:(NSString *)functionName withStringParams:(NSString *)firstParam, ...;

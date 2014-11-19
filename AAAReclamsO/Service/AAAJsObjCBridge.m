@@ -63,10 +63,6 @@ static AAAJsObjCBridge* _instance;
     [context setExceptionHandler:^(JSContext *context, JSValue *value) {
         NSLog(@"WEB JS Exception: %@", value);
     }];
-    NSString* jquery = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"jquery-2.1.1.min" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
-    [_webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:jquery waitUntilDone:YES];
-    NSString *javaScript=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"markets" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
-    [_webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:javaScript waitUntilDone:YES];
     context[@"Log"] = ^(NSString* message)
     {
         NSLog(@"AAAJsObjCBridge: %@",
@@ -77,6 +73,13 @@ static AAAJsObjCBridge* _instance;
 #pragma mark - Instance methods
 
 #pragma mark Public
+
+-(void) loadJavascriptFile:(NSString*) filename
+{
+    NSString *javaScript=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    [_webView stringByEvaluatingJavaScriptFromString:javaScript];
+//    [_webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:javaScript waitUntilDone:YES];
+}
 
 -(void)addDelegate:(id<AAAJsCallbacksDelegate>)del
 {
@@ -180,23 +183,19 @@ static AAAJsObjCBridge* _instance;
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    NSLog(@"didFailLoadWithError");
-}
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    
-    NSLog(@"shouldStartLoadWithRequest:%@", request);
-    return YES;
+    for (id<AAAJsCallbacksDelegate>del in delegates) {
+        if ([del respondsToSelector:@selector(aaaJsObjCBridgeWebViewFinishLoadingWithError:)]) {
+            [del aaaJsObjCBridgeWebViewFinishLoadingWithError:error];
+        }
+    }
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidFinishLoad");
-}
-
--(void)webViewDidStartLoad:(UIWebView *)webView
-{
-    NSLog(@"webViewDidStartLoad");
+    for (id<AAAJsCallbacksDelegate>del in delegates) {
+        if ([del respondsToSelector:@selector(aaaJsObjCBridgeWebViewFinishLoading)]) {
+            [del aaaJsObjCBridgeWebViewFinishLoading];
+        }
+    }
 }
 @end
