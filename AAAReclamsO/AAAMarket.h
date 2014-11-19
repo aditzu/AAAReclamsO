@@ -17,6 +17,7 @@
 
 @property(nonatomic, strong) NSString* name;
 @property(nonatomic, strong) UIImage* imgLogo;
+@property(nonatomic, strong) UIImage* imgLogoLandscape;
 @property(nonatomic, strong) NSMutableArray* catalogs;
 
 +(instancetype)marketWithName:(NSString *)title andLogoImage:(UIImage*) img;

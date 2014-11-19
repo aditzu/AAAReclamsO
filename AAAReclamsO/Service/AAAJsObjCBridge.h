@@ -24,7 +24,8 @@
 
 -(void) registerJsCallbackObject:(id<JSExport>) obj callbackObjVariableName:(NSString*)varName;
 -(void) callJsFunction:(NSString*) functionName withParams:(NSArray*) params;
--(void)callJsFunction:(NSString *)functionName withStringParams:(NSString *)firstParam, ...;
+-(void) callJsFunction:(NSString *)functionName withStringParams:(NSString *)firstParam, ...;
+-(void) callJsFunction:(NSString*) functionName withArguments:(NSArray*) args onGlobalObject:(NSString*) objectName;
 -(void) registerForFunctionCallback:(NSString*) functionName;
 -(void) registerForFunctionCallbackWithSelector:(SEL)selector;
 @end

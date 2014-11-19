@@ -12,7 +12,7 @@
 @interface AAACatalog : NSObject
 
 @property(nonatomic, strong) UIImage* cover;
+@property(nonatomic, strong) NSArray* imagesURLs;
 
-+(AAACatalog*) catalogWithCover:(UIImage*) coverImg;
-
++(AAACatalog*) catalogWithCover:(UIImage*) coverImg andImageUrls:(NSArray*) imageUrls;
 @end

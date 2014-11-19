@@ -44,7 +44,7 @@ static AAAJsObjCBridge* _instance;
     }
     if (self = [super init]) {
         delegates = [NSMutableArray array];
-        _webView = [[UIWebView alloc] init];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, 10, 200, 200)];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:_webView];
     
         NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"app" ofType:@"html"];
@@ -59,9 +59,19 @@ static AAAJsObjCBridge* _instance;
     NSURLRequest* request = [NSURLRequest requestWithURL:URL];
     _webView.delegate = self;
     [_webView loadRequest:request];
-    [[self contextForWebView:_webView] setExceptionHandler:^(JSContext *context, JSValue *value) {
+    JSContext* context = [self contextForWebView:_webView];
+    [context setExceptionHandler:^(JSContext *context, JSValue *value) {
         NSLog(@"WEB JS Exception: %@", value);
     }];
+    NSString* jquery = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"jquery-2.1.1.min" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    [_webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:jquery waitUntilDone:YES];
+    NSString *javaScript=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"markets" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    [_webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:javaScript waitUntilDone:YES];
+    context[@"Log"] = ^(NSString* message)
+    {
+        NSLog(@"AAAJsObjCBridge: %@",
+              message);
+    };
 }
 
 #pragma mark - Instance methods
@@ -76,6 +86,15 @@ static AAAJsObjCBridge* _instance;
 -(void)removeDelegate:(id<AAAJsCallbacksDelegate>)del
 {
     [delegates removeObject: del];
+}
+
+-(void) callJsFunction:(NSString*) functionName withArguments:(NSArray*) args onGlobalObject:(NSString*) objectName
+{
+    assert(functionName);
+    assert(objectName);
+    JSContext* context = [self contextForWebView:_webView];
+    JSValue* obj = context[objectName];
+    [obj invokeMethod:functionName withArguments:args];
 }
 
 -(void) callJsFunction:(NSString *)functionName withParams:(NSArray*)params
@@ -114,7 +133,7 @@ static AAAJsObjCBridge* _instance;
     NSString* selectorAsString = NSStringFromSelector(selector);
     NSString* functionName = [selectorAsString stringByReplacingOccurrencesOfString:@":" withString:@""];
     JSContext* context = [self contextForWebView:_webView];
-    BOOL hasParam = [selectorAsString containsString:@":"];
+    BOOL hasParam = [selectorAsString hasSuffix:@":"];
     context[functionName] = ^(id param)
     {
         for (id<AAAJsCallbacksDelegate> delegate in delegates)
@@ -159,4 +178,25 @@ static AAAJsObjCBridge* _instance;
     return [webv valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
 }
 
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"didFailLoadWithError");
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    
+    NSLog(@"shouldStartLoadWithRequest:%@", request);
+    return YES;
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSLog(@"webViewDidFinishLoad");
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    NSLog(@"webViewDidStartLoad");
+}
 @end

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AAAMarketTableViewCell.h"
+#import "AAACatalogVC.h"
 
-@interface AAAMarketsTableVC : UITableViewController
+@interface AAAMarketsTableVC : UIViewController<UITableViewDataSource, UITableViewDelegate, AAAMarketTableViewCellEvents, AAACatalogVCEvents>//UITableViewController<AAAMarketTableViewCellEvents>//
 
 @end
 

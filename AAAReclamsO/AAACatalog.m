@@ -8,12 +8,19 @@
 
 #import "AAACatalog.h"
 
+@interface AAACatalog()
+{
+}
+
+@end
+
 @implementation AAACatalog
 
-+(AAACatalog *)catalogWithCover:(UIImage *)coverImg
++(AAACatalog *)catalogWithCover:(UIImage *)coverImg andImageUrls:(NSArray *)imageUrls
 {
     AAACatalog* catalog = [AAACatalog new];
     catalog.cover = coverImg;
+    catalog.imagesURLs = imageUrls;
     return catalog;
 }
 
