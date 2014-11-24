@@ -11,9 +11,8 @@
 static inline NSString *JMImageCacheDirectory() {
 	static NSString *_JMImageCacheDirectory;
 	static dispatch_once_t onceToken;
-    
 	dispatch_once(&onceToken, ^{
-		_JMImageCacheDirectory = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches/JMCache"] copy];
+		_JMImageCacheDirectory = [[NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/Caches/%@/JMCache", [NSBundle mainBundle].bundleIdentifier]] copy];
 	});
 
 	return _JMImageCacheDirectory;
@@ -52,9 +51,8 @@ static inline NSString *cachePathForKey(NSString *key) {
 - (id) init {
     self = [super init];
     if(!self) return nil;
-
     self.diskOperationQueue = [[NSOperationQueue alloc] init];
-
+    
     [[NSFileManager defaultManager] createDirectoryAtPath:JMImageCacheDirectory()
                               withIntermediateDirectories:YES
                                                attributes:nil
@@ -139,6 +137,7 @@ static inline NSString *cachePathForKey(NSString *key) {
         }
     });
 }
+
 - (void) removeObjectForKey:(id)key {
     [super removeObjectForKey:key];
 

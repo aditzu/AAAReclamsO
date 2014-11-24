@@ -16,12 +16,20 @@
 
 @implementation AAACatalog
 
-+(AAACatalog *)catalogWithCover:(UIImage *)coverImg andImageUrls:(NSArray *)imageUrls
+-(void)setImagesURLs:(NSArray *)imagesURLs
 {
-    AAACatalog* catalog = [AAACatalog new];
-    catalog.cover = coverImg;
-    catalog.imagesURLs = imageUrls;
-    return catalog;
+    NSArray* sortedImages = [imagesURLs sortedArrayUsingComparator:^NSComparisonResult(NSString* obj1, NSString* obj2) {
+        NSString* firstName = [[obj1 lastPathComponent] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@",[obj1 pathExtension]] withString:@""];
+        NSString* secondName = [[obj2 lastPathComponent] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@", [obj2 pathExtension]] withString:@""];
+        
+        return [[NSNumber numberWithInt:[firstName intValue]] compare:[NSNumber numberWithInt:[secondName intValue]]];
+    }];
+    _imagesURLs = sortedImages;
+}
+
+-(NSUInteger)hash
+{
+    return self.identifier;
 }
 
 @end

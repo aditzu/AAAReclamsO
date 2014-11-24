@@ -8,11 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "AAAMarket.h"
+
+
 
 @interface AAACatalog : NSObject
 
 @property(nonatomic, strong) UIImage* cover;
 @property(nonatomic, strong) NSArray* imagesURLs;
-
-+(AAACatalog*) catalogWithCover:(UIImage*) coverImg andImageUrls:(NSArray*) imageUrls;
+@property(nonatomic) BOOL active;
+@property(nonatomic, strong) NSString* bkDescription;
+@property(nonatomic) double activeFrom;
+@property(nonatomic) double activeTo;
+@property(nonatomic, strong) NSString* name;
+@property(nonatomic) int identifier;
+@property(nonatomic, strong) NSString* pagesUrl;
+@property(nonatomic, strong) AAAMarket* market;
 @end

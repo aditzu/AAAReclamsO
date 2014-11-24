@@ -159,9 +159,9 @@ static BOOL entityIdentificationInferenceEnabled = YES;
 - (id)initWithEntity:(NSEntityDescription *)entity
 {
     NSAssert(entity, @"Cannot initialize an RKEntityMapping without an entity. Maybe you want RKObjectMapping instead?");
-    Class objectClass = NSClassFromString([entity managedObjectClassName]);
-    NSAssert(objectClass, @"Cannot initialize an entity mapping for an entity with a nil managed object class: Got nil class for managed object class name '%@'. Maybe you forgot to add the class files to your target?", [entity managedObjectClassName]);
-    self = [self initWithClass:objectClass];
+    Class _objectClass = NSClassFromString([entity managedObjectClassName]);
+    NSAssert(_objectClass, @"Cannot initialize an entity mapping for an entity with a nil managed object class: Got nil class for managed object class name '%@'. Maybe you forgot to add the class files to your target?", [entity managedObjectClassName]);
+    self = [self initWithClass:_objectClass];
     if (self) {
         self.entity = entity;
         self.discardsInvalidObjectsOnInsert = NO;
@@ -171,9 +171,9 @@ static BOOL entityIdentificationInferenceEnabled = YES;
     return self;
 }
 
-- (id)initWithClass:(Class)objectClass
+- (id)initWithClass:(Class)_objectClass
 {
-    self = [super initWithClass:objectClass];
+    self = [super initWithClass:_objectClass];
     if (self) {
         self.mutableConnections = [NSMutableArray array];
     }

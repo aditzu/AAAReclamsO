@@ -9,6 +9,7 @@
 #import "AAACatalogVC.h"
 #import "AAACatalog.h"
 #import "AAACatalogPageVC.h"
+#import "AAAwww.h"
 
 @interface AAACatalogVC(){
     id<AAACatalogVCEvents> delegate;
@@ -22,6 +23,8 @@
 @end
 
 @implementation AAACatalogVC
+
+static int PicturesToPreload = 3;
 
 -(void)viewDidLoad
 {
@@ -42,28 +45,42 @@
     {
         return;
     }
-    if (pageViewController) {
-        pageViewController.delegate = nil;
-        pageViewController.dataSource = nil;
-        [pageViewController.view removeFromSuperview];
-    }
-    pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    pageViewController.view.frame = self.view.bounds;
-    [self.view addSubview:pageViewController.view];
-    [self.view bringSubviewToFront:closeBtn];
+    
     pages = [NSMutableArray array];
-    for (int i =0; i< catalog.imagesURLs.count; i++)
-    {
-        AAACatalogPageVC* catalogPage = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogPageVC"];
-        catalogPage.imageUrl = catalog.imagesURLs[i];
-        catalogPage.indexInPageViewCtrl = i;
-        [pages addObject:catalogPage];
-    }
-    [pageViewController setViewControllers:@[pages[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-       
+    [[AAAwww instance] downloadPagesUrlsForCatalog:catalog.identifier withCompletionHandler:^(NSArray *_pages, NSError *error) {
+        if (!error) {
+            catalog.imagesURLs = _pages;
+        }
+        
+        if (pageViewController) {
+            pageViewController.delegate = nil;
+            pageViewController.dataSource = nil;
+            [pageViewController.view removeFromSuperview];
+        }
+        pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+        pageViewController.view.frame = self.view.bounds;
+        [self.view addSubview:pageViewController.view];
+        [self.view bringSubviewToFront:closeBtn];
+        
+        for (int i =0; i< catalog.imagesURLs.count; i++)
+        {
+            AAACatalogPageVC* catalogPage = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogPageVC"];
+            catalogPage.imageUrl = catalog.imagesURLs[i];
+            catalogPage.indexInPageViewCtrl = i;
+            if (i < PicturesToPreload) {
+                [catalogPage downloadImage];
+            }
+            
+            [pages addObject:catalogPage];
+        }
+        if (pages.count > 0) {
+            [pageViewController setViewControllers:@[pages[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+                
+            }];
+            pageViewController.delegate = self;
+            pageViewController.dataSource = self;
+        }
     }];
-    pageViewController.delegate = self;
-    pageViewController.dataSource = self;
 }
 
 -(void) setDelegate:(id<AAACatalogVCEvents>) _delegate
@@ -97,6 +114,7 @@
 {
     long currentIndex = [pages indexOfObject:viewController];
     if (currentIndex == pages.count -1 || isMinimized) return nil;
+    [pages[MIN(pages.count-1, currentIndex+1+PicturesToPreload)] downloadImage];
     return pages[currentIndex+1];
 }
 

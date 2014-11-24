@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AAACatalogVC.h"
 
-@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents>
+@interface AAAMarketsCatalogsVC : UIViewController<UIScrollViewDelegate, AAACatalogVCEvents>
 
 @end

@@ -7,8 +7,14 @@
 //
 
 #import "AAAwww.h"
+#import "AAACatalog.h"
 #import "AAAMarket.h"
 #import <RestKit/RestKit.h>
+
+static NSString* baseURL = @"http://marklogj-andreioprea.rhcloud.com";
+static NSString* downloadMarketsURL = @"/markets/list";
+static NSString* downloadCatalogsURL = @"/catalogs/list";
+static NSString* downloadCatalogPagesUrl = @"/pages";
 
 @interface AAAwww(){
 }
@@ -33,9 +39,9 @@ static AAAwww* _instance;
     [mapping addAttributeMappingsFromArray:@[@"identifier", @"miniLogoURL", @"logoURL", @"name"]];
     
     NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:mapping method:RKRequestMethodAny pathPattern:@"/markets/list/" keyPath:nil statusCodes:statusCodes];
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:mapping method:RKRequestMethodAny pathPattern:downloadMarketsURL keyPath:nil statusCodes:statusCodes];
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.0.16:8090/markets/list/"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, downloadMarketsURL]]];
     RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
     [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
         completionHandler([result array], nil);
@@ -44,4 +50,40 @@ static AAAwww* _instance;
     }];
     [operation start];
 }
+
+-(void) downloadCatalogInformationsWithCompletionHandler:(DownloadCatalogsBlock)completionHandler
+{
+    RKObjectMapping* marketMapping = [RKObjectMapping mappingForClass:[AAAMarket class]];
+    [marketMapping addAttributeMappingsFromArray:@[@"identifier", @"miniLogoURL", @"logoURL", @"name"]];
+    
+    RKObjectMapping* catalogMapping = [RKObjectMapping mappingForClass:[AAACatalog class]];
+    [catalogMapping addAttributeMappingsFromDictionary:@{@"active":@"active", @"description":@"bkDescription", @"from":@"activeFrom", @"to" : @"activeTo", @"name":@"name", @"identifier":@"identifier", @"url":@"pagesUrl"}];
+    [catalogMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"market" toKeyPath:@"market" withMapping:marketMapping]];
+    
+    NSIndexSet* statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+    RKResponseDescriptor* responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:catalogMapping method:RKRequestMethodAny pathPattern:downloadCatalogsURL keyPath:nil statusCodes:statusCodes];
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, downloadCatalogsURL]]];
+    RKObjectRequestOperation* operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        completionHandler([mappingResult array], nil);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        completionHandler(nil, error);
+    }];
+    [operation start];
+}
+
+-(void) downloadPagesUrlsForCatalog:(int) catalogId withCompletionHandler:(DownloadPagesForCatalogBlock)completionHandler
+{
+    RKObjectManager* manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:baseURL]];
+    AFHTTPClient * client = manager.HTTPClient;
+    [client getPath:[NSString stringWithFormat:@"%@/%i", downloadCatalogPagesUrl, catalogId]
+         parameters:nil
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                completionHandler([NSArray arrayWithArray:responseObject], nil);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"failure: %i", operation.response.statusCode);
+            }];
+}
+
 @end

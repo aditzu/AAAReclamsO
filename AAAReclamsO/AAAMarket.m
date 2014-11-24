@@ -12,13 +12,27 @@
 
 @synthesize name, miniLogoURL, logoURL, identifier;
 
-//+(instancetype)marketWithName:(NSString *)title andLogoImageName:(UIImage*) img
-//{
-//    AAAMarket* market = [[AAAMarket alloc] init];
-//    market.name = title;
-//    market.imgLogo = img;
-//    market.catalogs = [NSMutableArray array];
-//    return market;
-//}
+-(instancetype)init
+{
+    if (self = [super init])
+    {
+        self.catalogs = [NSMutableArray array];
+    }
+    return self;
+}
+
++(instancetype)marketWithName:(NSString *)title andLogoImage:(UIImage*) img;
+{
+    AAAMarket* market = [[AAAMarket alloc] init];
+    market.name = title;
+    market.imgLogo = img;
+    market.catalogs = [NSMutableArray array];
+    return market;
+}
+
+-(NSUInteger)hash
+{
+    return identifier;
+}
 
 @end

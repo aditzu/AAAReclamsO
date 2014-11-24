@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^DownloadMarketsBlock)(NSArray* markets, NSError* error);
+typedef void(^DownloadCatalogsBlock)(NSArray* catalogs, NSError* error);
+typedef void(^DownloadPagesForCatalogBlock) (NSArray* pages, NSError* error);
 
 @interface AAAwww : NSObject
 {
@@ -16,5 +18,7 @@ typedef void(^DownloadMarketsBlock)(NSArray* markets, NSError* error);
 
 +(AAAwww*) instance;
 -(void) downloadMarketsWithCompletionHandler:(DownloadMarketsBlock) completionHandler;
-
+-(void) downloadCatalogInformationsWithCompletionHandler:(DownloadCatalogsBlock) completionHandler;
+-(void) downloadPagesUrlsForCatalog:(int) catalogId withCompletionHandler:(DownloadPagesForCatalogBlock) completionHandler;
+-(void) downloadPagesUrlsForCatalogs:(NSArray*) catalogs;
 @end

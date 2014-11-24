@@ -119,6 +119,16 @@
 		9EB428891A19F94800700D96 /* cora 9-09 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428511A19F94800700D96 /* cora 9-09 11:17:2014.jpeg */; };
 		9EB4288A1A19F94800700D96 /* cora-01 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428521A19F94800700D96 /* cora-01 11:17:2014.jpeg */; };
 		9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */; };
+		9EE090FA1A1CD2DC006789F0 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE090F71A1CD2DC006789F0 /* JMImageCache.m */; };
+		9EE090FB1A1CD2DC006789F0 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE090F91A1CD2DC006789F0 /* UIImageView+JMImageCache.m */; };
+		9EE0910B1A1DF585006789F0 /* LBGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE091081A1DF585006789F0 /* LBGradient.m */; };
+		9EE0910C1A1DF585006789F0 /* LBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0910A1A1DF585006789F0 /* LBGradientView.m */; };
+		9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0910D1A1DF628006789F0 /* CoreText.framework */; };
+		9EE0911C1A1DF7A7006789F0 /* LEColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE091191A1DF7A7006789F0 /* LEColorPicker.m */; };
+		9EE0911D1A1DF7A7006789F0 /* UIColor+YUVSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0911B1A1DF7A7006789F0 /* UIColor+YUVSpace.m */; };
+		9EE091201A1F3483006789F0 /* catalogs_scroll.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0911E1A1F3483006789F0 /* catalogs_scroll.png */; };
+		9EE091231A1F3724006789F0 /* markets_scroll.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091221A1F3724006789F0 /* markets_scroll.png */; };
+		9EE091251A1F4AED006789F0 /* circular.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091241A1F4AED006789F0 /* circular.png */; };
 		A9E12EF72B4BB1B16996413C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46131CE3B423FC1E1397014B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -258,6 +268,22 @@
 		9EB428521A19F94800700D96 /* cora-01 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora-01 11:17:2014.jpeg"; sourceTree = "<group>"; };
 		9EB4288B1A1A1DC900700D96 /* AAACatalogPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogPageVC.h; sourceTree = "<group>"; };
 		9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalogPageVC.m; sourceTree = "<group>"; };
+		9EE090F61A1CD2DC006789F0 /* JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMImageCache.h; sourceTree = "<group>"; };
+		9EE090F71A1CD2DC006789F0 /* JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMImageCache.m; sourceTree = "<group>"; };
+		9EE090F81A1CD2DC006789F0 /* UIImageView+JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JMImageCache.h"; sourceTree = "<group>"; };
+		9EE090F91A1CD2DC006789F0 /* UIImageView+JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+JMImageCache.m"; sourceTree = "<group>"; };
+		9EE091071A1DF585006789F0 /* LBGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBGradient.h; sourceTree = "<group>"; };
+		9EE091081A1DF585006789F0 /* LBGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBGradient.m; sourceTree = "<group>"; };
+		9EE091091A1DF585006789F0 /* LBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBGradientView.h; sourceTree = "<group>"; };
+		9EE0910A1A1DF585006789F0 /* LBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBGradientView.m; sourceTree = "<group>"; };
+		9EE0910D1A1DF628006789F0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		9EE091181A1DF7A7006789F0 /* LEColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEColorPicker.h; sourceTree = "<group>"; };
+		9EE091191A1DF7A7006789F0 /* LEColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEColorPicker.m; sourceTree = "<group>"; };
+		9EE0911A1A1DF7A7006789F0 /* UIColor+YUVSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YUVSpace.h"; sourceTree = "<group>"; };
+		9EE0911B1A1DF7A7006789F0 /* UIColor+YUVSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YUVSpace.m"; sourceTree = "<group>"; };
+		9EE0911E1A1F3483006789F0 /* catalogs_scroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = catalogs_scroll.png; sourceTree = "<group>"; };
+		9EE091221A1F3724006789F0 /* markets_scroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markets_scroll.png; sourceTree = "<group>"; };
+		9EE091241A1F4AED006789F0 /* circular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circular.png; sourceTree = "<group>"; };
 		C2F365147BEC56749C74C9C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */,
 				A9E12EF72B4BB1B16996413C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +340,9 @@
 		9E2650C61A11192F005B546B /* AAAReclamsO */ = {
 			isa = PBXGroup;
 			children = (
+				9EE091171A1DF7A7006789F0 /* LEColorPicker */,
+				9EE091061A1DF585006789F0 /* LBGradient */,
+				9EE090F01A1CD1C8006789F0 /* JMImageCache */,
 				9EB4278E1A14B0E800700D96 /* Service */,
 				9E2650CB1A11192F005B546B /* AppDelegate.h */,
 				9E2650CC1A11192F005B546B /* AppDelegate.m */,
@@ -373,6 +403,9 @@
 		9E2651591A134C64005B546B /* gfx */ = {
 			isa = PBXGroup;
 			children = (
+				9EE091241A1F4AED006789F0 /* circular.png */,
+				9EE0911E1A1F3483006789F0 /* catalogs_scroll.png */,
+				9EE091221A1F3724006789F0 /* markets_scroll.png */,
 				9EB428191A19F94800700D96 /* Carrefour */,
 				9EB4283A1A19F94800700D96 /* Cora */,
 				9EB427E01A19F7F700700D96 /* Kaufland */,
@@ -509,9 +542,44 @@
 			path = Cora;
 			sourceTree = "<group>";
 		};
+		9EE090F01A1CD1C8006789F0 /* JMImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				9EE090F61A1CD2DC006789F0 /* JMImageCache.h */,
+				9EE090F71A1CD2DC006789F0 /* JMImageCache.m */,
+				9EE090F81A1CD2DC006789F0 /* UIImageView+JMImageCache.h */,
+				9EE090F91A1CD2DC006789F0 /* UIImageView+JMImageCache.m */,
+			);
+			name = JMImageCache;
+			path = ../Pods/JMImageCache;
+			sourceTree = "<group>";
+		};
+		9EE091061A1DF585006789F0 /* LBGradient */ = {
+			isa = PBXGroup;
+			children = (
+				9EE091071A1DF585006789F0 /* LBGradient.h */,
+				9EE091081A1DF585006789F0 /* LBGradient.m */,
+				9EE091091A1DF585006789F0 /* LBGradientView.h */,
+				9EE0910A1A1DF585006789F0 /* LBGradientView.m */,
+			);
+			path = LBGradient;
+			sourceTree = "<group>";
+		};
+		9EE091171A1DF7A7006789F0 /* LEColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				9EE091181A1DF7A7006789F0 /* LEColorPicker.h */,
+				9EE091191A1DF7A7006789F0 /* LEColorPicker.m */,
+				9EE0911A1A1DF7A7006789F0 /* UIColor+YUVSpace.h */,
+				9EE0911B1A1DF7A7006789F0 /* UIColor+YUVSpace.m */,
+			);
+			path = LEColorPicker;
+			sourceTree = "<group>";
+		};
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EE0910D1A1DF628006789F0 /* CoreText.framework */,
 				46131CE3B423FC1E1397014B /* libPods.a */,
 			);
 			name = Frameworks;
@@ -657,7 +725,9 @@
 				9EB4286B1A19F94800700D96 /* carrefour 32-32 11:17:2014.jpeg in Resources */,
 				9EB428101A19F7F700700D96 /* kaufland 244-20 11:17:2014.jpeg in Resources */,
 				9EB428621A19F94800700D96 /* carrefour 24-24 11:17:2014.jpeg in Resources */,
+				9EE091231A1F3724006789F0 /* markets_scroll.png in Resources */,
 				9EB427FE1A19F7F700700D96 /* kaufland 226-02 11:17:2014.jpeg in Resources */,
+				9EE091201A1F3483006789F0 /* catalogs_scroll.png in Resources */,
 				9EB4287D1A19F94800700D96 /* cora 2-02 11:17:2014.jpeg in Resources */,
 				9E26515E1A134C64005B546B /* carrefour_logo_squared.jpeg in Resources */,
 				9EB4285D1A19F94800700D96 /* carrefour 2-02 11:17:2014.jpeg in Resources */,
@@ -666,6 +736,7 @@
 				9E26515F1A134C64005B546B /* catalog_cover.png in Resources */,
 				9E7173F71A1CCA710078870E /* real_logo_horizontal.png in Resources */,
 				9EB427FD1A19F7F700700D96 /* kaufland 225-01 11:17:2014.jpeg in Resources */,
+				9EE091251A1F4AED006789F0 /* circular.png in Resources */,
 				9E2650D61A11192F005B546B /* Main.storyboard in Resources */,
 				9EB428871A19F94800700D96 /* cora 7-07 11:17:2014.jpeg in Resources */,
 				9EB428791A19F94800700D96 /* cora 16-16 11:17:2014.jpeg in Resources */,
@@ -753,13 +824,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE090FB1A1CD2DC006789F0 /* UIImageView+JMImageCache.m in Sources */,
 				9E7172D61A1C92410078870E /* AAAwww.m in Sources */,
 				9E2651411A120B60005B546B /* AAAMarket.m in Sources */,
 				9E2650CD1A11192F005B546B /* AppDelegate.m in Sources */,
+				9EE090FA1A1CD2DC006789F0 /* JMImageCache.m in Sources */,
 				9E2651531A127396005B546B /* AAACatalog.m in Sources */,
 				9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */,
+				9EE0911D1A1DF7A7006789F0 /* UIColor+YUVSpace.m in Sources */,
+				9EE0911C1A1DF7A7006789F0 /* LEColorPicker.m in Sources */,
+				9EE0910B1A1DF585006789F0 /* LBGradient.m in Sources */,
 				9E2650CA1A11192F005B546B /* main.m in Sources */,
 				9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */,
+				9EE0910C1A1DF585006789F0 /* LBGradientView.m in Sources */,
 				9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
