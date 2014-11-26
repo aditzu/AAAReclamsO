@@ -179,7 +179,6 @@ const static int catalogSubviewTag = 21341;
 {
     CGRect toFrame = [self.view convertRect:containerViewOfShownCatalog.frame fromView:containerViewOfShownCatalog.superview];
     CGSize scaleSize = CGSizeMake(containerViewOfShownCatalog.frame.size.width/catalogVC.view.frame.size.width, containerViewOfShownCatalog.frame.size.height/(catalogVC.view.frame.size.height + self.tabBarController.tabBar.frame.size.height));
-    catalogVC.view.layer.shadowOpacity = 0.0f;
     [UIView animateWithDuration:.4f animations:^{
         catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
         catalogVC.view.frame = toFrame;
@@ -187,7 +186,6 @@ const static int catalogSubviewTag = 21341;
         catalogVC.view.frame = containerViewOfShownCatalog.bounds;
         [containerViewOfShownCatalog addSubview:catalogVC.view];
     }];
-    [carousel reloadItemAtIndex:[currentShowingCatalogs indexOfObject:catalogVC] animated:YES];
 }
 
 #pragma mark - iCarousel Datasource
