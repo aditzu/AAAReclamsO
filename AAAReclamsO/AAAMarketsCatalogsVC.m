@@ -12,15 +12,13 @@
 #import "AAAwww.h"
 #import "JMImageCache.h"
 #import "LEColorPicker.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface AAAMarketsCatalogsVC()
 {
     NSMutableArray* markets;
     IBOutlet UIScrollView* marketsScrollView;
     IBOutlet UIScrollView* catalogsScrollView;
-    
-    IBOutlet UIImageView* testImag;
     
     AAAMarket* currentShowingMarket;
     NSMutableArray* currentShowingCatalogs;
@@ -30,11 +28,13 @@
     UIView* currentShownMarketView;
     NSMutableArray* marketViews;
     
-    CGRect marketViewMaxFrame;
+    CGRect catalogViewMaxFrame;
 }
 @end
 
 @implementation AAAMarketsCatalogsVC
+
+const static float DisabledMarketViewTransparency = 0.65f;
 
 -(void)viewDidLoad
 {
@@ -42,24 +42,8 @@
     marketViews = [NSMutableArray array];
     www = [AAAwww instance];
     [JMImageCache sharedCache].countLimit = 500;
-    
-//    LEColorPicker* colorPicker = [[LEColorPicker alloc] init];
-//    LEColorScheme* colorScheme = [colorPicker colorSchemeFromImage:[UIImage imageNamed:@"metro_logo_squared.jpg"]];
-//    NSLog(@"primaryCOlor:%@", colorScheme.primaryTextColor);
-//    NSLog(@"secondaryTextColor:%@", colorScheme.secondaryTextColor);
-//    NSLog(@"backgroundColor:%@", colorScheme.backgroundColor);
-//    
-//    CAGradientLayer* gradient = [CAGradientLayer layer];
-//    gradient.frame = catalogsScrollView.bounds;
-//    gradient.colors = @[ (id)colorScheme.backgroundColor.CGColor, (id)colorScheme.primaryTextColor.CGColor];
-//    gradient.allowsEdgeAntialiasing = YES;
-//    gradient.drawsAsynchronously=YES;
-//    gradient.magnificationFilter = kCAFilterTrilinear;
-//    gradient.opacity = .5f;
-//    [catalogsScrollView.layer insertSublayer:gradient atIndex:0];
-    
-    marketsScrollView.delegate = self;
-    
+//    marketsScrollView.delegate = self;
+    catalogsScrollView.delegate = self;
 //    [[JMImageCache sharedCache] removeAllObjects];
     
     markets = [NSMutableArray array];
@@ -69,23 +53,46 @@
             if (![markets containsObject:catalog.market]) {
                 [markets addObject:catalog.market];
             }
-            [catalog.market.catalogs addObject:catalog];///auuuu retain circle
+            [markets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                AAAMarket* mark = (AAAMarket*)obj;
+                if (mark.identifier == catalog.market.identifier) {
+                    [mark.catalogs addObject:catalog];
+                }
+            }];
+//            [catalog.market.catalogs addObject:catalog];///auuuu retain circle
         }
         [self addTheMarkets];
-        [self arrangeViews:marketViews inScrollView:marketsScrollView];
         if (markets.count>0) {
             currentShowingMarket = markets[0];
             [self setTheCatalogsForMarket:currentShowingMarket];
             [self setMarketViewAsSelected:marketViews[0]];
+            [self arrangeViews:currentShowingCatalogs inScrollView:catalogsScrollView];
         }
         [self addTapGestureRecognizerToScrollView];
     }];
 }
 
++(UIImage*)imageWithShadowForImage:(UIImage *)initialImage {
+    
+    CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef shadowContext = CGBitmapContextCreate(NULL, initialImage.size.width, initialImage.size.height + 4, CGImageGetBitsPerComponent(initialImage.CGImage), 0, colourSpace, kCGImageAlphaPremultipliedLast);// kCGImageAlphaPremultipliedLast
+    CGColorSpaceRelease(colourSpace);
+    
+    CGContextSetShadowWithColor(shadowContext, CGSizeMake(0,4), 70, [UIColor blackColor].CGColor);
+    CGContextDrawImage(shadowContext, CGRectMake(0, 4, initialImage.size.width, initialImage.size.height), initialImage.CGImage);
+    
+    CGImageRef shadowedCGImage = CGBitmapContextCreateImage(shadowContext);
+    CGContextRelease(shadowContext);
+    
+    UIImage * shadowedImage = [UIImage imageWithCGImage:shadowedCGImage];
+    CGImageRelease(shadowedCGImage);
+    
+    return shadowedImage;
+}
 
 -(void) addTheMarkets
 {
-    int border = 10;
+    int border = 5;
     int side = marketsScrollView.bounds.size.height;
     CGSize viewSize = CGSizeMake(side, side);
     for (int i =0; i < markets.count; i++)
@@ -96,18 +103,22 @@
         float viewX = i * viewSize.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2;
 
         UIView* marketView = [[UIView alloc] initWithFrame:CGRectMake(viewX, border, viewFinalWidth, viewFinalHeight)];
-        marketViewMaxFrame = marketView.frame;//temp
+//        marketViewMaxFrame = marketView.frame;//temp
         UIButton* btn = [[UIButton alloc] initWithFrame:marketView.bounds];
         [btn setBackgroundColor:[UIColor grayColor]];
         
-        [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:market.miniLogoURL] completionBlock:^(UIImage *image) {
-            [btn setBackgroundImage:image forState:UIControlStateNormal];
+        NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
+
+        [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
+            UIImage* newImage = [AAAMarketsCatalogsVC imageWithShadowForImage:image];
+            [btn setBackgroundImage:newImage forState:UIControlStateNormal];
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
             NSLog(@"JMIMageCache failed: %@", error);
         }];
         
         btn.tag = i;
         [btn addTarget:self action:@selector(marketButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        marketView.alpha = DisabledMarketViewTransparency;
         [marketView addSubview:btn];
         [marketsScrollView addSubview:marketView];
         marketsScrollView.contentSize = CGSizeMake(marketView.frame.origin.x + marketView.frame.size.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2, viewSize.height);
@@ -117,17 +128,17 @@
 
 -(void) marketButtonClicked:(UIButton*) btn
 {
-    if ([currentShownMarketView isEqual:btn]) {
+    if ([currentShownMarketView isEqual:marketViews[btn.tag]]) {
         return;
     }
     currentShowingMarket = markets[btn.tag];
     [self setTheCatalogsForMarket:currentShowingMarket];
-    [self setMarketViewAsSelected:btn];
+    [self setMarketViewAsSelected:marketViews[btn.tag]];
 }
 
 -(void) setMarketViewAsSelected:(UIView*) btn
 {
-    int scaleDiff = 5;
+    int scaleDiff = 2;
     CGRect currentShowingMarketBtnNewFrame = currentShownMarketView ? currentShownMarketView.frame : CGRectZero;
     currentShowingMarketBtnNewFrame.origin.x += scaleDiff;
     currentShowingMarketBtnNewFrame.origin.y += scaleDiff;
@@ -140,11 +151,14 @@
     newMarketBtnFrame.size.height += scaleDiff*2;
     newMarketBtnFrame.size.width += scaleDiff*2;
     
+    
     [UIView animateWithDuration:.1f animations:^{
         if (currentShownMarketView) {
             currentShownMarketView.frame = currentShowingMarketBtnNewFrame;
+            currentShownMarketView.alpha = DisabledMarketViewTransparency;
         }
         btn.frame = newMarketBtnFrame;
+        btn.alpha = 1.0f;
     } completion:^(BOOL finished) {
         currentShownMarketView = btn;
     }];
@@ -167,7 +181,8 @@
         AAACatalog* catalog = market.catalogs[i];
         AAACatalogVC* catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
         catalogVC.catalog = catalog;
-        UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(i * viewSize.width + (border * (2 * i + 1)), border/2, viewSize.width, viewSize.height)];
+        UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(i * viewSize.width + (border * (.5 * i + 1)), border/2, viewSize.width, viewSize.height)];
+        catalogViewMaxFrame = containerView.frame;
         CGRect catalogVCFrame = catalogVC.view.frame;
 //        catalogVCFrame.size.height = 519;//hardcoded, it is not loaded here yet. it's 568
         CGSize scaleSize = CGSizeMake(containerView.frame.size.width/catalogVCFrame.size.width, containerView.frame.size.height/catalogVCFrame.size.height);
@@ -229,27 +244,31 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self arrangeViews:marketViews inScrollView:scrollView];
+    [self arrangeViews:currentShowingCatalogs inScrollView:scrollView];
 }
 
 -(void) arrangeViews:(NSArray*)views inScrollView:(UIScrollView*) scrollView
 {
-    int dif = 10;
-    int centerOffsetNoEffect = 50;
-    int angleOffset = 60;
-    for (UIView* scrollViewSubview in views) {
+    int sizeScaleDif = 100;
+    int centerOffsetNoEffect = 20;
+    int angleOffset = 20;
+    for (AAACatalogVC* scrollViewCatalog in views) {
+        int i = [views indexOfObject:scrollViewCatalog];
+        
+        UIView* scrollViewSubview = scrollViewCatalog.view.superview;
         CGRect subviewFrameInMyView = CGRectMake(scrollViewSubview.frame.origin.x - scrollView.contentOffset.x, scrollViewSubview.frame.origin.y, scrollViewSubview.frame.size.width, scrollViewSubview.frame.size.height);
-        [self.view convertRect:scrollViewSubview.frame fromView:scrollView];
         float pixelsFromCenter = scrollView.bounds.size.width / 2 - (subviewFrameInMyView.origin.x + subviewFrameInMyView.size.width/2);
         BOOL isInLeft = pixelsFromCenter < 0;
         float distanceFromCenter = fabs(pixelsFromCenter);
         distanceFromCenter -= centerOffsetNoEffect;
-        if (distanceFromCenter>0) {
+        if (distanceFromCenter>0.001f) {
             float percentage = (100* (distanceFromCenter))/(scrollView.bounds.size.width/2 - centerOffsetNoEffect);
-            float pixels = dif/100.0f*percentage;
-            CGRect toBeFrame = CGRectMake(scrollViewSubview.center.x - marketViewMaxFrame.size.width/2, scrollViewSubview.center.y - marketViewMaxFrame.size.height/2, marketViewMaxFrame.size.width, marketViewMaxFrame.size.height);
-            toBeFrame.origin.x += pixels;
-            toBeFrame.origin.y += pixels;
+//            NSLog(@"PERCENTAGE: %f ----- %i + %@", percentage, i, NSStringFromCGRect(subviewFrameInMyView));
+            float pixels = sizeScaleDif/100.0f*percentage;
+//            CGRect toBeFrame = CGRectMake(scrollViewSubview.center.x - catalogViewMaxFrame.size.width/2, scrollViewSubview.center.y - catalogViewMaxFrame.size.height/2, catalogViewMaxFrame.size.width, catalogViewMaxFrame.size.height);
+            CGRect toBeFrame = scrollViewSubview.frame;
+//            toBeFrame.origin.x += pixels;
+//            toBeFrame.origin.y += pixels;
             toBeFrame.size.width -= pixels*2;
             toBeFrame.size.height -= pixels*2;
             scrollViewSubview.frame = toBeFrame;
@@ -260,7 +279,12 @@
             CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
             rotationAndPerspectiveTransform.m34 = 1.0 / -500;
             rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, angle * M_PI / 180.0f, 0.0f, 1.0f, 0.0f);
+            
+            float initialX = scrollViewSubview.frame.origin.x;
             scrollViewSubview.layer.transform = rotationAndPerspectiveTransform;
+            CGRect newFrame = scrollViewSubview.frame;
+            newFrame.origin.x = initialX;
+//            scrollViewSubview.frame = newFrame;
         }
     }
 }

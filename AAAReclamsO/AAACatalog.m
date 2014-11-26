@@ -27,6 +27,11 @@
     _imagesURLs = sortedImages;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    return self.identifier == ((AAACatalog*)object).identifier;
+}
+
 -(NSUInteger)hash
 {
     return self.identifier;

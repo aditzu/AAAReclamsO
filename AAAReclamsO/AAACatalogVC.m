@@ -24,7 +24,7 @@
 
 @implementation AAACatalogVC
 
-static int PicturesToPreload = 3;
+const static int PicturesToPreload = 3;
 
 -(void)viewDidLoad
 {

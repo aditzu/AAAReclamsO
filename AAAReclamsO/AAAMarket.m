@@ -30,6 +30,11 @@
     return market;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    return self.identifier == ((AAAMarket*)object).identifier;
+}
+
 -(NSUInteger)hash
 {
     return identifier;

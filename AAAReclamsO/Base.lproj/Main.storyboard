@@ -230,20 +230,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="catalogs_scroll.png" translatesAutoresizingMaskIntoConstraints="NO" id="2p5-AF-gdC" userLabel="catalogs ImgView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="422"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="MOv-vo-MmQ" userLabel="bg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="markets_scroll.png" translatesAutoresizingMaskIntoConstraints="NO" id="cPv-b4-pmI" userLabel="markets ImgView">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bottom_bar_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="cPv-b4-pmI" userLabel="markets ImgView">
                                 <rect key="frame" x="0.0" y="438" width="320" height="82"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circular.png" translatesAutoresizingMaskIntoConstraints="NO" id="kb2-5f-pIm">
-                                <rect key="frame" x="0.0" y="450" width="320" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-49-Hvk" userLabel="markets ScrollView">
                                 <rect key="frame" x="0.0" y="440" width="320" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N81-ok-fha" userLabel="catalogs ScrollView">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bottom_bar_overlay.png" translatesAutoresizingMaskIntoConstraints="NO" id="o9c-XI-fmy">
+                                <rect key="frame" x="0.0" y="438" width="320" height="82"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N81-ok-fha" userLabel="catalogs ScrollView">
                                 <rect key="frame" x="0.0" y="20" width="320" height="422"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -254,7 +256,6 @@
                     <connections>
                         <outlet property="catalogsScrollView" destination="N81-ok-fha" id="naF-IJ-abT"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
-                        <outlet property="testImag" destination="kb2-5f-pIm" id="5pU-FS-wdZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzr-UZ-Jrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -486,10 +487,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="catalogs_scroll.png" width="640" height="845"/>
-        <image name="circular.png" width="612" height="116"/>
+        <image name="bg.png" width="320" height="568"/>
+        <image name="bottom_bar_bg.png" width="320" height="81"/>
+        <image name="bottom_bar_overlay.png" width="320" height="81"/>
         <image name="first" width="30" height="30"/>
-        <image name="markets_scroll.png" width="640" height="174"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

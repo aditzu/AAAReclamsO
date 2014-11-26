@@ -36,7 +36,7 @@
 -(void) downloadImage
 {
     if (!img) {
-        NSLog(@"Downloading:%@", self.imageUrl);
+//        NSLog(@"Downloading:%@", self.imageUrl);
         [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:self.imageUrl] completionBlock:^(UIImage *image) {
             img = image;
             spinnerView.hidden = YES;

@@ -15,109 +15,9 @@
 		9E2650E71A11192F005B546B /* AAAReclamsOTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2650E61A11192F005B546B /* AAAReclamsOTests.m */; };
 		9E2651411A120B60005B546B /* AAAMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651401A120B60005B546B /* AAAMarket.m */; };
 		9E2651531A127396005B546B /* AAACatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651521A127396005B546B /* AAACatalog.m */; };
-		9E26515E1A134C64005B546B /* carrefour_logo_squared.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515A1A134C64005B546B /* carrefour_logo_squared.jpeg */; };
-		9E26515F1A134C64005B546B /* catalog_cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515B1A134C64005B546B /* catalog_cover.png */; };
-		9E2651601A134C64005B546B /* cora_logo_squared.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515C1A134C64005B546B /* cora_logo_squared.jpeg */; };
-		9E2651611A134C64005B546B /* kaufland_logo_squared.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E26515D1A134C64005B546B /* kaufland_logo_squared.jpg */; };
-		9E2651631A134C7C005B546B /* kaufland.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9E2651621A134C7C005B546B /* kaufland.pdf */; };
 		9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651651A136FD6005B546B /* AAACatalogVC.m */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
-		9E7173EB1A1CCA600078870E /* auchan_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173E91A1CCA600078870E /* auchan_logo_horizontal.png */; };
-		9E7173EC1A1CCA600078870E /* auchan_logo_squared.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173EA1A1CCA600078870E /* auchan_logo_squared.jpg */; };
-		9E7173EF1A1CCA6B0078870E /* lidl_logo_horizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173ED1A1CCA6B0078870E /* lidl_logo_horizontal.jpg */; };
-		9E7173F01A1CCA6B0078870E /* lidl_logo_squared.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173EE1A1CCA6B0078870E /* lidl_logo_squared.jpg */; };
-		9E7173F51A1CCA710078870E /* metro_logo_horizontal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173F11A1CCA710078870E /* metro_logo_horizontal.jpg */; };
-		9E7173F61A1CCA710078870E /* metro_logo_squared.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173F21A1CCA710078870E /* metro_logo_squared.jpg */; };
-		9E7173F71A1CCA710078870E /* real_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173F31A1CCA710078870E /* real_logo_horizontal.png */; };
-		9E7173F81A1CCA710078870E /* real_logo_squared.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E7173F41A1CCA710078870E /* real_logo_squared.jpg */; };
-		9EB4279F1A17580E00700D96 /* carrefour_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4279E1A17580E00700D96 /* carrefour_logo_horizontal.png */; };
-		9EB427A11A17581B00700D96 /* cora_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427A01A17581B00700D96 /* cora_logo_horizontal.png */; };
-		9EB427A31A17582900700D96 /* kaufland_logo_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427A21A17582900700D96 /* kaufland_logo_horizontal.png */; };
 		9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */; };
-		9EB427FD1A19F7F700700D96 /* kaufland 225-01 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E11A19F7F700700D96 /* kaufland 225-01 11:17:2014.jpeg */; };
-		9EB427FE1A19F7F700700D96 /* kaufland 226-02 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E21A19F7F700700D96 /* kaufland 226-02 11:17:2014.jpeg */; };
-		9EB427FF1A19F7F700700D96 /* kaufland 227-03 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E31A19F7F700700D96 /* kaufland 227-03 11:17:2014.jpeg */; };
-		9EB428001A19F7F700700D96 /* kaufland 228-04 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E41A19F7F700700D96 /* kaufland 228-04 11:17:2014.jpeg */; };
-		9EB428011A19F7F700700D96 /* kaufland 229-05 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E51A19F7F700700D96 /* kaufland 229-05 11:17:2014.jpeg */; };
-		9EB428021A19F7F700700D96 /* kaufland 230-06 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E61A19F7F700700D96 /* kaufland 230-06 11:17:2014.jpeg */; };
-		9EB428031A19F7F700700D96 /* kaufland 231-07 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E71A19F7F700700D96 /* kaufland 231-07 11:17:2014.jpeg */; };
-		9EB428041A19F7F700700D96 /* kaufland 232-08 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E81A19F7F700700D96 /* kaufland 232-08 11:17:2014.jpeg */; };
-		9EB428051A19F7F700700D96 /* kaufland 233-09 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427E91A19F7F700700D96 /* kaufland 233-09 11:17:2014.jpeg */; };
-		9EB428061A19F7F700700D96 /* kaufland 234-10 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427EA1A19F7F700700D96 /* kaufland 234-10 11:17:2014.jpeg */; };
-		9EB428071A19F7F700700D96 /* kaufland 235-11 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427EB1A19F7F700700D96 /* kaufland 235-11 11:17:2014.jpeg */; };
-		9EB428081A19F7F700700D96 /* kaufland 236-12 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427EC1A19F7F700700D96 /* kaufland 236-12 11:17:2014.jpeg */; };
-		9EB428091A19F7F700700D96 /* kaufland 237-13 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427ED1A19F7F700700D96 /* kaufland 237-13 11:17:2014.jpeg */; };
-		9EB4280A1A19F7F700700D96 /* kaufland 238-14 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427EE1A19F7F700700D96 /* kaufland 238-14 11:17:2014.jpeg */; };
-		9EB4280B1A19F7F700700D96 /* kaufland 239-15 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427EF1A19F7F700700D96 /* kaufland 239-15 11:17:2014.jpeg */; };
-		9EB4280C1A19F7F700700D96 /* kaufland 240-16 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F01A19F7F700700D96 /* kaufland 240-16 11:17:2014.jpeg */; };
-		9EB4280D1A19F7F700700D96 /* kaufland 241-17 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F11A19F7F700700D96 /* kaufland 241-17 11:17:2014.jpeg */; };
-		9EB4280E1A19F7F700700D96 /* kaufland 242-18 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F21A19F7F700700D96 /* kaufland 242-18 11:17:2014.jpeg */; };
-		9EB4280F1A19F7F700700D96 /* kaufland 243-19 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F31A19F7F700700D96 /* kaufland 243-19 11:17:2014.jpeg */; };
-		9EB428101A19F7F700700D96 /* kaufland 244-20 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F41A19F7F700700D96 /* kaufland 244-20 11:17:2014.jpeg */; };
-		9EB428111A19F7F700700D96 /* kaufland 245-21 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F51A19F7F700700D96 /* kaufland 245-21 11:17:2014.jpeg */; };
-		9EB428121A19F7F700700D96 /* kaufland 246-22 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F61A19F7F700700D96 /* kaufland 246-22 11:17:2014.jpeg */; };
-		9EB428131A19F7F700700D96 /* kaufland 247-23 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F71A19F7F700700D96 /* kaufland 247-23 11:17:2014.jpeg */; };
-		9EB428141A19F7F700700D96 /* kaufland 248-24 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F81A19F7F700700D96 /* kaufland 248-24 11:17:2014.jpeg */; };
-		9EB428151A19F7F700700D96 /* kaufland 249-25 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427F91A19F7F700700D96 /* kaufland 249-25 11:17:2014.jpeg */; };
-		9EB428161A19F7F700700D96 /* kaufland 250-26 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427FA1A19F7F700700D96 /* kaufland 250-26 11:17:2014.jpeg */; };
-		9EB428171A19F7F700700D96 /* kaufland 251-27 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427FB1A19F7F700700D96 /* kaufland 251-27 11:17:2014.jpeg */; };
-		9EB428181A19F7F700700D96 /* kaufland 252-28 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB427FC1A19F7F700700D96 /* kaufland 252-28 11:17:2014.jpeg */; };
-		9EB428531A19F94800700D96 /* carrefour 10-10 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4281A1A19F94800700D96 /* carrefour 10-10 11:17:2014.jpeg */; };
-		9EB428541A19F94800700D96 /* carrefour 11-11 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4281B1A19F94800700D96 /* carrefour 11-11 11:17:2014.jpeg */; };
-		9EB428551A19F94800700D96 /* carrefour 12-12 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4281C1A19F94800700D96 /* carrefour 12-12 11:17:2014.jpeg */; };
-		9EB428561A19F94800700D96 /* carrefour 13-13 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4281D1A19F94800700D96 /* carrefour 13-13 11:17:2014.jpeg */; };
-		9EB428571A19F94800700D96 /* carrefour 14-14 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4281E1A19F94800700D96 /* carrefour 14-14 11:17:2014.jpeg */; };
-		9EB428581A19F94800700D96 /* carrefour 15-15 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4281F1A19F94800700D96 /* carrefour 15-15 11:17:2014.jpeg */; };
-		9EB428591A19F94800700D96 /* carrefour 16-16 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428201A19F94800700D96 /* carrefour 16-16 11:17:2014.jpeg */; };
-		9EB4285A1A19F94800700D96 /* carrefour 17-17 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428211A19F94800700D96 /* carrefour 17-17 11:17:2014.jpeg */; };
-		9EB4285B1A19F94800700D96 /* carrefour 18-18 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428221A19F94800700D96 /* carrefour 18-18 11:17:2014.jpeg */; };
-		9EB4285C1A19F94800700D96 /* carrefour 19-19 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428231A19F94800700D96 /* carrefour 19-19 11:17:2014.jpeg */; };
-		9EB4285D1A19F94800700D96 /* carrefour 2-02 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428241A19F94800700D96 /* carrefour 2-02 11:17:2014.jpeg */; };
-		9EB4285E1A19F94800700D96 /* carrefour 20-20 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428251A19F94800700D96 /* carrefour 20-20 11:17:2014.jpeg */; };
-		9EB4285F1A19F94800700D96 /* carrefour 21-21 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428261A19F94800700D96 /* carrefour 21-21 11:17:2014.jpeg */; };
-		9EB428601A19F94800700D96 /* carrefour 22-22 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428271A19F94800700D96 /* carrefour 22-22 11:17:2014.jpeg */; };
-		9EB428611A19F94800700D96 /* carrefour 23-23 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428281A19F94800700D96 /* carrefour 23-23 11:17:2014.jpeg */; };
-		9EB428621A19F94800700D96 /* carrefour 24-24 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428291A19F94800700D96 /* carrefour 24-24 11:17:2014.jpeg */; };
-		9EB428631A19F94800700D96 /* carrefour 25-25 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4282A1A19F94800700D96 /* carrefour 25-25 11:17:2014.jpeg */; };
-		9EB428641A19F94800700D96 /* carrefour 26-26 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4282B1A19F94800700D96 /* carrefour 26-26 11:17:2014.jpeg */; };
-		9EB428651A19F94800700D96 /* carrefour 27-27 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4282C1A19F94800700D96 /* carrefour 27-27 11:17:2014.jpeg */; };
-		9EB428661A19F94800700D96 /* carrefour 28-28 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4282D1A19F94800700D96 /* carrefour 28-28 11:17:2014.jpeg */; };
-		9EB428671A19F94800700D96 /* carrefour 29-29 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4282E1A19F94800700D96 /* carrefour 29-29 11:17:2014.jpeg */; };
-		9EB428681A19F94800700D96 /* carrefour 3-03 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4282F1A19F94800700D96 /* carrefour 3-03 11:17:2014.jpeg */; };
-		9EB428691A19F94800700D96 /* carrefour 30-30 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428301A19F94800700D96 /* carrefour 30-30 11:17:2014.jpeg */; };
-		9EB4286A1A19F94800700D96 /* carrefour 31-31 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428311A19F94800700D96 /* carrefour 31-31 11:17:2014.jpeg */; };
-		9EB4286B1A19F94800700D96 /* carrefour 32-32 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428321A19F94800700D96 /* carrefour 32-32 11:17:2014.jpeg */; };
-		9EB4286C1A19F94800700D96 /* carrefour 4-04 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428331A19F94800700D96 /* carrefour 4-04 11:17:2014.jpeg */; };
-		9EB4286D1A19F94800700D96 /* carrefour 5-05 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428341A19F94800700D96 /* carrefour 5-05 11:17:2014.jpeg */; };
-		9EB4286E1A19F94800700D96 /* carrefour 6-06 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428351A19F94800700D96 /* carrefour 6-06 11:17:2014.jpeg */; };
-		9EB4286F1A19F94800700D96 /* carrefour 7-07 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428361A19F94800700D96 /* carrefour 7-07 11:17:2014.jpeg */; };
-		9EB428701A19F94800700D96 /* carrefour 8-08 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428371A19F94800700D96 /* carrefour 8-08 11:17:2014.jpeg */; };
-		9EB428711A19F94800700D96 /* carrefour 9-09 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428381A19F94800700D96 /* carrefour 9-09 11:17:2014.jpeg */; };
-		9EB428721A19F94800700D96 /* carrefour-01 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428391A19F94800700D96 /* carrefour-01 11:17:2014.jpeg */; };
-		9EB428731A19F94800700D96 /* cora 10-10 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4283B1A19F94800700D96 /* cora 10-10 11:17:2014.jpeg */; };
-		9EB428741A19F94800700D96 /* cora 11-11 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4283C1A19F94800700D96 /* cora 11-11 11:17:2014.jpeg */; };
-		9EB428751A19F94800700D96 /* cora 12-12 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4283D1A19F94800700D96 /* cora 12-12 11:17:2014.jpeg */; };
-		9EB428761A19F94800700D96 /* cora 13-13 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4283E1A19F94800700D96 /* cora 13-13 11:17:2014.jpeg */; };
-		9EB428771A19F94800700D96 /* cora 14-14 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4283F1A19F94800700D96 /* cora 14-14 11:17:2014.jpeg */; };
-		9EB428781A19F94800700D96 /* cora 15-15 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428401A19F94800700D96 /* cora 15-15 11:17:2014.jpeg */; };
-		9EB428791A19F94800700D96 /* cora 16-16 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428411A19F94800700D96 /* cora 16-16 11:17:2014.jpeg */; };
-		9EB4287A1A19F94800700D96 /* cora 17-17 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428421A19F94800700D96 /* cora 17-17 11:17:2014.jpeg */; };
-		9EB4287B1A19F94800700D96 /* cora 18-18 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428431A19F94800700D96 /* cora 18-18 11:17:2014.jpeg */; };
-		9EB4287C1A19F94800700D96 /* cora 19-19 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428441A19F94800700D96 /* cora 19-19 11:17:2014.jpeg */; };
-		9EB4287D1A19F94800700D96 /* cora 2-02 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428451A19F94800700D96 /* cora 2-02 11:17:2014.jpeg */; };
-		9EB4287E1A19F94800700D96 /* cora 20-20 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428461A19F94800700D96 /* cora 20-20 11:17:2014.jpeg */; };
-		9EB4287F1A19F94800700D96 /* cora 21-21 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428471A19F94800700D96 /* cora 21-21 11:17:2014.jpeg */; };
-		9EB428801A19F94800700D96 /* cora 22-22 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428481A19F94800700D96 /* cora 22-22 11:17:2014.jpeg */; };
-		9EB428811A19F94800700D96 /* cora 23-23 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428491A19F94800700D96 /* cora 23-23 11:17:2014.jpeg */; };
-		9EB428821A19F94800700D96 /* cora 24-24 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4284A1A19F94800700D96 /* cora 24-24 11:17:2014.jpeg */; };
-		9EB428831A19F94800700D96 /* cora 3-03 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4284B1A19F94800700D96 /* cora 3-03 11:17:2014.jpeg */; };
-		9EB428841A19F94800700D96 /* cora 4-04 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4284C1A19F94800700D96 /* cora 4-04 11:17:2014.jpeg */; };
-		9EB428851A19F94800700D96 /* cora 5-05 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4284D1A19F94800700D96 /* cora 5-05 11:17:2014.jpeg */; };
-		9EB428861A19F94800700D96 /* cora 6-06 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4284E1A19F94800700D96 /* cora 6-06 11:17:2014.jpeg */; };
-		9EB428871A19F94800700D96 /* cora 7-07 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4284F1A19F94800700D96 /* cora 7-07 11:17:2014.jpeg */; };
-		9EB428881A19F94800700D96 /* cora 8-08 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428501A19F94800700D96 /* cora 8-08 11:17:2014.jpeg */; };
-		9EB428891A19F94800700D96 /* cora 9-09 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428511A19F94800700D96 /* cora 9-09 11:17:2014.jpeg */; };
-		9EB4288A1A19F94800700D96 /* cora-01 11:17:2014.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB428521A19F94800700D96 /* cora-01 11:17:2014.jpeg */; };
 		9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */; };
 		9EE090FA1A1CD2DC006789F0 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE090F71A1CD2DC006789F0 /* JMImageCache.m */; };
 		9EE090FB1A1CD2DC006789F0 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE090F91A1CD2DC006789F0 /* UIImageView+JMImageCache.m */; };
@@ -126,9 +26,9 @@
 		9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0910D1A1DF628006789F0 /* CoreText.framework */; };
 		9EE0911C1A1DF7A7006789F0 /* LEColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE091191A1DF7A7006789F0 /* LEColorPicker.m */; };
 		9EE0911D1A1DF7A7006789F0 /* UIColor+YUVSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0911B1A1DF7A7006789F0 /* UIColor+YUVSpace.m */; };
-		9EE091201A1F3483006789F0 /* catalogs_scroll.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0911E1A1F3483006789F0 /* catalogs_scroll.png */; };
-		9EE091231A1F3724006789F0 /* markets_scroll.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091221A1F3724006789F0 /* markets_scroll.png */; };
-		9EE091251A1F4AED006789F0 /* circular.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091241A1F4AED006789F0 /* circular.png */; };
+		9EE091531A24B740006789F0 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091511A24B740006789F0 /* bg@2x.png */; };
+		9EE091571A24BA2B006789F0 /* bottom_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091551A24BA2B006789F0 /* bottom_bar_bg@2x.png */; };
+		9EE091581A24BA2B006789F0 /* bottom_bar_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */; };
 		A9E12EF72B4BB1B16996413C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46131CE3B423FC1E1397014B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -160,112 +60,12 @@
 		9E2651401A120B60005B546B /* AAAMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarket.m; sourceTree = "<group>"; };
 		9E2651511A127396005B546B /* AAACatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalog.h; sourceTree = "<group>"; };
 		9E2651521A127396005B546B /* AAACatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalog.m; sourceTree = "<group>"; };
-		9E26515A1A134C64005B546B /* carrefour_logo_squared.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = carrefour_logo_squared.jpeg; sourceTree = "<group>"; };
-		9E26515B1A134C64005B546B /* catalog_cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = catalog_cover.png; sourceTree = "<group>"; };
-		9E26515C1A134C64005B546B /* cora_logo_squared.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cora_logo_squared.jpeg; sourceTree = "<group>"; };
-		9E26515D1A134C64005B546B /* kaufland_logo_squared.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kaufland_logo_squared.jpg; sourceTree = "<group>"; };
-		9E2651621A134C7C005B546B /* kaufland.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = kaufland.pdf; sourceTree = "<group>"; };
 		9E2651641A136FD6005B546B /* AAACatalogVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogVC.h; sourceTree = "<group>"; };
 		9E2651651A136FD6005B546B /* AAACatalogVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalogVC.m; sourceTree = "<group>"; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
 		9E7172D51A1C92410078870E /* AAAwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAwww.m; sourceTree = "<group>"; };
-		9E7173E91A1CCA600078870E /* auchan_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = auchan_logo_horizontal.png; sourceTree = "<group>"; };
-		9E7173EA1A1CCA600078870E /* auchan_logo_squared.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = auchan_logo_squared.jpg; sourceTree = "<group>"; };
-		9E7173ED1A1CCA6B0078870E /* lidl_logo_horizontal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lidl_logo_horizontal.jpg; sourceTree = "<group>"; };
-		9E7173EE1A1CCA6B0078870E /* lidl_logo_squared.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lidl_logo_squared.jpg; sourceTree = "<group>"; };
-		9E7173F11A1CCA710078870E /* metro_logo_horizontal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metro_logo_horizontal.jpg; sourceTree = "<group>"; };
-		9E7173F21A1CCA710078870E /* metro_logo_squared.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metro_logo_squared.jpg; sourceTree = "<group>"; };
-		9E7173F31A1CCA710078870E /* real_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = real_logo_horizontal.png; sourceTree = "<group>"; };
-		9E7173F41A1CCA710078870E /* real_logo_squared.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = real_logo_squared.jpg; sourceTree = "<group>"; };
-		9EB4279E1A17580E00700D96 /* carrefour_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carrefour_logo_horizontal.png; sourceTree = "<group>"; };
-		9EB427A01A17581B00700D96 /* cora_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cora_logo_horizontal.png; sourceTree = "<group>"; };
-		9EB427A21A17582900700D96 /* kaufland_logo_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kaufland_logo_horizontal.png; sourceTree = "<group>"; };
 		9EB427A41A1785EC00700D96 /* AAAMarketsCatalogsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketsCatalogsVC.h; sourceTree = "<group>"; };
 		9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketsCatalogsVC.m; sourceTree = "<group>"; };
-		9EB427E11A19F7F700700D96 /* kaufland 225-01 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 225-01 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E21A19F7F700700D96 /* kaufland 226-02 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 226-02 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E31A19F7F700700D96 /* kaufland 227-03 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 227-03 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E41A19F7F700700D96 /* kaufland 228-04 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 228-04 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E51A19F7F700700D96 /* kaufland 229-05 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 229-05 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E61A19F7F700700D96 /* kaufland 230-06 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 230-06 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E71A19F7F700700D96 /* kaufland 231-07 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 231-07 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E81A19F7F700700D96 /* kaufland 232-08 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 232-08 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427E91A19F7F700700D96 /* kaufland 233-09 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 233-09 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427EA1A19F7F700700D96 /* kaufland 234-10 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 234-10 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427EB1A19F7F700700D96 /* kaufland 235-11 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 235-11 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427EC1A19F7F700700D96 /* kaufland 236-12 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 236-12 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427ED1A19F7F700700D96 /* kaufland 237-13 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 237-13 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427EE1A19F7F700700D96 /* kaufland 238-14 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 238-14 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427EF1A19F7F700700D96 /* kaufland 239-15 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 239-15 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F01A19F7F700700D96 /* kaufland 240-16 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 240-16 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F11A19F7F700700D96 /* kaufland 241-17 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 241-17 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F21A19F7F700700D96 /* kaufland 242-18 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 242-18 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F31A19F7F700700D96 /* kaufland 243-19 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 243-19 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F41A19F7F700700D96 /* kaufland 244-20 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 244-20 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F51A19F7F700700D96 /* kaufland 245-21 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 245-21 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F61A19F7F700700D96 /* kaufland 246-22 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 246-22 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F71A19F7F700700D96 /* kaufland 247-23 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 247-23 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F81A19F7F700700D96 /* kaufland 248-24 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 248-24 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427F91A19F7F700700D96 /* kaufland 249-25 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 249-25 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427FA1A19F7F700700D96 /* kaufland 250-26 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 250-26 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427FB1A19F7F700700D96 /* kaufland 251-27 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 251-27 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB427FC1A19F7F700700D96 /* kaufland 252-28 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kaufland 252-28 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4281A1A19F94800700D96 /* carrefour 10-10 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 10-10 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4281B1A19F94800700D96 /* carrefour 11-11 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 11-11 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4281C1A19F94800700D96 /* carrefour 12-12 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 12-12 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4281D1A19F94800700D96 /* carrefour 13-13 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 13-13 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4281E1A19F94800700D96 /* carrefour 14-14 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 14-14 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4281F1A19F94800700D96 /* carrefour 15-15 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 15-15 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428201A19F94800700D96 /* carrefour 16-16 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 16-16 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428211A19F94800700D96 /* carrefour 17-17 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 17-17 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428221A19F94800700D96 /* carrefour 18-18 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 18-18 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428231A19F94800700D96 /* carrefour 19-19 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 19-19 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428241A19F94800700D96 /* carrefour 2-02 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 2-02 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428251A19F94800700D96 /* carrefour 20-20 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 20-20 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428261A19F94800700D96 /* carrefour 21-21 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 21-21 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428271A19F94800700D96 /* carrefour 22-22 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 22-22 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428281A19F94800700D96 /* carrefour 23-23 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 23-23 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428291A19F94800700D96 /* carrefour 24-24 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 24-24 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4282A1A19F94800700D96 /* carrefour 25-25 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 25-25 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4282B1A19F94800700D96 /* carrefour 26-26 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 26-26 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4282C1A19F94800700D96 /* carrefour 27-27 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 27-27 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4282D1A19F94800700D96 /* carrefour 28-28 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 28-28 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4282E1A19F94800700D96 /* carrefour 29-29 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 29-29 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4282F1A19F94800700D96 /* carrefour 3-03 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 3-03 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428301A19F94800700D96 /* carrefour 30-30 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 30-30 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428311A19F94800700D96 /* carrefour 31-31 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 31-31 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428321A19F94800700D96 /* carrefour 32-32 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 32-32 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428331A19F94800700D96 /* carrefour 4-04 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 4-04 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428341A19F94800700D96 /* carrefour 5-05 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 5-05 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428351A19F94800700D96 /* carrefour 6-06 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 6-06 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428361A19F94800700D96 /* carrefour 7-07 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 7-07 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428371A19F94800700D96 /* carrefour 8-08 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 8-08 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428381A19F94800700D96 /* carrefour 9-09 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour 9-09 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428391A19F94800700D96 /* carrefour-01 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "carrefour-01 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4283B1A19F94800700D96 /* cora 10-10 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 10-10 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4283C1A19F94800700D96 /* cora 11-11 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 11-11 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4283D1A19F94800700D96 /* cora 12-12 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 12-12 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4283E1A19F94800700D96 /* cora 13-13 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 13-13 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4283F1A19F94800700D96 /* cora 14-14 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 14-14 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428401A19F94800700D96 /* cora 15-15 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 15-15 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428411A19F94800700D96 /* cora 16-16 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 16-16 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428421A19F94800700D96 /* cora 17-17 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 17-17 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428431A19F94800700D96 /* cora 18-18 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 18-18 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428441A19F94800700D96 /* cora 19-19 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 19-19 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428451A19F94800700D96 /* cora 2-02 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 2-02 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428461A19F94800700D96 /* cora 20-20 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 20-20 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428471A19F94800700D96 /* cora 21-21 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 21-21 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428481A19F94800700D96 /* cora 22-22 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 22-22 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428491A19F94800700D96 /* cora 23-23 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 23-23 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4284A1A19F94800700D96 /* cora 24-24 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 24-24 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4284B1A19F94800700D96 /* cora 3-03 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 3-03 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4284C1A19F94800700D96 /* cora 4-04 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 4-04 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4284D1A19F94800700D96 /* cora 5-05 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 5-05 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4284E1A19F94800700D96 /* cora 6-06 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 6-06 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB4284F1A19F94800700D96 /* cora 7-07 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 7-07 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428501A19F94800700D96 /* cora 8-08 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 8-08 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428511A19F94800700D96 /* cora 9-09 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora 9-09 11:17:2014.jpeg"; sourceTree = "<group>"; };
-		9EB428521A19F94800700D96 /* cora-01 11:17:2014.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cora-01 11:17:2014.jpeg"; sourceTree = "<group>"; };
 		9EB4288B1A1A1DC900700D96 /* AAACatalogPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogPageVC.h; sourceTree = "<group>"; };
 		9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalogPageVC.m; sourceTree = "<group>"; };
 		9EE090F61A1CD2DC006789F0 /* JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMImageCache.h; sourceTree = "<group>"; };
@@ -281,9 +81,9 @@
 		9EE091191A1DF7A7006789F0 /* LEColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEColorPicker.m; sourceTree = "<group>"; };
 		9EE0911A1A1DF7A7006789F0 /* UIColor+YUVSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YUVSpace.h"; sourceTree = "<group>"; };
 		9EE0911B1A1DF7A7006789F0 /* UIColor+YUVSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YUVSpace.m"; sourceTree = "<group>"; };
-		9EE0911E1A1F3483006789F0 /* catalogs_scroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = catalogs_scroll.png; sourceTree = "<group>"; };
-		9EE091221A1F3724006789F0 /* markets_scroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markets_scroll.png; sourceTree = "<group>"; };
-		9EE091241A1F4AED006789F0 /* circular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circular.png; sourceTree = "<group>"; };
+		9EE091511A24B740006789F0 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
+		9EE091551A24BA2B006789F0 /* bottom_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom_bar_bg@2x.png"; sourceTree = "<group>"; };
+		9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom_bar_overlay@2x.png"; sourceTree = "<group>"; };
 		C2F365147BEC56749C74C9C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -393,7 +193,6 @@
 		9E2651581A134C4C005B546B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9E2651621A134C7C005B546B /* kaufland.pdf */,
 				9E2651591A134C64005B546B /* gfx */,
 			);
 			name = Resources;
@@ -403,27 +202,9 @@
 		9E2651591A134C64005B546B /* gfx */ = {
 			isa = PBXGroup;
 			children = (
-				9EE091241A1F4AED006789F0 /* circular.png */,
-				9EE0911E1A1F3483006789F0 /* catalogs_scroll.png */,
-				9EE091221A1F3724006789F0 /* markets_scroll.png */,
-				9EB428191A19F94800700D96 /* Carrefour */,
-				9EB4283A1A19F94800700D96 /* Cora */,
-				9EB427E01A19F7F700700D96 /* Kaufland */,
-				9EB427A21A17582900700D96 /* kaufland_logo_horizontal.png */,
-				9EB4279E1A17580E00700D96 /* carrefour_logo_horizontal.png */,
-				9EB427A01A17581B00700D96 /* cora_logo_horizontal.png */,
-				9E26515A1A134C64005B546B /* carrefour_logo_squared.jpeg */,
-				9E26515B1A134C64005B546B /* catalog_cover.png */,
-				9E26515C1A134C64005B546B /* cora_logo_squared.jpeg */,
-				9E26515D1A134C64005B546B /* kaufland_logo_squared.jpg */,
-				9E7173E91A1CCA600078870E /* auchan_logo_horizontal.png */,
-				9E7173EA1A1CCA600078870E /* auchan_logo_squared.jpg */,
-				9E7173ED1A1CCA6B0078870E /* lidl_logo_horizontal.jpg */,
-				9E7173EE1A1CCA6B0078870E /* lidl_logo_squared.jpg */,
-				9E7173F11A1CCA710078870E /* metro_logo_horizontal.jpg */,
-				9E7173F21A1CCA710078870E /* metro_logo_squared.jpg */,
-				9E7173F31A1CCA710078870E /* real_logo_horizontal.png */,
-				9E7173F41A1CCA710078870E /* real_logo_squared.jpg */,
+				9EE091511A24B740006789F0 /* bg@2x.png */,
+				9EE091551A24BA2B006789F0 /* bottom_bar_bg@2x.png */,
+				9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */,
 			);
 			path = gfx;
 			sourceTree = "<group>";
@@ -435,111 +216,6 @@
 				9E7172D51A1C92410078870E /* AAAwww.m */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		9EB427E01A19F7F700700D96 /* Kaufland */ = {
-			isa = PBXGroup;
-			children = (
-				9EB427E11A19F7F700700D96 /* kaufland 225-01 11:17:2014.jpeg */,
-				9EB427E21A19F7F700700D96 /* kaufland 226-02 11:17:2014.jpeg */,
-				9EB427E31A19F7F700700D96 /* kaufland 227-03 11:17:2014.jpeg */,
-				9EB427E41A19F7F700700D96 /* kaufland 228-04 11:17:2014.jpeg */,
-				9EB427E51A19F7F700700D96 /* kaufland 229-05 11:17:2014.jpeg */,
-				9EB427E61A19F7F700700D96 /* kaufland 230-06 11:17:2014.jpeg */,
-				9EB427E71A19F7F700700D96 /* kaufland 231-07 11:17:2014.jpeg */,
-				9EB427E81A19F7F700700D96 /* kaufland 232-08 11:17:2014.jpeg */,
-				9EB427E91A19F7F700700D96 /* kaufland 233-09 11:17:2014.jpeg */,
-				9EB427EA1A19F7F700700D96 /* kaufland 234-10 11:17:2014.jpeg */,
-				9EB427EB1A19F7F700700D96 /* kaufland 235-11 11:17:2014.jpeg */,
-				9EB427EC1A19F7F700700D96 /* kaufland 236-12 11:17:2014.jpeg */,
-				9EB427ED1A19F7F700700D96 /* kaufland 237-13 11:17:2014.jpeg */,
-				9EB427EE1A19F7F700700D96 /* kaufland 238-14 11:17:2014.jpeg */,
-				9EB427EF1A19F7F700700D96 /* kaufland 239-15 11:17:2014.jpeg */,
-				9EB427F01A19F7F700700D96 /* kaufland 240-16 11:17:2014.jpeg */,
-				9EB427F11A19F7F700700D96 /* kaufland 241-17 11:17:2014.jpeg */,
-				9EB427F21A19F7F700700D96 /* kaufland 242-18 11:17:2014.jpeg */,
-				9EB427F31A19F7F700700D96 /* kaufland 243-19 11:17:2014.jpeg */,
-				9EB427F41A19F7F700700D96 /* kaufland 244-20 11:17:2014.jpeg */,
-				9EB427F51A19F7F700700D96 /* kaufland 245-21 11:17:2014.jpeg */,
-				9EB427F61A19F7F700700D96 /* kaufland 246-22 11:17:2014.jpeg */,
-				9EB427F71A19F7F700700D96 /* kaufland 247-23 11:17:2014.jpeg */,
-				9EB427F81A19F7F700700D96 /* kaufland 248-24 11:17:2014.jpeg */,
-				9EB427F91A19F7F700700D96 /* kaufland 249-25 11:17:2014.jpeg */,
-				9EB427FA1A19F7F700700D96 /* kaufland 250-26 11:17:2014.jpeg */,
-				9EB427FB1A19F7F700700D96 /* kaufland 251-27 11:17:2014.jpeg */,
-				9EB427FC1A19F7F700700D96 /* kaufland 252-28 11:17:2014.jpeg */,
-			);
-			path = Kaufland;
-			sourceTree = "<group>";
-		};
-		9EB428191A19F94800700D96 /* Carrefour */ = {
-			isa = PBXGroup;
-			children = (
-				9EB4281A1A19F94800700D96 /* carrefour 10-10 11:17:2014.jpeg */,
-				9EB4281B1A19F94800700D96 /* carrefour 11-11 11:17:2014.jpeg */,
-				9EB4281C1A19F94800700D96 /* carrefour 12-12 11:17:2014.jpeg */,
-				9EB4281D1A19F94800700D96 /* carrefour 13-13 11:17:2014.jpeg */,
-				9EB4281E1A19F94800700D96 /* carrefour 14-14 11:17:2014.jpeg */,
-				9EB4281F1A19F94800700D96 /* carrefour 15-15 11:17:2014.jpeg */,
-				9EB428201A19F94800700D96 /* carrefour 16-16 11:17:2014.jpeg */,
-				9EB428211A19F94800700D96 /* carrefour 17-17 11:17:2014.jpeg */,
-				9EB428221A19F94800700D96 /* carrefour 18-18 11:17:2014.jpeg */,
-				9EB428231A19F94800700D96 /* carrefour 19-19 11:17:2014.jpeg */,
-				9EB428241A19F94800700D96 /* carrefour 2-02 11:17:2014.jpeg */,
-				9EB428251A19F94800700D96 /* carrefour 20-20 11:17:2014.jpeg */,
-				9EB428261A19F94800700D96 /* carrefour 21-21 11:17:2014.jpeg */,
-				9EB428271A19F94800700D96 /* carrefour 22-22 11:17:2014.jpeg */,
-				9EB428281A19F94800700D96 /* carrefour 23-23 11:17:2014.jpeg */,
-				9EB428291A19F94800700D96 /* carrefour 24-24 11:17:2014.jpeg */,
-				9EB4282A1A19F94800700D96 /* carrefour 25-25 11:17:2014.jpeg */,
-				9EB4282B1A19F94800700D96 /* carrefour 26-26 11:17:2014.jpeg */,
-				9EB4282C1A19F94800700D96 /* carrefour 27-27 11:17:2014.jpeg */,
-				9EB4282D1A19F94800700D96 /* carrefour 28-28 11:17:2014.jpeg */,
-				9EB4282E1A19F94800700D96 /* carrefour 29-29 11:17:2014.jpeg */,
-				9EB4282F1A19F94800700D96 /* carrefour 3-03 11:17:2014.jpeg */,
-				9EB428301A19F94800700D96 /* carrefour 30-30 11:17:2014.jpeg */,
-				9EB428311A19F94800700D96 /* carrefour 31-31 11:17:2014.jpeg */,
-				9EB428321A19F94800700D96 /* carrefour 32-32 11:17:2014.jpeg */,
-				9EB428331A19F94800700D96 /* carrefour 4-04 11:17:2014.jpeg */,
-				9EB428341A19F94800700D96 /* carrefour 5-05 11:17:2014.jpeg */,
-				9EB428351A19F94800700D96 /* carrefour 6-06 11:17:2014.jpeg */,
-				9EB428361A19F94800700D96 /* carrefour 7-07 11:17:2014.jpeg */,
-				9EB428371A19F94800700D96 /* carrefour 8-08 11:17:2014.jpeg */,
-				9EB428381A19F94800700D96 /* carrefour 9-09 11:17:2014.jpeg */,
-				9EB428391A19F94800700D96 /* carrefour-01 11:17:2014.jpeg */,
-			);
-			path = Carrefour;
-			sourceTree = "<group>";
-		};
-		9EB4283A1A19F94800700D96 /* Cora */ = {
-			isa = PBXGroup;
-			children = (
-				9EB4283B1A19F94800700D96 /* cora 10-10 11:17:2014.jpeg */,
-				9EB4283C1A19F94800700D96 /* cora 11-11 11:17:2014.jpeg */,
-				9EB4283D1A19F94800700D96 /* cora 12-12 11:17:2014.jpeg */,
-				9EB4283E1A19F94800700D96 /* cora 13-13 11:17:2014.jpeg */,
-				9EB4283F1A19F94800700D96 /* cora 14-14 11:17:2014.jpeg */,
-				9EB428401A19F94800700D96 /* cora 15-15 11:17:2014.jpeg */,
-				9EB428411A19F94800700D96 /* cora 16-16 11:17:2014.jpeg */,
-				9EB428421A19F94800700D96 /* cora 17-17 11:17:2014.jpeg */,
-				9EB428431A19F94800700D96 /* cora 18-18 11:17:2014.jpeg */,
-				9EB428441A19F94800700D96 /* cora 19-19 11:17:2014.jpeg */,
-				9EB428451A19F94800700D96 /* cora 2-02 11:17:2014.jpeg */,
-				9EB428461A19F94800700D96 /* cora 20-20 11:17:2014.jpeg */,
-				9EB428471A19F94800700D96 /* cora 21-21 11:17:2014.jpeg */,
-				9EB428481A19F94800700D96 /* cora 22-22 11:17:2014.jpeg */,
-				9EB428491A19F94800700D96 /* cora 23-23 11:17:2014.jpeg */,
-				9EB4284A1A19F94800700D96 /* cora 24-24 11:17:2014.jpeg */,
-				9EB4284B1A19F94800700D96 /* cora 3-03 11:17:2014.jpeg */,
-				9EB4284C1A19F94800700D96 /* cora 4-04 11:17:2014.jpeg */,
-				9EB4284D1A19F94800700D96 /* cora 5-05 11:17:2014.jpeg */,
-				9EB4284E1A19F94800700D96 /* cora 6-06 11:17:2014.jpeg */,
-				9EB4284F1A19F94800700D96 /* cora 7-07 11:17:2014.jpeg */,
-				9EB428501A19F94800700D96 /* cora 8-08 11:17:2014.jpeg */,
-				9EB428511A19F94800700D96 /* cora 9-09 11:17:2014.jpeg */,
-				9EB428521A19F94800700D96 /* cora-01 11:17:2014.jpeg */,
-			);
-			path = Cora;
 			sourceTree = "<group>";
 		};
 		9EE090F01A1CD1C8006789F0 /* JMImageCache */ = {
@@ -668,112 +344,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EB4280B1A19F7F700700D96 /* kaufland 239-15 11:17:2014.jpeg in Resources */,
-				9EB428011A19F7F700700D96 /* kaufland 229-05 11:17:2014.jpeg in Resources */,
-				9EB4286F1A19F94800700D96 /* carrefour 7-07 11:17:2014.jpeg in Resources */,
-				9EB428161A19F7F700700D96 /* kaufland 250-26 11:17:2014.jpeg in Resources */,
-				9EB428681A19F94800700D96 /* carrefour 3-03 11:17:2014.jpeg in Resources */,
-				9EB428701A19F94800700D96 /* carrefour 8-08 11:17:2014.jpeg in Resources */,
-				9EB428131A19F7F700700D96 /* kaufland 247-23 11:17:2014.jpeg in Resources */,
-				9EB427A11A17581B00700D96 /* cora_logo_horizontal.png in Resources */,
-				9E7173F51A1CCA710078870E /* metro_logo_horizontal.jpg in Resources */,
-				9EB428551A19F94800700D96 /* carrefour 12-12 11:17:2014.jpeg in Resources */,
-				9EB4286D1A19F94800700D96 /* carrefour 5-05 11:17:2014.jpeg in Resources */,
-				9EB428751A19F94800700D96 /* cora 12-12 11:17:2014.jpeg in Resources */,
-				9EB428541A19F94800700D96 /* carrefour 11-11 11:17:2014.jpeg in Resources */,
-				9EB4287A1A19F94800700D96 /* cora 17-17 11:17:2014.jpeg in Resources */,
-				9EB428691A19F94800700D96 /* carrefour 30-30 11:17:2014.jpeg in Resources */,
-				9EB4280D1A19F7F700700D96 /* kaufland 241-17 11:17:2014.jpeg in Resources */,
-				9EB428891A19F94800700D96 /* cora 9-09 11:17:2014.jpeg in Resources */,
-				9EB4280C1A19F7F700700D96 /* kaufland 240-16 11:17:2014.jpeg in Resources */,
-				9EB4285B1A19F94800700D96 /* carrefour 18-18 11:17:2014.jpeg in Resources */,
-				9EB428651A19F94800700D96 /* carrefour 27-27 11:17:2014.jpeg in Resources */,
-				9EB428581A19F94800700D96 /* carrefour 15-15 11:17:2014.jpeg in Resources */,
-				9E2651601A134C64005B546B /* cora_logo_squared.jpeg in Resources */,
-				9EB4287C1A19F94800700D96 /* cora 19-19 11:17:2014.jpeg in Resources */,
-				9E7173EB1A1CCA600078870E /* auchan_logo_horizontal.png in Resources */,
-				9EB4280A1A19F7F700700D96 /* kaufland 238-14 11:17:2014.jpeg in Resources */,
-				9EB428091A19F7F700700D96 /* kaufland 237-13 11:17:2014.jpeg in Resources */,
-				9EB428821A19F94800700D96 /* cora 24-24 11:17:2014.jpeg in Resources */,
-				9EB428141A19F7F700700D96 /* kaufland 248-24 11:17:2014.jpeg in Resources */,
-				9EB428061A19F7F700700D96 /* kaufland 234-10 11:17:2014.jpeg in Resources */,
-				9EB4287B1A19F94800700D96 /* cora 18-18 11:17:2014.jpeg in Resources */,
-				9EB428801A19F94800700D96 /* cora 22-22 11:17:2014.jpeg in Resources */,
-				9EB428591A19F94800700D96 /* carrefour 16-16 11:17:2014.jpeg in Resources */,
-				9EB4288A1A19F94800700D96 /* cora-01 11:17:2014.jpeg in Resources */,
-				9EB428721A19F94800700D96 /* carrefour-01 11:17:2014.jpeg in Resources */,
-				9EB4280E1A19F7F700700D96 /* kaufland 242-18 11:17:2014.jpeg in Resources */,
-				9EB4287F1A19F94800700D96 /* cora 21-21 11:17:2014.jpeg in Resources */,
-				9EB4280F1A19F7F700700D96 /* kaufland 243-19 11:17:2014.jpeg in Resources */,
-				9EB428881A19F94800700D96 /* cora 8-08 11:17:2014.jpeg in Resources */,
-				9E7173F01A1CCA6B0078870E /* lidl_logo_squared.jpg in Resources */,
-				9EB428021A19F7F700700D96 /* kaufland 230-06 11:17:2014.jpeg in Resources */,
-				9EB428731A19F94800700D96 /* cora 10-10 11:17:2014.jpeg in Resources */,
-				9EB4285A1A19F94800700D96 /* carrefour 17-17 11:17:2014.jpeg in Resources */,
-				9EB428781A19F94800700D96 /* cora 15-15 11:17:2014.jpeg in Resources */,
-				9E7173EF1A1CCA6B0078870E /* lidl_logo_horizontal.jpg in Resources */,
-				9EB428151A19F7F700700D96 /* kaufland 249-25 11:17:2014.jpeg in Resources */,
-				9EB4285F1A19F94800700D96 /* carrefour 21-21 11:17:2014.jpeg in Resources */,
-				9EB428641A19F94800700D96 /* carrefour 26-26 11:17:2014.jpeg in Resources */,
-				9E2651611A134C64005B546B /* kaufland_logo_squared.jpg in Resources */,
-				9E2651631A134C7C005B546B /* kaufland.pdf in Resources */,
-				9EB428001A19F7F700700D96 /* kaufland 228-04 11:17:2014.jpeg in Resources */,
-				9EB428771A19F94800700D96 /* cora 14-14 11:17:2014.jpeg in Resources */,
-				9EB428081A19F7F700700D96 /* kaufland 236-12 11:17:2014.jpeg in Resources */,
-				9EB428811A19F94800700D96 /* cora 23-23 11:17:2014.jpeg in Resources */,
-				9EB428121A19F7F700700D96 /* kaufland 246-22 11:17:2014.jpeg in Resources */,
-				9EB4286B1A19F94800700D96 /* carrefour 32-32 11:17:2014.jpeg in Resources */,
-				9EB428101A19F7F700700D96 /* kaufland 244-20 11:17:2014.jpeg in Resources */,
-				9EB428621A19F94800700D96 /* carrefour 24-24 11:17:2014.jpeg in Resources */,
-				9EE091231A1F3724006789F0 /* markets_scroll.png in Resources */,
-				9EB427FE1A19F7F700700D96 /* kaufland 226-02 11:17:2014.jpeg in Resources */,
-				9EE091201A1F3483006789F0 /* catalogs_scroll.png in Resources */,
-				9EB4287D1A19F94800700D96 /* cora 2-02 11:17:2014.jpeg in Resources */,
-				9E26515E1A134C64005B546B /* carrefour_logo_squared.jpeg in Resources */,
-				9EB4285D1A19F94800700D96 /* carrefour 2-02 11:17:2014.jpeg in Resources */,
-				9EB428851A19F94800700D96 /* cora 5-05 11:17:2014.jpeg in Resources */,
-				9E7173EC1A1CCA600078870E /* auchan_logo_squared.jpg in Resources */,
-				9E26515F1A134C64005B546B /* catalog_cover.png in Resources */,
-				9E7173F71A1CCA710078870E /* real_logo_horizontal.png in Resources */,
-				9EB427FD1A19F7F700700D96 /* kaufland 225-01 11:17:2014.jpeg in Resources */,
-				9EE091251A1F4AED006789F0 /* circular.png in Resources */,
 				9E2650D61A11192F005B546B /* Main.storyboard in Resources */,
-				9EB428871A19F94800700D96 /* cora 7-07 11:17:2014.jpeg in Resources */,
-				9EB428791A19F94800700D96 /* cora 16-16 11:17:2014.jpeg in Resources */,
-				9EB428741A19F94800700D96 /* cora 11-11 11:17:2014.jpeg in Resources */,
-				9EB428611A19F94800700D96 /* carrefour 23-23 11:17:2014.jpeg in Resources */,
-				9E7173F61A1CCA710078870E /* metro_logo_squared.jpg in Resources */,
-				9EB4286C1A19F94800700D96 /* carrefour 4-04 11:17:2014.jpeg in Resources */,
-				9EB428761A19F94800700D96 /* cora 13-13 11:17:2014.jpeg in Resources */,
-				9EB4286A1A19F94800700D96 /* carrefour 31-31 11:17:2014.jpeg in Resources */,
-				9EB428531A19F94800700D96 /* carrefour 10-10 11:17:2014.jpeg in Resources */,
-				9EB4286E1A19F94800700D96 /* carrefour 6-06 11:17:2014.jpeg in Resources */,
-				9EB428571A19F94800700D96 /* carrefour 14-14 11:17:2014.jpeg in Resources */,
-				9EB428711A19F94800700D96 /* carrefour 9-09 11:17:2014.jpeg in Resources */,
-				9EB428111A19F7F700700D96 /* kaufland 245-21 11:17:2014.jpeg in Resources */,
-				9EB427FF1A19F7F700700D96 /* kaufland 227-03 11:17:2014.jpeg in Resources */,
-				9E7173F81A1CCA710078870E /* real_logo_squared.jpg in Resources */,
-				9EB428661A19F94800700D96 /* carrefour 28-28 11:17:2014.jpeg in Resources */,
-				9EB4287E1A19F94800700D96 /* cora 20-20 11:17:2014.jpeg in Resources */,
-				9EB428071A19F7F700700D96 /* kaufland 235-11 11:17:2014.jpeg in Resources */,
+				9EE091571A24BA2B006789F0 /* bottom_bar_bg@2x.png in Resources */,
+				9EE091581A24BA2B006789F0 /* bottom_bar_overlay@2x.png in Resources */,
 				9E2650DB1A11192F005B546B /* LaunchScreen.xib in Resources */,
-				9EB4285C1A19F94800700D96 /* carrefour 19-19 11:17:2014.jpeg in Resources */,
-				9EB4279F1A17580E00700D96 /* carrefour_logo_horizontal.png in Resources */,
-				9EB428631A19F94800700D96 /* carrefour 25-25 11:17:2014.jpeg in Resources */,
-				9EB428601A19F94800700D96 /* carrefour 22-22 11:17:2014.jpeg in Resources */,
-				9EB427A31A17582900700D96 /* kaufland_logo_horizontal.png in Resources */,
-				9EB4285E1A19F94800700D96 /* carrefour 20-20 11:17:2014.jpeg in Resources */,
-				9EB428181A19F7F700700D96 /* kaufland 252-28 11:17:2014.jpeg in Resources */,
-				9EB428861A19F94800700D96 /* cora 6-06 11:17:2014.jpeg in Resources */,
-				9EB428051A19F7F700700D96 /* kaufland 233-09 11:17:2014.jpeg in Resources */,
 				9E2650D81A11192F005B546B /* Images.xcassets in Resources */,
-				9EB428561A19F94800700D96 /* carrefour 13-13 11:17:2014.jpeg in Resources */,
-				9EB428041A19F7F700700D96 /* kaufland 232-08 11:17:2014.jpeg in Resources */,
-				9EB428171A19F7F700700D96 /* kaufland 251-27 11:17:2014.jpeg in Resources */,
-				9EB428841A19F94800700D96 /* cora 4-04 11:17:2014.jpeg in Resources */,
-				9EB428031A19F7F700700D96 /* kaufland 231-07 11:17:2014.jpeg in Resources */,
-				9EB428671A19F94800700D96 /* carrefour 29-29 11:17:2014.jpeg in Resources */,
-				9EB428831A19F94800700D96 /* cora 3-03 11:17:2014.jpeg in Resources */,
+				9EE091531A24B740006789F0 /* bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
