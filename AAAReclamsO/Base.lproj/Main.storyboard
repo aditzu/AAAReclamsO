@@ -245,7 +245,15 @@
                                 <rect key="frame" x="0.0" y="438" width="320" height="82"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N81-ok-fha" userLabel="catalogs ScrollView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBQ-9U-Cwl" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="20" width="320" height="422"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="7zJ-Rv-Ayp" id="SGT-Mc-Apn"/>
+                                    <outlet property="delegate" destination="7zJ-Rv-Ayp" id="nis-YX-LBW"/>
+                                </connections>
+                            </view>
+                            <scrollView hidden="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N81-ok-fha" userLabel="catalogs ScrollView">
                                 <rect key="frame" x="0.0" y="20" width="320" height="422"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -254,6 +262,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="first" id="q9j-H4-nzW"/>
                     <connections>
+                        <outlet property="carousel" destination="VBQ-9U-Cwl" id="6RL-ED-eUL"/>
                         <outlet property="catalogsScrollView" destination="N81-ok-fha" id="naF-IJ-abT"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
                     </connections>
@@ -416,7 +425,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IAa-8M-9Lg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cvK-JU-ARK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hn9-nY-wld">
@@ -436,8 +445,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="4uG-Av-5Np"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="519"/>
                     <connections>
                         <outlet property="closeBtn" destination="Hn9-nY-wld" id="Obb-XU-x3W"/>
                     </connections>
@@ -455,13 +462,9 @@
                         <viewControllerLayoutGuide type="bottom" id="eaJ-Lg-Ps1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cbQ-zC-8jm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ba8-Pk-bQC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKE-wH-PAu" userLabel="spinner view">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
@@ -471,19 +474,40 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ba8-Pk-bQC">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.84705889225006104" green="0.12549020349979401" blue="0.17254902422428131" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="519"/>
+                    <navigationItem key="navigationItem" id="uqv-kR-Jah"/>
                     <connections>
                         <outlet property="page" destination="Ba8-Pk-bQC" id="c4B-xG-vTI"/>
-                        <outlet property="spinnerView" destination="nKE-wH-PAu" id="8b2-rX-kz4"/>
+                        <outlet property="spinnerView" destination="nKE-wH-PAu" id="vKu-zS-HRq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRU-lX-aWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1665" y="322.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="lzF-e6-EIq">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Fel-rR-x0B" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ze2-0j-hwK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sbw-4Y-MVr"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Xee-y0-ROr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O5Z-cb-aBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

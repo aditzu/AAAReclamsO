@@ -29,6 +29,8 @@
     NSMutableArray* marketViews;
     
     CGRect catalogViewMaxFrame;
+    
+    IBOutlet iCarousel* carousel;
 }
 @end
 
@@ -41,9 +43,12 @@ const static float DisabledMarketViewTransparency = 0.65f;
     [super viewDidLoad];
     marketViews = [NSMutableArray array];
     www = [AAAwww instance];
-    [JMImageCache sharedCache].countLimit = 500;
-//    marketsScrollView.delegate = self;
-    catalogsScrollView.delegate = self;
+    [JMImageCache sharedCache].countLimit = 200;
+    carousel.type = iCarouselTypeRotary;
+    carousel.scrollSpeed = .4f;
+    carousel.decelerationRate = 0.5f;
+    carousel.perspective = -0.7/500;
+
 //    [[JMImageCache sharedCache] removeAllObjects];
     
     markets = [NSMutableArray array];
@@ -56,19 +61,16 @@ const static float DisabledMarketViewTransparency = 0.65f;
             [markets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 AAAMarket* mark = (AAAMarket*)obj;
                 if (mark.identifier == catalog.market.identifier) {
-                    [mark.catalogs addObject:catalog];
+                    [mark.catalogs addObject:catalog];//auuuu retain circle
                 }
             }];
-//            [catalog.market.catalogs addObject:catalog];///auuuu retain circle
         }
         [self addTheMarkets];
         if (markets.count>0) {
             currentShowingMarket = markets[0];
             [self setTheCatalogsForMarket:currentShowingMarket];
             [self setMarketViewAsSelected:marketViews[0]];
-            [self arrangeViews:currentShowingCatalogs inScrollView:catalogsScrollView];
         }
-        [self addTapGestureRecognizerToScrollView];
     }];
 }
 
@@ -103,7 +105,6 @@ const static float DisabledMarketViewTransparency = 0.65f;
         float viewX = i * viewSize.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2;
 
         UIView* marketView = [[UIView alloc] initWithFrame:CGRectMake(viewX, border, viewFinalWidth, viewFinalHeight)];
-//        marketViewMaxFrame = marketView.frame;//temp
         UIButton* btn = [[UIButton alloc] initWithFrame:marketView.bounds];
         [btn setBackgroundColor:[UIColor grayColor]];
         
@@ -164,49 +165,95 @@ const static float DisabledMarketViewTransparency = 0.65f;
     }];
 }
 
+const static int catalogSubviewTag = 21341;
+
 -(void) setTheCatalogsForMarket:(AAAMarket*) market
 {
-    int catalogSubviewTag = 21341;
+    [carousel reloadData];
+    [carousel setCurrentItemIndex:0];
+}
+
+#pragma mark - AAAEvents
+
+-(void)closeCatalogVC:(AAACatalogVC *)catalogVC
+{
+    CGRect toFrame = [self.view convertRect:containerViewOfShownCatalog.frame fromView:containerViewOfShownCatalog.superview];
+    CGSize scaleSize = CGSizeMake(containerViewOfShownCatalog.frame.size.width/catalogVC.view.frame.size.width, containerViewOfShownCatalog.frame.size.height/(catalogVC.view.frame.size.height + self.tabBarController.tabBar.frame.size.height));
+    catalogVC.view.layer.shadowOpacity = 0.0f;
+    [UIView animateWithDuration:.4f animations:^{
+        catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
+        catalogVC.view.frame = toFrame;
+    } completion:^(BOOL finished) {
+        catalogVC.view.frame = containerViewOfShownCatalog.bounds;
+        [containerViewOfShownCatalog addSubview:catalogVC.view];
+    }];
+    [carousel reloadItemAtIndex:[currentShowingCatalogs indexOfObject:catalogVC] animated:YES];
+}
+
+#pragma mark - iCarousel Datasource
+
+-(NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    currentShowingCatalogs = [NSMutableArray array];
+    return currentShowingMarket ? currentShowingMarket.catalogs.count : 0;
+}
+
+-(UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+    if (currentShowingMarket.catalogs.count <= index) {
+        return nil;
+    }
     int border = 20;
     CGSize viewSize = CGSizeMake(catalogsScrollView.bounds.size.width - (2*border), catalogsScrollView.bounds.size.height - border);
-    for (UIView* subview in catalogsScrollView.subviews) {
-        if (subview.tag == catalogSubviewTag)
-        {
-            [subview removeFromSuperview];
-        }
-    }
-    currentShowingCatalogs = [NSMutableArray array];
-    for (int i=0; i < market.catalogs.count; i++)
-    {
-        AAACatalog* catalog = market.catalogs[i];
-        AAACatalogVC* catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
-        catalogVC.catalog = catalog;
-        UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(i * viewSize.width + (border * (.5 * i + 1)), border/2, viewSize.width, viewSize.height)];
-        catalogViewMaxFrame = containerView.frame;
-        CGRect catalogVCFrame = catalogVC.view.frame;
-//        catalogVCFrame.size.height = 519;//hardcoded, it is not loaded here yet. it's 568
-        CGSize scaleSize = CGSizeMake(containerView.frame.size.width/catalogVCFrame.size.width, containerView.frame.size.height/catalogVCFrame.size.height);
-        catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
-        catalogVC.view.frame = containerView.bounds;
-        [containerView addSubview:catalogVC.view];
-        containerView.tag = catalogSubviewTag;
-        [catalogVC setDelegate:self];
-        [currentShowingCatalogs addObject:catalogVC];
-        [catalogsScrollView addSubview:containerView];
-        catalogsScrollView.contentSize = CGSizeMake(containerView.frame.origin.x + containerView.frame.size.width + border, containerView.frame.size.height);
+    AAACatalog* catalog = currentShowingMarket.catalogs[index];
+    AAACatalogVC* catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
+    [catalogVC view];
+    catalogVC.catalog = catalog;
+    UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(border, border/2, viewSize.width, viewSize.height)];
+    catalogViewMaxFrame = containerView.frame;
+    CGRect catalogVCFrame = catalogVC.view.frame;
+    CGSize scaleSize = CGSizeMake(containerView.frame.size.width/catalogVCFrame.size.width, containerView.frame.size.height/catalogVCFrame.size.height);
+    catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
+    catalogVC.view.frame = containerView.bounds;
+    [containerView addSubview:catalogVC.view];
+    containerView.tag = catalogSubviewTag;
+    [catalogVC setDelegate:self];
+    currentShowingCatalogs[index] = catalogVC;
+    return containerView;
+}
+
+-(CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    switch (option) {
+        case iCarouselOptionVisibleItems:
+            return 3;
+        case iCarouselOptionWrap:
+            return NO;
+        case iCarouselOptionArc:
+            return M_PI * 1.0f;
+        case iCarouselOptionSpacing:
+            return value * 1.2;
+        case iCarouselOptionShowBackfaces:
+            return NO;
+        case iCarouselOptionFadeMinAlpha:
+        case iCarouselOptionFadeMin:
+        case iCarouselOptionFadeMax:
+        case iCarouselOptionCount:
+        case iCarouselOptionFadeRange:
+        case iCarouselOptionAngle:
+        case iCarouselOptionOffsetMultiplier:
+        case iCarouselOptionRadius:
+        case iCarouselOptionTilt:
+        default:
+            return value;
     }
 }
 
--(void) addTapGestureRecognizerToScrollView
-{
-    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped:)];
-    [catalogsScrollView addGestureRecognizer:tapGesture];
-}
+#pragma mark - iCarousel Delegate
 
--(void)scrollViewTapped:(UITapGestureRecognizer*) tapGesture
+-(void)carousel:(iCarousel *)_carousel didSelectItemAtIndex:(NSInteger)index
 {
-    int catalogIndex = (int)catalogsScrollView.contentOffset.x/catalogsScrollView.bounds.size.width;
-    AAACatalogVC* catalogVC = currentShowingCatalogs[catalogIndex];
+    AAACatalogVC* catalogVC = currentShowingCatalogs[index];
     containerViewOfShownCatalog = catalogVC.view.superview;
     [catalogVC maximize];
     CGRect initialFrame = [self.view convertRect:catalogVC.view.frame fromView:catalogVC.view.superview];
@@ -214,79 +261,15 @@ const static float DisabledMarketViewTransparency = 0.65f;
     [self.view addSubview:catalogVC.view];
     
     CGRect myBounds = self.view.bounds;
-//    myBounds.size.height -= self.tabBarController.tabBar.frame.size.height;
+    myBounds.size.height -= self.tabBarController.tabBar.frame.size.height;
+    
+    CGSize scale = CGSizeMake(myBounds.size.width/self.view.bounds.size.width, myBounds.size.height/self.view.bounds.size.height);
+    //todo
     [UIView animateWithDuration:.4f animations:^{
-        catalogVC.view.transform = CGAffineTransformIdentity;
+//        catalogVC.view.transform = CGAffineTransformIdentity;
+        catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale.width, scale.height);
         catalogVC.view.frame = myBounds;
     }];
-    tapGesture.enabled = NO;
-}
-
-#pragma mark - AAAEvents
-
--(void)closeCatalogVC:(AAACatalogVC *)catalogVC
-{
-    for (UITapGestureRecognizer* tapGesture in catalogsScrollView.gestureRecognizers) {
-        tapGesture.enabled = YES;
-    }
-    CGRect toFrame = [self.view convertRect:containerViewOfShownCatalog.frame fromView:catalogsScrollView];
-    CGSize scaleSize = CGSizeMake(containerViewOfShownCatalog.frame.size.width/catalogVC.view.frame.size.width, containerViewOfShownCatalog.frame.size.height/catalogVC.view.frame.size.height);
-    [UIView animateWithDuration:.4f animations:^{
-        catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
-            catalogVC.view.frame = toFrame;
-    } completion:^(BOOL finished) {
-        catalogVC.view.frame = containerViewOfShownCatalog.bounds;
-        [containerViewOfShownCatalog addSubview:catalogVC.view];
-    }];
-}
-
-#pragma mark - UIScrollViewDelegate
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self arrangeViews:currentShowingCatalogs inScrollView:scrollView];
-}
-
--(void) arrangeViews:(NSArray*)views inScrollView:(UIScrollView*) scrollView
-{
-    int sizeScaleDif = 100;
-    int centerOffsetNoEffect = 20;
-    int angleOffset = 20;
-    for (AAACatalogVC* scrollViewCatalog in views) {
-        int i = [views indexOfObject:scrollViewCatalog];
-        
-        UIView* scrollViewSubview = scrollViewCatalog.view.superview;
-        CGRect subviewFrameInMyView = CGRectMake(scrollViewSubview.frame.origin.x - scrollView.contentOffset.x, scrollViewSubview.frame.origin.y, scrollViewSubview.frame.size.width, scrollViewSubview.frame.size.height);
-        float pixelsFromCenter = scrollView.bounds.size.width / 2 - (subviewFrameInMyView.origin.x + subviewFrameInMyView.size.width/2);
-        BOOL isInLeft = pixelsFromCenter < 0;
-        float distanceFromCenter = fabs(pixelsFromCenter);
-        distanceFromCenter -= centerOffsetNoEffect;
-        if (distanceFromCenter>0.001f) {
-            float percentage = (100* (distanceFromCenter))/(scrollView.bounds.size.width/2 - centerOffsetNoEffect);
-//            NSLog(@"PERCENTAGE: %f ----- %i + %@", percentage, i, NSStringFromCGRect(subviewFrameInMyView));
-            float pixels = sizeScaleDif/100.0f*percentage;
-//            CGRect toBeFrame = CGRectMake(scrollViewSubview.center.x - catalogViewMaxFrame.size.width/2, scrollViewSubview.center.y - catalogViewMaxFrame.size.height/2, catalogViewMaxFrame.size.width, catalogViewMaxFrame.size.height);
-            CGRect toBeFrame = scrollViewSubview.frame;
-//            toBeFrame.origin.x += pixels;
-//            toBeFrame.origin.y += pixels;
-            toBeFrame.size.width -= pixels*2;
-            toBeFrame.size.height -= pixels*2;
-            scrollViewSubview.frame = toBeFrame;
-//            scrollViewSubview.clipsToBounds = YES;
-            
-            float angle = angleOffset/100.0f*percentage;
-            angle = isInLeft ? angle : -angle;
-            CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
-            rotationAndPerspectiveTransform.m34 = 1.0 / -500;
-            rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, angle * M_PI / 180.0f, 0.0f, 1.0f, 0.0f);
-            
-            float initialX = scrollViewSubview.frame.origin.x;
-            scrollViewSubview.layer.transform = rotationAndPerspectiveTransform;
-            CGRect newFrame = scrollViewSubview.frame;
-            newFrame.origin.x = initialX;
-//            scrollViewSubview.frame = newFrame;
-        }
-    }
 }
 
 @end

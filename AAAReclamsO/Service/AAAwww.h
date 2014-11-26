@@ -20,5 +20,5 @@ typedef void(^DownloadPagesForCatalogBlock) (NSArray* pages, NSError* error);
 -(void) downloadMarketsWithCompletionHandler:(DownloadMarketsBlock) completionHandler;
 -(void) downloadCatalogInformationsWithCompletionHandler:(DownloadCatalogsBlock) completionHandler;
 -(void) downloadPagesUrlsForCatalog:(int) catalogId withCompletionHandler:(DownloadPagesForCatalogBlock) completionHandler;
--(void) downloadPagesUrlsForCatalogs:(NSArray*) catalogs;
+//-(void) downloadPagesUrlsForCatalogs:(NSArray*) catalogs;
 @end

@@ -29,6 +29,7 @@
 		9EE091531A24B740006789F0 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091511A24B740006789F0 /* bg@2x.png */; };
 		9EE091571A24BA2B006789F0 /* bottom_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091551A24BA2B006789F0 /* bottom_bar_bg@2x.png */; };
 		9EE091581A24BA2B006789F0 /* bottom_bar_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */; };
+		9EE0915C1A25D2B8006789F0 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0915B1A25D2B8006789F0 /* iCarousel.m */; };
 		A9E12EF72B4BB1B16996413C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46131CE3B423FC1E1397014B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		9EE091511A24B740006789F0 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		9EE091551A24BA2B006789F0 /* bottom_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom_bar_bg@2x.png"; sourceTree = "<group>"; };
 		9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom_bar_overlay@2x.png"; sourceTree = "<group>"; };
+		9EE0915A1A25D2B8006789F0 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		9EE0915B1A25D2B8006789F0 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		C2F365147BEC56749C74C9C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +143,7 @@
 		9E2650C61A11192F005B546B /* AAAReclamsO */ = {
 			isa = PBXGroup;
 			children = (
+				9EE091591A25D2B8006789F0 /* iCarousel */,
 				9EE091171A1DF7A7006789F0 /* LEColorPicker */,
 				9EE091061A1DF585006789F0 /* LBGradient */,
 				9EE090F01A1CD1C8006789F0 /* JMImageCache */,
@@ -250,6 +254,15 @@
 				9EE0911B1A1DF7A7006789F0 /* UIColor+YUVSpace.m */,
 			);
 			path = LEColorPicker;
+			sourceTree = "<group>";
+		};
+		9EE091591A25D2B8006789F0 /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				9EE0915A1A25D2B8006789F0 /* iCarousel.h */,
+				9EE0915B1A25D2B8006789F0 /* iCarousel.m */,
+			);
+			path = iCarousel;
 			sourceTree = "<group>";
 		};
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
@@ -406,6 +419,7 @@
 				9E2650CD1A11192F005B546B /* AppDelegate.m in Sources */,
 				9EE090FA1A1CD2DC006789F0 /* JMImageCache.m in Sources */,
 				9E2651531A127396005B546B /* AAACatalog.m in Sources */,
+				9EE0915C1A25D2B8006789F0 /* iCarousel.m in Sources */,
 				9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */,
 				9EE0911D1A1DF7A7006789F0 /* UIColor+YUVSpace.m in Sources */,
 				9EE0911C1A1DF7A7006789F0 /* LEColorPicker.m in Sources */,

@@ -29,6 +29,7 @@ static AAAwww* _instance;
 {
     if (!_instance) {
         _instance = [[AAAwww alloc] init];
+        RKLogConfigureByName("RestKit/Network", RKLogLevelError);
     }
     return _instance;
 }
@@ -80,7 +81,7 @@ static AAAwww* _instance;
     [client getPath:[NSString stringWithFormat:@"%@/%i", downloadCatalogPagesUrl, catalogId]
          parameters:nil
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                completionHandler([NSArray arrayWithArray:responseObject], nil);
+                completionHandler([NSArray arrayWithArray:[[NSDictionary dictionaryWithDictionary:responseObject] objectForKey:@"pages"]], nil);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"failure: %i", operation.response.statusCode);
             }];

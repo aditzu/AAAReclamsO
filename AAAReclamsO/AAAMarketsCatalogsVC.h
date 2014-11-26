@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AAACatalogVC.h"
+#import "iCarousel.h"
 
-@interface AAAMarketsCatalogsVC : UIViewController<UIScrollViewDelegate, AAACatalogVCEvents>
+@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate>
 
 @end

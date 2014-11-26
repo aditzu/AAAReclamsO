@@ -31,6 +31,14 @@ const static int PicturesToPreload = 3;
     [super viewDidLoad];
     [self updateSettingsFromCatalog:self.catalog];
     [self minimize];
+    
+    self.view.layer.masksToBounds = NO;
+    self.view.layer.cornerRadius = 2; // if you like rounded corners
+    self.view.layer.shadowOffset = CGSizeMake(0, 4);
+    self.view.layer.shadowRadius = 4;
+    self.view.layer.shadowOpacity = 0.5;
+    self.view.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(-4.f, 0, self.view.bounds.size.width+4, self.view.bounds.size.height) cornerRadius:1.0f].CGPath;
+    
 }
 
 -(void)setCatalog:(AAACatalog *)catalog
@@ -100,6 +108,7 @@ const static int PicturesToPreload = 3;
 {
     isMinimized = YES;
     closeBtn.hidden=isMinimized;
+    
 }
 
 -(void)maximize

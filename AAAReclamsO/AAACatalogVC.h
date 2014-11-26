@@ -22,6 +22,7 @@
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;
+@property(nonatomic, strong) IBOutlet UIView* containerView;
 
 -(void) setDelegate:(id<AAACatalogVCEvents>) _delegate;
 -(void) setCatalog:(AAACatalog*) catalog;
