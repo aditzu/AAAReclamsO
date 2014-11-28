@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAACatalogPageVC : UIViewController
+@interface AAACatalogPageVC : UIViewController<UIScrollViewDelegate>
 
 @property(nonatomic, strong) NSString* imageUrl;
 @property(nonatomic) int indexInPageViewCtrl;
 
 -(void) downloadImage;
+-(void) show:(BOOL)show;
 @end

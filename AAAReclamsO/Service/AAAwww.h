@@ -12,6 +12,8 @@ typedef void(^DownloadMarketsBlock)(NSArray* markets, NSError* error);
 typedef void(^DownloadCatalogsBlock)(NSArray* catalogs, NSError* error);
 typedef void(^DownloadPagesForCatalogBlock) (NSArray* pages, NSError* error);
 
+@class AAACatalog;
+
 @interface AAAwww : NSObject
 {
 }
@@ -19,6 +21,5 @@ typedef void(^DownloadPagesForCatalogBlock) (NSArray* pages, NSError* error);
 +(AAAwww*) instance;
 -(void) downloadMarketsWithCompletionHandler:(DownloadMarketsBlock) completionHandler;
 -(void) downloadCatalogInformationsWithCompletionHandler:(DownloadCatalogsBlock) completionHandler;
--(void) downloadPagesUrlsForCatalog:(int) catalogId withCompletionHandler:(DownloadPagesForCatalogBlock) completionHandler;
-//-(void) downloadPagesUrlsForCatalogs:(NSArray*) catalogs;
+-(void) downloadPagesUrlsForCatalog:(int) catalogId withCompletionHandler:(DownloadPagesForCatalogBlock)completionHandler;
 @end

@@ -49,7 +49,7 @@ const static int PicturesToPreload = 3;
 
 -(void) updateSettingsFromCatalog:(AAACatalog*) catalog
 {
-    if (!self.isViewLoaded)
+    if (!self.isViewLoaded || !catalog)
     {
         return;
     }
@@ -108,13 +108,18 @@ const static int PicturesToPreload = 3;
 {
     isMinimized = YES;
     closeBtn.hidden=isMinimized;
-    
+    for (AAACatalogPageVC* page in pages) {
+        [page show:NO];
+    }
 }
 
 -(void)maximize
 {
     isMinimized = NO;
     closeBtn.hidden=isMinimized;
+    for (AAACatalogPageVC* page in pages) {
+        [page show:YES];
+    }
 }
 
 #pragma UIPageViewCtrl
