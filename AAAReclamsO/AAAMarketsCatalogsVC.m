@@ -18,7 +18,6 @@
 {
     NSMutableArray* markets;
     IBOutlet UIScrollView* marketsScrollView;
-    IBOutlet UIScrollView* catalogsScrollView;
     
     AAAMarket* currentShowingMarket;
     NSMutableArray* currentShowingCatalogs;
@@ -31,6 +30,7 @@
     CGRect catalogViewMaxFrame;
     
     IBOutlet iCarousel* carousel;
+    UIImageView* bg;
 }
 @end
 
@@ -48,8 +48,6 @@ const static float DisabledMarketViewTransparency = 0.65f;
     carousel.scrollSpeed = .4f;
     carousel.decelerationRate = 0.5f;
     carousel.perspective = -0.7/500;
-
-//    [[JMImageCache sharedCache] removeAllObjects];
     
     markets = [NSMutableArray array];
     [www downloadCatalogInformationsWithCompletionHandler:^(NSArray *catalogs, NSError *error) {
@@ -72,6 +70,23 @@ const static float DisabledMarketViewTransparency = 0.65f;
             [self setMarketViewAsSelected:marketViews[0]];
         }
     }];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [bg removeFromSuperview];
+    bg = [[UIImageView alloc] init];
+    bg.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.4f];
+    bg.frame = self.view.bounds;
+    bg.alpha = 0.0f;
+    [[UIApplication sharedApplication].keyWindow addSubview:bg];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [bg removeFromSuperview];
 }
 
 +(UIImage*)imageWithShadowForImage:(UIImage *)initialImage {
@@ -178,10 +193,11 @@ const static int catalogSubviewTag = 21341;
 -(void)closeCatalogVC:(AAACatalogVC *)catalogVC
 {
     CGRect toFrame = [self.view convertRect:containerViewOfShownCatalog.frame fromView:containerViewOfShownCatalog.superview];
-    CGSize scaleSize = CGSizeMake(containerViewOfShownCatalog.frame.size.width/catalogVC.view.frame.size.width, containerViewOfShownCatalog.frame.size.height/(catalogVC.view.frame.size.height + self.tabBarController.tabBar.frame.size.height));
-    [UIView animateWithDuration:.4f animations:^{
-        catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
+    UIViewAnimationOptions options = UIViewAnimationOptionLayoutSubviews;
+    [UIView animateWithDuration:.4f delay:.0f options:options animations:^{
+        [catalogVC.view layoutIfNeeded];
         catalogVC.view.frame = toFrame;
+        bg.alpha = 0.0f;
     } completion:^(BOOL finished) {
         catalogVC.view.frame = containerViewOfShownCatalog.bounds;
         [containerViewOfShownCatalog addSubview:catalogVC.view];
@@ -196,24 +212,22 @@ const static int catalogSubviewTag = 21341;
     return currentShowingMarket ? currentShowingMarket.catalogs.count : 0;
 }
 
--(UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+-(UIView *)carousel:(iCarousel *)_carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     if (currentShowingMarket.catalogs.count <= index) {
         return nil;
     }
     int border = 20;
-    CGSize viewSize = CGSizeMake(catalogsScrollView.bounds.size.width - (2*border), catalogsScrollView.bounds.size.height - border);
+    CGSize viewSize = CGSizeMake(carousel.bounds.size.width - (2*border), carousel.bounds.size.height - border);
     AAACatalog* catalog = currentShowingMarket.catalogs[index];
     AAACatalogVC* catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
     [catalogVC view];
     catalogVC.catalog = catalog;
     UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(border, border/2, viewSize.width, viewSize.height)];
     catalogViewMaxFrame = containerView.frame;
-    CGRect catalogVCFrame = catalogVC.view.frame;
-    CGSize scaleSize = CGSizeMake(containerView.frame.size.width/catalogVCFrame.size.width, containerView.frame.size.height/catalogVCFrame.size.height);
-    catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scaleSize.width, scaleSize.height);
     catalogVC.view.frame = containerView.bounds;
     [containerView addSubview:catalogVC.view];
+    
     containerView.tag = catalogSubviewTag;
     [catalogVC setDelegate:self];
     currentShowingCatalogs[index] = catalogVC;
@@ -254,20 +268,25 @@ const static int catalogSubviewTag = 21341;
     AAACatalogVC* catalogVC = currentShowingCatalogs[index];
     containerViewOfShownCatalog = catalogVC.view.superview;
     [catalogVC maximize];
+    
+    [UIView animateWithDuration:.3f animations:^{
+        bg.alpha = 1.0f;
+    }];
+    
     CGRect initialFrame = [self.view convertRect:catalogVC.view.frame fromView:catalogVC.view.superview];
     catalogVC.view.frame = initialFrame;
-    [self.view addSubview:catalogVC.view];
     
-    CGRect myBounds = self.view.bounds;
-    myBounds.size.height -= self.tabBarController.tabBar.frame.size.height;
-    
-    CGSize scale = CGSizeMake(myBounds.size.width/self.view.bounds.size.width, myBounds.size.height/self.view.bounds.size.height);
-    //todo
-    [UIView animateWithDuration:.4f animations:^{
-//        catalogVC.view.transform = CGAffineTransformIdentity;
-        catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale.width, scale.height);
-        catalogVC.view.frame = myBounds;
+    [[UIApplication sharedApplication].keyWindow addSubview:catalogVC.view];
+    UIViewAnimationOptions options = UIViewAnimationOptionLayoutSubviews;
+    [catalogVC.view layoutSubviews];
+    [UIView animateWithDuration:.4f delay:.0f options:options animations:^{
+        [catalogVC.view layoutIfNeeded];
+        catalogVC.view.frame = [UIApplication sharedApplication].keyWindow.bounds;
+    } completion:^(BOOL finished) {
+        [catalogVC finishedMaximized];
     }];
+    
+    
 }
 
 @end

@@ -17,7 +17,7 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate>{
     IBOutlet UIButton* closeBtn;
 }
 
@@ -28,4 +28,5 @@
 -(void) setCatalog:(AAACatalog*) catalog;
 -(void) minimize;
 -(void) maximize;
+-(void) finishedMaximized;
 @end
