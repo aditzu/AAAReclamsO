@@ -12,7 +12,8 @@
 
 @property(nonatomic, strong) NSString* imageUrl;
 @property(nonatomic) int indexInPageViewCtrl;
-
+@property(nonatomic, strong) IBOutlet UIScrollView* scrollView;
 -(void) downloadImage;
 -(void) show:(BOOL)show;
+//-(CGRect) scrollViewFrame;
 @end

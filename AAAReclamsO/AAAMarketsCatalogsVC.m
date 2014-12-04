@@ -11,7 +11,6 @@
 #import "AAAMarket.h"
 #import "AAAwww.h"
 #import "JMImageCache.h"
-#import "LEColorPicker.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AAAMarketsCatalogsVC()
@@ -269,10 +268,6 @@ const static int catalogSubviewTag = 21341;
     containerViewOfShownCatalog = catalogVC.view.superview;
     [catalogVC maximize];
     
-    [UIView animateWithDuration:.3f animations:^{
-        bg.alpha = 1.0f;
-    }];
-    
     CGRect initialFrame = [self.view convertRect:catalogVC.view.frame fromView:catalogVC.view.superview];
     catalogVC.view.frame = initialFrame;
     
@@ -280,13 +275,12 @@ const static int catalogSubviewTag = 21341;
     UIViewAnimationOptions options = UIViewAnimationOptionLayoutSubviews;
     [catalogVC.view layoutSubviews];
     [UIView animateWithDuration:.4f delay:.0f options:options animations:^{
+        bg.alpha = 1.0f;
         [catalogVC.view layoutIfNeeded];
         catalogVC.view.frame = [UIApplication sharedApplication].keyWindow.bounds;
     } completion:^(BOOL finished) {
         [catalogVC finishedMaximized];
     }];
-    
-    
 }
 
 @end

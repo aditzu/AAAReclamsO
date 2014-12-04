@@ -11,6 +11,8 @@
 #import "AAACatalogPageVC.h"
 #import "AAAwww.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AAAFavoriteItem.h"
+#import "AAAFavoritesManager.h"
 
 @interface AAACatalogVC(){
     id<AAACatalogVCEvents> delegate;
@@ -21,13 +23,17 @@
     BOOL pageIsAnimating;
     UITapGestureRecognizer* tapGesture;
     IBOutlet UIView* spinnerView;
-    IBOutlet NSLayoutConstraint* closeBtnTopConstraint;
+    IBOutlet UIView* topBarView;
+//    IBOutlet NSLayoutConstraint* closeBtnTopConstraint;
     
     IBOutlet UILabel* progressLabel;
     IBOutlet UIView* progressView;
+    IBOutlet UIButton* closeBtn;
+    IBOutlet UIButton* favoriteButton;
 }
 
 -(IBAction) closePressed:(id)sender;
+-(IBAction) favoritePressed:(id)sender;
 
 @end
 
@@ -47,24 +53,21 @@ const static int PicturesToPreload = 3;
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
     tapGesture.enabled = NO;
-    [self showCloseButton:NO];
-    [self showProgressView:NO];
     spinnerView.hidden = NO;
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
-        closeBtnTopConstraint.constant = 0.0f;
-    }
-    else
-    {
-        closeBtnTopConstraint.constant = 20.0f;
-    }
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
+////        closeBtnTopConstraint.constant = 0.0f;
+//    }
+//    else
+//    {
+////        closeBtnTopConstraint.constant = 20.0f;
+//    }
 }
 
 -(void) didTap:(UITapGestureRecognizer*) tapGestureRecognizer
 {
     if (tapGesture.state == UIGestureRecognizerStateRecognized) {
-        
-        [self showCloseButton:closeBtn.hidden];
+        [self showTopBar:[NSNumber numberWithBool:YES]];
     }
 }
 
@@ -96,9 +99,7 @@ const static int PicturesToPreload = 3;
         pageViewController.view.frame = self.view.bounds;
         
         [self.view addSubview:pageViewController.view];
-        [self.view bringSubviewToFront:closeBtn];
-        [self.view bringSubviewToFront:progressView];
-        
+        [self.view bringSubviewToFront:topBarView];
         for (int i =0; i< catalog.imagesURLs.count; i++)
         {
             AAACatalogPageVC* catalogPage = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogPageVC"];
@@ -112,8 +113,15 @@ const static int PicturesToPreload = 3;
         }
         if (pages.count > 0) {
             __block UIView* v = spinnerView;
+//            __block AAACatalogPageVC* pg = (AAACatalogPageVC*)pages[0];
+            __block AAACatalogVC* selfVC = self;
             [pageViewController setViewControllers:@[pages[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
                 v.hidden = YES;
+                [selfVC updateFavoriteButton];
+//                [pg.view layoutIfNeeded];
+//                CGRect frame = [pg scrollViewFrame];
+//                CGRect newFrame = [myView convertRect:frame fromView:pg.scrollView];
+                
             }];
             pageViewController.delegate = self;
             pageViewController.dataSource = self;
@@ -140,6 +148,42 @@ const static int PicturesToPreload = 3;
     [self minimize];
 }
 
+-(void) updateFavoriteButton
+{
+    AAACatalogPageVC* currentPage = [self currentPage];
+    if (!currentPage) {
+        return;
+    }
+    favoriteButton.selected = ([[AAAFavoritesManager sharedInstance] itemForImageURL:currentPage.imageUrl] != nil);
+}
+
+-(AAACatalogPageVC*) currentPage
+{
+    AAACatalogPageVC* currentPage;;
+    if (pageViewController.viewControllers.count > 0) {
+        currentPage = pageViewController.viewControllers[0];
+    }
+    return currentPage;
+}
+
+-(void)favoritePressed:(UIButton*)sender
+{
+    [sender setSelected:!sender.selected];
+    AAACatalogPageVC* currentPage = [self currentPage];
+    if (!currentPage) {
+        return;
+    }
+    if (sender.selected) {
+        AAAFavoriteItem* favoriteItem = [AAAFavoriteItem new];
+        favoriteItem.imageUrl = currentPage.imageUrl;
+        [[AAAFavoritesManager sharedInstance] addFavoriteItem:favoriteItem];
+    }
+    else
+    {
+        [[AAAFavoritesManager sharedInstance] removeFavoriteItemWithImageURL:currentPage.imageUrl];
+    }
+}
+
 -(void)minimize
 {
     isMinimized = YES;
@@ -147,7 +191,7 @@ const static int PicturesToPreload = 3;
         [page show:NO];
     }
     tapGesture.enabled = NO;
-    [self showCloseButton:NO];
+    [self showTopBar:[NSNumber numberWithBool:NO]];
 }
 
 -(void)maximize
@@ -162,30 +206,24 @@ const static int PicturesToPreload = 3;
 
 -(void)finishedMaximized
 {
-    [self showCloseButton:YES];
-    [self showProgressView:[NSNumber numberWithBool:YES]];
-    float delay = 2.0f;
-    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
-    dispatch_after(time, dispatch_get_main_queue(), ^{
-        [self showCloseButton:NO];
-        [self showProgressView:NO];
-    });
+    [self showTopBar:[NSNumber numberWithBool:YES]];
 }
 
--(void) showProgressView:(NSNumber*) show
+-(void) showTopBar:(NSNumber*) show
 {
-    float delay = 2.0f;
-    if ([show boolValue] == progressView.hidden) {
-        [self showView:progressView show:[show boolValue]];
-        if (show) {
-            [self performSelector:@selector(showProgressView:) withObject:[NSNumber numberWithBool:NO]
+    BOOL showVal = [show boolValue];
+    float delay = 3.0f;
+    if (showVal == topBarView.hidden) {
+        [self showView:topBarView show:showVal];
+        if (showVal) {
+            [self performSelector:@selector(showTopBar:) withObject:[NSNumber numberWithBool:NO]
                        afterDelay:delay];
         }
     }
-    else if (show)
+    else if (showVal)
     {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showProgressView:) object:@(NO)];
-        [self performSelector:@selector(showProgressView:) withObject:[NSNumber numberWithBool:NO] afterDelay:delay];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showTopBar:) object:[NSNumber numberWithBool:NO]];
+        [self performSelector:@selector(showTopBar:) withObject:[NSNumber numberWithBool:NO] afterDelay:delay];
     }
 }
 
@@ -210,7 +248,7 @@ const static int PicturesToPreload = 3;
     }];
 }
 
-#pragma UIPageViewCtrl
+#pragma mark - UIPageViewCtrl
 
 -(void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
@@ -223,7 +261,9 @@ const static int PicturesToPreload = 3;
         pageIsAnimating = NO;
         int indexOfVC = [pages indexOfObject: _pageViewController.viewControllers[0]];
         [self setProgress:indexOfVC+1 outOf:pages.count];
-        [self showProgressView:[NSNumber numberWithBool:YES]];
+        [self updateFavoriteButton];
+        [self showTopBar:[NSNumber numberWithBool:YES]];
+//        [self showProgressView:[NSNumber numberWithBool:YES]];
     }
 }
 
@@ -235,7 +275,6 @@ const static int PicturesToPreload = 3;
     long currentIndex = [pages indexOfObject:viewController];
     if (currentIndex == pages.count -1 || isMinimized) return nil;
     [pages[MIN(pages.count-1, currentIndex+1+PicturesToPreload)] downloadImage];
-    [self showCloseButton:NO];
     return pages[currentIndex+1];
 }
 

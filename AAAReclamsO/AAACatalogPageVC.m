@@ -14,7 +14,6 @@
 {
     IBOutlet UIImageView* page;
     IBOutlet UIView* spinnerView;
-    IBOutlet UIScrollView* scrollView;
     IBOutlet UIView* overlay;
     
     IBOutlet NSLayoutConstraint* pageYConstraint;
@@ -26,14 +25,15 @@
     UIImage* img;
     
     BOOL animating;
+    float pageYConstraintInitial;
 }
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    scrollView.minimumZoomScale = 1.0f;
-    scrollView.maximumZoomScale = 3.0f;
-    scrollView.contentSize = page.frame.size;
+    self.scrollView.minimumZoomScale = 1.0f;
+    self.scrollView.maximumZoomScale = 3.0f;
+    self.scrollView.contentSize = page.frame.size;
     
     if (self.imageUrl) {
         [self updateImage];
@@ -42,23 +42,25 @@
     
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTapFrom:)];
     tapGesture.numberOfTapsRequired = 2;
-    [scrollView addGestureRecognizer:tapGesture];
+    [self.scrollView addGestureRecognizer:tapGesture];
     [self show:shown];
     self.view.clipsToBounds = NO;
+    pageYConstraintInitial = pageYConstraint.constant;
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    if (pageWConstraint.constant != scrollView.bounds.size.width) {
-        pageWConstraint.constant  = scrollView.bounds.size.width;
+    if (pageWConstraint.constant != self.scrollView.bounds.size.width) {
+        pageWConstraint.constant  = self.scrollView.bounds.size.width;
     }
     
-    if (pageHConstraint.constant != scrollView.bounds.size.height) {
-        pageHConstraint.constant = scrollView.bounds.size.height - 4;//4 for the shadow
+    if (pageHConstraint.constant != self.scrollView.bounds.size.height) {
+        pageHConstraint.constant = self.scrollView.bounds.size.height - 4;//4 for the shadow
     }
     [page layoutIfNeeded];
-    scrollView.zoomScale = 1.0f;
+    self.scrollView.zoomScale = 1.0f;
+  
     
 //    float imageRatio = page.image.size.width/ page.image.size.height;
 //    float imageViewRatio = page.frame.size.width / page.frame.size.height;
@@ -83,14 +85,21 @@
 //    pageXConstraint.constant += xoffset;
 //    pageYConstraint.constant += yoffset;
 //    [page layoutIfNeeded];
-    
-    page.layer.masksToBounds = NO;
-    page.layer.shadowColor = [UIColor blackColor].CGColor;
-    page.layer.shadowOffset = CGSizeMake(0, 3);
-    page.layer.shadowOpacity = .5;
-    page.layer.shadowRadius = 1.0f;
-    [self.view layoutSubviews];
+//    
+//    
+//    page.layer.masksToBounds = NO;
+//    page.layer.shadowColor = [UIColor blackColor].CGColor;
+//    page.layer.shadowOffset = CGSizeMake(0, 3);
+//    page.layer.shadowOpacity = .5;
+//    page.layer.shadowRadius = 1.0f;
+//    [self.view layoutSubviews];
 }
+
+//-(CGRect)scrollViewFrame
+//{
+//    return page.frame;
+//    return [self.view convertRect:page.superview.frame fromView:self.scrollView];
+//}
 
 -(void)setImageUrl:(NSString *)imageUrl
 {
@@ -142,7 +151,7 @@
     zoomRect.size.height = page.frame.size.height / scale;
     zoomRect.size.width  = page.frame.size.width  / scale;
     
-    center = [page convertPoint:center fromView:scrollView];
+    center = [page convertPoint:center fromView:self.scrollView];
     
     zoomRect.origin.x    = center.x - ((zoomRect.size.width / 2.0));
     zoomRect.origin.y    = center.y - ((zoomRect.size.height / 2.0));
@@ -153,21 +162,41 @@
 - (void)handleDoubleTapFrom:(UITapGestureRecognizer *)recognizer {
     page.translatesAutoresizingMaskIntoConstraints = NO;
 
-    float newScale = scrollView.zoomScale * 4.0;
+    float newScale = self.scrollView.zoomScale * 4.0;
     
-    if (scrollView.zoomScale > scrollView.minimumZoomScale)
+    if (self.scrollView.zoomScale > self.scrollView.minimumZoomScale)
     {
-        [scrollView setZoomScale:scrollView.minimumZoomScale animated:YES];
+        [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
     }
     else
     {
         CGRect zoomRect = [self zoomRectForScale:newScale
                                       withCenter:[recognizer locationInView:recognizer.view]];
-        [scrollView zoomToRect:zoomRect animated:YES];
+        [self.scrollView zoomToRect:zoomRect animated:YES];
     }
 }
 
 #pragma mark - ScrollView
+
+-(void) scrollViewDidZoom:(UIScrollView *)scrollView
+{
+//    CGSize contentSize = scrollView.contentSize;
+//    if (contentSize.height < scrollView.bounds.size.height) {
+//        float y = scrollView.bounds.size.height - contentSize.height;
+//        if (y <= pageYConstraintInitial) {
+//            pageYConstraint.constant = scrollView.bounds.size.height - contentSize.height;
+//        }
+//    }
+//    else
+//    {
+//        pageYConstraint.constant = 0.0f;
+//    }
+//    [page layoutIfNeeded];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+}
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {

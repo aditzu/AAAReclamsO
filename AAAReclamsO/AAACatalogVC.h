@@ -18,7 +18,6 @@
 @end
 
 @interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate>{
-    IBOutlet UIButton* closeBtn;
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;
