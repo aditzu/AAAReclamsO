@@ -87,4 +87,9 @@ static AAAwww* _instance;
             }];
 }
 
+-(NSString *)host
+{
+    return [baseURL stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+}
+
 @end

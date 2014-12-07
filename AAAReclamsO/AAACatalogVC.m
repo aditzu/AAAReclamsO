@@ -24,16 +24,13 @@
     UITapGestureRecognizer* tapGesture;
     IBOutlet UIView* spinnerView;
     IBOutlet UIView* topBarView;
-//    IBOutlet NSLayoutConstraint* closeBtnTopConstraint;
     
     IBOutlet UILabel* progressLabel;
     IBOutlet UIView* progressView;
     IBOutlet UIButton* closeBtn;
-    IBOutlet UIButton* favoriteButton;
 }
 
 -(IBAction) closePressed:(id)sender;
--(IBAction) favoritePressed:(id)sender;
 
 @end
 
@@ -46,9 +43,6 @@ const static int PicturesToPreload = 3;
     [super viewDidLoad];
     [self updateSettingsFromCatalog:self.catalog];
     [self minimize];
-    
-    pageViewController = NO;
-    
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
@@ -67,7 +61,8 @@ const static int PicturesToPreload = 3;
 -(void) didTap:(UITapGestureRecognizer*) tapGestureRecognizer
 {
     if (tapGesture.state == UIGestureRecognizerStateRecognized) {
-        [self showTopBar:[NSNumber numberWithBool:YES]];
+        [self close];
+//        [self showTopBar:[NSNumber numberWithBool:YES]];
     }
 }
 
@@ -86,6 +81,11 @@ const static int PicturesToPreload = 3;
     
     pages = [NSMutableArray array];
     [[AAAwww instance] downloadPagesUrlsForCatalog:catalog.identifier withCompletionHandler:^(NSArray *_pages, NSError *error) {
+        if (error) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kWWWErrorOccured object:nil];
+            return ;
+        }
+        
         if (!error) {
             catalog.imagesURLs = _pages;
         }
@@ -113,19 +113,17 @@ const static int PicturesToPreload = 3;
         }
         if (pages.count > 0) {
             __block UIView* v = spinnerView;
-//            __block AAACatalogPageVC* pg = (AAACatalogPageVC*)pages[0];
+            __block AAACatalogPageVC* pg = [self currentPage];
             __block AAACatalogVC* selfVC = self;
+//            __block UIView* pageView = pageViewController.view;
             [pageViewController setViewControllers:@[pages[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
                 v.hidden = YES;
-                [selfVC updateFavoriteButton];
-//                [pg.view layoutIfNeeded];
-//                CGRect frame = [pg scrollViewFrame];
-//                CGRect newFrame = [myView convertRect:frame fromView:pg.scrollView];
+                pg.delegate = selfVC;
                 
             }];
             pageViewController.delegate = self;
             pageViewController.dataSource = self;
-            [self setProgress:1 outOf:pages.count];
+            [self setProgress:1 outOf:(int)pages.count];
         }
     }];
 }
@@ -140,7 +138,7 @@ const static int PicturesToPreload = 3;
     delegate = _delegate;
 }
 
--(void)closePressed:(id)sender
+-(void) close
 {
     if ([delegate respondsToSelector:@selector(closeCatalogVC:)]) {
         [delegate closeCatalogVC:self];
@@ -148,14 +146,19 @@ const static int PicturesToPreload = 3;
     [self minimize];
 }
 
--(void) updateFavoriteButton
+-(void)closePressed:(id)sender
 {
-    AAACatalogPageVC* currentPage = [self currentPage];
-    if (!currentPage) {
-        return;
-    }
-    favoriteButton.selected = ([[AAAFavoritesManager sharedInstance] itemForImageURL:currentPage.imageUrl] != nil);
+    [self close];
 }
+
+//-(void) updateFavoriteButton
+//{
+//    AAACatalogPageVC* currentPage = [self currentPage];
+//    if (!currentPage) {
+//        return;
+//    }
+//    favoriteButton.selected = ([[AAAFavoritesManager sharedInstance] itemForImageURL:currentPage.imageUrl] != nil);
+//}
 
 -(AAACatalogPageVC*) currentPage
 {
@@ -192,6 +195,7 @@ const static int PicturesToPreload = 3;
     }
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
+    pageViewController.view.frame= self.view.bounds;
 }
 
 -(void)maximize
@@ -207,6 +211,10 @@ const static int PicturesToPreload = 3;
 -(void)finishedMaximized
 {
     [self showTopBar:[NSNumber numberWithBool:YES]];
+    
+    AAACatalogPageVC* currentPage=  [self currentPage];
+    CGRect frame = [currentPage scrollViewFrame];
+    pageViewController.view.frame = frame;
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -259,11 +267,10 @@ const static int PicturesToPreload = 3;
 {
     if (completed || finished) {
         pageIsAnimating = NO;
-        int indexOfVC = [pages indexOfObject: _pageViewController.viewControllers[0]];
-        [self setProgress:indexOfVC+1 outOf:pages.count];
-        [self updateFavoriteButton];
+        int indexOfVC = (int)[pages indexOfObject: _pageViewController.viewControllers[0]];
+        [self setProgress:indexOfVC+1 outOf:(int)pages.count];
+//        [self updateFavoriteButton];
         [self showTopBar:[NSNumber numberWithBool:YES]];
-//        [self showProgressView:[NSNumber numberWithBool:YES]];
     }
 }
 
@@ -306,6 +313,13 @@ const static int PicturesToPreload = 3;
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return NO;
+}
+
+#pragma mark - AAACatalogPageDelegate
+
+-(void)catalogPage:(AAACatalogPageVC *)catalogPage contentSizeDidChange:(CGSize)newSize
+{
+    
 }
 
 @end

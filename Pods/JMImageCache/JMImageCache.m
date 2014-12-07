@@ -69,11 +69,16 @@ static inline NSString *cachePathForKey(NSString *key) {
     }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
         NSURLResponse* response = nil;
+        int retryCount = 0;
         NSError* error = nil;
-        NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        NSData* data = nil;
+        
+        do {
+            data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            retryCount++;
+        } while (error && retryCount <= self.numberOfRetries);
         
         if (error)
         {

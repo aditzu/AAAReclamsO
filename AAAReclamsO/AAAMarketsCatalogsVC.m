@@ -11,6 +11,7 @@
 #import "AAAMarket.h"
 #import "AAAwww.h"
 #import "JMImageCache.h"
+#import "Reachability.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AAAMarketsCatalogsVC()
@@ -30,10 +31,24 @@
     
     IBOutlet iCarousel* carousel;
     UIImageView* bg;
+    
+    //Error view
+    IBOutlet UIView* errorView;
+    IBOutlet UIActivityIndicatorView* errorViewSpinner;
+    IBOutlet UILabel* errorViewMessageLabel;
+    IBOutlet UIButton* errorViewRetryButton;
+    
+    NSMutableDictionary* catalogsVCs;
+    BOOL isDownloadingCatalogs;
 }
+
+-(IBAction) errorViewRetryPressed:(UIButton*)sender;
 @end
 
 @implementation AAAMarketsCatalogsVC
+
+static Reachability* internetReach;
+static Reachability* ownServerReach;
 
 const static float DisabledMarketViewTransparency = 0.65f;
 
@@ -41,6 +56,7 @@ const static float DisabledMarketViewTransparency = 0.65f;
 {
     [super viewDidLoad];
     marketViews = [NSMutableArray array];
+    catalogsVCs = [NSMutableDictionary dictionary];
     www = [AAAwww instance];
     [JMImageCache sharedCache].countLimit = 200;
     carousel.type = iCarouselTypeRotary;
@@ -48,8 +64,62 @@ const static float DisabledMarketViewTransparency = 0.65f;
     carousel.decelerationRate = 0.5f;
     carousel.perspective = -0.7/500;
     
-    markets = [NSMutableArray array];
+    errorView.layer.cornerRadius = 5.0f;
+    errorViewRetryButton.layer.cornerRadius = 5.0f;
+    [JMImageCache sharedCache].numberOfRetries = 2;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wwwErrorOccured) name:kWWWErrorOccured object:nil];
+    [self checkForInternetConnectionOnSuccess:^{
+        [self resetCatalogs];
+        [self downloadCatalogs];
+    } onFailure:^{
+        [self resetCatalogs];
+    }];
+}
+
+-(void) resetCatalogs
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        markets = [NSMutableArray array];
+        for (NSString* key in [catalogsVCs allKeys]) {
+            NSArray* catalogVcsForMarket = catalogsVCs[key];
+            for (AAACatalogVC* catalogVC in catalogVcsForMarket) {
+                [catalogVC.view removeFromSuperview];
+            }
+        }
+        catalogsVCs = [NSMutableDictionary dictionary];
+        for (UIView* marketView in marketViews) {
+            [marketView removeFromSuperview];
+        }
+        marketViews = [NSMutableArray array];
+    });
+}
+
+-(void) wwwErrorOccured
+{
+    [self resetCatalogs];
+    errorView.hidden = NO;
+    errorViewMessageLabel.text = @"Momentan lucrăm pentru a îmbunătăți experiența dumneavoastră în aplicație.\nVă rugăm să reveniți mai târziu!";
+    errorViewRetryButton.hidden =  NO;
+    errorViewMessageLabel.hidden = NO;
+    [errorViewSpinner stopAnimating];
+}
+
+- (void)downloadCatalogs
+{
+    errorView.hidden = NO;
+    [errorViewSpinner startAnimating];
+    errorViewRetryButton.hidden = YES;
+    errorViewMessageLabel.hidden = YES;
+    isDownloadingCatalogs = YES;
     [www downloadCatalogInformationsWithCompletionHandler:^(NSArray *catalogs, NSError *error) {
+        isDownloadingCatalogs = NO;
+        if (error) {
+            [self wwwErrorOccured];
+            return;
+        }
+        errorView.hidden = YES;
         for (AAACatalog* catalog in catalogs)
         {
             if (![markets containsObject:catalog.market]) {
@@ -68,6 +138,102 @@ const static float DisabledMarketViewTransparency = 0.65f;
             [self setTheCatalogsForMarket:currentShowingMarket];
             [self setMarketViewAsSelected:marketViews[0]];
         }
+    }];
+}
+
+
+
+-(void) checkForInternetConnectionOnSuccess:(void(^)(void)) success onFailure:(void(^)(void)) failure
+{
+    if (internetReach) {
+        [internetReach stopNotifier];
+        internetReach = nil;
+    }
+    if (ownServerReach) {
+        [ownServerReach stopNotifier];
+        ownServerReach = nil;
+    }
+    
+    errorView.hidden = NO;
+    void(^errorViewLoadingBlock)(BOOL loading) = ^(BOOL loading)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            errorViewRetryButton.hidden = loading;
+            errorViewMessageLabel.hidden = loading;
+            if (loading) {
+                [errorViewSpinner startAnimating];
+            }
+            else
+            {
+                [errorViewSpinner stopAnimating];
+            }
+            [self.view layoutSubviews];
+        });
+    };
+    
+    errorViewLoadingBlock(YES);
+    internetReach = [Reachability reachabilityWithHostName:@"www.google.com"];
+    internetReach.unreachableBlock = ^(Reachability* reach)
+    {
+        errorViewMessageLabel.text = @"Aplicația necesită o conexiune stabilă la internet.\nVă rugăm să reîncercați după ce ați facut setările necesare!";
+        errorViewLoadingBlock(NO);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            errorView.hidden = NO;
+        });
+        failure();
+    };
+    
+    internetReach.reachableBlock = ^(Reachability* reach)
+    {
+        ownServerReach = [Reachability reachabilityWithHostName:[www host]];
+        ownServerReach.unreachableBlock = ^(Reachability* reachability)
+        {
+            errorViewMessageLabel.text = @"Momentan lucrăm pentru a îmbunătăți experiența dumneavoastră în aplicație.\nVă rugăm să reveniți mai târziu!";
+            errorViewLoadingBlock(NO);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                errorView.hidden = NO;
+            });
+            [reachability stopNotifier];
+            failure();
+        };
+        ownServerReach.reachableBlock = ^(Reachability* reachability)
+        {
+            errorViewLoadingBlock(NO);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                errorView.hidden = YES;
+            });
+            success();
+            [reachability stopNotifier];
+        };
+        [ownServerReach startNotifier];
+    };
+    [internetReach startNotifier];
+}
+
+-(void) reachabilityChanged:(NSNotification*) reachNotification
+{
+    Reachability* reachability = reachNotification.object;
+    if (!reachability) {
+        return;
+    }
+    if (markets && reachability.currentReachabilityStatus == NotReachable)
+    {
+        [self resetCatalogs];
+    }
+    if (!isDownloadingCatalogs && !markets && reachability.currentReachabilityStatus != NotReachable)
+    {
+        [self resetCatalogs];
+        [self downloadCatalogs];
+    }
+}
+
+-(void)errorViewRetryPressed:(UIButton *)sender
+{
+    [self checkForInternetConnectionOnSuccess:^{
+        [self resetCatalogs];
+        [self downloadCatalogs];
+    }onFailure:^{
+        [self resetCatalogs];
     }];
 }
 
@@ -218,17 +384,32 @@ const static int catalogSubviewTag = 21341;
     }
     int border = 20;
     CGSize viewSize = CGSizeMake(carousel.bounds.size.width - (2*border), carousel.bounds.size.height - border);
-    AAACatalog* catalog = currentShowingMarket.catalogs[index];
-    AAACatalogVC* catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
-    [catalogVC view];
-    catalogVC.catalog = catalog;
+    
+    NSMutableArray* catalogVCForShowingMarket = [catalogsVCs objectForKey:[NSNumber numberWithInt:currentShowingMarket.identifier]];
+    if (!catalogVCForShowingMarket)
+    {
+        catalogVCForShowingMarket = [NSMutableArray array];
+        catalogsVCs[[NSNumber numberWithInt:currentShowingMarket.identifier]] = catalogVCForShowingMarket;
+    }
+    AAACatalogVC* catalogVC = nil;
+    if (catalogVCForShowingMarket.count <= index) {
+        AAACatalog* catalog = currentShowingMarket.catalogs[index];
+        catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
+        [catalogVC view];
+        catalogVC.catalog = catalog;
+        [catalogVC setDelegate:self];
+        [catalogVCForShowingMarket addObject:catalogVC];
+    }
+    else
+    {
+        catalogVC = catalogVCForShowingMarket[index];
+    }
+    
     UIView* containerView = [[UIView alloc] initWithFrame:CGRectMake(border, border/2, viewSize.width, viewSize.height)];
     catalogViewMaxFrame = containerView.frame;
     catalogVC.view.frame = containerView.bounds;
     [containerView addSubview:catalogVC.view];
-    
     containerView.tag = catalogSubviewTag;
-    [catalogVC setDelegate:self];
     currentShowingCatalogs[index] = catalogVC;
     return containerView;
 }

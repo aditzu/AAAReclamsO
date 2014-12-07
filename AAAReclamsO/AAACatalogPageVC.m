@@ -26,6 +26,9 @@
     
     BOOL animating;
     float pageYConstraintInitial;
+    
+    
+    BOOL pageResetToScrollViewBounds;
 }
 
 -(void)viewDidLoad
@@ -46,60 +49,62 @@
     [self show:shown];
     self.view.clipsToBounds = NO;
     pageYConstraintInitial = pageYConstraint.constant;
+    
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    if (pageWConstraint.constant != self.scrollView.bounds.size.width) {
-        pageWConstraint.constant  = self.scrollView.bounds.size.width;
+    
+//    if (!pageResetToScrollViewBounds)
+    {
+        if (pageWConstraint.constant != self.scrollView.bounds.size.width) {
+            pageWConstraint.constant  = self.scrollView.bounds.size.width;
+        }
+        
+        if (pageHConstraint.constant != self.scrollView.bounds.size.height - 4) {
+            pageHConstraint.constant = self.scrollView.bounds.size.height - 4;//4 for the shadow
+        }
+        [self.view layoutIfNeeded];
+        pageResetToScrollViewBounds = YES;
     }
     
-    if (pageHConstraint.constant != self.scrollView.bounds.size.height) {
-        pageHConstraint.constant = self.scrollView.bounds.size.height - 4;//4 for the shadow
-    }
-    [page layoutIfNeeded];
     self.scrollView.zoomScale = 1.0f;
-  
-    
-//    float imageRatio = page.image.size.width/ page.image.size.height;
-//    float imageViewRatio = page.frame.size.width / page.frame.size.height;
-//    
-//    float width = 0, height = 0, yoffset = 0, xoffset = 0;
-//    if (imageRatio > imageViewRatio) {
-//        width = page.frame.size.width;
-//        height = width / imageRatio;
-//        assert(page.frame.size.height > height);
-//        yoffset = (page.frame.size.height - height)/2.0f;
-//    }
-//    else
-//    {
-//        height = page.frame.size.height;
-//        width = height * imageRatio;
-//        assert(page.frame.size.width > width);
-//        xoffset = (page.frame.size.width - width) / 2.0f;
-//    }
-//    
-//    pageWConstraint.constant = width;
-//    pageHConstraint.constant = height;
-//    pageXConstraint.constant += xoffset;
-//    pageYConstraint.constant += yoffset;
-//    [page layoutIfNeeded];
-//    
-//    
-//    page.layer.masksToBounds = NO;
-//    page.layer.shadowColor = [UIColor blackColor].CGColor;
-//    page.layer.shadowOffset = CGSizeMake(0, 3);
-//    page.layer.shadowOpacity = .5;
-//    page.layer.shadowRadius = 1.0f;
-//    [self.view layoutSubviews];
+    page.layer.masksToBounds = NO;
+    page.layer.shadowColor = [UIColor blackColor].CGColor;
+    page.layer.shadowOffset = CGSizeMake(0, 3);
+    page.layer.shadowOpacity = .5;
+    page.layer.shadowRadius = 1.0f;
+    [self.view layoutSubviews];
 }
 
-//-(CGRect)scrollViewFrame
-//{
-//    return page.frame;
-//    return [self.view convertRect:page.superview.frame fromView:self.scrollView];
-//}
+-(CGRect)scrollViewFrame
+{
+    float imageRatio = page.image.size.width/ page.image.size.height;
+    float imageViewRatio = page.frame.size.width / page.frame.size.height;
+    
+    float width = 0, height = 0, yoffset = 0, xoffset = 0;
+    if (imageRatio > imageViewRatio) {
+        width = page.frame.size.width;
+        height = width / imageRatio;
+        assert(page.frame.size.height > height);
+        yoffset = (page.frame.size.height - height)/2.0f;
+    }
+    else
+    {
+        height = page.frame.size.height;
+        width = height * imageRatio;
+        assert(page.frame.size.width > width);
+        xoffset = (page.frame.size.width - width) / 2.0f;
+    }
+    
+    CGRect imgViewFrame = page.frame;
+    imgViewFrame.size.width = width;
+    imgViewFrame.size.height = height;
+    imgViewFrame.origin.x += xoffset;
+    imgViewFrame.origin.y += yoffset;
+    return [self.view convertRect:imgViewFrame fromView:self.scrollView];
+}
 
 -(void)setImageUrl:(NSString *)imageUrl
 {
@@ -180,6 +185,10 @@
 
 -(void) scrollViewDidZoom:(UIScrollView *)scrollView
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(catalogPage:contentSizeDidChange:)])
+    {
+        [self.delegate catalogPage:self contentSizeDidChange:scrollView.contentSize];
+    }
 //    CGSize contentSize = scrollView.contentSize;
 //    if (contentSize.height < scrollView.bounds.size.height) {
 //        float y = scrollView.bounds.size.height - contentSize.height;
@@ -192,10 +201,6 @@
 //        pageYConstraint.constant = 0.0f;
 //    }
 //    [page layoutIfNeeded];
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

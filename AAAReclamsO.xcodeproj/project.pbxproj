@@ -26,6 +26,8 @@
 		9EB845BA1A2F1F67008EB324 /* AAACatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845B71A2F1F67008EB324 /* AAACatalog.m */; };
 		9EB845BB1A2F1F67008EB324 /* AAAMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845B91A2F1F67008EB324 /* AAAMarket.m */; };
 		9EB845BE1A2F1F75008EB324 /* AAAFavoriteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845BD1A2F1F75008EB324 /* AAAFavoriteItem.m */; };
+		9EB845D81A31B96F008EB324 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB845D71A31B96F008EB324 /* SystemConfiguration.framework */; };
+		9EB845DC1A31B99C008EB324 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845DB1A31B99C008EB324 /* Reachability.m */; };
 		9EE090FA1A1CD2DC006789F0 /* JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE090F71A1CD2DC006789F0 /* JMImageCache.m */; };
 		9EE090FB1A1CD2DC006789F0 /* UIImageView+JMImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE090F91A1CD2DC006789F0 /* UIImageView+JMImageCache.m */; };
 		9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0910D1A1DF628006789F0 /* CoreText.framework */; };
@@ -81,6 +83,9 @@
 		9EB845B91A2F1F67008EB324 /* AAAMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarket.m; sourceTree = "<group>"; };
 		9EB845BC1A2F1F75008EB324 /* AAAFavoriteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAFavoriteItem.h; sourceTree = "<group>"; };
 		9EB845BD1A2F1F75008EB324 /* AAAFavoriteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAFavoriteItem.m; sourceTree = "<group>"; };
+		9EB845D71A31B96F008EB324 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9EB845DA1A31B99C008EB324 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		9EB845DB1A31B99C008EB324 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		9EE090F61A1CD2DC006789F0 /* JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMImageCache.h; sourceTree = "<group>"; };
 		9EE090F71A1CD2DC006789F0 /* JMImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMImageCache.m; sourceTree = "<group>"; };
 		9EE090F81A1CD2DC006789F0 /* UIImageView+JMImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+JMImageCache.h"; sourceTree = "<group>"; };
@@ -99,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB845D81A31B96F008EB324 /* SystemConfiguration.framework in Frameworks */,
 				9EB845AD1A2CCEAB008EB324 /* Reveal.framework in Frameworks */,
 				9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */,
 				A9E12EF72B4BB1B16996413C /* libPods.a in Frameworks */,
@@ -148,6 +154,7 @@
 		9E2650C61A11192F005B546B /* AAAReclamsO */ = {
 			isa = PBXGroup;
 			children = (
+				9EB845D91A31B99C008EB324 /* Reachability */,
 				9EB845B51A2F1EF4008EB324 /* Model */,
 				9EE091591A25D2B8006789F0 /* iCarousel */,
 				9EE090F01A1CD1C8006789F0 /* JMImageCache */,
@@ -241,6 +248,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9EB845D91A31B99C008EB324 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				9EB845DA1A31B99C008EB324 /* Reachability.h */,
+				9EB845DB1A31B99C008EB324 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		9EE090F01A1CD1C8006789F0 /* JMImageCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +281,7 @@
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EB845D71A31B96F008EB324 /* SystemConfiguration.framework */,
 				9EB845AC1A2CCEAB008EB324 /* Reveal.framework */,
 				9EE0910D1A1DF628006789F0 /* CoreText.framework */,
 				46131CE3B423FC1E1397014B /* libPods.a */,
@@ -425,6 +442,7 @@
 				9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */,
 				9EB845BA1A2F1F67008EB324 /* AAACatalog.m in Sources */,
 				9EB845BB1A2F1F67008EB324 /* AAAMarket.m in Sources */,
+				9EB845DC1A31B99C008EB324 /* Reachability.m in Sources */,
 				9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */,
 				9EB845B41A2F1CF8008EB324 /* AAAFavoritesManager.m in Sources */,
 				9EB845BE1A2F1F75008EB324 /* AAAFavoriteItem.m in Sources */,

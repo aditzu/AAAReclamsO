@@ -10,6 +10,7 @@
 #import "AAACatalog.h"
 
 @class AAACatalogVC;
+@protocol AAACatalogPageVCDelegate;
 
 @protocol AAACatalogVCEvents <NSObject>
 
@@ -17,7 +18,7 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate>{
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;
