@@ -114,9 +114,9 @@ const static float DisabledMarketViewTransparency = 0.65f;
     errorViewMessageLabel.hidden = YES;
     isDownloadingCatalogs = YES;
     [www downloadCatalogInformationsWithCompletionHandler:^(NSArray *catalogs, NSError *error) {
-        isDownloadingCatalogs = NO;
         if (error) {
             [self wwwErrorOccured];
+            isDownloadingCatalogs = NO;
             return;
         }
         errorView.hidden = YES;
@@ -138,6 +138,7 @@ const static float DisabledMarketViewTransparency = 0.65f;
             [self setTheCatalogsForMarket:currentShowingMarket];
             [self setMarketViewAsSelected:marketViews[0]];
         }
+        isDownloadingCatalogs = NO;
     }];
 }
 

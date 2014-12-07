@@ -113,13 +113,12 @@ const static int PicturesToPreload = 3;
         }
         if (pages.count > 0) {
             __block UIView* v = spinnerView;
-            __block AAACatalogPageVC* pg = [self currentPage];
             __block AAACatalogVC* selfVC = self;
 //            __block UIView* pageView = pageViewController.view;
             [pageViewController setViewControllers:@[pages[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
                 v.hidden = YES;
+                AAACatalogPageVC* pg = [selfVC currentPage];
                 pg.delegate = selfVC;
-                
             }];
             pageViewController.delegate = self;
             pageViewController.dataSource = self;
@@ -282,7 +281,9 @@ const static int PicturesToPreload = 3;
     long currentIndex = [pages indexOfObject:viewController];
     if (currentIndex == pages.count -1 || isMinimized) return nil;
     [pages[MIN(pages.count-1, currentIndex+1+PicturesToPreload)] downloadImage];
-    return pages[currentIndex+1];
+    AAACatalogPageVC* nextPagevc = pages[currentIndex+1];
+    nextPagevc.delegate = self;
+    return nextPagevc;
 }
 
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
@@ -319,7 +320,17 @@ const static int PicturesToPreload = 3;
 
 -(void)catalogPage:(AAACatalogPageVC *)catalogPage contentSizeDidChange:(CGSize)newSize
 {
-    
+//    CGRect frame = pageViewController.view.frame;
+//    
+//    float width = MIN(newSize.width, self.view.window.bounds.size.width);
+//    float height = MIN(newSize.height, self.view.window.bounds.size.height);
+//    frame.size.width = width;
+//    frame.size.height = height;
+//    pageViewController.view.frame = frame;
+//    pageViewController.view.center = self.view.center;
+//    [pageViewController.view layoutSubviews];
+//    NSLog(@"pageVCSize: %@", NSStringFromCGRect(pageViewController.view.frame));
+//    NSLog(@"ContentSize: %@", NSStringFromCGSize(newSize));
 }
 
 @end

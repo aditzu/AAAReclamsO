@@ -56,7 +56,7 @@
 {
     [super viewDidLayoutSubviews];
     
-//    if (!pageResetToScrollViewBounds)
+    if (!self.scrollView.isZooming)
     {
         if (pageWConstraint.constant != self.scrollView.bounds.size.width) {
             pageWConstraint.constant  = self.scrollView.bounds.size.width;
@@ -67,15 +67,15 @@
         }
         [self.view layoutIfNeeded];
         pageResetToScrollViewBounds = YES;
+        
+        self.scrollView.zoomScale = 1.0f;
+        page.layer.masksToBounds = NO;
+        page.layer.shadowColor = [UIColor blackColor].CGColor;
+        page.layer.shadowOffset = CGSizeMake(0, 3);
+        page.layer.shadowOpacity = .5;
+        page.layer.shadowRadius = 1.0f;
+        [self.view layoutSubviews];
     }
-    
-    self.scrollView.zoomScale = 1.0f;
-    page.layer.masksToBounds = NO;
-    page.layer.shadowColor = [UIColor blackColor].CGColor;
-    page.layer.shadowOffset = CGSizeMake(0, 3);
-    page.layer.shadowOpacity = .5;
-    page.layer.shadowRadius = 1.0f;
-    [self.view layoutSubviews];
 }
 
 -(CGRect)scrollViewFrame
