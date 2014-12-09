@@ -52,7 +52,6 @@ const static int PicturesToPreload = 3;
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
     tapGesture.enabled = NO;
-    currentFrame.origin.y += self.view.bounds.size.height;
     spinnerView.hidden = NO;
     bannerViewContainer.hidden = YES;
     bannerIsShown = YES;
