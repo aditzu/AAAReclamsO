@@ -55,10 +55,10 @@ static AAAwww* _instance;
 -(void) downloadCatalogInformationsWithCompletionHandler:(DownloadCatalogsBlock)completionHandler
 {
     RKObjectMapping* marketMapping = [RKObjectMapping mappingForClass:[AAAMarket class]];
-    [marketMapping addAttributeMappingsFromArray:@[@"identifier", @"miniLogoURL", @"logoURL", @"name"]];
+    [marketMapping addAttributeMappingsFromArray:@[@"identifier", @"miniLogoURL", @"logoURL", @"name", @"priority"]];
     
     RKObjectMapping* catalogMapping = [RKObjectMapping mappingForClass:[AAACatalog class]];
-    [catalogMapping addAttributeMappingsFromDictionary:@{@"active":@"active", @"description":@"bkDescription", @"from":@"activeFrom", @"to" : @"activeTo", @"name":@"name", @"identifier":@"identifier", @"url":@"pagesUrl"}];
+    [catalogMapping addAttributeMappingsFromDictionary:@{@"active":@"active", @"description":@"bkDescription", @"from":@"activeFrom", @"to" : @"activeTo", @"name":@"name", @"identifier":@"identifier", @"url":@"pagesUrl", @"priority":@"priority"}];
     [catalogMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"market" toKeyPath:@"market" withMapping:marketMapping]];
     
     NSIndexSet* statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);

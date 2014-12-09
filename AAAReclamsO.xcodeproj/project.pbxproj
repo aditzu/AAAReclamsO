@@ -20,6 +20,8 @@
 		9E8654291A36127B00ECEE62 /* AAAGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8654281A36127B00ECEE62 /* AAAGlobals.m */; };
 		9E86545F1A362B2A00ECEE62 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E86545E1A362B2A00ECEE62 /* iAd.framework */; };
 		9E8654621A364B6600ECEE62 /* AAASharedBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8654611A364B6600ECEE62 /* AAASharedBanner.m */; };
+		9E8654661A3743E000ECEE62 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8654651A3743E000ECEE62 /* libFlurry_5.4.0.a */; };
+		9E8654681A3743F100ECEE62 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8654671A3743F100ECEE62 /* Security.framework */; };
 		9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */; };
 		9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */; };
 		9EB845AD1A2CCEAB008EB324 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB845AC1A2CCEAB008EB324 /* Reveal.framework */; };
@@ -87,6 +89,9 @@
 		9E86545E1A362B2A00ECEE62 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		9E8654601A364B6600ECEE62 /* AAASharedBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAASharedBanner.h; sourceTree = "<group>"; };
 		9E8654611A364B6600ECEE62 /* AAASharedBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAASharedBanner.m; sourceTree = "<group>"; };
+		9E8654641A3743E000ECEE62 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		9E8654651A3743E000ECEE62 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
+		9E8654671A3743F100ECEE62 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9EB427A41A1785EC00700D96 /* AAAMarketsCatalogsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketsCatalogsVC.h; sourceTree = "<group>"; };
 		9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketsCatalogsVC.m; sourceTree = "<group>"; };
 		9EB4288B1A1A1DC900700D96 /* AAACatalogPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogPageVC.h; sourceTree = "<group>"; };
@@ -123,11 +128,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E8654681A3743F100ECEE62 /* Security.framework in Frameworks */,
 				9E86545F1A362B2A00ECEE62 /* iAd.framework in Frameworks */,
 				9EB845D81A31B96F008EB324 /* SystemConfiguration.framework in Frameworks */,
 				9EB845AD1A2CCEAB008EB324 /* Reveal.framework in Frameworks */,
 				9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */,
 				A9E12EF72B4BB1B16996413C /* libPods.a in Frameworks */,
+				9E8654661A3743E000ECEE62 /* libFlurry_5.4.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +181,7 @@
 		9E2650C61A11192F005B546B /* AAAReclamsO */ = {
 			isa = PBXGroup;
 			children = (
+				9E8654631A3743E000ECEE62 /* Flurry */,
 				9EB845D91A31B99C008EB324 /* Reachability */,
 				9EB845B51A2F1EF4008EB324 /* Model */,
 				9EE091591A25D2B8006789F0 /* iCarousel */,
@@ -244,6 +252,15 @@
 			path = gfx;
 			sourceTree = "<group>";
 		};
+		9E8654631A3743E000ECEE62 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				9E8654641A3743E000ECEE62 /* Flurry.h */,
+				9E8654651A3743E000ECEE62 /* libFlurry_5.4.0.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 		9EB4278E1A14B0E800700D96 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +322,7 @@
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E8654671A3743F100ECEE62 /* Security.framework */,
 				9E86545E1A362B2A00ECEE62 /* iAd.framework */,
 				9E86545C1A3623FD00ECEE62 /* CoreTelephony.framework */,
 				9E8654591A36216400ECEE62 /* MessageUI.framework */,
@@ -621,6 +639,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/AAAReclamsO/GoogleMobileAdsSdkiOS-6.12.2",
+					"$(PROJECT_DIR)/AAAReclamsO/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -645,6 +664,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/AAAReclamsO/GoogleMobileAdsSdkiOS-6.12.2",
+					"$(PROJECT_DIR)/AAAReclamsO/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

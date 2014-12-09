@@ -26,7 +26,7 @@
 @property(nonatomic, strong) UIImage* imgLogo;
 @property(nonatomic, strong) UIImage* imgLogoLandscape;
 @property(nonatomic, strong) NSMutableArray* catalogs;
-
+@property(nonatomic) double priority;
 +(instancetype)marketWithName:(NSString *)title andLogoImage:(UIImage*) img;
 
 @end

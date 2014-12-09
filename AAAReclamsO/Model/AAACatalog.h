@@ -24,4 +24,5 @@
 @property(nonatomic) int identifier;
 @property(nonatomic, strong) NSString* pagesUrl;
 @property(nonatomic, strong) AAAMarket* market;
+@property(nonatomic) double priority;
 @end

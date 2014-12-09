@@ -15,6 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AAAGlobals.h"
 #import <iAd/iAd.h>
+#import "Flurry.h"
 
 @interface AAAMarketsCatalogsVC()
 {
@@ -123,7 +124,6 @@ const static float DisabledMarketViewTransparency = 0.65f;
             isDownloadingCatalogs = NO;
             return;
         }
-//        [self resetCatalogs];
         errorView.hidden = YES;
         for (AAACatalog* catalog in catalogs)
         {
@@ -140,6 +140,9 @@ const static float DisabledMarketViewTransparency = 0.65f;
                 }
             }];
         }
+        markets  = [NSMutableArray arrayWithArray:[markets sortedArrayUsingComparator:^NSComparisonResult(AAAMarket* obj1, AAAMarket* obj2) {
+            return [[NSNumber numberWithDouble:obj2.priority] compare:[NSNumber numberWithDouble:obj1.priority]];
+        }]];
         [self addTheMarkets];
         if (markets.count>0) {
             currentShowingMarket = markets[0];
@@ -149,7 +152,6 @@ const static float DisabledMarketViewTransparency = 0.65f;
         isDownloadingCatalogs = NO;
     }];
 }
-
 
 
 -(void) checkForInternetConnectionOnSuccess:(void(^)(void)) success onFailure:(void(^)(void)) failure
@@ -358,6 +360,7 @@ const static int catalogSubviewTag = 21341;
 
 -(void) setTheCatalogsForMarket:(AAAMarket*) market
 {
+    [Flurry logEvent:FlurryEventMarketOpened withParameters:@{FlurryParameterMarketName:market.name}];
     [carousel reloadData];
     [carousel setCurrentItemIndex:0];
 }
@@ -471,6 +474,11 @@ const static int catalogSubviewTag = 21341;
     } completion:^(BOOL finished) {
         [catalogVC finishedMaximized];
     }];
+    AAACatalog* catalog = catalogVC.catalog;
+    [Flurry logEvent:FlurryEventAdOpened withParameters:@{FlurryParameterCatalogId : [NSString stringWithFormat:@"%i",catalog.identifier],
+                                                          FlurryParameterCatalogIndex : [NSString stringWithFormat:@"%i", index],
+                                                          FlurryParameterCatalogPriority : [NSString stringWithFormat:@"%f", catalog.priority],
+                                                        FlurryParameterMarketName : currentShowingMarket.name}];
 }
 
 @end

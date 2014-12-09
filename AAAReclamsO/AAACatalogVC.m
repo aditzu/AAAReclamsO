@@ -14,6 +14,7 @@
 #import "AAAFavoritesManager.h"
 #import <iAd/iAd.h>
 #import "AAAGlobals.h"
+#import "Flurry.h"
 
 @interface AAACatalogVC(){
     id<AAACatalogVCEvents> delegate;
@@ -202,6 +203,10 @@ const static int PicturesToPreload = 3;
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
     pageViewController.view.frame= self.view.bounds;
+    if (pageViewController && pageViewController.viewControllers && pageViewController.viewControllers.count > 0) {
+        float percentageSeen = [pages indexOfObject:pageViewController.viewControllers[0]] * 100 / pages.count;
+        [Flurry logEvent:FlurryEventCatalogPercentageSeen withParameters:@{FlurryParameterPercentage : [NSString stringWithFormat:@"%f", percentageSeen]}];
+    }
 }
 
 -(void)maximize
@@ -311,12 +316,9 @@ const static int PicturesToPreload = 3;
     {
         currentFrame.origin.y -= self.view.bounds.size.height;
     }
-    [UIView animateWithDuration:.25f delay: show ? 0.40f : 0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:.25f delay: show ? 0.0f : 0.40f options:UIViewAnimationOptionCurveEaseIn animations:^{
         pageViewController.view.frame = currentFrame;
     } completion:nil];
-//    [UIView animateWithDuration: animated ? .25f : 0.0f animations:^{
-//        pageViewController.view.frame = currentFrame;
-//    }];
 }
 
 #pragma mark - UIPageViewCtrl
@@ -409,12 +411,13 @@ const static int PicturesToPreload = 3;
     if (!isMinimized) {
         [self layoutBanner:YES animated:YES];
     }
+    [Flurry logEvent:FlurryEventAdServed];
     NSLog(@"bannerViewDidLoadAd");
 }
 
 -(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
-//    [self showView:pageViewController.view show:NO];
+    [Flurry logEvent:FlurryEventAdOpened];
     if (!willLeave) {
         [self showPageViewController:NO animated:YES];
     }
@@ -424,7 +427,6 @@ const static int PicturesToPreload = 3;
 
 -(void)bannerViewActionDidFinish:(ADBannerView *)banner
 {
-//    [self showView:pageViewController.view show:YES];
     [self showPageViewController:YES animated:YES];
     NSLog(@"bannerViewActionDidFinish");
 }

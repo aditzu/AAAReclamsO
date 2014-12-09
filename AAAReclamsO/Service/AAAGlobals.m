@@ -34,9 +34,9 @@ static AAAGlobals* _instance;
     return bannerView.bannerView;
 }
 
--(NSString *)googleAdsId
+-(NSString *)flurryId
 {
-    return @"";
+    return @"QNVNYDDJXCM9FR583Q4T";
 }
 
 @end
