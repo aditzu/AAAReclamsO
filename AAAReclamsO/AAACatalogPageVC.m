@@ -178,6 +178,7 @@
 
 -(void) show:(BOOL)show
 {
+//    page.contentMode = show ? UIViewContentModeScaleToFill : UIViewContentModeScaleAspectFit;
     shown = show;
     overlay.hidden = show;
 }

@@ -26,6 +26,7 @@
     UITapGestureRecognizer* tapGesture;
     IBOutlet UIView* spinnerView;
     IBOutlet UIView* topBarView;
+    IBOutlet NSLayoutConstraint* topBarTopConstraint;
     
     IBOutlet UILabel* progressLabel;
     IBOutlet UIView* progressView;
@@ -224,15 +225,21 @@ const static int PicturesToPreload = 3;
     [self layoutBanner:NO animated:NO];
 }
 
--(void)finishedMaximized
+-(void)updatePageViewControllerForCurrentPage
 {
-    [self showTopBar:[NSNumber numberWithBool:YES]];
-    
     AAACatalogPageVC* currentPage=  [self currentPage];
     CGRect frame = [currentPage scrollViewFrame];
     pageViewController.view.frame = frame;
+    topBarTopConstraint.constant = frame.origin.y > topBarView.frame.size.height ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
     bannerViewContainer.hidden = NO;
     [self layoutBanner:bannerView.bannerLoaded animated:bannerView.bannerLoaded];
+}
+
+
+-(void)finishedMaximized
+{
+    [self showTopBar:[NSNumber numberWithBool:YES]];
+    [self updatePageViewControllerForCurrentPage];
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -331,6 +338,7 @@ const static int PicturesToPreload = 3;
 -(void)pageViewController:(UIPageViewController *)_pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if (completed || finished) {
+//        [self updatePageViewControllerForCurrentPage];
         pageIsAnimating = NO;
         int indexOfVC = (int)[pages indexOfObject: _pageViewController.viewControllers[0]];
         [self setProgress:indexOfVC+1 outOf:(int)pages.count];
@@ -403,7 +411,7 @@ const static int PicturesToPreload = 3;
 
 -(void)bannerViewWillLoadAd:(ADBannerView *)banner
 {
-    NSLog(@"bannerViewWillLoadAd");
+//    NSLog(@"bannerViewWillLoadAd");
 }
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner
@@ -412,29 +420,30 @@ const static int PicturesToPreload = 3;
         [self layoutBanner:YES animated:YES];
     }
     [Flurry logEvent:FlurryEventAdServed];
-    NSLog(@"bannerViewDidLoadAd");
+//    NSLog(@"bannerViewDidLoadAd");
 }
 
 -(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
     [Flurry logEvent:FlurryEventAdOpened];
     if (!willLeave) {
+        [self showTopBar:[NSNumber numberWithBool:NO]];
         [self showPageViewController:NO animated:YES];
     }
-    NSLog(@"bannerViewActionShouldBegin");
+//    NSLog(@"bannerViewActionShouldBegin");
     return YES;
 }
 
 -(void)bannerViewActionDidFinish:(ADBannerView *)banner
 {
     [self showPageViewController:YES animated:YES];
-    NSLog(@"bannerViewActionDidFinish");
+//    NSLog(@"bannerViewActionDidFinish");
 }
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     [self layoutBanner:NO animated:YES];
-    NSLog(@"didFailToReceiveAdWithError: %@", error);
+//    NSLog(@"didFailToReceiveAdWithError: %@", error);
 }
 
 

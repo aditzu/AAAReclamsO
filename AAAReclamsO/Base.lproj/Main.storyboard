@@ -71,7 +71,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grI-65-opn" userLabel="Error view">
                                 <rect key="frame" x="10" y="159" width="300" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRz-aK-n53">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRz-aK-n53">
                                         <rect key="frame" x="30" y="40" width="240" height="130"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="IXK-DQ-KPA"/>
@@ -114,6 +114,19 @@
                                     <constraint firstAttribute="height" constant="250" id="viW-cP-33M"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h6O-Se-vnM" userLabel="loading view">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.39999999999999963" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DPj-Em-06F">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="D0m-Pv-w6s">
+                                        <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.03529411927" green="0.1176470667" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -146,6 +159,7 @@
                         <outlet property="errorViewMessageLabel" destination="YRz-aK-n53" id="Uwy-pp-Mxf"/>
                         <outlet property="errorViewRetryButton" destination="KPV-bk-bIm" id="sA6-SE-gFw"/>
                         <outlet property="errorViewSpinner" destination="7aB-FQ-lv0" id="1jQ-Oj-Kwa"/>
+                        <outlet property="loadingView" destination="h6O-Se-vnM" id="eVv-eH-1tC"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
                     </connections>
                 </viewController>
@@ -173,14 +187,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlq-bV-F4K" userLabel="topBar">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hn9-nY-wld">
-                                        <rect key="frame" x="5" y="5" width="50" height="50"/>
+                                        <rect key="frame" x="5" y="5" width="50" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="9d1-0P-Mdx"/>
-                                            <constraint firstAttribute="height" constant="50" id="hT6-xe-Idt"/>
+                                            <constraint firstAttribute="height" constant="30" id="hT6-xe-Idt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" image="close_btn_nobg.png">
@@ -192,9 +206,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Neq-bN-oEZ" userLabel="Progress view">
-                                        <rect key="frame" x="120" y="10" width="80" height="40"/>
+                                        <rect key="frame" x="120" y="0.0" width="80" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zz1-wv-Yk5">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.33000000000000002" colorSpace="calibratedWhite"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwN-co-slu">
@@ -213,7 +228,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HaF-Yh-gvh" userLabel="Favorite view">
-                                        <rect key="frame" x="255" y="5" width="50" height="50"/>
+                                        <rect key="frame" x="255" y="5" width="50" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzR-Nh-E6g">
                                                 <rect key="frame" x="5" y="5" width="40" height="40"/>
@@ -232,9 +247,9 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="BW4-RL-L3E"/>
+                                            <constraint firstAttribute="height" constant="30" id="BW4-RL-L3E"/>
                                             <constraint firstAttribute="width" constant="50" id="Sjo-IK-RFh"/>
-                                            <constraint firstAttribute="centerY" secondItem="OzR-Nh-E6g" secondAttribute="centerY" id="chl-N1-Dpc"/>
+                                            <constraint firstAttribute="centerY" secondItem="OzR-Nh-E6g" secondAttribute="centerY" constant="-10" id="chl-N1-Dpc"/>
                                             <constraint firstAttribute="centerX" secondItem="OzR-Nh-E6g" secondAttribute="centerX" id="eJY-Gf-9I1"/>
                                         </constraints>
                                     </view>
@@ -246,7 +261,7 @@
                                     <constraint firstAttribute="bottom" secondItem="HaF-Yh-gvh" secondAttribute="bottom" constant="5" id="cDu-aq-CxU"/>
                                     <constraint firstAttribute="centerX" secondItem="Neq-bN-oEZ" secondAttribute="centerX" id="ecF-PK-vic"/>
                                     <constraint firstAttribute="trailing" secondItem="HaF-Yh-gvh" secondAttribute="trailing" constant="15" id="ga0-cy-MCe"/>
-                                    <constraint firstAttribute="height" constant="60" id="gdp-35-edw"/>
+                                    <constraint firstAttribute="height" constant="40" id="gdp-35-edw"/>
                                     <constraint firstItem="Hn9-nY-wld" firstAttribute="top" secondItem="Tlq-bV-F4K" secondAttribute="top" constant="5" id="o0s-n9-B6D"/>
                                     <constraint firstItem="Hn9-nY-wld" firstAttribute="leading" secondItem="Tlq-bV-F4K" secondAttribute="leading" constant="5" id="q3y-Wg-33C"/>
                                 </constraints>
@@ -299,6 +314,7 @@
                         <outlet property="progressLabel" destination="CwN-co-slu" id="3mn-mm-J2G"/>
                         <outlet property="progressView" destination="Neq-bN-oEZ" id="Szk-Im-Hk8"/>
                         <outlet property="spinnerView" destination="T3b-25-tZs" id="rUa-lM-uGY"/>
+                        <outlet property="topBarTopConstraint" destination="yjs-h1-xB7" id="FV1-s2-8ag"/>
                         <outlet property="topBarView" destination="Tlq-bV-F4K" id="fdd-4y-UXB"/>
                     </connections>
                 </viewController>

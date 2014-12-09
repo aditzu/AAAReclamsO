@@ -43,6 +43,8 @@
     
     NSMutableDictionary* catalogsVCs;
     BOOL isDownloadingCatalogs;
+    
+    IBOutlet UIView* loadingView;
 }
 
 -(IBAction) errorViewRetryPressed:(UIButton*)sender;
@@ -66,6 +68,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
     carousel.scrollSpeed = .4f;
     carousel.decelerationRate = 0.5f;
     carousel.perspective = -0.7/500;
+    
+    loadingView.hidden = YES;
     
     errorView.layer.cornerRadius = 5.0f;
     errorViewRetryButton.layer.cornerRadius = 5.0f;
@@ -118,10 +122,12 @@ const static float DisabledMarketViewTransparency = 0.65f;
     errorViewRetryButton.hidden = YES;
     errorViewMessageLabel.hidden = YES;
     isDownloadingCatalogs = YES;
+    loadingView.hidden = NO;
     [www downloadCatalogInformationsWithCompletionHandler:^(NSArray *catalogs, NSError *error) {
         if (error) {
             [self wwwErrorOccured];
             isDownloadingCatalogs = NO;
+            loadingView.hidden = YES;
             return;
         }
         errorView.hidden = YES;
@@ -149,6 +155,7 @@ const static float DisabledMarketViewTransparency = 0.65f;
             [self setTheCatalogsForMarket:currentShowingMarket];
             [self setMarketViewAsSelected:marketViews[0]];
         }
+        loadingView.hidden = YES;
         isDownloadingCatalogs = NO;
     }];
 }
@@ -186,10 +193,10 @@ const static float DisabledMarketViewTransparency = 0.65f;
     internetReach = [Reachability reachabilityWithHostName:@"www.google.com"];
     internetReach.unreachableBlock = ^(Reachability* reach)
     {
-        errorViewMessageLabel.text = @"Aplicația necesită o conexiune stabilă la internet.\nVă rugăm să reîncercați după ce ați facut setările necesare!";
-        errorViewLoadingBlock(NO);
         dispatch_async(dispatch_get_main_queue(), ^{
+            errorViewMessageLabel.text = @"Aplicația necesită o conexiune stabilă la internet.\nVă rugăm să reîncercați după ce ați facut setările necesare!";
             errorView.hidden = NO;
+            errorViewLoadingBlock(NO);
         });
         failure();
     };
@@ -199,10 +206,10 @@ const static float DisabledMarketViewTransparency = 0.65f;
         ownServerReach = [Reachability reachabilityWithHostName:[www host]];
         ownServerReach.unreachableBlock = ^(Reachability* reachability)
         {
-            errorViewMessageLabel.text = @"Momentan lucrăm pentru a îmbunătăți experiența dumneavoastră în aplicație.\nVă rugăm să reveniți mai târziu!";
-            errorViewLoadingBlock(NO);
             dispatch_async(dispatch_get_main_queue(), ^{
+                errorViewMessageLabel.text = @"Momentan lucrăm pentru a îmbunătăți experiența dumneavoastră în aplicație.\nVă rugăm să reveniți mai târziu!";
                 errorView.hidden = NO;
+                errorViewLoadingBlock(NO);
             });
             [reachability stopNotifier];
             failure();
