@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "AAACatalog.h"
+#import "AAACatalogPageVC.h"
+#import <iAd/iAd.h>
 
 @class AAACatalogVC;
-@protocol AAACatalogPageVCDelegate;
 
 @protocol AAACatalogVCEvents <NSObject>
 
@@ -18,11 +19,11 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, ADBannerViewDelegate>{
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;
-@property(nonatomic, strong) IBOutlet UIView* containerView;
+//@property(nonatomic, strong) IBOutlet UIView* containerView;
 
 -(void) setDelegate:(id<AAACatalogVCEvents>) _delegate;
 -(void) setCatalog:(AAACatalog*) catalog;

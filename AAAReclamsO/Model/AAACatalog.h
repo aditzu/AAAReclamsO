@@ -16,7 +16,7 @@
 
 @property(nonatomic, strong) UIImage* cover;
 @property(nonatomic, strong) NSArray* imagesURLs;
-@property(nonatomic) BOOL active;
+@property(nonatomic, getter=isActive) BOOL active;
 @property(nonatomic, strong) NSString* bkDescription;
 @property(nonatomic) double activeFrom;
 @property(nonatomic) double activeTo;

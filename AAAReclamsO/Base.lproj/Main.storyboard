@@ -96,7 +96,7 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7aB-FQ-lv0">
-                                        <rect key="frame" x="150" y="115" width="20" height="20"/>
+                                        <rect key="frame" x="140" y="115" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="afe-hM-xgr"/>
                                             <constraint firstAttribute="height" constant="20" id="hsN-ND-3np"/>
@@ -109,7 +109,7 @@
                                     <constraint firstAttribute="centerX" secondItem="YRz-aK-n53" secondAttribute="centerX" id="3yL-A0-g1Q"/>
                                     <constraint firstItem="YRz-aK-n53" firstAttribute="centerX" secondItem="KPV-bk-bIm" secondAttribute="centerX" id="HzI-Lo-68A"/>
                                     <constraint firstAttribute="centerY" secondItem="7aB-FQ-lv0" secondAttribute="centerY" id="KT1-Qa-HMP"/>
-                                    <constraint firstAttribute="centerX" secondItem="7aB-FQ-lv0" secondAttribute="centerX" constant="-10" id="Ook-5B-SDb"/>
+                                    <constraint firstAttribute="centerX" secondItem="7aB-FQ-lv0" secondAttribute="centerX" id="Ook-5B-SDb"/>
                                     <constraint firstAttribute="bottom" secondItem="KPV-bk-bIm" secondAttribute="bottom" constant="24" id="T5e-FN-Skl"/>
                                     <constraint firstAttribute="height" constant="250" id="viW-cP-33M"/>
                                 </constraints>
@@ -165,6 +165,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mx9-a3-D5M" userLabel="Banner">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="K8t-qm-dWB"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlq-bV-F4K" userLabel="topBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                 <subviews>
@@ -188,7 +195,6 @@
                                         <rect key="frame" x="120" y="10" width="80" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zz1-wv-Yk5">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.33000000000000002" colorSpace="calibratedWhite"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwN-co-slu">
@@ -273,17 +279,22 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="mx9-a3-D5M" secondAttribute="bottom" id="0BP-b7-e61"/>
+                            <constraint firstAttribute="centerX" secondItem="mx9-a3-D5M" secondAttribute="centerX" id="5B0-4U-ill"/>
                             <constraint firstAttribute="trailing" secondItem="T3b-25-tZs" secondAttribute="trailing" id="Mrp-AC-1Dh"/>
                             <constraint firstAttribute="trailing" secondItem="Tlq-bV-F4K" secondAttribute="trailing" id="ULC-pv-C5a"/>
                             <constraint firstItem="Tlq-bV-F4K" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="a8w-hd-BXn"/>
                             <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="T3b-25-tZs" secondAttribute="bottom" id="cdg-yx-Yjl"/>
+                            <constraint firstItem="mx9-a3-D5M" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="dmQ-tf-PNt"/>
                             <constraint firstItem="T3b-25-tZs" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="ecg-PA-VcX"/>
+                            <constraint firstAttribute="trailing" secondItem="mx9-a3-D5M" secondAttribute="trailing" id="hPf-y7-cO6"/>
                             <constraint firstItem="T3b-25-tZs" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="t5G-0d-7HV"/>
                             <constraint firstItem="Tlq-bV-F4K" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="yjs-h1-xB7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4uG-Av-5Np"/>
                     <connections>
+                        <outlet property="bannerViewContainer" destination="mx9-a3-D5M" id="WKx-0G-yQQ"/>
                         <outlet property="closeBtn" destination="Hn9-nY-wld" id="Obb-XU-x3W"/>
                         <outlet property="progressLabel" destination="CwN-co-slu" id="3mn-mm-J2G"/>
                         <outlet property="progressView" destination="Neq-bN-oEZ" id="Szk-Im-Hk8"/>
@@ -369,11 +380,19 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label="acces"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HlS-Nb-UZ6" userLabel="bannerSuperView">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bde-6a-Ksl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Cgf-lv-7Z0" firstAttribute="bottom" secondItem="nKE-wH-PAu" secondAttribute="bottom" constant="49" id="2uK-cr-ltm"/>
                             <constraint firstItem="eaJ-Lg-Ps1" firstAttribute="top" secondItem="nKE-wH-PAu" secondAttribute="bottom" constant="49" id="344-mW-v13" userLabel="Vertical Space - (49) - Bottom Layout Guide - spinner view#3"/>
+                            <constraint firstItem="HlS-Nb-UZ6" firstAttribute="leading" secondItem="cbQ-zC-8jm" secondAttribute="leading" id="3Zl-c6-kZr"/>
                             <constraint firstAttribute="trailing" secondItem="nKE-wH-PAu" secondAttribute="trailing" id="AQu-Wh-mlJ" userLabel="Horizontal Space - View - spinner view#3"/>
                             <constraint firstItem="eaJ-Lg-Ps1" firstAttribute="top" secondItem="B7P-Mi-vNc" secondAttribute="bottom" id="BBX-hF-MeD" userLabel="Vertical Space - Bottom Layout Guide - overlay#3"/>
                             <constraint firstItem="LKG-f1-TFg" firstAttribute="height" secondItem="cbQ-zC-8jm" secondAttribute="height" id="DFF-f4-ehj"/>
@@ -387,6 +406,8 @@
                             <constraint firstItem="Cgf-lv-7Z0" firstAttribute="trailing" secondItem="nKE-wH-PAu" secondAttribute="trailing" id="loS-ht-SN8"/>
                             <constraint firstItem="Cgf-lv-7Z0" firstAttribute="top" secondItem="nKE-wH-PAu" secondAttribute="top" id="mX5-bS-Mqb"/>
                             <constraint firstItem="B7P-Mi-vNc" firstAttribute="top" secondItem="cbQ-zC-8jm" secondAttribute="top" id="nJ2-0f-zlF" userLabel="Vertical Space - overlay - View#3"/>
+                            <constraint firstAttribute="trailing" secondItem="HlS-Nb-UZ6" secondAttribute="trailing" id="nXN-e2-3Ij"/>
+                            <constraint firstItem="eaJ-Lg-Ps1" firstAttribute="top" secondItem="HlS-Nb-UZ6" secondAttribute="bottom" id="o8m-3C-J6s"/>
                             <constraint firstItem="LKG-f1-TFg" firstAttribute="width" secondItem="cbQ-zC-8jm" secondAttribute="width" id="t5c-XH-Pva"/>
                             <constraint firstItem="Cgf-lv-7Z0" firstAttribute="bottom" secondItem="eaJ-Lg-Ps1" secondAttribute="top" id="tZ1-iI-w6T"/>
                             <constraint firstItem="Cgf-lv-7Z0" firstAttribute="top" secondItem="cbQ-zC-8jm" secondAttribute="top" id="yAy-91-9x5"/>
@@ -394,12 +415,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="uqv-kR-Jah"/>
                     <connections>
+                        <outlet property="bannerSuperView" destination="HlS-Nb-UZ6" id="GmY-GA-VCu"/>
                         <outlet property="overlay" destination="B7P-Mi-vNc" id="77h-TC-KsS"/>
                         <outlet property="page" destination="Ba8-Pk-bQC" id="c4B-xG-vTI"/>
                         <outlet property="pageHConstraint" destination="O7f-UB-lhD" id="s7O-Wj-C4W"/>
                         <outlet property="pageWConstraint" destination="l6M-dF-jud" id="UCE-Cy-AEM"/>
-                        <outlet property="pageXConstraint" destination="zjq-4G-obz" id="JeN-e9-HIu"/>
-                        <outlet property="pageYConstraint" destination="VY4-Tq-xuz" id="evg-KV-eTr"/>
                         <outlet property="scrollView" destination="Cgf-lv-7Z0" id="6Em-Na-maC"/>
                         <outlet property="spinnerView" destination="nKE-wH-PAu" id="vKu-zS-HRq"/>
                     </connections>

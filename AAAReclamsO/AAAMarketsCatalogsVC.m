@@ -13,6 +13,8 @@
 #import "JMImageCache.h"
 #import "Reachability.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AAAGlobals.h"
+#import <iAd/iAd.h>
 
 @interface AAAMarketsCatalogsVC()
 {
@@ -71,8 +73,10 @@ const static float DisabledMarketViewTransparency = 0.65f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wwwErrorOccured) name:kWWWErrorOccured object:nil];
     [self checkForInternetConnectionOnSuccess:^{
-        [self resetCatalogs];
-        [self downloadCatalogs];
+        if (!isDownloadingCatalogs) {
+            [self resetCatalogs];
+            [self downloadCatalogs];
+        }
     } onFailure:^{
         [self resetCatalogs];
     }];
@@ -119,9 +123,13 @@ const static float DisabledMarketViewTransparency = 0.65f;
             isDownloadingCatalogs = NO;
             return;
         }
+//        [self resetCatalogs];
         errorView.hidden = YES;
         for (AAACatalog* catalog in catalogs)
         {
+            if (!catalog.isActive) {
+                break;
+            }
             if (![markets containsObject:catalog.market]) {
                 [markets addObject:catalog.market];
             }
@@ -400,6 +408,7 @@ const static int catalogSubviewTag = 21341;
         catalogVC.catalog = catalog;
         [catalogVC setDelegate:self];
         [catalogVCForShowingMarket addObject:catalogVC];
+        [self addChildViewController:catalogVC];
     }
     else
     {
@@ -449,7 +458,6 @@ const static int catalogSubviewTag = 21341;
     AAACatalogVC* catalogVC = currentShowingCatalogs[index];
     containerViewOfShownCatalog = catalogVC.view.superview;
     [catalogVC maximize];
-    
     CGRect initialFrame = [self.view convertRect:catalogVC.view.frame fromView:catalogVC.view.superview];
     catalogVC.view.frame = initialFrame;
     

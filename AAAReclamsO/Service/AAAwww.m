@@ -13,7 +13,7 @@
 
 static NSString* baseURL = @"http://marklogj-andreioprea.rhcloud.com";
 static NSString* downloadMarketsURL = @"/markets/list";
-static NSString* downloadCatalogsURL = @"/catalogs/list";
+static NSString* downloadCatalogsURL = @"/catalogs/list/active";
 static NSString* downloadCatalogPagesUrl = @"/pages";
 
 @interface AAAwww(){

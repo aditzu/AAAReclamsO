@@ -17,6 +17,9 @@
 		9E54DF881A2899CF00624465 /* close_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E54DF871A2899CF00624465 /* close_btn@2x.png */; };
 		9E5B4B051A289F46009AC6C4 /* close_btn_nobg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B4B041A289F46009AC6C4 /* close_btn_nobg@2x.png */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
+		9E8654291A36127B00ECEE62 /* AAAGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8654281A36127B00ECEE62 /* AAAGlobals.m */; };
+		9E86545F1A362B2A00ECEE62 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E86545E1A362B2A00ECEE62 /* iAd.framework */; };
+		9E8654621A364B6600ECEE62 /* AAASharedBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8654611A364B6600ECEE62 /* AAASharedBanner.m */; };
 		9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */; };
 		9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */; };
 		9EB845AD1A2CCEAB008EB324 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB845AC1A2CCEAB008EB324 /* Reveal.framework */; };
@@ -68,6 +71,22 @@
 		9E5B4B041A289F46009AC6C4 /* close_btn_nobg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close_btn_nobg@2x.png"; sourceTree = "<group>"; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
 		9E7172D51A1C92410078870E /* AAAwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAwww.m; sourceTree = "<group>"; };
+		9E86541F1A36124800ECEE62 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9E8654211A36125200ECEE62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9E8654231A36125700ECEE62 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9E8654251A36125D00ECEE62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9E8654271A36127B00ECEE62 /* AAAGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAGlobals.h; sourceTree = "<group>"; };
+		9E8654281A36127B00ECEE62 /* AAAGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAGlobals.m; sourceTree = "<group>"; };
+		9E86544E1A36214400ECEE62 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		9E8654501A36214A00ECEE62 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9E8654521A36214F00ECEE62 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9E8654551A36215D00ECEE62 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		9E8654561A36215D00ECEE62 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		9E8654591A36216400ECEE62 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		9E86545C1A3623FD00ECEE62 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		9E86545E1A362B2A00ECEE62 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		9E8654601A364B6600ECEE62 /* AAASharedBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAASharedBanner.h; sourceTree = "<group>"; };
+		9E8654611A364B6600ECEE62 /* AAASharedBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAASharedBanner.m; sourceTree = "<group>"; };
 		9EB427A41A1785EC00700D96 /* AAAMarketsCatalogsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketsCatalogsVC.h; sourceTree = "<group>"; };
 		9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketsCatalogsVC.m; sourceTree = "<group>"; };
 		9EB4288B1A1A1DC900700D96 /* AAACatalogPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogPageVC.h; sourceTree = "<group>"; };
@@ -104,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E86545F1A362B2A00ECEE62 /* iAd.framework in Frameworks */,
 				9EB845D81A31B96F008EB324 /* SystemConfiguration.framework in Frameworks */,
 				9EB845AD1A2CCEAB008EB324 /* Reveal.framework in Frameworks */,
 				9EE0910E1A1DF628006789F0 /* CoreText.framework in Frameworks */,
@@ -231,6 +251,10 @@
 				9E7172D51A1C92410078870E /* AAAwww.m */,
 				9EB845B21A2F1CF8008EB324 /* AAAFavoritesManager.h */,
 				9EB845B31A2F1CF8008EB324 /* AAAFavoritesManager.m */,
+				9E8654271A36127B00ECEE62 /* AAAGlobals.h */,
+				9E8654281A36127B00ECEE62 /* AAAGlobals.m */,
+				9E8654601A364B6600ECEE62 /* AAASharedBanner.h */,
+				9E8654611A364B6600ECEE62 /* AAASharedBanner.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -281,6 +305,18 @@
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E86545E1A362B2A00ECEE62 /* iAd.framework */,
+				9E86545C1A3623FD00ECEE62 /* CoreTelephony.framework */,
+				9E8654591A36216400ECEE62 /* MessageUI.framework */,
+				9E8654551A36215D00ECEE62 /* EventKit.framework */,
+				9E8654561A36215D00ECEE62 /* EventKitUI.framework */,
+				9E8654521A36214F00ECEE62 /* AVFoundation.framework */,
+				9E8654501A36214A00ECEE62 /* AudioToolbox.framework */,
+				9E86544E1A36214400ECEE62 /* AdSupport.framework */,
+				9E8654251A36125D00ECEE62 /* UIKit.framework */,
+				9E8654231A36125700ECEE62 /* CoreGraphics.framework */,
+				9E8654211A36125200ECEE62 /* Foundation.framework */,
+				9E86541F1A36124800ECEE62 /* StoreKit.framework */,
 				9EB845D71A31B96F008EB324 /* SystemConfiguration.framework */,
 				9EB845AC1A2CCEAB008EB324 /* Reveal.framework */,
 				9EE0910D1A1DF628006789F0 /* CoreText.framework */,
@@ -439,10 +475,12 @@
 				9EE0915C1A25D2B8006789F0 /* iCarousel.m in Sources */,
 				9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */,
 				9E2650CA1A11192F005B546B /* main.m in Sources */,
+				9E8654291A36127B00ECEE62 /* AAAGlobals.m in Sources */,
 				9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */,
 				9EB845BA1A2F1F67008EB324 /* AAACatalog.m in Sources */,
 				9EB845BB1A2F1F67008EB324 /* AAAMarket.m in Sources */,
 				9EB845DC1A31B99C008EB324 /* Reachability.m in Sources */,
+				9E8654621A364B6600ECEE62 /* AAASharedBanner.m in Sources */,
 				9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */,
 				9EB845B41A2F1CF8008EB324 /* AAAFavoritesManager.m in Sources */,
 				9EB845BE1A2F1F75008EB324 /* AAAFavoriteItem.m in Sources */,
@@ -582,6 +620,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AAAReclamsO/GoogleMobileAdsSdkiOS-6.12.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -605,6 +644,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AAAReclamsO/GoogleMobileAdsSdkiOS-6.12.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

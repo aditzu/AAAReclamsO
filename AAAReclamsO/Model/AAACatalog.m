@@ -16,6 +16,11 @@
 
 @implementation AAACatalog
 
+-(BOOL)isActive
+{
+    return _active;// &&  [[NSDate date] compare:[NSDate dateWithTimeIntervalSince1970:self.activeFrom/1000]] == NSOrderedDescending && [[NSDate date] compare:[NSDate dateWithTimeIntervalSince1970:self.activeTo/1000]] == NSOrderedAscending;
+}
+
 -(void)setImagesURLs:(NSArray *)imagesURLs
 {
     NSArray* sortedImages = [imagesURLs sortedArrayUsingComparator:^NSComparisonResult(NSString* obj1, NSString* obj2) {

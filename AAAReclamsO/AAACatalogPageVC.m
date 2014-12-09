@@ -16,8 +16,8 @@
     IBOutlet UIView* spinnerView;
     IBOutlet UIView* overlay;
     
-    IBOutlet NSLayoutConstraint* pageYConstraint;
-    IBOutlet NSLayoutConstraint* pageXConstraint;
+//    IBOutlet NSLayoutConstraint* pageYConstraint;
+//    IBOutlet NSLayoutConstraint* pageXConstraint;
     IBOutlet NSLayoutConstraint* pageWConstraint;
     IBOutlet NSLayoutConstraint* pageHConstraint;
     
@@ -25,10 +25,11 @@
     UIImage* img;
     
     BOOL animating;
-    float pageYConstraintInitial;
-    
+//    float pageYConstraintInitial;
     
     BOOL pageResetToScrollViewBounds;
+    BOOL didCutImage;
+    __weak IBOutlet UIView *bannerSuperView;
 }
 
 -(void)viewDidLoad
@@ -48,7 +49,8 @@
     [self.scrollView addGestureRecognizer:tapGesture];
     [self show:shown];
     self.view.clipsToBounds = NO;
-    pageYConstraintInitial = pageYConstraint.constant;
+//    pageYConstraintInitial = pageYConstraint.constant;
+//    [bannerSuperView addSubview:[[AAAGlobals sharedInstance] sharedBannerView]];
     
 }
 
@@ -68,6 +70,11 @@
         [self.view layoutIfNeeded];
         pageResetToScrollViewBounds = YES;
         
+//        if (!didCutImage)
+//        {
+//            [self cutTheImage];
+//            didCutImage = YES;
+//        }
         self.scrollView.zoomScale = 1.0f;
         page.layer.masksToBounds = NO;
         page.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -76,6 +83,32 @@
         page.layer.shadowRadius = 1.0f;
         [self.view layoutSubviews];
     }
+}
+
+-(void) cutTheImage
+{
+    float imageRatio = page.image.size.width/ page.image.size.height;
+    float imageViewRatio = page.frame.size.width / page.frame.size.height;
+    
+    float width = 0, height = 0, yoffset = 0, xoffset = 0;
+    if (imageRatio > imageViewRatio) {
+        width = page.frame.size.width;
+        height = width / imageRatio;
+        assert(page.frame.size.height > height);
+        yoffset = (page.frame.size.height - height)/2.0f;
+    }
+    else
+    {
+        height = page.frame.size.height;
+        width = height * imageRatio;
+        assert(page.frame.size.width > width);
+        xoffset = (page.frame.size.width - width) / 2.0f;
+    }
+    pageWConstraint.constant = width;
+    pageHConstraint.constant = height;
+//    pageXConstraint.constant += xoffset;
+//    pageYConstraint.constant += yoffset;
+    [self.view layoutSubviews];
 }
 
 -(CGRect)scrollViewFrame

@@ -8,11 +8,12 @@
 
 #import "AAACatalogVC.h"
 #import "AAACatalog.h"
-#import "AAACatalogPageVC.h"
 #import "AAAwww.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AAAFavoriteItem.h"
 #import "AAAFavoritesManager.h"
+#import <iAd/iAd.h>
+#import "AAAGlobals.h"
 
 @interface AAACatalogVC(){
     id<AAACatalogVCEvents> delegate;
@@ -28,6 +29,10 @@
     IBOutlet UILabel* progressLabel;
     IBOutlet UIView* progressView;
     IBOutlet UIButton* closeBtn;
+    
+    IBOutlet UIView* bannerViewContainer;
+    ADBannerView* bannerView;
+    BOOL bannerIsShown;
 }
 
 -(IBAction) closePressed:(id)sender;
@@ -47,8 +52,10 @@ const static int PicturesToPreload = 3;
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
     tapGesture.enabled = NO;
+    currentFrame.origin.y += self.view.bounds.size.height;
     spinnerView.hidden = NO;
-    
+    bannerViewContainer.hidden = YES;
+    bannerIsShown = YES;
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
 ////        closeBtnTopConstraint.constant = 0.0f;
 //    }
@@ -62,7 +69,6 @@ const static int PicturesToPreload = 3;
 {
     if (tapGesture.state == UIGestureRecognizerStateRecognized) {
         [self close];
-//        [self showTopBar:[NSNumber numberWithBool:YES]];
     }
 }
 
@@ -110,6 +116,7 @@ const static int PicturesToPreload = 3;
             }
             
             [pages addObject:catalogPage];
+            [self addChildViewController:catalogPage];
         }
         if (pages.count > 0) {
             __block UIView* v = spinnerView;
@@ -189,6 +196,7 @@ const static int PicturesToPreload = 3;
 -(void)minimize
 {
     isMinimized = YES;
+    [self layoutBanner:NO animated:NO];
     for (AAACatalogPageVC* page in pages) {
         [page show:NO];
     }
@@ -205,6 +213,11 @@ const static int PicturesToPreload = 3;
     }
     tapGesture.enabled = YES;
     [closeBtn layoutIfNeeded];
+    bannerView = [[AAAGlobals sharedInstance] sharedBannerView];
+    bannerView.delegate = self;
+    bannerViewContainer.hidden = YES;
+    [bannerViewContainer addSubview:bannerView];
+    [self layoutBanner:NO animated:NO];
 }
 
 -(void)finishedMaximized
@@ -214,6 +227,8 @@ const static int PicturesToPreload = 3;
     AAACatalogPageVC* currentPage=  [self currentPage];
     CGRect frame = [currentPage scrollViewFrame];
     pageViewController.view.frame = frame;
+    bannerViewContainer.hidden = NO;
+    [self layoutBanner:bannerView.bannerLoaded animated:bannerView.bannerLoaded];
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -253,6 +268,56 @@ const static int PicturesToPreload = 3;
             viewToShow.hidden = !show;
         }
     }];
+}
+
+- (void)layoutBanner:(BOOL) layout animated:(BOOL)animated
+{
+    if (bannerIsShown == layout) {
+        return;
+    }
+    CGRect contentFrame = bannerViewContainer.bounds;
+    CGRect bannerFrame = bannerView.frame;
+    
+    CGRect pageVCFrame = pageViewController.view.frame;
+    if (bannerView.bannerLoaded && layout)
+    {
+        contentFrame.size.height -= bannerView.frame.size.height;
+        bannerFrame.origin.y = contentFrame.size.height;
+        if (pageVCFrame.size.height + pageVCFrame.origin.y > self.view.bounds.size.height - bannerView.frame.size.height) {
+            pageVCFrame.origin.y = self.view.bounds.size.height - bannerView.frame.size.height - pageVCFrame.size.height + 4;
+        }
+        bannerIsShown = YES;
+    } else {
+        bannerFrame.origin.y = contentFrame.size.height;
+        bannerIsShown = NO;
+    }
+    
+    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+        bannerView.frame = contentFrame;
+        [bannerViewContainer layoutIfNeeded];
+        bannerView.frame = bannerFrame;
+        pageViewController.view.frame = pageVCFrame;
+    }];
+}
+
+-(void) showPageViewController:(BOOL) show animated:(BOOL) animated
+{
+    CGRect currentFrame = pageViewController.view.frame;
+    if (show) {
+        if (currentFrame.origin.y < 0) {
+            currentFrame.origin.y += self.view.bounds.size.height;
+        }
+    }
+    else if (currentFrame.origin.y > 0)
+    {
+        currentFrame.origin.y -= self.view.bounds.size.height;
+    }
+    [UIView animateWithDuration:.25f delay: show ? 0.40f : 0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        pageViewController.view.frame = currentFrame;
+    } completion:nil];
+//    [UIView animateWithDuration: animated ? .25f : 0.0f animations:^{
+//        pageViewController.view.frame = currentFrame;
+//    }];
 }
 
 #pragma mark - UIPageViewCtrl
@@ -328,9 +393,48 @@ const static int PicturesToPreload = 3;
 //    frame.size.height = height;
 //    pageViewController.view.frame = frame;
 //    pageViewController.view.center = self.view.center;
-//    [pageViewController.view layoutSubviews];
+    [pageViewController.view layoutSubviews];
 //    NSLog(@"pageVCSize: %@", NSStringFromCGRect(pageViewController.view.frame));
 //    NSLog(@"ContentSize: %@", NSStringFromCGSize(newSize));
 }
+
+#pragma mark - ADBannerViewDelegate methods
+
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner
+{
+    NSLog(@"bannerViewWillLoadAd");
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    if (!isMinimized) {
+        [self layoutBanner:YES animated:YES];
+    }
+    NSLog(@"bannerViewDidLoadAd");
+}
+
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+//    [self showView:pageViewController.view show:NO];
+    if (!willLeave) {
+        [self showPageViewController:NO animated:YES];
+    }
+    NSLog(@"bannerViewActionShouldBegin");
+    return YES;
+}
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+//    [self showView:pageViewController.view show:YES];
+    [self showPageViewController:YES animated:YES];
+    NSLog(@"bannerViewActionDidFinish");
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [self layoutBanner:NO animated:YES];
+    NSLog(@"didFailToReceiveAdWithError: %@", error);
+}
+
 
 @end
