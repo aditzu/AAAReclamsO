@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <iAd/iAd.h>
+#import "GADBannerView.h"
 
-@interface AAASharedBanner : NSObject<ADBannerViewDelegate>
+@interface AAASharedBanner : NSObject
 
-@property (nonatomic, strong) ADBannerView* bannerView;
+@property (nonatomic, strong) GADBannerView* bannerView;
+
+-(id)initWithAdUnitId:(NSString*) adUnitId;
+-(void) setRootViewController:(UIViewController*) vc;
+
 @end

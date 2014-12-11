@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <iAd/iAd.h>
+@class AAASharedBanner;
 
 #pragma mark - Flurry
 
@@ -26,6 +26,6 @@ static NSString* const FlurryParameterCatalogId = @"Catalog id";
 @interface AAAGlobals : NSObject
 
 +(AAAGlobals*) sharedInstance;
--(ADBannerView*) sharedBannerView;
+-(AAASharedBanner*) sharedBannerView;
 -(NSString*) flurryId;
 @end

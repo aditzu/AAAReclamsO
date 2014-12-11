@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9E2650C31A11192F005B546B"
-               BuildableName = "AAAReclamsO.app"
+               BuildableName = "OfertaMea.app"
                BlueprintName = "AAAReclamsO"
                ReferencedContainer = "container:AAAReclamsO.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9E2650C31A11192F005B546B"
-            BuildableName = "AAAReclamsO.app"
+            BuildableName = "OfertaMea.app"
             BlueprintName = "AAAReclamsO"
             ReferencedContainer = "container:AAAReclamsO.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9E2650C31A11192F005B546B"
-            BuildableName = "AAAReclamsO.app"
+            BuildableName = "OfertaMea.app"
             BlueprintName = "AAAReclamsO"
             ReferencedContainer = "container:AAAReclamsO.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9E2650C31A11192F005B546B"
-            BuildableName = "AAAReclamsO.app"
+            BuildableName = "OfertaMea.app"
             BlueprintName = "AAAReclamsO"
             ReferencedContainer = "container:AAAReclamsO.xcodeproj">
          </BuildableReference>

@@ -11,6 +11,9 @@
 #import "AAACatalogPageVC.h"
 #import <iAd/iAd.h>
 
+#import "GADBannerView.h"
+#import "GADRequest.h"
+
 @class AAACatalogVC;
 
 @protocol AAACatalogVCEvents <NSObject>
@@ -19,7 +22,7 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, ADBannerViewDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, ADBannerViewDelegate, GADBannerViewDelegate>{
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;

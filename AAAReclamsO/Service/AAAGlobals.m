@@ -26,17 +26,22 @@ static AAAGlobals* _instance;
     return _instance;
 }
 
--(ADBannerView *)sharedBannerView
+-(AAASharedBanner *)sharedBannerView
 {
     if (!bannerView) {
-        bannerView = [[AAASharedBanner alloc] init];
+        bannerView = [[AAASharedBanner alloc] initWithAdUnitId:[self gadUnitId]];
     }
-    return bannerView.bannerView;
+    return bannerView;
 }
 
 -(NSString *)flurryId
 {
     return @"QNVNYDDJXCM9FR583Q4T";
+}
+
+-(NSString*) gadUnitId
+{
+    return @"ca-app-pub-2163416701589769/7779082332";
 }
 
 @end

@@ -179,11 +179,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mx9-a3-D5M" userLabel="Banner">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-3i-5Ko" userLabel="gBannerContainer">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="K8t-qm-dWB"/>
+                                    <constraint firstAttribute="height" constant="50" id="6nS-jD-1aA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlq-bV-F4K" userLabel="topBar">
@@ -294,23 +294,22 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="mx9-a3-D5M" secondAttribute="bottom" id="0BP-b7-e61"/>
-                            <constraint firstAttribute="centerX" secondItem="mx9-a3-D5M" secondAttribute="centerX" id="5B0-4U-ill"/>
+                            <constraint firstItem="qcP-3i-5Ko" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="3Gt-W7-Gy5"/>
                             <constraint firstAttribute="trailing" secondItem="T3b-25-tZs" secondAttribute="trailing" id="Mrp-AC-1Dh"/>
                             <constraint firstAttribute="trailing" secondItem="Tlq-bV-F4K" secondAttribute="trailing" id="ULC-pv-C5a"/>
+                            <constraint firstAttribute="trailing" secondItem="qcP-3i-5Ko" secondAttribute="trailing" id="XMv-2I-ykN"/>
+                            <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="qcP-3i-5Ko" secondAttribute="bottom" id="Zri-I3-qES"/>
                             <constraint firstItem="Tlq-bV-F4K" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="a8w-hd-BXn"/>
                             <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="T3b-25-tZs" secondAttribute="bottom" id="cdg-yx-Yjl"/>
-                            <constraint firstItem="mx9-a3-D5M" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="dmQ-tf-PNt"/>
                             <constraint firstItem="T3b-25-tZs" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="ecg-PA-VcX"/>
-                            <constraint firstAttribute="trailing" secondItem="mx9-a3-D5M" secondAttribute="trailing" id="hPf-y7-cO6"/>
                             <constraint firstItem="T3b-25-tZs" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="t5G-0d-7HV"/>
                             <constraint firstItem="Tlq-bV-F4K" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="yjs-h1-xB7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4uG-Av-5Np"/>
                     <connections>
-                        <outlet property="bannerViewContainer" destination="mx9-a3-D5M" id="WKx-0G-yQQ"/>
                         <outlet property="closeBtn" destination="Hn9-nY-wld" id="Obb-XU-x3W"/>
+                        <outlet property="gadBannerViewContainer" destination="qcP-3i-5Ko" id="GhJ-FM-VQP"/>
                         <outlet property="progressLabel" destination="CwN-co-slu" id="3mn-mm-J2G"/>
                         <outlet property="progressView" destination="Neq-bN-oEZ" id="Szk-Im-Hk8"/>
                         <outlet property="spinnerView" destination="T3b-25-tZs" id="rUa-lM-uGY"/>

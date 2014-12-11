@@ -12,9 +12,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AAAFavoriteItem.h"
 #import "AAAFavoritesManager.h"
-#import <iAd/iAd.h>
 #import "AAAGlobals.h"
 #import "Flurry.h"
+#import "AAASharedBanner.h"
+
 
 @interface AAACatalogVC(){
     id<AAACatalogVCEvents> delegate;
@@ -32,9 +33,12 @@
     IBOutlet UIView* progressView;
     IBOutlet UIButton* closeBtn;
     
-    IBOutlet UIView* bannerViewContainer;
-    ADBannerView* bannerView;
+//    IBOutlet UIView* bannerViewContainer;
+//    ADBannerView* bannerView;
     BOOL bannerIsShown;
+    AAASharedBanner *sharedGadBannerView;
+    __weak IBOutlet UIView *gadBannerViewContainer;
+    BOOL gadBannerLoaded;
 }
 
 -(IBAction) closePressed:(id)sender;
@@ -55,8 +59,18 @@ const static int PicturesToPreload = 3;
     [self.view addGestureRecognizer:tapGesture];
     tapGesture.enabled = NO;
     spinnerView.hidden = NO;
-    bannerViewContainer.hidden = YES;
+//    bannerViewContainer.hidden = YES;
     bannerIsShown = YES;
+    
+//    gadBannerView.hidden = YES;
+//    gadBannerView.adUnitID = @"ca-app-pub-2163416701589769/7779082332";
+//    gadBannerView.rootViewController = self;
+//    gadBannerView.adSize = GADAdSizeFullWidthPortraitWithHeight(50);
+//    GADRequest* gadRequest = [GADRequest request];
+//    gadRequest.testDevices = @[GAD_SIMULATOR_ID];
+//    gadBannerView.delegate = self;
+//    [gadBannerView loadRequest:gadRequest];
+    
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
 ////        closeBtnTopConstraint.constant = 0.0f;
 //    }
@@ -204,6 +218,7 @@ const static int PicturesToPreload = 3;
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
     pageViewController.view.frame= self.view.bounds;
+    
     if (pageViewController && pageViewController.viewControllers && pageViewController.viewControllers.count > 0) {
         float percentageSeen = [pages indexOfObject:pageViewController.viewControllers[0]] * 100 / pages.count;
         [Flurry logEvent:FlurryEventCatalogPercentageSeen withParameters:@{FlurryParameterPercentage : [NSString stringWithFormat:@"%f", percentageSeen]}];
@@ -218,11 +233,25 @@ const static int PicturesToPreload = 3;
     }
     tapGesture.enabled = YES;
     [closeBtn layoutIfNeeded];
-    bannerView = [[AAAGlobals sharedInstance] sharedBannerView];
-    bannerView.delegate = self;
-    bannerViewContainer.hidden = YES;
-    [bannerViewContainer addSubview:bannerView];
-    [self layoutBanner:NO animated:NO];
+    
+//    sharedGadBannerView = [[AAAGlobals sharedInstance] sharedBannerView];
+//    [sharedGadBannerView setRootViewController:self];
+//    sharedGadBannerView.bannerView.delegate = self;
+//    gadBannerViewContainer.hidden = YES;
+//    [gadBannerViewContainer addSubview:sharedGadBannerView.bannerView];
+//    [self layoutBanner:NO animated:NO];
+}
+
+-(void)finishedMaximized
+{
+    [self showTopBar:[NSNumber numberWithBool:YES]];
+    
+    sharedGadBannerView = [[AAAGlobals sharedInstance] sharedBannerView];
+    [sharedGadBannerView setRootViewController:self];
+    sharedGadBannerView.bannerView.delegate = self;
+    [gadBannerViewContainer addSubview:sharedGadBannerView.bannerView];
+    sharedGadBannerView.bannerView.hidden = NO;
+    [self updatePageViewControllerForCurrentPage];
 }
 
 -(void)updatePageViewControllerForCurrentPage
@@ -231,15 +260,8 @@ const static int PicturesToPreload = 3;
     CGRect frame = [currentPage scrollViewFrame];
     pageViewController.view.frame = frame;
     topBarTopConstraint.constant = frame.origin.y > topBarView.frame.size.height ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
-    bannerViewContainer.hidden = NO;
-    [self layoutBanner:bannerView.bannerLoaded animated:bannerView.bannerLoaded];
-}
-
-
--(void)finishedMaximized
-{
-    [self showTopBar:[NSNumber numberWithBool:YES]];
-    [self updatePageViewControllerForCurrentPage];
+    [self layoutBanner:gadBannerLoaded animated:gadBannerLoaded];
+//    [self layoutBanner:bannerView.bannerLoaded animated:bannerView.bannerLoaded];
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -281,21 +303,51 @@ const static int PicturesToPreload = 3;
     }];
 }
 
+//- (void)layoutBanner:(BOOL) layout animated:(BOOL)animated
+//{
+//    if (bannerIsShown == layout) {
+//        return;
+//    }
+//    CGRect contentFrame = bannerViewContainer.bounds;
+//    CGRect bannerFrame = bannerView.frame;
+//    
+//    CGRect pageVCFrame = pageViewController.view.frame;
+//    if (bannerView.bannerLoaded && layout)
+//    {
+//        contentFrame.size.height -= bannerView.frame.size.height;
+//        bannerFrame.origin.y = contentFrame.size.height;
+//        if (pageVCFrame.size.height + pageVCFrame.origin.y > self.view.bounds.size.height - bannerView.frame.size.height) {
+//            pageVCFrame.origin.y = self.view.bounds.size.height - bannerView.frame.size.height - pageVCFrame.size.height + 4;
+//        }
+//        bannerIsShown = YES;
+//    } else {
+//        bannerFrame.origin.y = contentFrame.size.height;
+//        bannerIsShown = NO;
+//    }
+//    
+//    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+//        bannerView.frame = contentFrame;
+//        [bannerViewContainer layoutIfNeeded];
+//        bannerView.frame = bannerFrame;
+//        pageViewController.view.frame = pageVCFrame;
+//    }];
+//}
+
 - (void)layoutBanner:(BOOL) layout animated:(BOOL)animated
 {
     if (bannerIsShown == layout) {
         return;
     }
-    CGRect contentFrame = bannerViewContainer.bounds;
-    CGRect bannerFrame = bannerView.frame;
+    CGRect contentFrame = gadBannerViewContainer.bounds;
+    CGRect bannerFrame = sharedGadBannerView.bannerView.frame;
     
     CGRect pageVCFrame = pageViewController.view.frame;
-    if (bannerView.bannerLoaded && layout)
+    if (gadBannerLoaded && layout)
     {
-        contentFrame.size.height -= bannerView.frame.size.height;
+        contentFrame.size.height -= sharedGadBannerView.bannerView.frame.size.height;
         bannerFrame.origin.y = contentFrame.size.height;
-        if (pageVCFrame.size.height + pageVCFrame.origin.y > self.view.bounds.size.height - bannerView.frame.size.height) {
-            pageVCFrame.origin.y = self.view.bounds.size.height - bannerView.frame.size.height - pageVCFrame.size.height + 4;
+        if (pageVCFrame.size.height + pageVCFrame.origin.y > self.view.bounds.size.height - sharedGadBannerView.bannerView.frame.size.height) {
+            pageVCFrame.origin.y = self.view.bounds.size.height - sharedGadBannerView.bannerView.frame.size.height - pageVCFrame.size.height + 4;
         }
         bannerIsShown = YES;
     } else {
@@ -304,9 +356,8 @@ const static int PicturesToPreload = 3;
     }
     
     [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
-        bannerView.frame = contentFrame;
-        [bannerViewContainer layoutIfNeeded];
-        bannerView.frame = bannerFrame;
+        [gadBannerViewContainer layoutIfNeeded];
+        sharedGadBannerView.bannerView.frame = bannerFrame;
         pageViewController.view.frame = pageVCFrame;
     }];
 }
@@ -338,7 +389,6 @@ const static int PicturesToPreload = 3;
 -(void)pageViewController:(UIPageViewController *)_pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if (completed || finished) {
-//        [self updatePageViewControllerForCurrentPage];
         pageIsAnimating = NO;
         int indexOfVC = (int)[pages indexOfObject: _pageViewController.viewControllers[0]];
         [self setProgress:indexOfVC+1 outOf:(int)pages.count];
@@ -407,44 +457,41 @@ const static int PicturesToPreload = 3;
 //    NSLog(@"ContentSize: %@", NSStringFromCGSize(newSize));
 }
 
-#pragma mark - ADBannerViewDelegate methods
 
--(void)bannerViewWillLoadAd:(ADBannerView *)banner
+#pragma mark - GADBannerView Delegate
+
+-(void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
-//    NSLog(@"bannerViewWillLoadAd");
+    gadBannerLoaded = NO;
+    [self layoutBanner:NO animated:YES];
+    NSLog(@"didFailToReceiveAdWithError :%@", error);
 }
 
--(void)bannerViewDidLoadAd:(ADBannerView *)banner
+-(void)adViewDidReceiveAd:(GADBannerView *)view
 {
+    gadBannerLoaded = YES;
     if (!isMinimized) {
         [self layoutBanner:YES animated:YES];
     }
-    [Flurry logEvent:FlurryEventAdServed];
-//    NSLog(@"bannerViewDidLoadAd");
+    NSLog(@"adViewDidReceiveAd");
 }
 
--(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    [Flurry logEvent:FlurryEventAdOpened];
-    if (!willLeave) {
-        [self showTopBar:[NSNumber numberWithBool:NO]];
-        [self showPageViewController:NO animated:YES];
-    }
-//    NSLog(@"bannerViewActionShouldBegin");
-    return YES;
-}
-
--(void)bannerViewActionDidFinish:(ADBannerView *)banner
+-(void)adViewDidDismissScreen:(GADBannerView *)adView
 {
     [self showPageViewController:YES animated:YES];
-//    NSLog(@"bannerViewActionDidFinish");
+    NSLog(@"adViewDidDismissScreen");
 }
 
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+-(void)adViewWillLeaveApplication:(GADBannerView *)adView
 {
-    [self layoutBanner:NO animated:YES];
-//    NSLog(@"didFailToReceiveAdWithError: %@", error);
+    NSLog(@"adViewWillLeaveApplication");
 }
 
+-(void)adViewWillPresentScreen:(GADBannerView *)adView
+{
+    [self showTopBar:[NSNumber numberWithBool:NO]];
+    [self showPageViewController:NO animated:YES];
+    NSLog(@"adViewWillPresentScreen");
+}
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AAASharedBanner.h"
+#import "GADRequest.h"
 
 @interface AAASharedBanner()
 {
@@ -17,42 +18,59 @@
 @implementation AAASharedBanner
 
 
--(instancetype)init
+-(instancetype)initWithAdUnitId:(NSString*) adUnitId
 {
     if (self = [super init])
     {
-        self.bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-        self.bannerView.delegate = self;
+        self.bannerView = [[GADBannerView alloc] initWithAdSize:GADAdSizeFullWidthPortraitWithHeight(50)];
+        self.bannerView.hidden = YES;
+        self.bannerView.adUnitID = adUnitId;
     }
     return self;
 }
 
-#pragma mark - delegate methods
-
--(void)bannerViewWillLoadAd:(ADBannerView *)banner
+-(void)setRootViewController:(UIViewController *)vc
 {
-    NSLog(@"bannerViewWillLoadAd");
+    self.bannerView.rootViewController = vc;
+    GADRequest* gadRequest = [GADRequest request];
+    gadRequest.testDevices = @[GAD_SIMULATOR_ID];
+    [self.bannerView loadRequest:gadRequest];
 }
 
--(void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-    NSLog(@"bannerViewDidLoadAd");
-}
-
--(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    NSLog(@"bannerViewActionShouldBegin");
-    return YES;
-}
-
--(void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-    NSLog(@"bannerViewActionDidFinish");
-}
-
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-    NSLog(@"didFailToReceiveAdWithError: %@", error);
-}
+//#pragma mark - GADBannerView Delegate
+//
+//-(void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
+//{
+//    gadBannerLoaded = NO;
+//    [self layoutBanner:NO animated:YES];
+//    NSLog(@"didFailToReceiveAdWithError :%@", error);
+//}
+//
+//-(void)adViewDidReceiveAd:(GADBannerView *)view
+//{
+//    gadBannerLoaded = YES;
+//    if (!isMinimized) {
+//        [self layoutBanner:YES animated:YES];
+//    }
+//    NSLog(@"adViewDidReceiveAd");
+//}
+//
+//-(void)adViewDidDismissScreen:(GADBannerView *)adView
+//{
+//    [self showPageViewController:YES animated:YES];
+//    NSLog(@"adViewDidDismissScreen");
+//}
+//
+//-(void)adViewWillLeaveApplication:(GADBannerView *)adView
+//{
+//    NSLog(@"adViewWillLeaveApplication");
+//}
+//
+//-(void)adViewWillPresentScreen:(GADBannerView *)adView
+//{
+//    [self showTopBar:[NSNumber numberWithBool:NO]];
+//    [self showPageViewController:NO animated:YES];
+//    NSLog(@"adViewWillPresentScreen");
+//}
 
 @end
