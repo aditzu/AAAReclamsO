@@ -39,6 +39,7 @@
     AAASharedBanner *sharedGadBannerView;
     __weak IBOutlet UIView *gadBannerViewContainer;
     BOOL gadBannerLoaded;
+    __weak IBOutlet UIImageView *progressViewBgImage;
 }
 
 -(IBAction) closePressed:(id)sender;
@@ -59,17 +60,9 @@ const static int PicturesToPreload = 3;
     [self.view addGestureRecognizer:tapGesture];
     tapGesture.enabled = NO;
     spinnerView.hidden = NO;
-//    bannerViewContainer.hidden = YES;
     bannerIsShown = YES;
     
-//    gadBannerView.hidden = YES;
-//    gadBannerView.adUnitID = @"ca-app-pub-2163416701589769/7779082332";
-//    gadBannerView.rootViewController = self;
-//    gadBannerView.adSize = GADAdSizeFullWidthPortraitWithHeight(50);
-//    GADRequest* gadRequest = [GADRequest request];
-//    gadRequest.testDevices = @[GAD_SIMULATOR_ID];
-//    gadBannerView.delegate = self;
-//    [gadBannerView loadRequest:gadRequest];
+    progressViewBgImage.layer.cornerRadius = 5.0f;
     
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
 ////        closeBtnTopConstraint.constant = 0.0f;
@@ -83,7 +76,8 @@ const static int PicturesToPreload = 3;
 -(void) didTap:(UITapGestureRecognizer*) tapGestureRecognizer
 {
     if (tapGesture.state == UIGestureRecognizerStateRecognized) {
-        [self close];
+//        [self close];
+        [self showTopBar:[NSNumber numberWithBool:YES]];
     }
 }
 
@@ -244,24 +238,35 @@ const static int PicturesToPreload = 3;
 
 -(void)finishedMaximized
 {
-    [self showTopBar:[NSNumber numberWithBool:YES]];
-    
     sharedGadBannerView = [[AAAGlobals sharedInstance] sharedBannerView];
     [sharedGadBannerView setRootViewController:self];
     sharedGadBannerView.bannerView.delegate = self;
     [gadBannerViewContainer addSubview:sharedGadBannerView.bannerView];
     sharedGadBannerView.bannerView.hidden = NO;
     [self updatePageViewControllerForCurrentPage];
+    [self updateTopBarPosition];
+    [self layoutBanner:gadBannerLoaded animated:gadBannerLoaded];
+    [self showTopBar:[NSNumber numberWithBool:YES]];
 }
+
+-(void) updateTopBarPosition
+{
+    AAACatalogPageVC* currentPage=  [self currentPage];
+    if (!currentPage) {
+        return;
+    }
+    CGRect frame = pageViewController.view.frame;
+    [UIView animateWithDuration:.2f animations:^{
+        topBarTopConstraint.constant = frame.origin.y > topBarView.frame.size.height + 20 ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
+    }];
+}
+
 
 -(void)updatePageViewControllerForCurrentPage
 {
     AAACatalogPageVC* currentPage=  [self currentPage];
     CGRect frame = [currentPage scrollViewFrame];
     pageViewController.view.frame = frame;
-    topBarTopConstraint.constant = frame.origin.y > topBarView.frame.size.height ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
-    [self layoutBanner:gadBannerLoaded animated:gadBannerLoaded];
-//    [self layoutBanner:bannerView.bannerLoaded animated:bannerView.bannerLoaded];
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -472,6 +477,7 @@ const static int PicturesToPreload = 3;
     gadBannerLoaded = YES;
     if (!isMinimized) {
         [self layoutBanner:YES animated:YES];
+        [self updateTopBarPosition];
     }
     NSLog(@"adViewDidReceiveAd");
 }
