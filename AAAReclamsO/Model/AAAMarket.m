@@ -30,6 +30,16 @@
     return market;
 }
 
+-(void)setLogoURL:(NSString *)_logoURL
+{
+    logoURL = [_logoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
+-(void)setMiniLogoURL:(NSString *)_miniLogoURL
+{
+    miniLogoURL = [_miniLogoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
 -(BOOL)isEqual:(id)object
 {
     return self.identifier == ((AAAMarket*)object).identifier;

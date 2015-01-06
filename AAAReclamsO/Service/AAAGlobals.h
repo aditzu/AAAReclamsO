@@ -11,14 +11,15 @@
 
 #pragma mark - Flurry
 
-static NSString* const FlurryEventAdOpened = @"iAd opened";
+static NSString* const FlurryEventAdOpened = @"ad opened";
 static NSString* const FlurryEventCatalogOpened = @"Catalog watched";
 static NSString* const FlurryEventMarketOpened = @"Market opened";
 static NSString* const FlurryEventCatalogPercentageSeen = @"Percentage of catalog seen";
-static NSString* const FlurryEventAdServed = @"iAd served";
+static NSString* const FlurryEventAdServed = @"ad served";
 
 static NSString* const FlurryParameterPercentage = @"Percentage";
 static NSString* const FlurryParameterMarketName = @"Market";
+static NSString* const FlurryParameterMarketPriority = @"Market priority";
 static NSString* const FlurryParameterCatalogIndex = @"Catalog index";
 static NSString* const FlurryParameterCatalogPriority = @"Catalog priority";
 static NSString* const FlurryParameterCatalogId = @"Catalog id";
@@ -28,4 +29,5 @@ static NSString* const FlurryParameterCatalogId = @"Catalog id";
 +(AAAGlobals*) sharedInstance;
 -(AAASharedBanner*) sharedBannerView;
 -(NSString*) flurryId;
+-(NSString*) privacyPolicyURL;
 @end

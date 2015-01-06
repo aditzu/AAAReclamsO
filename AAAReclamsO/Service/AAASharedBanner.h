@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <iAd/iAd.h>
 #import "GADBannerView.h"
 
 @interface AAASharedBanner : NSObject

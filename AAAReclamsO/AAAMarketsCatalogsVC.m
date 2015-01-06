@@ -14,8 +14,9 @@
 #import "Reachability.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AAAGlobals.h"
-#import <iAd/iAd.h>
 #import "Flurry.h"
+#import "AAATutorialManager.h"
+//#import "AAATutorialViewController.h"
 
 @interface AAAMarketsCatalogsVC()
 {
@@ -45,12 +46,21 @@
     BOOL isDownloadingCatalogs;
     
     IBOutlet UIView* loadingView;
+    
+    ScrollDirection marketsScrollViewDirection;
+    CGPoint marketsScrollViewLastContentOffset;
+    
+    NSDate* lastTimeRefreshButtonWasPressed;
+    __weak IBOutlet UIView *topBar;
 }
+- (IBAction)privacyButtonPressed:(UIButton *)sender;
+- (IBAction)refreshButtonPressed:(UIButton *)sender;
 
 -(IBAction) errorViewRetryPressed:(UIButton*)sender;
 @end
 
 @implementation AAAMarketsCatalogsVC
+const static int MIN_SECONDS_TO_RELOAD_DATA = 10;
 
 static Reachability* internetReach;
 static Reachability* ownServerReach;
@@ -71,6 +81,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
     
     loadingView.hidden = YES;
     
+    marketsScrollView.delegate = self;
+    
     errorView.layer.cornerRadius = 5.0f;
     errorViewRetryButton.layer.cornerRadius = 5.0f;
     [JMImageCache sharedCache].numberOfRetries = 2;
@@ -85,6 +97,29 @@ const static float DisabledMarketViewTransparency = 0.65f;
     } onFailure:^{
         [self resetCatalogs];
     }];
+
+    [[AAATutorialManager instance] setupWithStoryboard:self.storyboard];
+    UIView* dragMarketsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverMarkets withDependecies:@[] atCenter:marketsScrollView.center];
+    [self.view addSubview:dragMarketsTutorial];
+    UIView* tapMarketTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnMarket withDependecies:@[@(TutorialViewDiscoverMarkets)] atCenter:marketsScrollView.center];
+    [self.view addSubview:tapMarketTutorial];
+    UIView* dragCatalogsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverCatalogs withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
+    [self.view addSubview:dragCatalogsTutorial];
+    UIView* tapCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnCatalog withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
+    [self.view addSubview:tapCatalogTutorial];
+
+    [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverMarkets];
+    [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
+    [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverCatalogs];
+    [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnCatalog];
+    
+//    [AAATutorialViewController initWithStoryboard:self.storyboard andSuperView:self.view];
+//
+//    [self.view addSubview:[AAATutorialViewController instance].view];
+//    [[AAATutorialController instance] setSuperview:self.view];
+//    [[AAATutorialController instance] show:YES];
+////
+//    [[AAATutorialController instance] showArrow];
 }
 
 -(void) resetCatalogs
@@ -147,7 +182,7 @@ const static float DisabledMarketViewTransparency = 0.65f;
             }];
         }
         markets  = [NSMutableArray arrayWithArray:[markets sortedArrayUsingComparator:^NSComparisonResult(AAAMarket* obj1, AAAMarket* obj2) {
-            return [[NSNumber numberWithDouble:obj2.priority] compare:[NSNumber numberWithDouble:obj1.priority]];
+            return [[NSNumber numberWithDouble:obj1.priority] compare:[NSNumber numberWithDouble:obj2.priority]];
         }]];
         [self addTheMarkets];
         if (markets.count>0) {
@@ -157,6 +192,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
         }
         loadingView.hidden = YES;
         isDownloadingCatalogs = NO;
+//        [[AAATutorialViewController instance] show:YES tutorialView:iTutorialViewTypeMarketsBar];
+//        [[AAATutorialViewController instance] animateStepNumber:iTutorialViewStepNumberFirst inTutorialView:iTutorialViewTypeMarketsBar];
     }];
 }
 
@@ -242,6 +279,27 @@ const static float DisabledMarketViewTransparency = 0.65f;
     {
         [self resetCatalogs];
         [self downloadCatalogs];
+    }
+}
+
+- (IBAction)privacyButtonPressed:(UIButton *)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[AAAGlobals sharedInstance] privacyPolicyURL]]];
+}
+
+- (IBAction)refreshButtonPressed:(UIButton *)sender
+{
+    if (!lastTimeRefreshButtonWasPressed || [[NSDate date] timeIntervalSinceDate:lastTimeRefreshButtonWasPressed] > MIN_SECONDS_TO_RELOAD_DATA)
+    {
+        lastTimeRefreshButtonWasPressed = [NSDate date];
+        [self checkForInternetConnectionOnSuccess:^{
+            if (!isDownloadingCatalogs) {
+                [self resetCatalogs];
+                [self downloadCatalogs];
+            }
+        } onFailure:^{
+            [self resetCatalogs];
+        }];
     }
 }
 
@@ -333,6 +391,9 @@ const static float DisabledMarketViewTransparency = 0.65f;
     currentShowingMarket = markets[btn.tag];
     [self setTheCatalogsForMarket:currentShowingMarket];
     [self setMarketViewAsSelected:marketViews[btn.tag]];
+    
+    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnMarket];
+    [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
 }
 
 -(void) setMarketViewAsSelected:(UIView*) btn
@@ -367,7 +428,7 @@ const static int catalogSubviewTag = 21341;
 
 -(void) setTheCatalogsForMarket:(AAAMarket*) market
 {
-    [Flurry logEvent:FlurryEventMarketOpened withParameters:@{FlurryParameterMarketName:market.name}];
+    [Flurry logEvent:FlurryEventMarketOpened withParameters:@{FlurryParameterMarketName:market.name, FlurryParameterMarketPriority : @(market.priority)}];
     [carousel reloadData];
     [carousel setCurrentItemIndex:0];
 }
@@ -382,9 +443,14 @@ const static int catalogSubviewTag = 21341;
         [catalogVC.view layoutIfNeeded];
         catalogVC.view.frame = toFrame;
         bg.alpha = 0.0f;
+        topBar.alpha = 1.0f;
     } completion:^(BOOL finished) {
         catalogVC.view.frame = containerViewOfShownCatalog.bounds;
         [containerViewOfShownCatalog addSubview:catalogVC.view];
+        [catalogVC finishedMinimized];
+        [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverMarkets];
+        [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
+        [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
     }];
 }
 
@@ -414,7 +480,7 @@ const static int catalogSubviewTag = 21341;
     if (catalogVCForShowingMarket.count <= index) {
         AAACatalog* catalog = currentShowingMarket.catalogs[index];
         catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
-        [catalogVC view];
+        [catalogVC view];//to call viewdidload in AAACatalogVC
         catalogVC.catalog = catalog;
         [catalogVC setDelegate:self];
         [catalogVCForShowingMarket addObject:catalogVC];
@@ -474,18 +540,85 @@ const static int catalogSubviewTag = 21341;
     [[UIApplication sharedApplication].keyWindow addSubview:catalogVC.view];
     UIViewAnimationOptions options = UIViewAnimationOptionLayoutSubviews;
     [catalogVC.view layoutSubviews];
+    
     [UIView animateWithDuration:.4f delay:.0f options:options animations:^{
         bg.alpha = 1.0f;
         [catalogVC.view layoutIfNeeded];
         catalogVC.view.frame = [UIApplication sharedApplication].keyWindow.bounds;
+        topBar.alpha = 0.0f;
     } completion:^(BOOL finished) {
         [catalogVC finishedMaximized];
     }];
     AAACatalog* catalog = catalogVC.catalog;
     [Flurry logEvent:FlurryEventAdOpened withParameters:@{FlurryParameterCatalogId : [NSString stringWithFormat:@"%i",catalog.identifier],
-                                                          FlurryParameterCatalogIndex : [NSString stringWithFormat:@"%i", index],
+                                                          FlurryParameterCatalogIndex : [NSString stringWithFormat:@"%li", (long)index],
                                                           FlurryParameterCatalogPriority : [NSString stringWithFormat:@"%f", catalog.priority],
                                                         FlurryParameterMarketName : currentShowingMarket.name}];
+    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnCatalog];
+}
+
+-(void)carouselDidScroll:(iCarousel *)_carousel
+{
+    if (!_carousel.isDragging) {
+        return;
+    }
+    if (currentShowingMarket && currentShowingMarket.catalogs.count > 1) {
+        [[AAATutorialManager instance] invalidateTutorialView:TutorialViewDiscoverCatalogs];
+        [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnCatalog];
+    }
+}
+
+#pragma mark - Scroll View delegate
+
+//-(void) showFullMarketViewsAfterScrollViewStopped
+//{
+//    float leftX = marketsScrollView.contentOffset.x;
+//    float rightX = leftX + marketsScrollView.bounds.size.width;
+//    if (rightX > marketsScrollView.contentSize.width) {
+//        rightX = marketsScrollView.contentSize.width;
+//        leftX = rightX - marketsScrollView.bounds.size.width;
+//    }
+//    for (UIView* marketView in marketViews) {
+//        float marketViewX = marketView.frame.origin.x;
+//        float marketViewWidth = marketView.frame.size.width;
+//        if (marketsScrollViewDirection == ScrollDirectionLeft)
+//        {
+//            if () {
+//                <#statements#>
+//            }
+//        }
+//    }
+//}
+//
+//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    NSLog(@"scrollViewDidEndDecelerating");
+//}
+//
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    if (!decelerate) {
+//        NSLog(@"scrollViewDidEndDragging");
+//    }
+//}
+//
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:marketsScrollView]) {
+        [[AAATutorialManager instance] invalidateTutorialView:TutorialViewDiscoverMarkets];
+        [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
+        
+        
+//        [[AAATutorialViewController instance] animateStepNumber:iTutorialViewStepNumberSecond inTutorialView:iTutorialViewTypeMarketsBar];
+//        [[AAATutorialViewController instance] updateProgress:iTutorialViewTypeMarketsBar progress:iTutorialViewStepNumberFirst];
+    }
+    
+//    if (marketsScrollViewLastContentOffset.x > scrollView.contentOffset.x)
+//        marketsScrollViewDirection = ScrollDirectionRight;
+//    else if (marketsScrollViewLastContentOffset.x < scrollView.contentOffset.x)
+//        marketsScrollViewDirection = ScrollDirectionLeft;
+//    
+//    marketsScrollViewLastContentOffset = scrollView.contentOffset;
 }
 
 @end

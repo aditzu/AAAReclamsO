@@ -10,6 +10,15 @@
 #import "AAACatalogVC.h"
 #import "iCarousel.h"
 
-@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate>
+typedef enum ScrollDirection {
+    ScrollDirectionNone,
+    ScrollDirectionRight,
+    ScrollDirectionLeft,
+    ScrollDirectionUp,
+    ScrollDirectionDown,
+    ScrollDirectionCrazy,
+} ScrollDirection;
+
+@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate, UIScrollViewDelegate>
 
 @end

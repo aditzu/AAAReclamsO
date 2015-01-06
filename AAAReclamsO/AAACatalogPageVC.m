@@ -25,11 +25,28 @@
     UIImage* img;
     
     BOOL animating;
-//    float pageYConstraintInitial;
     
     BOOL pageResetToScrollViewBounds;
     BOOL didCutImage;
     __weak IBOutlet UIView *bannerSuperView;
+    
+    NSMutableArray* onPageLoadedBlocks;
+}
+
+-(instancetype)init
+{
+    if (self = [super init]) {
+        onPageLoadedBlocks = [NSMutableArray array];
+    }
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        onPageLoadedBlocks = [NSMutableArray array];
+    }
+    return self;
 }
 
 -(void)viewDidLoad
@@ -49,9 +66,12 @@
     [self.scrollView addGestureRecognizer:tapGesture];
     [self show:shown];
     self.view.clipsToBounds = NO;
-//    pageYConstraintInitial = pageYConstraint.constant;
-//    [bannerSuperView addSubview:[[AAAGlobals sharedInstance] sharedBannerView]];
-    
+ //   page.contentMode = UIViewContentModeScaleAspectFit | UIViewContentModeBottom;
+}
+
+-(void)addOnPageLoaded:(onPageLoadedBlock)onPageLoaded
+{
+    [onPageLoadedBlocks addObject:[onPageLoaded copy]];
 }
 
 -(void)viewDidLayoutSubviews
@@ -64,8 +84,12 @@
             pageWConstraint.constant  = self.scrollView.bounds.size.width;
         }
         
-        if (pageHConstraint.constant != self.scrollView.bounds.size.height - 4) {
-            pageHConstraint.constant = self.scrollView.bounds.size.height - 4;//4 for the shadow
+        if (pageHConstraint.constant != self.scrollView.bounds.size.height){// - 4) {
+            pageHConstraint.constant = self.scrollView.bounds.size.height;// - 4;//4 for the shadow
+            [page layoutIfNeeded];
+            if (self.onScrollViewHeightConstraintChange) {
+                self.onScrollViewHeightConstraintChange(self);
+            }
         }
         [self.view layoutIfNeeded];
         pageResetToScrollViewBounds = YES;
@@ -76,12 +100,13 @@
 //            didCutImage = YES;
 //        }
         self.scrollView.zoomScale = 1.0f;
-        page.layer.masksToBounds = NO;
-        page.layer.shadowColor = [UIColor blackColor].CGColor;
-        page.layer.shadowOffset = CGSizeMake(0, 3);
-        page.layer.shadowOpacity = .5;
-        page.layer.shadowRadius = 1.0f;
-        [self.view layoutSubviews];
+//        page.layer.masksToBounds = NO;
+//        page.layer.shadowColor = [UIColor blackColor].CGColor;
+//        page.layer.shadowOffset = CGSizeMake(0, 3);
+//        page.layer.shadowOpacity = .5;
+//        page.layer.shadowRadius = 1.0f;
+        
+//        [self.view layoutSubviews];
     }
 }
 
@@ -113,7 +138,7 @@
 
 -(CGRect)scrollViewFrame
 {
-    float imageRatio = page.image.size.width/ page.image.size.height;
+    float imageRatio = img.size.width/ img.size.height;
     float imageViewRatio = page.frame.size.width / page.frame.size.height;
     
     float width = 0, height = 0, yoffset = 0, xoffset = 0;
@@ -127,7 +152,7 @@
     {
         height = page.frame.size.height;
         width = height * imageRatio;
-        assert(page.frame.size.width > width);
+        assert(page.frame.size.width > width); //daca pagina nu e incarcata, aici o sa dea creeesh
         xoffset = (page.frame.size.width - width) / 2.0f;
     }
     
@@ -141,9 +166,16 @@
 
 -(void)setImageUrl:(NSString *)imageUrl
 {
-    _imageUrl = imageUrl;
+    _imageUrl = [imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (page) {
         [self updateImage];
+    }
+}
+
+-(void) alertOnPageLoadedListeners:(BOOL) success
+{
+    for (onPageLoadedBlock _onPgLoaded in onPageLoadedBlocks) {
+        _onPgLoaded(self, success);
     }
 }
 
@@ -153,8 +185,11 @@
         [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:self.imageUrl] completionBlock:^(UIImage *image) {
             img = image;
             spinnerView.hidden = YES;
+            self.isPageLoaded = YES;
+            [self alertOnPageLoadedListeners:YES];
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
             NSLog(@"Failed to download catalog page: %@", self.imageUrl);
+            [self alertOnPageLoadedListeners:NO];
         }];
     }
 }
@@ -170,8 +205,11 @@
             img = image;
             spinnerView.hidden = YES;
             [page setImage: image];
+            self.isPageLoaded = YES;
+            [self alertOnPageLoadedListeners:YES];
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
             NSLog(@"Failed to download catalog page: %@", self.imageUrl);
+            [self alertOnPageLoadedListeners:NO];
         }];
     }
 }

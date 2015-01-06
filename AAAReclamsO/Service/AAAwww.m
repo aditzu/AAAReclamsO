@@ -83,7 +83,7 @@ static AAAwww* _instance;
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 completionHandler([NSArray arrayWithArray:[[NSDictionary dictionaryWithDictionary:responseObject] objectForKey:@"pages"]], nil);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"failure: %i", operation.response.statusCode);
+                NSLog(@"failure: %li", (long)operation.response.statusCode);
             }];
 }
 

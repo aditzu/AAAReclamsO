@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AAACatalog.h"
 #import "AAACatalogPageVC.h"
-#import <iAd/iAd.h>
 
 #import "GADBannerView.h"
 #import "GADRequest.h"
@@ -22,7 +21,7 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, ADBannerViewDelegate, GADBannerViewDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, GADBannerViewDelegate>{
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;
@@ -31,6 +30,7 @@
 -(void) setDelegate:(id<AAACatalogVCEvents>) _delegate;
 -(void) setCatalog:(AAACatalog*) catalog;
 -(void) minimize;
+-(void) finishedMinimized;
 -(void) maximize;
 -(void) finishedMaximized;
 @end

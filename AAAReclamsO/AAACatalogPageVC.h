@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class AAACatalogPageVC;
+typedef void (^onPageLoadedBlock) (AAACatalogPageVC* catalogPageVC, BOOL success);
+typedef void (^OnScrollViewHeightConstraintChange) (AAACatalogPageVC* catalogPageVC);
 
 @protocol AAACatalogPageVCDelegate <NSObject>
 @optional
@@ -21,7 +23,10 @@
 @property(nonatomic) int indexInPageViewCtrl;
 @property(nonatomic, strong) IBOutlet UIScrollView* scrollView;
 @property(nonatomic, strong) id<AAACatalogPageVCDelegate> delegate;
+@property(nonatomic) BOOL isPageLoaded;
+@property(nonatomic, copy) OnScrollViewHeightConstraintChange onScrollViewHeightConstraintChange;
 -(void) downloadImage;
 -(void) show:(BOOL)show;
 -(CGRect) scrollViewFrame;
+-(void) addOnPageLoaded:(onPageLoadedBlock) onPageLoaded;
 @end

@@ -41,7 +41,12 @@ static AAAGlobals* _instance;
 
 -(NSString*) gadUnitId
 {
-    return @"ca-app-pub-2163416701589769/7779082332";
+    return @"ca-app-pub-3940256099942544/2934735716";// @"ca-app-pub-2163416701589769/7779082332";
+}
+
+-(NSString *)privacyPolicyURL
+{
+    return @"http://alphaappers.com/ofertamea/disclaimer.html";
 }
 
 @end

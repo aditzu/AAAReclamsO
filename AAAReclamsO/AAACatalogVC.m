@@ -15,7 +15,7 @@
 #import "AAAGlobals.h"
 #import "Flurry.h"
 #import "AAASharedBanner.h"
-
+#import "AAATutorialManager.h"
 
 @interface AAACatalogVC(){
     id<AAACatalogVCEvents> delegate;
@@ -40,6 +40,13 @@
     __weak IBOutlet UIView *gadBannerViewContainer;
     BOOL gadBannerLoaded;
     __weak IBOutlet UIImageView *progressViewBgImage;
+    
+    UIView* discoverCatalogTutorial;
+    UIView* zoomCatalogTutorial;
+    UIView* closeCatalogTutorial;
+    __weak IBOutlet UIView *fromToBottomBar;
+    __weak IBOutlet UILabel *fromToLabel;
+    __weak IBOutlet NSLayoutConstraint *fromToDistanceToBottomConstraint;
 }
 
 -(IBAction) closePressed:(id)sender;
@@ -64,6 +71,23 @@ const static int PicturesToPreload = 3;
     
     progressViewBgImage.layer.cornerRadius = 5.0f;
     
+    discoverCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewExploreCatalog
+                                                             withDependecies:@[]
+                                                                    atCenter:self.view.center];
+    zoomCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewZoomOnCatalog
+                                                         withDependecies:@[@(TutorialViewExploreCatalog)]
+                                                                atCenter:self.view.center];
+//    closeCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewCloseCatalog
+//                                                          withDependecies:@[@(TutorialViewExploreCatalog), @(TutorialViewZoomOnCatalog)]
+//                                                                 atCenter:closeBtn.center];
+
+    
+//    fromToBottomBar.layer.masksToBounds = NO;
+//    fromToBottomBar.layer.shadowColor = [UIColor blackColor].CGColor;
+//    fromToBottomBar.layer.shadowOffset = CGSizeMake(0, 3);
+//    fromToBottomBar.layer.shadowOpacity = .5;
+//    fromToBottomBar.layer.shadowRadius = 1.0f;
+    
 //    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
 ////        closeBtnTopConstraint.constant = 0.0f;
 //    }
@@ -71,6 +95,13 @@ const static int PicturesToPreload = 3;
 //    {
 ////        closeBtnTopConstraint.constant = 20.0f;
 //    }
+}
+
+-(void)dealloc
+{
+    for (AAACatalogPageVC* page in pages) {
+        page.onScrollViewHeightConstraintChange = nil;
+    }
 }
 
 -(void) didTap:(UITapGestureRecognizer*) tapGestureRecognizer
@@ -87,12 +118,36 @@ const static int PicturesToPreload = 3;
     [self updateSettingsFromCatalog:catalog];
 }
 
+-(CGRect) pageControllerFullFrame
+{
+    CGRect myBounds = self.view.bounds;
+    myBounds.size.height = fromToBottomBar.frame.origin.y;
+    return myBounds;
+}
+
+-(void) setBottomBarYPosition
+{
+    AAACatalogPageVC* currentPage = [self currentPage];
+    if (currentPage) {
+        CGRect scrollViewFrame = [currentPage scrollViewFrame];
+        CGRect myBounds = self.view.frame;
+        float constant = myBounds.size.height - (scrollViewFrame.origin.y + scrollViewFrame.size.height) - fromToBottomBar.frame.size.height;
+        fromToDistanceToBottomConstraint.constant = constant;
+    }
+}
+
 -(void) updateSettingsFromCatalog:(AAACatalog*) catalog
 {
     if (!self.isViewLoaded || !catalog)
     {
         return;
     }
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSDate* from = [NSDate dateWithTimeIntervalSince1970:catalog.activeFrom/1000.0f];
+    NSDate* to = [NSDate dateWithTimeIntervalSince1970:catalog.activeTo/1000.0f];
+    
+    fromToLabel.text = [NSString stringWithFormat:@"De la %@ până la %@", [dateFormatter stringFromDate:from], [dateFormatter stringFromDate:to]];
     
     pages = [NSMutableArray array];
     [[AAAwww instance] downloadPagesUrlsForCatalog:catalog.identifier withCompletionHandler:^(NSArray *_pages, NSError *error) {
@@ -111,13 +166,22 @@ const static int PicturesToPreload = 3;
             [pageViewController.view removeFromSuperview];
         }
         pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-        pageViewController.view.frame = self.view.bounds;
-        
+        pageViewController.view.frame = [self pageControllerFullFrame];
         [self.view addSubview:pageViewController.view];
         [self.view bringSubviewToFront:topBarView];
+        [self.view bringSubviewToFront:fromToBottomBar];
         for (int i =0; i< catalog.imagesURLs.count; i++)
         {
             AAACatalogPageVC* catalogPage = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogPageVC"];
+            if (i == 0) {
+                catalogPage.onScrollViewHeightConstraintChange = ^(AAACatalogPageVC* page)
+                {
+                    if (page.isPageLoaded) {
+                        [self setBottomBarYPosition];
+                        page.onScrollViewHeightConstraintChange = nil;
+                    }
+                };
+            }
             catalogPage.imageUrl = catalog.imagesURLs[i];
             catalogPage.indexInPageViewCtrl = i;
             if (i < PicturesToPreload) {
@@ -155,6 +219,9 @@ const static int PicturesToPreload = 3;
 
 -(void) close
 {
+    [discoverCatalogTutorial removeFromSuperview];
+    [closeCatalogTutorial removeFromSuperview];
+    [zoomCatalogTutorial removeFromSuperview];
     if ([delegate respondsToSelector:@selector(closeCatalogVC:)]) {
         [delegate closeCatalogVC:self];
     }
@@ -163,6 +230,7 @@ const static int PicturesToPreload = 3;
 
 -(void)closePressed:(id)sender
 {
+//    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewCloseCatalog];
     [self close];
 }
 
@@ -211,12 +279,22 @@ const static int PicturesToPreload = 3;
     }
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
-    pageViewController.view.frame= self.view.bounds;
+    if (pageViewController) {
+        pageViewController.view.frame= [self pageControllerFullFrame];
+//        [self setBottomBarYPosition];
+    }
+    
+    [self showView:fromToBottomBar show:YES];
     
     if (pageViewController && pageViewController.viewControllers && pageViewController.viewControllers.count > 0) {
         float percentageSeen = [pages indexOfObject:pageViewController.viewControllers[0]] * 100 / pages.count;
         [Flurry logEvent:FlurryEventCatalogPercentageSeen withParameters:@{FlurryParameterPercentage : [NSString stringWithFormat:@"%f", percentageSeen]}];
     }
+}
+
+-(void) finishedMinimized
+{
+    [self setBottomBarYPosition];
 }
 
 -(void)maximize
@@ -227,7 +305,7 @@ const static int PicturesToPreload = 3;
     }
     tapGesture.enabled = YES;
     [closeBtn layoutIfNeeded];
-    
+    [self showView:fromToBottomBar show:NO];
 //    sharedGadBannerView = [[AAAGlobals sharedInstance] sharedBannerView];
 //    [sharedGadBannerView setRootViewController:self];
 //    sharedGadBannerView.bannerView.delegate = self;
@@ -247,6 +325,23 @@ const static int PicturesToPreload = 3;
     [self updateTopBarPosition];
     [self layoutBanner:gadBannerLoaded animated:gadBannerLoaded];
     [self showTopBar:[NSNumber numberWithBool:YES]];
+    
+    
+//    [discoverCatalogTutorial removeConstraints:discoverCatalogTutorial.constraints];
+//    [closeCatalogTutorial removeConstraints:closeCatalogTutorial.constraints];
+//    [zoomCatalogTutorial removeConstraints:zoomCatalogTutorial.constraints];
+    
+    [self.view addSubview:discoverCatalogTutorial];
+    [self.view addSubview:zoomCatalogTutorial];
+//    closeCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewCloseCatalog
+//                                                          withDependecies:@[@(TutorialViewExploreCatalog), @(TutorialViewZoomOnCatalog)]
+//                                                                 atCenter:closeBtn.center];
+//    [topBarView addSubview:closeCatalogTutorial];
+    [self.view bringSubviewToFront:topBarView];
+    
+    [[AAATutorialManager instance] showTutorialView:TutorialViewExploreCatalog];
+    [[AAATutorialManager instance] showTutorialView:TutorialViewZoomOnCatalog];
+//    [[AAATutorialManager instance] showTutorialView:TutorialViewCloseCatalog];
 }
 
 -(void) updateTopBarPosition
@@ -267,6 +362,11 @@ const static int PicturesToPreload = 3;
     AAACatalogPageVC* currentPage=  [self currentPage];
     CGRect frame = [currentPage scrollViewFrame];
     pageViewController.view.frame = frame;
+//    [currentPage onPageLoaded:^(AAACatalogPageVC *catalogPageVC, BOOL success) {
+//        if ([currentPage isEqual:catalogPageVC] && success) {
+//
+//        }
+//    }];
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -399,6 +499,8 @@ const static int PicturesToPreload = 3;
         [self setProgress:indexOfVC+1 outOf:(int)pages.count];
 //        [self updateFavoriteButton];
         [self showTopBar:[NSNumber numberWithBool:YES]];
+        [[AAATutorialManager instance] invalidateTutorialView:TutorialViewExploreCatalog];
+        [[AAATutorialManager instance] showTutorialView:TutorialViewZoomOnCatalog];
     }
 }
 
@@ -449,6 +551,9 @@ const static int PicturesToPreload = 3;
 
 -(void)catalogPage:(AAACatalogPageVC *)catalogPage contentSizeDidChange:(CGSize)newSize
 {
+    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewZoomOnCatalog];
+//    [[AAATutorialManager instance] showTutorialView:TutorialViewCloseCatalog];
+    
 //    CGRect frame = pageViewController.view.frame;
 //    
 //    float width = MIN(newSize.width, self.view.window.bounds.size.width);
