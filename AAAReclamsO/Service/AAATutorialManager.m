@@ -88,6 +88,9 @@ static AAATutorialManager* _instance;
         for (NSNumber* tutViewKey in dependencies) {
             BOOL tutViewSeen = [[tutViewsSeen objectForKey:tutViewKey] boolValue];
             shouldShow = tutViewSeen;
+            if (!shouldShow) {
+                break;
+            }
         }
     }
     return shouldShow;

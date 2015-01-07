@@ -45,12 +45,12 @@
     } completion:^(BOOL finished) {
     }];
     
-    UIViewAnimationOptions animOptions = UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse;
+    UIViewAnimationOptions animOptions = UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse|UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction;
     switch (self.animationType) {
         case TutorialAnimationTypePulsing:
         {
             [UIView animateWithDuration:.4f delay:.3f options:animOptions animations:^{
-                self.imageView.layer.transform = CATransform3DMakeScale(1.1f, 1.1f, 1.0f);
+                self.view.layer.transform = CATransform3DMakeScale(1.1f, 1.1f, 1.0f);
             } completion:^(BOOL finished) {
                 
             }];
@@ -60,7 +60,7 @@
         case TutorialAnimationTypeMoveLeftRight:
         {
             [UIView animateWithDuration:.4f delay:0 options:animOptions animations:^{
-                self.imageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 10.0f, 0.0f);
+                self.view.layer.transform = CATransform3DMakeTranslation(10, 0, 0);
             } completion:^(BOOL finished) {
                 
             }];
@@ -78,6 +78,7 @@
         self.view.alpha = 0.0f;
     } completion:^(BOOL finished) {
         if (!self.isStarted) {
+            [self.view.layer removeAllAnimations];
             self.view.hidden = YES;
         }
     }];

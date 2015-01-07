@@ -42,18 +42,20 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8b-n6-xzn" userLabel="privacy Button">
                                         <rect key="frame" x="10" y="0.0" width="15" height="20"/>
-                                        <state key="normal" backgroundImage="lock.png">
+                                        <state key="normal" image="lock.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="highlighted" image="lock_highlight.png"/>
                                         <connections>
                                             <action selector="privacyButtonPressed:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="yV1-HW-gNp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1N-sK-0Vg" userLabel="refresh Button">
-                                        <rect key="frame" x="290" y="0.0" width="26" height="20"/>
-                                        <state key="normal" backgroundImage="refresh.png">
+                                        <rect key="frame" x="290" y="0.0" width="20" height="20"/>
+                                        <state key="normal" image="refresh.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="highlighted" image="refresh_highlight.png"/>
                                         <connections>
                                             <action selector="refreshButtonPressed:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="k1o-hf-8F0"/>
                                         </connections>
@@ -336,10 +338,38 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="26"/>
                                         <color key="backgroundColor" red="0.03529411927" green="0.1176470667" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5b-dG-TjH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5b-dG-TjH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="De la ">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="X">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-BoldItalic"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" până la ">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Y">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-BoldItalic"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -694,8 +724,10 @@
         <image name="favorite_filled.png" width="104" height="100"/>
         <image name="first" width="30" height="30"/>
         <image name="lock.png" width="44" height="58"/>
+        <image name="lock_highlight.png" width="44" height="58"/>
         <image name="minimize.png" width="64" height="62"/>
-        <image name="refresh.png" width="134" height="104"/>
+        <image name="refresh.png" width="128" height="128"/>
+        <image name="refresh_highlight.png" width="128" height="128"/>
         <image name="swipe_left_right.png" width="128" height="128"/>
         <image name="tap.png" width="128" height="128"/>
     </resources>

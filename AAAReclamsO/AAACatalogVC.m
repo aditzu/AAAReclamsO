@@ -147,7 +147,21 @@ const static int PicturesToPreload = 3;
     NSDate* from = [NSDate dateWithTimeIntervalSince1970:catalog.activeFrom/1000.0f];
     NSDate* to = [NSDate dateWithTimeIntervalSince1970:catalog.activeTo/1000.0f];
     
-    fromToLabel.text = [NSString stringWithFormat:@"De la %@ până la %@", [dateFormatter stringFromDate:from], [dateFormatter stringFromDate:to]];
+//    NSAttributedString* sdada = fromToLabel.attributedText;
+    
+    NSString* labelText = fromToLabel.text;
+    NSRange rangeOfX = [labelText rangeOfString:@"X"];
+    NSDictionary* normalTextAttributes = [fromToLabel.attributedText attributesAtIndex:0 effectiveRange:NULL];
+    NSDictionary* dateTextAttributes = [fromToLabel.attributedText attributesAtIndex:rangeOfX.location effectiveRange:NULL];
+    
+    NSMutableAttributedString* allString = [[NSMutableAttributedString alloc] init];
+    [allString appendAttributedString:[[NSAttributedString alloc] initWithString:@"De la " attributes:normalTextAttributes]];
+    [allString appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:from] attributes:dateTextAttributes]];
+    [allString appendAttributedString:[[NSAttributedString alloc] initWithString:@" până la " attributes:normalTextAttributes]];
+    [allString appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:to] attributes:dateTextAttributes]];
+    
+    fromToLabel.attributedText = allString;
+//    fromToLabel.text = [NSString stringWithFormat:@"De la %@ până la %@", [dateFormatter stringFromDate:from], [dateFormatter stringFromDate:to]];
     
     pages = [NSMutableArray array];
     [[AAAwww instance] downloadPagesUrlsForCatalog:catalog.identifier withCompletionHandler:^(NSArray *_pages, NSError *error) {
@@ -170,6 +184,7 @@ const static int PicturesToPreload = 3;
         [self.view addSubview:pageViewController.view];
         [self.view bringSubviewToFront:topBarView];
         [self.view bringSubviewToFront:fromToBottomBar];
+        pageViewController.view.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
         for (int i =0; i< catalog.imagesURLs.count; i++)
         {
             AAACatalogPageVC* catalogPage = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogPageVC"];
@@ -322,8 +337,8 @@ const static int PicturesToPreload = 3;
     [gadBannerViewContainer addSubview:sharedGadBannerView.bannerView];
     sharedGadBannerView.bannerView.hidden = NO;
     [self updatePageViewControllerForCurrentPage];
-    [self updateTopBarPosition];
     [self layoutBanner:gadBannerLoaded animated:gadBannerLoaded];
+    [self updateTopBarPosition];
     [self showTopBar:[NSNumber numberWithBool:YES]];
     
     
@@ -346,13 +361,24 @@ const static int PicturesToPreload = 3;
 
 -(void) updateTopBarPosition
 {
+    
+    NSLog(@"[UIApplication sharedApplication].statusBarFrame: %@", NSStringFromCGRect([UIApplication sharedApplication].statusBarFrame));
+    NSLog(@"[UIApplication sharedApplication].statusBarHidden: %i", [UIApplication sharedApplication].statusBarHidden);
+    NSLog(@"[UIApplication sharedApplication].statusBarStyle: %i", [UIApplication sharedApplication].statusBarStyle);
+    
+    
     AAACatalogPageVC* currentPage=  [self currentPage];
     if (!currentPage) {
         return;
     }
     CGRect frame = pageViewController.view.frame;
+    float constant = frame.origin.y > topBarView.frame.size.height + 20 ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
+    if (constant < 20) {
+        constant = 20;
+        
+    }
     [UIView animateWithDuration:.2f animations:^{
-        topBarTopConstraint.constant = frame.origin.y > topBarView.frame.size.height + 20 ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
+        topBarTopConstraint.constant = constant;
     }];
 }
 
@@ -452,7 +478,12 @@ const static int PicturesToPreload = 3;
         contentFrame.size.height -= sharedGadBannerView.bannerView.frame.size.height;
         bannerFrame.origin.y = contentFrame.size.height;
         if (pageVCFrame.size.height + pageVCFrame.origin.y > self.view.bounds.size.height - sharedGadBannerView.bannerView.frame.size.height) {
-            pageVCFrame.origin.y = self.view.bounds.size.height - sharedGadBannerView.bannerView.frame.size.height - pageVCFrame.size.height + 4;
+            float pageVCFrameY = self.view.bounds.size.height - sharedGadBannerView.bannerView.frame.size.height - pageVCFrame.size.height + 4;
+            if (pageVCFrameY < 0) {
+                pageVCFrame.size.height += pageVCFrameY;
+                pageVCFrameY = 0;
+            }
+            pageVCFrame.origin.y = pageVCFrameY;
         }
         bannerIsShown = YES;
     } else {

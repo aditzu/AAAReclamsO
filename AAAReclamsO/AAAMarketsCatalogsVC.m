@@ -392,6 +392,13 @@ const static float DisabledMarketViewTransparency = 0.65f;
     [self setTheCatalogsForMarket:currentShowingMarket];
     [self setMarketViewAsSelected:marketViews[btn.tag]];
     
+    //scroll marketView to the center of the screen
+    CGPoint btnCenter = ((UIView*)marketViews[btn.tag]).center;
+    CGSize scrollViewSize = marketsScrollView.bounds.size;
+    CGRect frameWithBtnInCenter = CGRectMake(btnCenter.x - scrollViewSize.width/2, 0, scrollViewSize.width, scrollViewSize.height);
+    [marketsScrollView scrollRectToVisible:frameWithBtnInCenter animated:YES];
+    
+    //handle tutorial
     [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnMarket];
     [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
 }
@@ -508,20 +515,20 @@ const static int catalogSubviewTag = 21341;
         case iCarouselOptionWrap:
             return NO;
         case iCarouselOptionArc:
-            return M_PI * 1.0f;
+            return M_PI * 1.3f;
         case iCarouselOptionSpacing:
             return value * 1.2;
         case iCarouselOptionShowBackfaces:
             return NO;
+        case iCarouselOptionRadius:
+        case iCarouselOptionOffsetMultiplier:
+        case iCarouselOptionTilt:
         case iCarouselOptionFadeMinAlpha:
         case iCarouselOptionFadeMin:
         case iCarouselOptionFadeMax:
         case iCarouselOptionCount:
         case iCarouselOptionFadeRange:
         case iCarouselOptionAngle:
-        case iCarouselOptionOffsetMultiplier:
-        case iCarouselOptionRadius:
-        case iCarouselOptionTilt:
         default:
             return value;
     }
