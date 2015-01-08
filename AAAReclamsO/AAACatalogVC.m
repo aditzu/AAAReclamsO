@@ -147,9 +147,10 @@ const static int PicturesToPreload = 3;
     NSDate* from = [NSDate dateWithTimeIntervalSince1970:catalog.activeFrom/1000.0f];
     NSDate* to = [NSDate dateWithTimeIntervalSince1970:catalog.activeTo/1000.0f];
     
-//    NSAttributedString* sdada = fromToLabel.attributedText;
-    
     NSString* labelText = fromToLabel.text;
+    if (![labelText containsString:@"X"]) {
+        NSLog(@"ERROR. Make sure that the \"fromToLabel\" contains an X string in Interface Builder!");
+    }
     NSRange rangeOfX = [labelText rangeOfString:@"X"];
     NSDictionary* normalTextAttributes = [fromToLabel.attributedText attributesAtIndex:0 effectiveRange:NULL];
     NSDictionary* dateTextAttributes = [fromToLabel.attributedText attributesAtIndex:rangeOfX.location effectiveRange:NULL];
@@ -161,7 +162,6 @@ const static int PicturesToPreload = 3;
     [allString appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:to] attributes:dateTextAttributes]];
     
     fromToLabel.attributedText = allString;
-//    fromToLabel.text = [NSString stringWithFormat:@"De la %@ până la %@", [dateFormatter stringFromDate:from], [dateFormatter stringFromDate:to]];
     
     pages = [NSMutableArray array];
     [[AAAwww instance] downloadPagesUrlsForCatalog:catalog.identifier withCompletionHandler:^(NSArray *_pages, NSError *error) {
@@ -361,12 +361,6 @@ const static int PicturesToPreload = 3;
 
 -(void) updateTopBarPosition
 {
-    
-    NSLog(@"[UIApplication sharedApplication].statusBarFrame: %@", NSStringFromCGRect([UIApplication sharedApplication].statusBarFrame));
-    NSLog(@"[UIApplication sharedApplication].statusBarHidden: %i", [UIApplication sharedApplication].statusBarHidden);
-    NSLog(@"[UIApplication sharedApplication].statusBarStyle: %i", [UIApplication sharedApplication].statusBarStyle);
-    
-    
     AAACatalogPageVC* currentPage=  [self currentPage];
     if (!currentPage) {
         return;
