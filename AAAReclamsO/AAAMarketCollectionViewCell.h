@@ -2,35 +2,20 @@
 //  AAAMarketCollectionViewCell.h
 //  AAAReclamsO
 //
-//  Created by Adrian Ancuta on 13/11/14.
-//  Copyright (c) 2014 Adrian Ancuta. All rights reserved.
+//  Created by Adrian Ancuta on 09/01/15.
+//  Copyright (c) 2015 Adrian Ancuta. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-@class AAAMarket, AAACatalogVC, AAAMarketCollectionViewCell;
+#import "AAAMarket.h"
+@interface AAAMarketCollectionViewCell : UICollectionViewCell
 
-@protocol AAAMarketCollectionCellEvents <NSObject>
+typedef void(^onSelectedBlock)(AAAMarket* market);
+typedef BOOL(^onActiveChangeBlock)(AAAMarketCollectionViewCell* cell);
 
--(void) needToShowCatalogVC:(AAACatalogVC*) catalogVC forMarketCell:(AAAMarketCollectionViewCell*) marketCell;
-
-@end
-
-@interface AAAMarketCollectionViewCell : UICollectionViewCell{
-    
-    IBOutlet UIImageView* marketRibon;
-    id<AAAMarketCollectionCellEvents> delegate;
-    NSArray* catalogViewControllers;
-}
-
+@property(nonatomic) BOOL isActive;
 @property(nonatomic, strong) AAAMarket* market;
-@property(nonatomic, readonly) int lastCatalogIndexShown;
-@property(nonatomic, strong) IBOutlet UIScrollView* catalogsScrollView;
-
--(CGRect) visibleCatalogFrameInCell;
--(void) setDelegate:(id<AAAMarketCollectionCellEvents>) delegate;
--(void)setMarket:(AAAMarket *)market withViewControllers:(NSArray*) viewControllers;
-
--(void) addCatalogVC:(UIViewController*) catalogVC atIndex:(int) index;
--(void) scaleDownCatalog:(UIViewController*) catalogVC atIndex:(int) index;
-
+-(void)setupEditModeOn:(BOOL)on;
+-(void) onSelected:(onSelectedBlock) onSelectedBlock;
+-(void) onActiveChanged:(onActiveChangeBlock) onActiveChangeBlock;
 @end

@@ -148,7 +148,7 @@ const static int PicturesToPreload = 3;
     NSDate* to = [NSDate dateWithTimeIntervalSince1970:catalog.activeTo/1000.0f];
     
     NSString* labelText = fromToLabel.text;
-    if (![labelText containsString:@"X"]) {
+    if ([labelText rangeOfString:@"X"].length == 0) {
         NSLog(@"ERROR. Make sure that the \"fromToLabel\" contains an X string in Interface Builder!");
     }
     NSRange rangeOfX = [labelText rangeOfString:@"X"];

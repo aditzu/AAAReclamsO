@@ -19,6 +19,6 @@ typedef enum ScrollDirection {
     ScrollDirectionCrazy,
 } ScrollDirection;
 
-@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate, UIScrollViewDelegate>
+@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end

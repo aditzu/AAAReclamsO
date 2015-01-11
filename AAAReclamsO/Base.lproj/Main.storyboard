@@ -81,8 +81,75 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-49-Hvk" userLabel="markets ScrollView">
-                                        <rect key="frame" x="-20" y="-20" width="320" height="88"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k0x-hS-Keu">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HW3-TT-FT8">
+                                            <size key="itemSize" width="86" height="86"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="marketViewCellReuseIdentifier" id="kC5-rp-BdD" customClass="AAAMarketCollectionViewCell">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" tag="212" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EqX-oF-g3d">
+                                                            <rect key="frame" x="3" y="3" width="80" height="80"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="80" id="laJ-mt-0EQ"/>
+                                                                <constraint firstAttribute="width" constant="80" id="wfN-xu-K1I"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSv-Wv-eut">
+                                                            <rect key="frame" x="0.0" y="56" width="86" height="30"/>
+                                                            <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                            <state key="normal" title="Selectează">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="selectPressed:" destination="kC5-rp-BdD" eventType="touchUpInside" id="M4N-fN-JtR"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="def-Io-PXP">
+                                                            <rect key="frame" x="55" y="0.0" width="30" height="30"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <state key="normal" image="remove.png">
+                                                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="addRemovePressed:" destination="kC5-rp-BdD" eventType="touchUpInside" id="T2q-ZR-EIG"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="centerY" secondItem="EqX-oF-g3d" secondAttribute="centerY" id="6tk-iV-Sgt"/>
+                                                    <constraint firstAttribute="centerX" secondItem="EqX-oF-g3d" secondAttribute="centerX" id="lrc-8V-yk1"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="addRemoveBtn" destination="def-Io-PXP" id="rUk-yJ-ka4"/>
+                                                    <outlet property="logoImgView" destination="EqX-oF-g3d" id="kw4-MJ-c3o"/>
+                                                    <outlet property="selectBtn" destination="dSv-Wv-eut" id="iuW-gE-4Ai"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="7zJ-Rv-Ayp" id="q5g-tT-iMu"/>
+                                            <outlet property="delegate" destination="7zJ-Rv-Ayp" id="EHp-0P-5Vr"/>
+                                        </connections>
+                                    </collectionView>
+                                    <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-49-Hvk" userLabel="markets ScrollView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                         <subviews>
                                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltw-j1-7ei">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
@@ -100,15 +167,19 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="cPv-b4-pmI" secondAttribute="bottom" id="1Ic-yE-6rB"/>
                                     <constraint firstItem="1IV-49-Hvk" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="AgP-hc-AFM"/>
+                                    <constraint firstItem="k0x-hS-Keu" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="C70-6z-Qk4"/>
+                                    <constraint firstItem="k0x-hS-Keu" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="D1w-GX-JmE"/>
                                     <constraint firstItem="o9c-XI-fmy" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="Fou-a1-ARL"/>
                                     <constraint firstAttribute="bottom" secondItem="1IV-49-Hvk" secondAttribute="bottom" id="IM0-LQ-Ueg"/>
                                     <constraint firstAttribute="bottom" secondItem="o9c-XI-fmy" secondAttribute="bottom" id="TkV-dH-wUR"/>
                                     <constraint firstItem="cPv-b4-pmI" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="VXK-yE-K61"/>
                                     <constraint firstItem="cPv-b4-pmI" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="aLI-gw-28w"/>
+                                    <constraint firstAttribute="trailing" secondItem="k0x-hS-Keu" secondAttribute="trailing" id="cjx-2c-H7K"/>
                                     <constraint firstAttribute="trailing" secondItem="1IV-49-Hvk" secondAttribute="trailing" id="eGS-7s-HiY"/>
                                     <constraint firstAttribute="trailing" secondItem="o9c-XI-fmy" secondAttribute="trailing" id="g5Y-Eo-BK9"/>
                                     <constraint firstItem="1IV-49-Hvk" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="pdm-P8-JgT"/>
                                     <constraint firstItem="o9c-XI-fmy" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="ppE-Ld-jf9"/>
+                                    <constraint firstAttribute="bottom" secondItem="k0x-hS-Keu" secondAttribute="bottom" id="sIF-gA-g3C"/>
                                     <constraint firstAttribute="height" constant="88" id="v9D-Cx-ECY"/>
                                     <constraint firstAttribute="trailing" secondItem="cPv-b4-pmI" secondAttribute="trailing" id="xu3-r0-SDL"/>
                                 </constraints>
@@ -202,10 +273,10 @@
                             <constraint firstAttribute="bottom" secondItem="MOv-vo-MmQ" secondAttribute="bottom" id="Oe2-VQ-OiW"/>
                             <constraint firstAttribute="centerY" secondItem="grI-65-opn" secondAttribute="centerY" id="PoA-O4-Xll"/>
                             <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="bottom" id="STK-bc-rYt"/>
+                            <constraint firstItem="IiU-qH-vpQ" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="-15" id="cBM-qC-epA"/>
                             <constraint firstItem="MOv-vo-MmQ" firstAttribute="top" secondItem="Sa3-S0-tZS" secondAttribute="top" id="jIP-ir-ozb"/>
                             <constraint firstItem="AGx-Nj-mhU" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="jgA-7r-SMA"/>
                             <constraint firstItem="grI-65-opn" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" constant="10" id="qOT-dz-GEN"/>
-                            <constraint firstItem="AGx-Nj-mhU" firstAttribute="top" secondItem="IiU-qH-vpQ" secondAttribute="bottom" constant="-15" id="t9M-rN-aoc"/>
                             <constraint firstAttribute="trailing" secondItem="AGx-Nj-mhU" secondAttribute="trailing" id="yPU-Zw-EQN"/>
                             <constraint firstItem="VBQ-9U-Cwl" firstAttribute="top" secondItem="JhD-bm-KuR" secondAttribute="bottom" constant="20" id="zLh-Yy-Bkp"/>
                         </constraints>
@@ -218,8 +289,9 @@
                         <outlet property="errorViewRetryButton" destination="KPV-bk-bIm" id="sA6-SE-gFw"/>
                         <outlet property="errorViewSpinner" destination="7aB-FQ-lv0" id="1jQ-Oj-Kwa"/>
                         <outlet property="loadingView" destination="h6O-Se-vnM" id="eVv-eH-1tC"/>
+                        <outlet property="marketViewsCollectionView" destination="k0x-hS-Keu" id="1yt-2a-27e"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
-                        <outlet property="marketsViewHeightConstraint" destination="v9D-Cx-ECY" id="Cav-et-LAl"/>
+                        <outlet property="marketsViewHeightConstraint" destination="v9D-Cx-ECY" id="Fu7-O5-MCV"/>
                         <outlet property="topBar" destination="M2j-Gx-z10" id="0b4-7Z-xlD"/>
                     </connections>
                 </viewController>
@@ -760,6 +832,7 @@
         <image name="open_edit.png" width="128" height="128"/>
         <image name="refresh.png" width="128" height="128"/>
         <image name="refresh_highlight.png" width="128" height="128"/>
+        <image name="remove.png" width="50" height="50"/>
         <image name="swipe_left_right.png" width="128" height="128"/>
         <image name="tap.png" width="128" height="128"/>
     </resources>

@@ -34,6 +34,25 @@ static AAAGlobals* _instance;
     return bannerView;
 }
 
++(UIImage*)imageWithShadowForImage:(UIImage *)initialImage
+{
+    
+    CGColorSpaceRef colourSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef shadowContext = CGBitmapContextCreate(NULL, initialImage.size.width, initialImage.size.height + 4, CGImageGetBitsPerComponent(initialImage.CGImage), 0, colourSpace, kCGImageAlphaPremultipliedLast);// kCGImageAlphaPremultipliedLast
+    CGColorSpaceRelease(colourSpace);
+    
+    CGContextSetShadowWithColor(shadowContext, CGSizeMake(0,4), 70, [UIColor blackColor].CGColor);
+    CGContextDrawImage(shadowContext, CGRectMake(0, 4, initialImage.size.width, initialImage.size.height), initialImage.CGImage);
+    
+    CGImageRef shadowedCGImage = CGBitmapContextCreateImage(shadowContext);
+    CGContextRelease(shadowContext);
+    
+    UIImage * shadowedImage = [UIImage imageWithCGImage:shadowedCGImage];
+    CGImageRelease(shadowedCGImage);
+    
+    return shadowedImage;
+}
+
 -(NSString *)flurryId
 {
     return @"QNVNYDDJXCM9FR583Q4T";

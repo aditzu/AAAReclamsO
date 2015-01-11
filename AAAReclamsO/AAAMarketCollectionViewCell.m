@@ -2,110 +2,148 @@
 //  AAAMarketCollectionViewCell.m
 //  AAAReclamsO
 //
-//  Created by Adrian Ancuta on 13/11/14.
-//  Copyright (c) 2014 Adrian Ancuta. All rights reserved.
+//  Created by Adrian Ancuta on 09/01/15.
+//  Copyright (c) 2015 Adrian Ancuta. All rights reserved.
 //
 
 #import "AAAMarketCollectionViewCell.h"
-#import "AAAMarket.h"
-#import "AAACatalog.h"
-#import "AAACatalogVC.h"
-#import "AAAMarketTableViewCell.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIImageView+JMImageCache.h"
+#import "JMImageCache.h"
+#import "AAAGlobals.h"
 
 @interface AAAMarketCollectionViewCell()
+{
+    onSelectedBlock _onSelected;
+    onActiveChangeBlock _onActiveChange;
+}
 
--(IBAction)scrollToLeftPressed:(UIButton*)sender;
--(IBAction)scrollToRightPressed:(UIButton*)sender;
+@property(nonatomic) BOOL isInEditMode;
+
+@property (weak, nonatomic) IBOutlet UIButton *selectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *addRemoveBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImgView;
+
+- (IBAction)selectPressed:(UIButton *)sender;
+- (IBAction)addRemovePressed:(UIButton *)sender;
 @end
 
 @implementation AAAMarketCollectionViewCell
+const static float DisabledMarketViewTransparency = 0.65f;
 
--(void)setMarket:(AAAMarket *)market withViewControllers:(NSArray*) viewControllers
+-(id)initWithCoder:(NSCoder *)aDecoder
 {
-    self.market = market;
-    catalogViewControllers = viewControllers;
-    [marketRibon setImage:market.imgLogo];
-    for (int i =0; i<viewControllers.count; i++)
-    {
-        UIViewController* catalogVC = viewControllers[i];
-        CGSize scrollViewSize = self.catalogsScrollView.bounds.size;
-        [self scaleDownCatalog:catalogVC atIndex:i];
-        [self addCatalogVC:catalogVC atIndex:i];
-        self.catalogsScrollView.contentSize = CGSizeMake( (i +1) * scrollViewSize.width, scrollViewSize.height);
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setSelected:NO];
+    }
+    return self;
+}
+
+-(void)setupEditModeOn:(BOOL)on
+{
+    self.isInEditMode = on;
+    [self.addRemoveBtn setImage:[UIImage imageNamed:self.isActive ? @"remove" : @"add"] forState:UIControlStateNormal];
+
+    [UIView animateWithDuration:.3f animations:^{
+        self.selectBtn.hidden = !on;
+        self.addRemoveBtn.hidden = !on;
+        self.logoImgView.layer.transform = on ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
+        [self updateEnabledView];
+    }];
+}
+
+-(void)onSelected:(onSelectedBlock)onSelectedBlock
+{
+    _onSelected = onSelectedBlock;
+}
+
+-(void)onActiveChanged:(onActiveChangeBlock)onActiveChangeBlock
+{
+    _onActiveChange = onActiveChangeBlock;
+}
+
+-(void)setMarket:(AAAMarket *)market
+{
+    _market = market;
+    if (!market) {
+        return;
+    }
+    [self.logoImgView setImage:nil];
+    NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
+    [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
+        UIImage* newImage = [AAAGlobals imageWithShadowForImage:image];
+        [self.logoImgView setImage:newImage];
+//        if (!self.isInEditMode && self.isSelected)
+//        {
+//            [self setMarketViewAsSelected:cell];
+//        }
+    } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
+        NSLog(@"JMIMageCache failed: %@", error);
+    }];
+}
+
+-(void) setSelected:(BOOL)selected
+{
+    NSLog(@"setselected: %i", selected);
+    [super setSelected:selected];
+    [self updateEnabledView];
+}
+
+-(void) updateEnabledView
+{
+    self.logoImgView.alpha = (self.isInEditMode && self.isActive) || (!self.isInEditMode && self.isSelected) ? 1.0f:DisabledMarketViewTransparency;
+    self.selectBtn.alpha =  self.isInEditMode ? (self.isActive ? 1.0f : 0.0f) : 0.0f;
+}
+
+- (IBAction)selectPressed:(UIButton *)sender
+{
+    if (_onSelected) {
+        _onSelected(self.market);
     }
 }
 
--(CGRect) catalogVCFrameAtIndex:(int) index
+- (IBAction)addRemovePressed:(UIButton *)sender
 {
-    CGSize scrollViewSize = self.catalogsScrollView.bounds.size;
-    CGRect vcFrame  = CGRectMake(scrollViewSize.width *index + 5, 5, scrollViewSize.width - 10, scrollViewSize.height - 10);
-    return vcFrame;
-}
-
--(void) scaleDownCatalog:(UIViewController*) catalogVC atIndex:(int) index
-{
-    CGRect vcRect = [self catalogVCFrameAtIndex:index];
-    CGRect catalogInitialFrame = catalogVC.view.frame;
-    CGSize scale = CGSizeMake(vcRect.size.width / catalogInitialFrame.size.width, vcRect.size.height / catalogInitialFrame.size.height);
-    catalogVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale.width, scale.height);
-}
-
--(void) addCatalogVC:(UIViewController*) catalogVC atIndex:(int) index
-{
-    CGRect vcRect = [self catalogVCFrameAtIndex:index];
-    CGRect catalogInitialFrame = catalogVC.view.frame;
-    catalogInitialFrame.origin.x = vcRect.origin.x;
-    catalogInitialFrame.origin.y = vcRect.origin.y;
-    catalogVC.view.frame = catalogInitialFrame;
-    [self.catalogsScrollView addSubview:catalogVC.view];
-    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(catalogHasBeenClicked:)];
-    [catalogVC.view addGestureRecognizer:tapGesture];
-}
-
--(void)setDelegate:(id<AAAMarketCollectionCellEvents>)_delegate
-{
-    delegate = _delegate;
-}
-
--(void) catalogHasBeenClicked:(UITapGestureRecognizer*) gesture
-{
-    if([delegate respondsToSelector:@selector(needToShowCatalogVC:forMarketCell:)])
-    {
-        _lastCatalogIndexShown = gesture.view.tag;
-        AAACatalogVC* catalogVC = catalogViewControllers[gesture.view.tag];
-        for (UITapGestureRecognizer* tapgesture in catalogVC.view.gestureRecognizers) {
-            [catalogVC.view removeGestureRecognizer:tapgesture];
-        }
-        [delegate needToShowCatalogVC:catalogVC  forMarketCell:self];
+    self.isActive = !self.isActive;
+    if (_onActiveChange && !_onActiveChange(self)) {
+        return;
     }
-}
+    
+    UIImage* img = [UIImage imageNamed: self.isActive ? @"remove" : @"add"];
+    [sender setImage:img forState:UIControlStateNormal];
+    [sender setImage:img forState:UIControlStateSelected];
 
--(void)scrollToLeftPressed:(UIButton *)sender
-{
-    CGPoint pointToBe = self.catalogsScrollView.contentOffset;
-    if (pointToBe.x - self.catalogsScrollView.bounds.size.width >= 0) {
-        pointToBe.x -= self.catalogsScrollView.bounds.size.width;
-        [UIView animateWithDuration:.3f animations:^{
-            self.catalogsScrollView.contentOffset = pointToBe;
-        }];
-    }
-}
+    CATransition *transition = [CATransition animation];
+    transition.duration = .4f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    transition.removedOnCompletion = YES;
+    [sender.layer addAnimation:transition forKey:@"fade"];
+    
+    CABasicAnimation *spin;
+    spin = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//    spin.fromValue = [NSNumber numberWithFloat:M_PI/4];
+//    spin.toValue = [NSNumber numberWithFloat:(M_PI/2)];
+    spin.fromValue = [NSNumber numberWithFloat:self.isActive? 0 : M_PI/4];
+    spin.toValue = [NSNumber numberWithFloat:self.isActive?-M_PI/2 : M_PI/2];
+    spin.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    spin.duration = .4f; // How fast should the image spin
+    spin.repeatCount = 1; // HUGE_VALF means infinite repeatCount;
+    spin.removedOnCompletion = YES;
+    [sender.layer addAnimation:spin forKey:@"Spin"];
 
--(void)scrollToRightPressed:(UIButton *)sender
-{
-    CGPoint pointToBe = self.catalogsScrollView.contentOffset;
-    if (pointToBe.x + self.catalogsScrollView.bounds.size.width < self.catalogsScrollView.contentSize.width) {
-        pointToBe.x += self.catalogsScrollView.bounds.size.width;
-        [UIView animateWithDuration:.3f animations:^{
-            self.catalogsScrollView.contentOffset = pointToBe;
-        }];
-    }
+    [UIView animateWithDuration:.3f animations:^{
+        [self updateEnabledView];
+    }];
+    
+    
+//    CATransition *animation = [CATransition animation];
+//    [animation setDelegate:self];
+//    [animation setDuration:.6f];
+//    //    [animation setTimingFunction: UIViewAnimationCurveEaseInOut];
+//    //    [animation setTimingFunction: [CAMediaTimingFunction UIViewAnimationCurveEaseInOut]];
+//    [animation setType:@"rippleEffect" ];
+//    [sender.layer addAnimation:animation forKey:NULL];
 }
-
--(CGRect)visibleCatalogFrameInCell
-{
-    int page = self.catalogsScrollView.contentOffset.x / self.catalogsScrollView.bounds.size.width;
-    return [self convertRect:[self catalogVCFrameAtIndex:page] fromView:self.catalogsScrollView];
-}
-
 @end

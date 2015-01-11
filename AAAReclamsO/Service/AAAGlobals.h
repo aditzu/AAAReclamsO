@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 @class AAASharedBanner;
 
 #pragma mark - Flurry
@@ -27,6 +28,7 @@ static NSString* const FlurryParameterCatalogId = @"Catalog id";
 @interface AAAGlobals : NSObject
 
 +(AAAGlobals*) sharedInstance;
++(UIImage*)imageWithShadowForImage:(UIImage *)initialImage;
 -(AAASharedBanner*) sharedBannerView;
 -(NSString*) flurryId;
 -(NSString*) privacyPolicyURL;
