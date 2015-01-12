@@ -17,6 +17,7 @@
 #import "Flurry.h"
 #import "AAATutorialManager.h"
 #import "AAAMarketCollectionViewCell.h"
+#import "FXBlurView.h"
 
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
 
@@ -31,8 +32,6 @@
     UIView* containerViewOfShownCatalog;
     
     AAAwww* www;
-//    UIView* currentShownMarketView;
-    NSMutableArray* marketViews;
     
     CGRect catalogViewMaxFrame;
     
@@ -61,12 +60,10 @@
     float topLimitYMarketsViewHeightConstraint;
     float previousMarketsViewHeight;
     __weak IBOutlet UICollectionView *marketViewsCollectionView;
+    __weak IBOutlet FXBlurView *blurView;
     
     BOOL _isInEditMode;
-//    NSIndexPath* lastSelectedMarketIndexPath;
     NSMutableDictionary* enabledMarketsUserDefaults;
-    
-//    NSMutableArray* marketsCollectionViewDatasource;
 }
 - (IBAction)privacyButtonPressed:(UIButton *)sender;
 - (IBAction)refreshButtonPressed:(UIButton *)sender;
@@ -85,7 +82,6 @@ static Reachability* ownServerReach;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    marketViews = [NSMutableArray array];
     catalogsVCs = [NSMutableDictionary dictionary];
     www = [AAAwww instance];
     [JMImageCache sharedCache].countLimit = 200;
@@ -135,21 +131,19 @@ static Reachability* ownServerReach;
     {
         NSData* marketsDisabledData = [[NSUserDefaults standardUserDefaults] objectForKey:kEnabledMarketsUserDefaultsKey];
         enabledMarketsUserDefaults = [NSKeyedUnarchiver unarchiveObjectWithData:marketsDisabledData];
-        
-//        disabledMarkets = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:kEnabledMarketsUserDefaultsKey]];
     }
     else
     {
         enabledMarketsUserDefaults = [NSMutableDictionary dictionary];
     }
-    
-    
-//    [marketViewsCollectionView registerClass:[AAAMarketCollectionViewCell class] forCellWithReuseIdentifier:kMarketCellReuseIdentifier];
+
     UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)marketViewsCollectionView.collectionViewLayout;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     marketViewsCollectionView.allowsMultipleSelection = NO;
-
-//    marketsCollectionViewDatasource = [NSMutableArray array];
+    blurView.blurRadius = 40;
+    [self updateBlurView];
+    blurView.dynamic = NO;
+    [blurView setUserInteractionEnabled:NO];
 }
 
 -(void) resetCatalogs
@@ -163,10 +157,6 @@ static Reachability* ownServerReach;
             }
         }
         catalogsVCs = [NSMutableDictionary dictionary];
-        for (UIView* marketView in marketViews) {
-            [marketView removeFromSuperview];
-        }
-        marketViews = [NSMutableArray array];
     });
 }
 
@@ -382,64 +372,6 @@ static Reachability* ownServerReach;
     [bg removeFromSuperview];
 }
 
-//-(void) addTheMarkets
-//{
-////    int border = 8;
-////    int side = marketsScrollView.bounds.size.height;
-////    CGSize viewSize = CGSizeMake(side, side);
-//    for (int i =0; i < markets.count; i++)
-//    {
-//        AAAMarket* market = markets[i];
-////        float viewFinalWidth = viewSize.width - (border*2);
-////        float viewFinalHeight = viewFinalWidth;
-////        float viewX = i * viewSize.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2;
-//
-////        UIView* marketView = [[UIView alloc] initWithFrame:CGRectMake(viewX, border, viewFinalWidth, viewFinalHeight)];
-//        UIView* marketView = [[UIView alloc] initWithFrame:CGRectZero];
-//
-//        UIButton* btn = [[UIButton alloc] initWithFrame:marketView.bounds];
-//        [btn setBackgroundColor:[UIColor grayColor]];
-//        
-//        NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
-//
-//        [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
-//            UIImage* newImage = [AAAMarketsCatalogsVC imageWithShadowForImage:image];
-//            [btn setBackgroundImage:newImage forState:UIControlStateNormal];
-//        } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
-//            NSLog(@"JMIMageCache failed: %@", error);
-//        }];
-//        
-//        btn.tag = i;
-//        [btn addTarget:self action:@selector(marketButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        marketView.alpha = DisabledMarketViewTransparency;
-//        [marketView addSubview:btn];
-//        [marketsScrollView addSubview:marketView];
-////        marketsScrollView.contentSize = CGSizeMake(marketView.frame.origin.x + marketView.frame.size.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2, viewSize.height);
-//        [marketViews addObject:marketView];
-//    }
-//    [self arrangeMArketViewsInNormalMode];
-//}
-
-//-(void) marketButtonClicked:(UIButton*) btn
-//{
-//    if ([currentShownMarketView isEqual:marketViews[btn.tag]]) {
-//        return;
-//    }
-//    currentShowingMarket = markets[btn.tag];
-//    [self setTheCatalogsForMarket:currentShowingMarket];
-//    [self setMarketViewAsSelected:marketViews[btn.tag]];
-//    
-//    //scroll marketView to the center of the screen
-//    CGPoint btnCenter = ((UIView*)marketViews[btn.tag]).center;
-//    CGSize scrollViewSize = marketsScrollView.bounds.size;
-//    CGRect frameWithBtnInCenter = CGRectMake(btnCenter.x - scrollViewSize.width/2, 0, scrollViewSize.width, scrollViewSize.height);
-//    [marketsScrollView scrollRectToVisible:frameWithBtnInCenter animated:YES];
-//    
-//    //handle tutorial
-//    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnMarket];
-//    [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
-//}
-
 -(void) setMarketViewAsSelected:(UIView*) btn
 {
     int scaleDiff = 2;
@@ -484,9 +416,6 @@ const static int catalogSubviewTag = 21341;
 {
     float y = [UIScreen mainScreen].bounds.size.height - [sender locationInView:self.view].y;
     y = CLAMP(y, bottomLimitYMarketsViewHeightConstraint, topLimitYMarketsViewHeightConstraint);
-    
-//    [self arrangeMarketViewsInEditMode];
-    
     if (sender.state == UIGestureRecognizerStateBegan && marketsViewHeightConstraint.constant == bottomLimitYMarketsViewHeightConstraint)
     {
         //open edit view
@@ -501,7 +430,6 @@ const static int catalogSubviewTag = 21341;
                 [self selectMarketInCollectionView:currentShowingMarket];
             }];
             return;
-//            [self arrangeMArketViewsInNormalMode];
         }
         if (previousMarketsViewHeight < y)
         {
@@ -523,6 +451,35 @@ const static int catalogSubviewTag = 21341;
     if (sender.state == UIGestureRecognizerStateRecognized && previousMarketsViewHeight != y) {
         previousMarketsViewHeight = y;
     }
+    [self updateBlurView];
+}
+
+const float minPercentageForAlpha = 100;
+const float maxBlurRadius = 20;
+
+-(void) updateBlurView
+{
+    float pointForMinPercentage = minPercentageForAlpha * (topLimitYMarketsViewHeightConstraint - bottomLimitYMarketsViewHeightConstraint) / 100 + bottomLimitYMarketsViewHeightConstraint;
+    float y = marketsViewHeightConstraint.constant;
+    float blurPercent = (y - pointForMinPercentage) / (topLimitYMarketsViewHeightConstraint - pointForMinPercentage) * 100;
+    blurPercent = CLAMP(blurPercent, 0, 100);
+
+    float alphaPercent = (y - bottomLimitYMarketsViewHeightConstraint) / (pointForMinPercentage - bottomLimitYMarketsViewHeightConstraint) * 100;
+    alphaPercent = CLAMP(alphaPercent, 0, 100);
+    
+    [UIView animateWithDuration:.5f animations:^{
+//        float blur = maxBlurRadius / 100.0f * blurPercent;
+//        if (blurView.blurRadius != blur || blurView.alpha == 0)
+//        {
+//            blurView.blurRadius = blur;
+//            [blurView updateAsynchronously:NO completion:nil];
+//        }
+        float alpha = alphaPercent / 100.0f;
+        if (blurView.alpha != alpha)
+        {
+            blurView.alpha = alpha;
+        }
+    }];
 }
 
 -(void) goToEditMode:(BOOL) editMode
@@ -554,13 +511,9 @@ const static int catalogSubviewTag = 21341;
 -(void) changeEditMenuStateToClosed:(BOOL)close onCompletion:(void(^)(void))completion
 {
     [self goToEditMode:!close];
-
+    
+    [blurView updateAsynchronously:NO completion:nil];
     [UIView animateWithDuration:.4f animations:^{
-//        [marketViewsCollectionView performBatchUpdates:^{
-//            [marketViewsCollectionView reloadData];
-//        } completion:^(BOOL finished) {
-//            
-//        }];
 //        [marketViewsCollectionView reloadItemsAtIndexPaths:marketViewsCollectionView.indexPathsForVisibleItems];
         [marketViewsCollectionView reloadData];
     }];
@@ -568,6 +521,7 @@ const static int catalogSubviewTag = 21341;
     [UIView animateWithDuration:.5f animations:^{
         marketsViewHeightConstraint.constant = close ? bottomLimitYMarketsViewHeightConstraint : topLimitYMarketsViewHeightConstraint;
         [self.view layoutIfNeeded];
+        [self updateBlurView];
     } completion:^(BOOL finished) {
         if (finished) {
             if (completion) {
@@ -586,77 +540,6 @@ const static int catalogSubviewTag = 21341;
         [self collectionView:marketViewsCollectionView didSelectItemAtIndexPath:lastSelectedIndexPath];
     }
 }
-
--(void) arrangeMArketViewsInNormalMode
-{
-    int border = 8;
-    int side = marketsScrollView.bounds.size.height;
-    CGSize viewSize = CGSizeMake(side, side);
-    for (int i =0; i < marketViews.count; i++)
-    {
-        float viewFinalWidth = viewSize.width - (border*2);
-        float viewFinalHeight = viewFinalWidth;
-        float viewX = i * viewSize.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2;
-        UIView* marketView = marketViews[i];
-        UIButton* btn = nil;
-        for (UIView* subv in marketView.subviews) {
-            if ([subv isKindOfClass:[UIButton class]] && subv.tag == i) {
-                btn = (UIButton*)subv;
-                break;
-            }
-        }
-        [UIView animateWithDuration:.3f animations:^{
-            marketView.frame = CGRectMake(viewX, border, viewFinalWidth, viewFinalHeight);
-            btn.frame = marketView.bounds;
-        } completion:^(BOOL finished) {
-            [marketsScrollView bringSubviewToFront:marketView];
-        }];
-        marketsScrollView.contentSize = CGSizeMake(marketView.frame.origin.x + marketView.frame.size.width + border + marketsScrollView.bounds.size.width/2 - viewSize.width/2, viewSize.height);
-    }
-}
-
-//-(void) arrangeMarketViewsInEditMode
-//{
-//    float minSpacingBetweenMarketViews = 10;
-//    CGSize marketViewSize = CGSizeZero;
-//    for (UIView* v in marketViews) {
-//        if (![v isEqual:currentShownMarketView]) {
-//            marketViewSize = v.frame.size;
-//            break;
-//        }
-//    }
-//    float scrollViewWitdth = marketsScrollView.bounds.size.width;
-//    int numberOfMarketViewsFull = (int)scrollViewWitdth/marketViewSize.width;
-//
-//    float emptySpace = scrollViewWitdth - (marketViewSize.width * numberOfMarketViewsFull);
-//    float spaceInBetweenMarketViews = emptySpace / numberOfMarketViewsFull;
-//    if (spaceInBetweenMarketViews <= minSpacingBetweenMarketViews) {
-//        numberOfMarketViewsFull --;
-//        emptySpace = scrollViewWitdth - (marketViewSize.width * numberOfMarketViewsFull);
-//        spaceInBetweenMarketViews = emptySpace / numberOfMarketViewsFull;
-//    }
-//    
-//    int rows = (int)(marketsScrollView.bounds.size.height / (marketViewSize.height + spaceInBetweenMarketViews));
-//    for (int i =0; i < marketViews.count; i++)
-//    {
-//        int row = i / numberOfMarketViewsFull;
-//        row = row > rows - 1 ? 0 : row;
-//        int column = i % numberOfMarketViewsFull;
-//        column = row == 0 ? i : column;
-//        column = column > numberOfMarketViewsFull ? numberOfMarketViewsFull + i%numberOfMarketViewsFull : column;
-//        float x = spaceInBetweenMarketViews/2 + (column*spaceInBetweenMarketViews) + (column*marketViewSize.width);
-//        UIView* marketV = marketViews[i];
-//        CGRect marketViewFrame = marketV.frame;
-//        marketViewFrame.origin.x = x;
-//        float y = spaceInBetweenMarketViews/2 + (row * spaceInBetweenMarketViews) + (row * marketViewSize.height);
-//        y = column > numberOfMarketViewsFull - 1 ? marketsScrollView.bounds.size.height - spaceInBetweenMarketViews/2 - marketViewSize.height : y;
-//        marketViewFrame.origin.y = y;
-//        [UIView animateWithDuration:.3f animations:^{
-//            marketV.frame = marketViewFrame;
-//        }];
-//        marketsScrollView.contentSize = CGSizeMake(marketViewFrame.origin.x + marketViewFrame.size.width + spaceInBetweenMarketViews/2.0f, marketViewSize.width);
-//    }
-//}
 
 -(CGSize) marketCellSize
 {

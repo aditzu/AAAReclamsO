@@ -72,12 +72,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
     [self.logoImgView setImage:nil];
     NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
     [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
-        UIImage* newImage = [AAAGlobals imageWithShadowForImage:image];
-        [self.logoImgView setImage:newImage];
-//        if (!self.isInEditMode && self.isSelected)
-//        {
-//            [self setMarketViewAsSelected:cell];
-//        }
+//        UIImage* newImage = [AAAGlobals imageWithShadowForImage:image];
+        [self.logoImgView setImage:image];
     } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
         NSLog(@"JMIMageCache failed: %@", error);
     }];
@@ -85,7 +81,6 @@ const static float DisabledMarketViewTransparency = 0.65f;
 
 -(void) setSelected:(BOOL)selected
 {
-    NSLog(@"setselected: %i", selected);
     [super setSelected:selected];
     [self updateEnabledView];
 }

@@ -74,6 +74,11 @@
                                     <outlet property="delegate" destination="7zJ-Rv-Ayp" id="nis-YX-LBW"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="213-o3-14Y" userLabel="blurview" customClass="FXBlurView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGx-Nj-mhU" userLabel="marketsscroll">
                                 <rect key="frame" x="0.0" y="480" width="320" height="88"/>
                                 <subviews>
@@ -263,17 +268,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.03529411927" green="0.1176470667" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
+                            <constraint firstItem="213-o3-14Y" firstAttribute="top" secondItem="Sa3-S0-tZS" secondAttribute="top" id="0Cx-g9-xJl"/>
                             <constraint firstAttribute="centerX" secondItem="grI-65-opn" secondAttribute="centerX" id="3DJ-ML-VjK"/>
                             <constraint firstAttribute="trailing" secondItem="VBQ-9U-Cwl" secondAttribute="trailing" id="3kV-tD-6UD"/>
                             <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="VBQ-9U-Cwl" secondAttribute="bottom" constant="88" id="5a3-8b-xkL"/>
                             <constraint firstItem="MOv-vo-MmQ" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="ASb-2L-kJn"/>
                             <constraint firstItem="VBQ-9U-Cwl" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="Ajo-h4-fHy"/>
                             <constraint firstAttribute="centerX" secondItem="IiU-qH-vpQ" secondAttribute="centerX" id="DOX-md-Jub"/>
+                            <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="213-o3-14Y" secondAttribute="bottom" id="KzX-pY-wrh"/>
                             <constraint firstAttribute="trailing" secondItem="MOv-vo-MmQ" secondAttribute="trailing" id="OEr-fV-Qec"/>
                             <constraint firstAttribute="bottom" secondItem="MOv-vo-MmQ" secondAttribute="bottom" id="Oe2-VQ-OiW"/>
                             <constraint firstAttribute="centerY" secondItem="grI-65-opn" secondAttribute="centerY" id="PoA-O4-Xll"/>
                             <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="bottom" id="STK-bc-rYt"/>
+                            <constraint firstAttribute="trailing" secondItem="213-o3-14Y" secondAttribute="trailing" id="ZFI-S7-u6f"/>
                             <constraint firstItem="IiU-qH-vpQ" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="-15" id="cBM-qC-epA"/>
+                            <constraint firstItem="213-o3-14Y" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="dkG-bK-rWd"/>
                             <constraint firstItem="MOv-vo-MmQ" firstAttribute="top" secondItem="Sa3-S0-tZS" secondAttribute="top" id="jIP-ir-ozb"/>
                             <constraint firstItem="AGx-Nj-mhU" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="jgA-7r-SMA"/>
                             <constraint firstItem="grI-65-opn" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" constant="10" id="qOT-dz-GEN"/>
@@ -283,6 +292,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="first" id="q9j-H4-nzW"/>
                     <connections>
+                        <outlet property="blurView" destination="213-o3-14Y" id="Ba8-CE-g08"/>
                         <outlet property="carousel" destination="VBQ-9U-Cwl" id="6RL-ED-eUL"/>
                         <outlet property="errorView" destination="grI-65-opn" id="lSp-PW-MRc"/>
                         <outlet property="errorViewMessageLabel" destination="YRz-aK-n53" id="Uwy-pp-Mxf"/>
