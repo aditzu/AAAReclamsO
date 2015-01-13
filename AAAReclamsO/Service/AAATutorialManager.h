@@ -16,7 +16,6 @@ typedef NS_ENUM(NSInteger, TutorialView)
     TutorialViewDiscoverCatalogs,
     TutorialViewTapOnCatalog,
     TutorialViewExploreCatalog,
-//    TutorialViewCloseCatalog,
     TutorialViewZoomOnCatalog
 };
 
@@ -26,4 +25,5 @@ typedef NS_ENUM(NSInteger, TutorialView)
 -(void) setupWithStoryboard:(UIStoryboard*) _storyboard;
 -(void) showTutorialView:(TutorialView) tutorialViewToShow;
 -(void) invalidateTutorialView:(TutorialView) tutorialToInvalidate;
+-(void) hideAllTutorialViews;
 @end

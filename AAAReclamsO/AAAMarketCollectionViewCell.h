@@ -18,4 +18,5 @@ typedef BOOL(^onActiveChangeBlock)(AAAMarketCollectionViewCell* cell);
 -(void) setupEditModeOn:(BOOL)on;
 -(void) onSelected:(onSelectedBlock) onSelectedBlock;
 -(void) onActiveChanged:(onActiveChangeBlock) onActiveChangeBlock;
+-(void) enableAddRemoveFeature:(BOOL) enable;
 @end

@@ -16,6 +16,8 @@
 {
     onSelectedBlock _onSelected;
     onActiveChangeBlock _onActiveChange;
+    
+    BOOL _addRemoveEnabled;
 }
 
 @property(nonatomic) BOOL isInEditMode;
@@ -36,8 +38,15 @@ const static float DisabledMarketViewTransparency = 0.65f;
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self setSelected:NO];
+        _addRemoveEnabled = YES;
     }
     return self;
+}
+
+-(void)enableAddRemoveFeature:(BOOL)enable
+{
+    _addRemoveEnabled = enable;
+    self.addRemoveBtn.hidden = !enable;
 }
 
 -(void)setupEditModeOn:(BOOL)on
@@ -47,9 +56,10 @@ const static float DisabledMarketViewTransparency = 0.65f;
 
     [UIView animateWithDuration:.3f animations:^{
 //        self.selectBtn.alpha = on ? 1.0f : 0.0f;
-//        self.addRemoveBtn.alpha = on ? 1.0f : 0.0f;;
-        self.selectBtn.hidden = !on;
-        self.addRemoveBtn.hidden = !on;
+//        self.addRemoveBtn.alpha = on ? 1.0f : 0.0f;
+//        self.selectBtn.hidden = !on;
+        self.selectBtn.hidden = YES;
+        self.addRemoveBtn.hidden = _addRemoveEnabled ? !on : YES;
         self.logoImgView.layer.transform = on ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
         [self updateEnabledView];
     }];
@@ -91,7 +101,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
 
 -(void) updateEnabledView
 {
-    self.logoImgView.alpha = (self.isInEditMode && self.isActive) || (!self.isInEditMode && self.isSelected) ? 1.0f:DisabledMarketViewTransparency;
+    self.logoImgView.alpha = self.isSelected ? 1.0f : DisabledMarketViewTransparency;
+//    self.logoImgView.alpha = (self.isInEditMode && self.isActive) || (!self.isInEditMode && self.isSelected) ? 1.0f:DisabledMarketViewTransparency;
     self.selectBtn.alpha =  self.isInEditMode ? (self.isActive ? 1.0f : 0.0f) : 0.0f;
 }
 

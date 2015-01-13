@@ -68,12 +68,17 @@ static AAATutorialManager* _instance;
         if ([tutorialViews[@(tutorialViewToShow)] isStarted]) {
             return;
         }
-        for (NSNumber* key in [tutorialViews allKeys]) {
-            [tutorialViews[key] stop];
-        }
+        [self hideAllTutorialViews];
         
         AAATutorialVC* tutorialVC = [tutorialViews objectForKey:@(tutorialViewToShow)];
         [tutorialVC start];
+    }
+}
+
+-(void)hideAllTutorialViews
+{
+    for (NSNumber* key in [tutorialViews allKeys]) {
+        [tutorialViews[key] stop];
     }
 }
 
@@ -172,12 +177,6 @@ static AAATutorialManager* _instance;
             tutorialVC.animationType = TutorialAnimationTypeMoveLeftRight;
             break;
         }
-//            case TutorialViewCloseCatalog:
-//        {
-//            [tutorialVC setImage:[UIImage imageNamed:@"tap"] text:@"Inchide" id:[self idForTutorialView:tutorialViewType]];
-//            tutorialVC.animationType = TutorialAnimationTypePulsing;
-//            break;
-//        }
             case TutorialViewZoomOnCatalog:
         {
             [tutorialVC setImage:[UIImage imageNamed:@"zoom"] text:@"Zoom" id:[self idForTutorialView:tutorialViewType]];

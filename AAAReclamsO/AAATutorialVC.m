@@ -80,6 +80,7 @@
         if (!self.isStarted) {
             [self.view.layer removeAllAnimations];
             self.view.hidden = YES;
+            self.view.layer.transform = CATransform3DIdentity;
         }
     }];
 }

@@ -81,6 +81,7 @@
 
 @implementation AAAMarketsCatalogsVC
 const static int MIN_SECONDS_TO_RELOAD_DATA = 10;
+const static BOOL ENABLE_ADD_REMOVE_MARKET = NO;
 
 NSString* const kMarketCellReuseIdentifier = @"marketViewCellReuseIdentifier";
 NSString* const kEnabledMarketsUserDefaultsKey = @"EnabledMarkets";
@@ -126,11 +127,8 @@ static Reachability* ownServerReach;
     [self.view addSubview:dragCatalogsTutorial];
     UIView* tapCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnCatalog withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
     [self.view addSubview:tapCatalogTutorial];
-
-    [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverMarkets];
-    [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
-    [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverCatalogs];
-    [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnCatalog];
+    
+    [self showNextTutorialView];
     
     bottomLimitYMarketsViewHeightConstraint = marketsViewHeightConstraint.constant;
     topLimitYMarketsViewHeightConstraint = [UIScreen mainScreen].bounds.size.height - bottomLimitYMarketsViewHeightConstraint;
@@ -498,7 +496,7 @@ const float maxBlurRadius = 20;
 -(void) goToEditMode:(BOOL) editMode
 {
     _isInEditMode = editMode;
-    marketViewsCollectionView.allowsSelection = !editMode;
+//    marketViewsCollectionView.allowsSelection = !editMode;
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*)marketViewsCollectionView.collectionViewLayout;
     [UIView animateWithDuration:.3f animations:^{
         if (editMode)
@@ -515,9 +513,14 @@ const float maxBlurRadius = 20;
         }
         
     }];
-    if (!editMode) {
+    if (editMode)
+    {
+        [[AAATutorialManager instance] hideAllTutorialViews];
+    }
+    else
+    {
         [self updateEnabledMarketsDatasource];
-        
+        [self showNextTutorialView];
         //save the settings
         NSData* disabledMarketsData = [NSKeyedArchiver archivedDataWithRootObject:enabledMarketsUserDefaults];
         [[NSUserDefaults standardUserDefaults] setObject:disabledMarketsData forKey:kEnabledMarketsUserDefaultsKey];
@@ -534,7 +537,6 @@ const float maxBlurRadius = 20;
 
 -(void) changeEditMenuStateToClosed:(BOOL)close onCompletion:(void(^)(void))completion
 {
-    
     if (close)
     {
         [blurView removeGestureRecognizer:blurViewTapGesture];
@@ -620,8 +622,17 @@ const float maxBlurRadius = 20;
             space = marketViewsCollectionView.bounds.size.width - (noOfItems * markViewSize.width);
             spaceBetweenTwoItems = space / noOfItems;
         }
-        
-        
+    }
+}
+
+-(void) showNextTutorialView
+{
+    if (!_isInEditMode) {
+        [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverMarkets];
+        [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
+        if (currentShowingMarket && currentShowingMarket.catalogs) {
+            [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
+        }
     }
 }
 
@@ -640,10 +651,8 @@ const float maxBlurRadius = 20;
         catalogVC.view.frame = containerViewOfShownCatalog.bounds;
         [containerViewOfShownCatalog addSubview:catalogVC.view];
         [catalogVC finishedMinimized];
-        [[AAATutorialManager instance] showTutorialView:TutorialViewDiscoverMarkets];
-        [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
-        [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
     }];
+    [self showNextTutorialView];
 }
 
 #pragma mark - iCarousel Datasource
@@ -764,7 +773,7 @@ const float maxBlurRadius = 20;
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView isEqual:marketsScrollView]) {
+    if ([scrollView isKindOfClass:[UICollectionView class]] && !_isInEditMode && scrollView.isDragging) {
         [[AAATutorialManager instance] invalidateTutorialView:TutorialViewDiscoverMarkets];
         [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
     }
@@ -785,25 +794,38 @@ const float maxBlurRadius = 20;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AAAMarketCollectionViewCell* selectedCell = (AAAMarketCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    if (currentShowingMarket.identifier == selectedCell.market.identifier) {
+    void(^selectCurrentCell)(void);
+    selectCurrentCell = ^{
+        currentShowingMarket = enabledMarkets[indexPath.row]; //it should not be possible to select cells in normal mode, only during edit
+        [self setTheCatalogsForMarket:currentShowingMarket];
+        [self setMarketViewAsSelected:selectedCell];
+        [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        
+        //handle tutorial
+        if (!_isInEditMode && selectedCell.isSelected) {
+            [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnMarket];
+            [self showNextTutorialView];
+        }
+    };
+    
+    if(_isInEditMode)
+    {
+        [self changeEditMenuStateToClosed:YES onCompletion:^{
+            selectCurrentCell();
+        }];
         return;
     }
     
-    currentShowingMarket = enabledMarkets[indexPath.row]; //it should not be possible to select cells in normal mode, only during edit
-    [self setTheCatalogsForMarket:currentShowingMarket];
-    [self setMarketViewAsSelected:selectedCell];
-    [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    
-    //handle tutorial
-    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnMarket];
-    [[AAATutorialManager instance] showTutorialView:currentShowingMarket.catalogs.count > 1 ? TutorialViewDiscoverCatalogs : TutorialViewTapOnCatalog];
-
+    if (currentShowingMarket.identifier != selectedCell.market.identifier) {
+        selectCurrentCell();
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AAAMarketCollectionViewCell* cell = (AAAMarketCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kMarketCellReuseIdentifier forIndexPath:indexPath];
     AAAMarket* market = (AAAMarket*) (_isInEditMode ? markets[indexPath.row] : enabledMarkets[indexPath.row]);
+    [cell enableAddRemoveFeature:ENABLE_ADD_REMOVE_MARKET];
     cell.isActive = [enabledMarketsUserDefaults objectForKey:@(market.identifier)] ? [[enabledMarketsUserDefaults objectForKey:@(market.identifier)] boolValue] : YES;
     [cell setupEditModeOn:_isInEditMode];
     [cell onSelected:^(AAAMarket* _market) {
@@ -833,6 +855,7 @@ const float maxBlurRadius = 20;
     }];
     
     cell.market = market;
+    [cell setSelected:[market isEqual:currentShowingMarket]];
     return cell;
 }
 
@@ -889,12 +912,6 @@ const float maxBlurRadius = 20;
         return CGSizeZero;
     }
     return [self collectionViewPadding:collectionView withLayout:collectionViewLayout];
-}
-
--(void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [[AAATutorialManager instance] invalidateTutorialView:TutorialViewDiscoverMarkets];
-    [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
 }
 
 #pragma mark - UIGestureRecognizer
