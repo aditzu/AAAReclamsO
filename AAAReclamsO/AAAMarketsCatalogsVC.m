@@ -64,6 +64,14 @@
     
     BOOL _isInEditMode;
     NSMutableDictionary* enabledMarketsUserDefaults;
+    
+    UITapGestureRecognizer* blurViewTapGesture;
+    IBOutlet UIPanGestureRecognizer *editMenuPanGesture;
+    IBOutlet UIPanGestureRecognizer *editMenuPanGestureBlurView;
+    __weak IBOutlet UIView *selectView;
+    __weak IBOutlet UIView *marketsScrollSuperView;
+    
+    ScrollDirection _marketsViewDragDirection;
 }
 - (IBAction)privacyButtonPressed:(UIButton *)sender;
 - (IBAction)refreshButtonPressed:(UIButton *)sender;
@@ -143,7 +151,9 @@ static Reachability* ownServerReach;
     blurView.blurRadius = 40;
     [self updateBlurView];
     blurView.dynamic = NO;
-    [blurView setUserInteractionEnabled:NO];
+    [blurView setUserInteractionEnabled:YES];
+    
+    blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
 }
 
 -(void) resetCatalogs
@@ -218,7 +228,6 @@ static Reachability* ownServerReach;
             return [[NSNumber numberWithDouble:obj1.priority] compare:[NSNumber numberWithDouble:obj2.priority]];
         }]];
         [self updateEnabledMarketsDatasource];
-//        [self addTheMarkets];
         [marketViewsCollectionView reloadData];
         if (markets.count>0) {
             currentShowingMarket = enabledMarkets[0];
@@ -229,13 +238,9 @@ static Reachability* ownServerReach;
             }
             NSIndexPath* lastSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             [marketViewsCollectionView selectItemAtIndexPath:lastSelectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-            
-//            [self setMarketViewAsSelected:marketViews[0]];
         }
         loadingView.hidden = YES;
         isDownloadingCatalogs = NO;
-//        [[AAATutorialViewController instance] show:YES tutorialView:iTutorialViewTypeMarketsBar];
-//        [[AAATutorialViewController instance] animateStepNumber:iTutorialViewStepNumberFirst inTutorialView:iTutorialViewTypeMarketsBar];
     }];
 }
 
@@ -414,12 +419,14 @@ const static int catalogSubviewTag = 21341;
 
 - (IBAction)editViewDrag:(UIPanGestureRecognizer *)sender
 {
+    [self updateBlurView];
     float y = [UIScreen mainScreen].bounds.size.height - [sender locationInView:self.view].y;
     y = CLAMP(y, bottomLimitYMarketsViewHeightConstraint, topLimitYMarketsViewHeightConstraint);
     if (sender.state == UIGestureRecognizerStateBegan && marketsViewHeightConstraint.constant == bottomLimitYMarketsViewHeightConstraint)
     {
         //open edit view
         [self goToEditMode:YES];
+        [marketViewsCollectionView reloadData];
     }
     
     if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateFailed || sender.state == UIGestureRecognizerStateCancelled)
@@ -431,7 +438,7 @@ const static int catalogSubviewTag = 21341;
             }];
             return;
         }
-        if (previousMarketsViewHeight < y)
+        if (_marketsViewDragDirection == ScrollDirectionUp)
         {
             //direction up
             y = topLimitYMarketsViewHeightConstraint;
@@ -448,10 +455,16 @@ const static int catalogSubviewTag = 21341;
     }
     marketsViewHeightConstraint.constant = y;
     
-    if (sender.state == UIGestureRecognizerStateRecognized && previousMarketsViewHeight != y) {
+    if (sender.state == UIGestureRecognizerStateChanged && previousMarketsViewHeight != y) {
+        if (previousMarketsViewHeight < y) {
+            _marketsViewDragDirection = ScrollDirectionUp;
+        }
+        else
+        {
+            _marketsViewDragDirection = ScrollDirectionDown;
+        }
         previousMarketsViewHeight = y;
     }
-    [self updateBlurView];
 }
 
 const float minPercentageForAlpha = 100;
@@ -487,18 +500,22 @@ const float maxBlurRadius = 20;
     _isInEditMode = editMode;
     marketViewsCollectionView.allowsSelection = !editMode;
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*)marketViewsCollectionView.collectionViewLayout;
-    if (editMode)
-    {
-        CGSize contSize = marketViewsCollectionView.contentSize;
-        contSize.width = marketViewsCollectionView.bounds.size.width;
-        marketViewsCollectionView.contentSize = contSize;
-        marketViewsCollectionView.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
-        [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    }
-    else{
-        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        marketViewsCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [UIView animateWithDuration:.3f animations:^{
+        if (editMode)
+        {
+            CGSize contSize = marketViewsCollectionView.contentSize;
+            contSize.width = marketViewsCollectionView.bounds.size.width;
+            marketViewsCollectionView.contentSize = contSize;
+            marketViewsCollectionView.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
+            [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+        }
+        else{
+            [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+            marketViewsCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        }
         
+    }];
+    if (!editMode) {
         [self updateEnabledMarketsDatasource];
         
         //save the settings
@@ -508,14 +525,36 @@ const float maxBlurRadius = 20;
     }
 }
 
+-(void) blurViewTapped:(UITapGestureRecognizer*) tapGesture
+{
+    [self changeEditMenuStateToClosed:YES onCompletion:^{
+        [self selectMarketInCollectionView:currentShowingMarket];
+    }];
+}
+
 -(void) changeEditMenuStateToClosed:(BOOL)close onCompletion:(void(^)(void))completion
 {
-    [self goToEditMode:!close];
+    
+    if (close)
+    {
+        [blurView removeGestureRecognizer:blurViewTapGesture];
+        [blurView removeGestureRecognizer:editMenuPanGestureBlurView];
+        
+        [marketViewsCollectionView addGestureRecognizer:editMenuPanGesture];
+        [marketViewsCollectionView.panGestureRecognizer requireGestureRecognizerToFail:editMenuPanGesture];
+    }
+    else
+    {
+        [blurView addGestureRecognizer:blurViewTapGesture];
+        [blurView addGestureRecognizer:editMenuPanGestureBlurView];
+        
+        [marketViewsCollectionView removeGestureRecognizer:editMenuPanGesture];
+    }
     
     [blurView updateAsynchronously:NO completion:nil];
     [UIView animateWithDuration:.4f animations:^{
 //        [marketViewsCollectionView reloadItemsAtIndexPaths:marketViewsCollectionView.indexPathsForVisibleItems];
-        [marketViewsCollectionView reloadData];
+//        [marketViewsCollectionView reloadData];
     }];
     
     [UIView animateWithDuration:.5f animations:^{
@@ -523,7 +562,10 @@ const float maxBlurRadius = 20;
         [self.view layoutIfNeeded];
         [self updateBlurView];
     } completion:^(BOOL finished) {
-        if (finished) {
+        if (finished)
+        {
+            [self goToEditMode:!close];
+            [marketViewsCollectionView reloadData];
             if (completion) {
                 completion();
             }
@@ -730,6 +772,11 @@ const float maxBlurRadius = 20;
 
 #pragma mark - UICOllectionView Datasource & Delegate
 
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _isInEditMode ? (markets ? markets.count : 0) : (enabledMarkets ? enabledMarkets.count : 0);
@@ -763,9 +810,6 @@ const float maxBlurRadius = 20;
         [self changeEditMenuStateToClosed:YES onCompletion:^{
             [self selectMarketInCollectionView:_market];
         }];
-        
-//        [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-//        [self collectionView:collectionView didSelectItemAtIndexPath:indexPath];
     }];
     [cell onActiveChanged:^(AAAMarketCollectionViewCell *cell) {
         BOOL thereIsAtLeastOneOtherActiveMarket = NO;
@@ -789,26 +833,6 @@ const float maxBlurRadius = 20;
     }];
     
     cell.market = market;
-//    UIImageView* imgView = nil;
-//    for (UIView* subv in cell.contentView.subviews) {
-//        if ([subv isKindOfClass:[UIImageView class]] && subv.tag == 212) {
-//            imgView = (UIImageView*)subv;
-//            break;
-//        }
-//    }
-//    [imgView setImage:nil];
-    
-//    NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
-//    [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
-//        UIImage* newImage = [AAAMarketsCatalogsVC imageWithShadowForImage:image];
-//        [imgView setImage:newImage];
-//        if (!_isInEditMode && lastSelectedMarketIndexPath && [lastSelectedMarketIndexPath isEqual: indexPath])
-//        {
-//            [self setMarketViewAsSelected:cell];
-//        }
-//    } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
-//        NSLog(@"JMIMageCache failed: %@", error);
-//    }];
     return cell;
 }
 
@@ -826,7 +850,7 @@ const float maxBlurRadius = 20;
 {
     if (_isInEditMode) {
         CGSize itemSize = [((id<UICollectionViewDelegateFlowLayout>)collectionView.delegate) collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0 ]];
-        float collectionViewWidth = collectionView.contentSize.width;
+        float collectionViewWidth = collectionView.bounds.size.width;
         float minSpacing = 10;
         int numberOfItemsPerRow = collectionViewWidth/itemSize.width;
         float space = collectionViewWidth - (numberOfItemsPerRow * itemSize.width);
@@ -872,5 +896,36 @@ const float maxBlurRadius = 20;
     [[AAATutorialManager instance] invalidateTutorialView:TutorialViewDiscoverMarkets];
     [[AAATutorialManager instance] showTutorialView:TutorialViewTapOnMarket];
 }
+
+#pragma mark - UIGestureRecognizer
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if ([gestureRecognizer.view isEqual:marketViewsCollectionView] && [gestureRecognizer isEqual:editMenuPanGesture]) {
+        CGPoint vel = [editMenuPanGesture velocityInView:self.view];
+        return abs(vel.y) >= 300;
+    }
+    return YES;
+}
+
+//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    NSArray* gestReg = marketViewsCollectionView.gestureRecognizers;
+//    
+//    if ([gestureRecognizer isEqual:marketViewsCollectionView.panGestureRecognizer]) {
+//        return YES;
+//    }
+//    editMenuPanGesture direction
+//    NSLog(@"shouldRequireFailureOfGestureRecognizer:otherGestureRecognizer %@, class: %@", otherGestureRecognizer, [otherGestureRecognizer class]);
+//    NSLog(@"shouldRequireFailureOfGestureRecognizer gestureRecognizer: %@, class: %@", gestureRecognizer, [gestureRecognizer class]);
+//    return NO;
+//}
+
+//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    NSLog(@"shouldRecognizeSimultaneouslyWithGestureRecognizer: otherGestureRecognizer %@, class: %@", otherGestureRecognizer, [otherGestureRecognizer class]);
+//    NSLog(@"shouldRecognizeSimultaneouslyWithGestureRecognizer gestureRecognizer: %@, class: %@", gestureRecognizer, [gestureRecognizer class]);
+//    return YES;
+//}
 
 @end

@@ -151,6 +151,7 @@
                                         <connections>
                                             <outlet property="dataSource" destination="7zJ-Rv-Ayp" id="q5g-tT-iMu"/>
                                             <outlet property="delegate" destination="7zJ-Rv-Ayp" id="EHp-0P-5Vr"/>
+                                            <outletCollection property="gestureRecognizers" destination="6h2-jK-qyO" appends="YES" id="pfl-Rt-7Wb"/>
                                         </connections>
                                     </collectionView>
                                     <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-49-Hvk" userLabel="markets ScrollView">
@@ -190,20 +191,26 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiU-qH-vpQ" userLabel="selectView">
-                                <rect key="frame" x="145" y="465" width="30" height="30"/>
+                                <rect key="frame" x="0.0" y="465" width="320" height="30"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="open_edit.png" translatesAutoresizingMaskIntoConstraints="NO" id="OTs-Gh-tq8">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open_edit.png" translatesAutoresizingMaskIntoConstraints="NO" id="OTs-Gh-tq8">
+                                        <rect key="frame" x="145" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="hUb-AD-IFb"/>
+                                            <constraint firstAttribute="height" constant="30" id="iGA-B6-AdU"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="1hO-7i-4hO"/>
+                                    <constraint firstItem="OTs-Gh-tq8" firstAttribute="top" secondItem="IiU-qH-vpQ" secondAttribute="top" id="1s1-RH-vqV"/>
+                                    <constraint firstAttribute="bottom" secondItem="OTs-Gh-tq8" secondAttribute="bottom" id="6Bd-Ng-pgl"/>
                                     <constraint firstAttribute="height" constant="30" id="W3h-63-aEP"/>
+                                    <constraint firstAttribute="centerX" secondItem="OTs-Gh-tq8" secondAttribute="centerX" id="bNH-hC-W1B"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="bYy-G0-lnx" appends="YES" id="Oty-kb-arF"/>
+                                    <outletCollection property="gestureRecognizers" destination="dTi-4b-3Uc" appends="YES" id="BSW-sA-6BG"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grI-65-opn" userLabel="Error view">
@@ -275,7 +282,9 @@
                             <constraint firstItem="MOv-vo-MmQ" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="ASb-2L-kJn"/>
                             <constraint firstItem="VBQ-9U-Cwl" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="Ajo-h4-fHy"/>
                             <constraint firstAttribute="centerX" secondItem="IiU-qH-vpQ" secondAttribute="centerX" id="DOX-md-Jub"/>
+                            <constraint firstAttribute="trailing" secondItem="IiU-qH-vpQ" secondAttribute="trailing" id="DbJ-D1-Mg1"/>
                             <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="213-o3-14Y" secondAttribute="bottom" id="KzX-pY-wrh"/>
+                            <constraint firstItem="IiU-qH-vpQ" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="Mdu-hz-vOp"/>
                             <constraint firstAttribute="trailing" secondItem="MOv-vo-MmQ" secondAttribute="trailing" id="OEr-fV-Qec"/>
                             <constraint firstAttribute="bottom" secondItem="MOv-vo-MmQ" secondAttribute="bottom" id="Oe2-VQ-OiW"/>
                             <constraint firstAttribute="centerY" secondItem="grI-65-opn" secondAttribute="centerY" id="PoA-O4-Xll"/>
@@ -294,21 +303,36 @@
                     <connections>
                         <outlet property="blurView" destination="213-o3-14Y" id="Ba8-CE-g08"/>
                         <outlet property="carousel" destination="VBQ-9U-Cwl" id="6RL-ED-eUL"/>
+                        <outlet property="editMenuPanGesture" destination="6h2-jK-qyO" id="s5z-g1-CBc"/>
+                        <outlet property="editMenuPanGestureBlurView" destination="bYy-G0-lnx" id="pt1-xC-7XS"/>
                         <outlet property="errorView" destination="grI-65-opn" id="lSp-PW-MRc"/>
                         <outlet property="errorViewMessageLabel" destination="YRz-aK-n53" id="Uwy-pp-Mxf"/>
                         <outlet property="errorViewRetryButton" destination="KPV-bk-bIm" id="sA6-SE-gFw"/>
                         <outlet property="errorViewSpinner" destination="7aB-FQ-lv0" id="1jQ-Oj-Kwa"/>
                         <outlet property="loadingView" destination="h6O-Se-vnM" id="eVv-eH-1tC"/>
                         <outlet property="marketViewsCollectionView" destination="k0x-hS-Keu" id="1yt-2a-27e"/>
+                        <outlet property="marketsScrollSuperView" destination="AGx-Nj-mhU" id="L8L-Yf-eDI"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
                         <outlet property="marketsViewHeightConstraint" destination="v9D-Cx-ECY" id="Fu7-O5-MCV"/>
+                        <outlet property="selectView" destination="IiU-qH-vpQ" id="Wni-R3-vVW"/>
                         <outlet property="topBar" destination="M2j-Gx-z10" id="0b4-7Z-xlD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzr-UZ-Jrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="bYy-G0-lnx">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="bYy-G0-lnx" userLabel="BlurView - Pan Gesture Recognizer">
                     <connections>
                         <action selector="editViewDrag:" destination="7zJ-Rv-Ayp" id="hoe-Cy-nET"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer delaysTouchesBegan="YES" minimumNumberOfTouches="1" id="6h2-jK-qyO" userLabel="marketsCollectionView -Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="editViewDrag:" destination="7zJ-Rv-Ayp" id="b22-2b-y2m"/>
+                        <outlet property="delegate" destination="7zJ-Rv-Ayp" id="ijo-8H-fH9"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer delaysTouchesBegan="YES" minimumNumberOfTouches="1" id="dTi-4b-3Uc" userLabel="selectView -Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="editViewDrag:" destination="7zJ-Rv-Ayp" id="kU8-Pu-DnJ"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
@@ -388,10 +412,9 @@
                                                     <constraint firstAttribute="width" constant="40" id="Idl-bw-nyw"/>
                                                     <constraint firstAttribute="height" constant="30" id="wSa-kS-xib"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="favorite_empty.png">
+                                                <state key="normal">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <state key="selected" backgroundImage="favorite_filled.png"/>
                                                 <connections>
                                                     <action selector="favoritePressed:" destination="9lg-sz-G2t" eventType="touchUpInside" id="2s5-6x-1Ms"/>
                                                 </connections>
@@ -833,8 +856,6 @@
         <image name="bg.png" width="320" height="568"/>
         <image name="bottom_bar_bg.png" width="320" height="81"/>
         <image name="bottom_bar_overlay.png" width="320" height="81"/>
-        <image name="favorite_empty.png" width="104" height="100"/>
-        <image name="favorite_filled.png" width="104" height="100"/>
         <image name="first" width="30" height="30"/>
         <image name="lock.png" width="44" height="58"/>
         <image name="lock_highlight.png" width="44" height="58"/>

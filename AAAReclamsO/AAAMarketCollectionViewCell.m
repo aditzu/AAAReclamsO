@@ -46,6 +46,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
     [self.addRemoveBtn setImage:[UIImage imageNamed:self.isActive ? @"remove" : @"add"] forState:UIControlStateNormal];
 
     [UIView animateWithDuration:.3f animations:^{
+//        self.selectBtn.alpha = on ? 1.0f : 0.0f;
+//        self.addRemoveBtn.alpha = on ? 1.0f : 0.0f;;
         self.selectBtn.hidden = !on;
         self.addRemoveBtn.hidden = !on;
         self.logoImgView.layer.transform = on ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
@@ -65,11 +67,13 @@ const static float DisabledMarketViewTransparency = 0.65f;
 
 -(void)setMarket:(AAAMarket *)market
 {
+    if (_market != market) {
+        [self.logoImgView setImage:nil];
+    }
     _market = market;
     if (!market) {
         return;
     }
-    [self.logoImgView setImage:nil];
     NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
     [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
 //        UIImage* newImage = [AAAGlobals imageWithShadowForImage:image];

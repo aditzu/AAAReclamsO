@@ -15,7 +15,7 @@ typedef BOOL(^onActiveChangeBlock)(AAAMarketCollectionViewCell* cell);
 
 @property(nonatomic) BOOL isActive;
 @property(nonatomic, strong) AAAMarket* market;
--(void)setupEditModeOn:(BOOL)on;
+-(void) setupEditModeOn:(BOOL)on;
 -(void) onSelected:(onSelectedBlock) onSelectedBlock;
 -(void) onActiveChanged:(onActiveChangeBlock) onActiveChangeBlock;
 @end

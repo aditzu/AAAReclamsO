@@ -46,8 +46,6 @@
 		9E9C08391A5C1745004AA7DE /* lock_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9C08381A5C1745004AA7DE /* lock_highlight@2x.png */; };
 		9EB427A61A1785EC00700D96 /* AAAMarketsCatalogsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */; };
 		9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */; };
-		9EB845B01A2F1537008EB324 /* favorite_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB845AE1A2F1537008EB324 /* favorite_empty@2x.png */; };
-		9EB845B11A2F1537008EB324 /* favorite_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB845AF1A2F1537008EB324 /* favorite_filled@2x.png */; };
 		9EB845B41A2F1CF8008EB324 /* AAAFavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845B31A2F1CF8008EB324 /* AAAFavoritesManager.m */; };
 		9EB845BA1A2F1F67008EB324 /* AAACatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845B71A2F1F67008EB324 /* AAACatalog.m */; };
 		9EB845BB1A2F1F67008EB324 /* AAAMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB845B91A2F1F67008EB324 /* AAAMarket.m */; };
@@ -163,8 +161,6 @@
 		9EB427A51A1785EC00700D96 /* AAAMarketsCatalogsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketsCatalogsVC.m; sourceTree = "<group>"; };
 		9EB4288B1A1A1DC900700D96 /* AAACatalogPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalogPageVC.h; sourceTree = "<group>"; };
 		9EB4288C1A1A1DC900700D96 /* AAACatalogPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAACatalogPageVC.m; sourceTree = "<group>"; };
-		9EB845AE1A2F1537008EB324 /* favorite_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite_empty@2x.png"; sourceTree = "<group>"; };
-		9EB845AF1A2F1537008EB324 /* favorite_filled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite_filled@2x.png"; sourceTree = "<group>"; };
 		9EB845B21A2F1CF8008EB324 /* AAAFavoritesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAFavoritesManager.h; sourceTree = "<group>"; };
 		9EB845B31A2F1CF8008EB324 /* AAAFavoritesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAFavoritesManager.m; sourceTree = "<group>"; };
 		9EB845B61A2F1F67008EB324 /* AAACatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAACatalog.h; sourceTree = "<group>"; };
@@ -334,8 +330,6 @@
 				9EF059AF1A5170390083A04F /* zoom@2x.png */,
 				9E8654AE1A3DEFAA00ECEE62 /* tap@2x.png */,
 				9E8654AC1A3DED8A00ECEE62 /* swipe_left_right@2x.png */,
-				9EB845AE1A2F1537008EB324 /* favorite_empty@2x.png */,
-				9EB845AF1A2F1537008EB324 /* favorite_filled@2x.png */,
 				9EE091511A24B740006789F0 /* bg@2x.png */,
 				9EE091551A24BA2B006789F0 /* bottom_bar_bg@2x.png */,
 				9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */,
@@ -605,7 +599,6 @@
 				9E2650D61A11192F005B546B /* Main.storyboard in Resources */,
 				9E86548C1A38D4DB00ECEE62 /* README.txt in Resources */,
 				9EE091571A24BA2B006789F0 /* bottom_bar_bg@2x.png in Resources */,
-				9EB845B01A2F1537008EB324 /* favorite_empty@2x.png in Resources */,
 				9EF059AE1A4F45430083A04F /* minimize@2x.png in Resources */,
 				9E8654AF1A3DEFAA00ECEE62 /* tap@2x.png in Resources */,
 				9EE091581A24BA2B006789F0 /* bottom_bar_overlay@2x.png in Resources */,
@@ -617,7 +610,6 @@
 				9EF059B01A5170390083A04F /* zoom@2x.png in Resources */,
 				9E9130F21A5D7BDF00272CC1 /* open_edit@2x.png in Resources */,
 				9E9C08371A5C1678004AA7DE /* refresh_highlight@2x.png in Resources */,
-				9EB845B11A2F1537008EB324 /* favorite_filled@2x.png in Resources */,
 				9EE091531A24B740006789F0 /* bg@2x.png in Resources */,
 				9E9C08311A59684F004AA7DE /* refresh@2x.png in Resources */,
 				9E8654AD1A3DED8A00ECEE62 /* swipe_left_right@2x.png in Resources */,
@@ -815,7 +807,7 @@
 			baseConfigurationReference = 9D5C279E41EB04FFDDACAF8D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageyo;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -840,7 +832,7 @@
 			baseConfigurationReference = C2F365147BEC56749C74C9C3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageyo;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

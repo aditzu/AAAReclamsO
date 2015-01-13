@@ -380,8 +380,10 @@ const static int PicturesToPreload = 3;
 -(void)updatePageViewControllerForCurrentPage
 {
     AAACatalogPageVC* currentPage=  [self currentPage];
-    CGRect frame = [currentPage scrollViewFrame];
-    pageViewController.view.frame = frame;
+    if (currentPage.isPageLoaded) {
+        CGRect frame = [currentPage scrollViewFrame];
+        pageViewController.view.frame = frame;
+    }
 //    [currentPage onPageLoaded:^(AAACatalogPageVC *catalogPageVC, BOOL success) {
 //        if ([currentPage isEqual:catalogPageVC] && success) {
 //
