@@ -28,8 +28,8 @@ static NSString* const FlurryParameterCatalogId = @"Catalog id";
 @interface AAAGlobals : NSObject
 
 +(AAAGlobals*) sharedInstance;
+-(AAASharedBanner *)sharedBannerViewWithRootViewController:(UIViewController*) rootViewController;
 +(UIImage*)imageWithShadowForImage:(UIImage *)initialImage;
--(AAASharedBanner*) sharedBannerView;
 -(NSString*) flurryId;
 -(NSString*) privacyPolicyURL;
 @end

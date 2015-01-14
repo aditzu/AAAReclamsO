@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AAACatalog.h"
 #import "AAACatalogPageVC.h"
+#import "AAASharedBanner.h"
 
-#import "GADBannerView.h"
-#import "GADRequest.h"
+//#import "GADBannerView.h"
+//#import "GADRequest.h"
 
 @class AAACatalogVC;
 
@@ -21,7 +22,7 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, GADBannerViewDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, AAASharedBannerDelegate>{
 }
 
 @property(nonatomic, strong) AAACatalog* catalog;

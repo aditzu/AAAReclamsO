@@ -7,13 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GADBannerView.h"
+#import <CoreLocation/CoreLocation.h>
+#import <UIKit/UIKit.h>
 
-@interface AAASharedBanner : NSObject
+@protocol AAASharedBannerDelegate<NSObject>
+@optional
+- (void) applicationWillTerminateFromAd;
+- (void) adWasTapped:(NSString*) adType apId:(NSString*) apId;
+- (void) adModalWillDismiss:(NSString*) adType apId:(NSString*) apId;
+- (void) adModalDidDismiss:(NSString*) adType apId:(NSString*) apId;
+- (void) adModalDidAppear:(NSString*) adType apId:(NSString*) apId;
+- (void) adModalWillAppear:(NSString*) adType apId:(NSString*) apId;
+- (void) adRequestSuccesful;
+- (void) adRequestFailedWithError:(NSError*) error;
+@end
 
-@property (nonatomic, strong) GADBannerView* bannerView;
+@interface AAASharedBanner : NSObject<CLLocationManagerDelegate>
 
--(id)initWithAdUnitId:(NSString*) adUnitId;
--(void) setRootViewController:(UIViewController*) vc;
+@property (nonatomic, strong, readonly) UIView* bannerView;
+@property (nonatomic, weak) id<AAASharedBannerDelegate> delegate;
+
+- (instancetype)initWithAdUnitId:(NSString*) adUnitId andRootViewController:(UIViewController*) rootVC;
+- (void) setRootViewController:(UIViewController*) vc;
+- (void) start;
+- (void) stop;
 
 @end

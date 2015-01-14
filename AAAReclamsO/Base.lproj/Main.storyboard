@@ -104,11 +104,11 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="212" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EqX-oF-g3d">
-                                                            <rect key="frame" x="3" y="3" width="80" height="80"/>
+                                                            <rect key="frame" x="6" y="6" width="74" height="74"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="80" id="laJ-mt-0EQ"/>
-                                                                <constraint firstAttribute="width" constant="80" id="wfN-xu-K1I"/>
+                                                                <constraint firstAttribute="height" constant="74" id="laJ-mt-0EQ"/>
+                                                                <constraint firstAttribute="width" constant="74" id="wfN-xu-K1I"/>
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSv-Wv-eut">
@@ -121,7 +121,7 @@
                                                                 <action selector="selectPressed:" destination="kC5-rp-BdD" eventType="touchUpInside" id="M4N-fN-JtR"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="def-Io-PXP">
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="def-Io-PXP" userLabel="addRemove">
                                                             <rect key="frame" x="55" y="0.0" width="30" height="30"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

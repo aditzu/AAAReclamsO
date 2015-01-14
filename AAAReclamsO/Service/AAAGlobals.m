@@ -26,10 +26,14 @@ static AAAGlobals* _instance;
     return _instance;
 }
 
--(AAASharedBanner *)sharedBannerView
+-(AAASharedBanner *)sharedBannerViewWithRootViewController:(UIViewController*) rootViewController
 {
     if (!bannerView) {
-        bannerView = [[AAASharedBanner alloc] initWithAdUnitId:[self gadUnitId]];
+        bannerView = [[AAASharedBanner alloc] initWithAdUnitId:[self apId] andRootViewController:rootViewController];
+    }
+    else
+    {
+        [bannerView setRootViewController:rootViewController];
     }
     return bannerView;
 }
@@ -58,9 +62,10 @@ static AAAGlobals* _instance;
     return @"QNVNYDDJXCM9FR583Q4T";
 }
 
--(NSString*) gadUnitId
+-(NSString*) apId
 {
-    return @"ca-app-pub-3940256099942544/2934735716";// @"ca-app-pub-2163416701589769/7779082332";
+//    return @"ca-app-pub-3940256099942544/2934735716";// @"ca-app-pub-2163416701589769/7779082332"; //gad
+    return @"190102"; //millenial
 }
 
 -(NSString *)privacyPolicyURL

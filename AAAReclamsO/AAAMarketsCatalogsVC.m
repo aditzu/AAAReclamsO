@@ -18,6 +18,7 @@
 #import "AAATutorialManager.h"
 #import "AAAMarketCollectionViewCell.h"
 #import "FXBlurView.h"
+#import "AAASharedBanner.h"
 
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
 
@@ -73,9 +74,9 @@
     
     ScrollDirection _marketsViewDragDirection;
 }
+
 - (IBAction)privacyButtonPressed:(UIButton *)sender;
 - (IBAction)refreshButtonPressed:(UIButton *)sender;
-
 -(IBAction) errorViewRetryPressed:(UIButton*)sender;
 @end
 
@@ -152,6 +153,8 @@ static Reachability* ownServerReach;
     [blurView setUserInteractionEnabled:YES];
     
     blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
+    
+    [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
 }
 
 -(void) resetCatalogs
