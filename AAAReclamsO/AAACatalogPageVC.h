@@ -14,6 +14,7 @@ typedef void (^OnScrollViewHeightConstraintChange) (AAACatalogPageVC* catalogPag
 
 @protocol AAACatalogPageVCDelegate <NSObject>
 @optional
+-(void) catalogPage:(AAACatalogPageVC*) catalogPage pageLoaded:(BOOL)pageLoaded;
 -(void) catalogPage:(AAACatalogPageVC*) catalogPage contentSizeDidChange:(CGSize) newSize;
 @end
 
@@ -27,6 +28,7 @@ typedef void (^OnScrollViewHeightConstraintChange) (AAACatalogPageVC* catalogPag
 @property(nonatomic, copy) OnScrollViewHeightConstraintChange onScrollViewHeightConstraintChange;
 -(void) downloadImage;
 -(void) show:(BOOL)show;
--(CGRect) scrollViewFrame;
+-(CGRect) croppedPageCalculatedFrame;
+-(CGRect) croppedPageCalculatedFrameInParentFrame:(CGRect) parentFrame;
 -(void) addOnPageLoaded:(onPageLoadedBlock) onPageLoaded;
 @end

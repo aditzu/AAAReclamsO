@@ -125,18 +125,43 @@ const static int PicturesToPreload = 3;
     [self updateSettingsFromCatalog:catalog seen:seen];
 }
 
--(CGRect) pageControllerFullFrame
+//-(CGRect) pageControllerFullFrame
+//{
+//    CGRect myBounds = self.view.bounds;
+//    if (isMinimized)
+//    {
+//        myBounds.size.height = fromToBottomBar.frame.origin.y;
+//    }
+//    else if(adBannerLoaded)
+//    {
+//        myBounds.size.height = gadBannerViewContainer.frame.origin.y;
+//    }
+//    return myBounds;
+//}
+
+-(CGRect) pageViewControllerFrameForPage:(AAACatalogPageVC*) page
 {
-    CGRect myBounds = self.view.bounds;
+    CGRect pageVCFrame = self.view.bounds;
     if (isMinimized)
     {
-        myBounds.size.height = fromToBottomBar.frame.origin.y;
+        pageVCFrame.size.height -= fromToBottomBar.frame.size.height;
     }
     else if(adBannerLoaded)
     {
-        myBounds.size.height = gadBannerViewContainer.frame.origin.y;
+        pageVCFrame.size.height -= gadBannerViewContainer.frame.size.height;
     }
-    return myBounds;
+    pageVCFrame = [page croppedPageCalculatedFrameInParentFrame:pageVCFrame];
+    return pageVCFrame;
+}
+
+-(CGRect) pageViewControllerFrame
+{
+    AAACatalogPageVC* currentPage = [self currentPage];
+    if (currentPage)
+    {
+        return [self pageViewControllerFrameForPage:currentPage];
+    }
+    return self.view.bounds;
 }
 
 -(void) setBottomBarYPosition
@@ -145,9 +170,10 @@ const static int PicturesToPreload = 3;
     if (currentPage) {
         if(currentPage.isPageLoaded)
         {
-            CGRect scrollViewFrame = [currentPage scrollViewFrame];
+//            CGRect scrollViewFrame = [currentPage croppedPageCalculatedFrame];
+            CGRect pageVCFrame = pageViewController.view.frame;
             CGRect myBounds = self.view.frame;
-            float constant = myBounds.size.height - (scrollViewFrame.origin.y + scrollViewFrame.size.height) - fromToBottomBar.frame.size.height;
+            float constant = myBounds.size.height - (pageVCFrame.origin.y + pageVCFrame.size.height) - fromToBottomBar.frame.size.height;
             fromToDistanceToBottomConstraint.constant = constant;
             return;
         }
@@ -167,12 +193,8 @@ const static int PicturesToPreload = 3;
     }
 }
 
--(void) updateSettingsFromCatalog:(AAACatalog*) catalog seen:(BOOL) seen
+- (void)setFromToDatesForCatalog:(AAACatalog *)catalog
 {
-    if (!self.isViewLoaded || !catalog)
-    {
-        return;
-    }
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy"];
     NSDate* from = [NSDate dateWithTimeIntervalSince1970:catalog.activeFrom/1000.0f];
@@ -193,6 +215,15 @@ const static int PicturesToPreload = 3;
     [allString appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:to] attributes:dateTextAttributes]];
     
     fromToLabel.attributedText = allString;
+}
+
+-(void) updateSettingsFromCatalog:(AAACatalog*) catalog seen:(BOOL) seen
+{
+    if (!self.isViewLoaded || !catalog)
+    {
+        return;
+    }
+    [self setFromToDatesForCatalog:catalog];
     
     pages = [NSMutableArray array];
     [[AAAwww instance] downloadPagesUrlsForCatalog:catalog.identifier withCompletionHandler:^(NSArray *_pages, NSError *error) {
@@ -211,7 +242,9 @@ const static int PicturesToPreload = 3;
             [pageViewController.view removeFromSuperview];
         }
         pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-        pageViewController.view.frame = [self pageControllerFullFrame];
+        pageViewController.delegate = self;
+        pageViewController.dataSource = self;
+        pageViewController.view.frame = [self pageViewControllerFrame];
         [self.view addSubview:pageViewController.view];
         [self.view bringSubviewToFront:topBarView];
         [self.view bringSubviewToFront:fromToBottomBar];
@@ -224,10 +257,12 @@ const static int PicturesToPreload = 3;
                 catalogPage.onScrollViewHeightConstraintChange = ^(AAACatalogPageVC* page)
                 {
                     if (page.isPageLoaded) {
+                        pageViewController.view.frame = [self pageViewControllerFrame];
                         [self setBottomBarYPosition];
                         page.onScrollViewHeightConstraintChange = nil;
                     }
                 };
+                catalogPage.delegate = self;
             }
             catalogPage.imageUrl = catalog.imagesURLs[i];
             catalogPage.indexInPageViewCtrl = i;
@@ -240,15 +275,13 @@ const static int PicturesToPreload = 3;
         }
         if (pages.count > 0) {
             __block UIView* v = spinnerView;
-            __block AAACatalogVC* selfVC = self;
-//            __block UIView* pageView = pageViewController.view;
             [pageViewController setViewControllers:@[pages[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
-                v.hidden = YES;
-                AAACatalogPageVC* pg = [selfVC currentPage];
-                pg.delegate = selfVC;
+                if (finished) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        v.hidden = YES;
+                    });
+                }
             }];
-            pageViewController.delegate = self;
-            pageViewController.dataSource = self;
             [self setProgress:1 outOf:(int)pages.count];
         }
     }];
@@ -298,7 +331,7 @@ const static int PicturesToPreload = 3;
 
 -(AAACatalogPageVC*) currentPage
 {
-    AAACatalogPageVC* currentPage;;
+    AAACatalogPageVC* currentPage;
     if (pageViewController.viewControllers.count > 0) {
         currentPage = pageViewController.viewControllers[0];
     }
@@ -335,7 +368,7 @@ const static int PicturesToPreload = 3;
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
     if (pageViewController) {
-        pageViewController.view.frame= [self pageControllerFullFrame];
+        pageViewController.view.frame= [self pageViewControllerFrame];
 //        [self setBottomBarYPosition];
     }
     
@@ -406,15 +439,10 @@ const static int PicturesToPreload = 3;
 -(void)updatePageViewControllerForCurrentPage
 {
     AAACatalogPageVC* currentPage=  [self currentPage];
-    if (currentPage.isPageLoaded) {
-        CGRect frame = [currentPage scrollViewFrame];
-        pageViewController.view.frame = frame;
+    if (currentPage.isPageLoaded)
+    {
+        pageViewController.view.frame = [self pageViewControllerFrameForPage:currentPage];
     }
-//    [currentPage onPageLoaded:^(AAACatalogPageVC *catalogPageVC, BOOL success) {
-//        if ([currentPage isEqual:catalogPageVC] && success) {
-//
-//        }
-//    }];
 }
 
 -(void) showTopBar:(NSNumber*) show
@@ -455,36 +483,6 @@ const static int PicturesToPreload = 3;
         }
     }];
 }
-
-//- (void)layoutBanner:(BOOL) layout animated:(BOOL)animated
-//{
-//    if (bannerIsShown == layout) {
-//        return;
-//    }
-//    CGRect contentFrame = bannerViewContainer.bounds;
-//    CGRect bannerFrame = bannerView.frame;
-//    
-//    CGRect pageVCFrame = pageViewController.view.frame;
-//    if (bannerView.bannerLoaded && layout)
-//    {
-//        contentFrame.size.height -= bannerView.frame.size.height;
-//        bannerFrame.origin.y = contentFrame.size.height;
-//        if (pageVCFrame.size.height + pageVCFrame.origin.y > self.view.bounds.size.height - bannerView.frame.size.height) {
-//            pageVCFrame.origin.y = self.view.bounds.size.height - bannerView.frame.size.height - pageVCFrame.size.height + 4;
-//        }
-//        bannerIsShown = YES;
-//    } else {
-//        bannerFrame.origin.y = contentFrame.size.height;
-//        bannerIsShown = NO;
-//    }
-//    
-//    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
-//        bannerView.frame = contentFrame;
-//        [bannerViewContainer layoutIfNeeded];
-//        bannerView.frame = bannerFrame;
-//        pageViewController.view.frame = pageVCFrame;
-//    }];
-//}
 
 - (void)layoutBanner:(BOOL) layout animated:(BOOL)animated
 {
@@ -550,14 +548,19 @@ const static int PicturesToPreload = 3;
         pageIsAnimating = NO;
         int indexOfVC = (int)[pages indexOfObject: _pageViewController.viewControllers[0]];
         [self setProgress:indexOfVC+1 outOf:(int)pages.count];
-//        [self updateFavoriteButton];
+        //        [self updateFavoriteButton];
+        AAACatalogPageVC* page = [self currentPage];
+        if (page.isPageLoaded) {
+            _pageViewController.view.frame = [self pageViewControllerFrame];
+            [self updateTopBarPosition];
+        }
         [self showTopBar:[NSNumber numberWithBool:YES]];
         [[AAATutorialManager instance] invalidateTutorialView:TutorialViewExploreCatalog];
         [[AAATutorialManager instance] showTutorialView:TutorialViewZoomOnCatalog];
     }
 }
 
--(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+-(UIViewController *)pageViewController:(UIPageViewController *)_pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     if (pageIsAnimating) {
         return nil;
@@ -566,7 +569,7 @@ const static int PicturesToPreload = 3;
     if (currentIndex == pages.count -1 || isMinimized) return nil;
     [pages[MIN(pages.count-1, currentIndex+1+PicturesToPreload)] downloadImage];
     AAACatalogPageVC* nextPagevc = pages[currentIndex+1];
-//    nextPagevc.delegate = self;
+    nextPagevc.delegate = self;
     return nextPagevc;
 }
 
@@ -602,6 +605,13 @@ const static int PicturesToPreload = 3;
 
 #pragma mark - AAACatalogPageDelegate
 
+-(void)catalogPage:(AAACatalogPageVC *)catalogPage pageLoaded:(BOOL)pageLoaded
+{
+//    [UIView animateWithDuration:.3f animations:^{
+        pageViewController.view.frame = [self pageViewControllerFrame];
+//    }];
+}
+
 -(void)catalogPage:(AAACatalogPageVC *)catalogPage contentSizeDidChange:(CGSize)newSize
 {
     [[AAATutorialManager instance] invalidateTutorialView:TutorialViewZoomOnCatalog];
@@ -619,44 +629,6 @@ const static int PicturesToPreload = 3;
 //    NSLog(@"pageVCSize: %@", NSStringFromCGRect(pageViewController.view.frame));
 //    NSLog(@"ContentSize: %@", NSStringFromCGSize(newSize));
 }
-
-
-//#pragma mark - GADBannerView Delegate
-//
-//-(void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
-//{
-//    gadBannerLoaded = NO;
-//    [self layoutBanner:NO animated:YES];
-//    NSLog(@"didFailToReceiveAdWithError :%@", error);
-//}
-//
-//-(void)adViewDidReceiveAd:(GADBannerView *)view
-//{
-//    gadBannerLoaded = YES;
-//    if (!isMinimized) {
-//        [self layoutBanner:YES animated:YES];
-//        [self updateTopBarPosition];
-//    }
-//    NSLog(@"adViewDidReceiveAd");
-//}
-//
-//-(void)adViewDidDismissScreen:(GADBannerView *)adView
-//{
-//    [self showPageViewController:YES animated:YES];
-//    NSLog(@"adViewDidDismissScreen");
-//}
-//
-//-(void)adViewWillLeaveApplication:(GADBannerView *)adView
-//{
-//    NSLog(@"adViewWillLeaveApplication");
-//}
-//
-//-(void)adViewWillPresentScreen:(GADBannerView *)adView
-//{
-//    [self showTopBar:[NSNumber numberWithBool:NO]];
-//    [self showPageViewController:NO animated:YES];
-//    NSLog(@"adViewWillPresentScreen");
-//}
 
 #pragma mark - AAASharedBannerDelegate
 

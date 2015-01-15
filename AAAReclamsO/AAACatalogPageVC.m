@@ -64,11 +64,22 @@
 {
     _isPageLoaded = isPageLoaded;
     [self alertOnPageLoadedListeners:isPageLoaded];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(catalogPage:pageLoaded:)])
+    {
+        [self.delegate catalogPage:self pageLoaded:isPageLoaded];
+    }
 }
 
 -(void)addOnPageLoaded:(onPageLoadedBlock)onPageLoaded
 {
     [onPageLoadedBlocks addObject:[onPageLoaded copy]];
+}
+
+-(void) alertOnPageLoadedListeners:(BOOL) success
+{
+    for (onPageLoadedBlock _onPgLoaded in onPageLoadedBlocks) {
+        _onPgLoaded(self, success);
+    }
 }
 
 -(void)viewDidLayoutSubviews
@@ -93,55 +104,60 @@
     }
 }
 
--(void) cutTheImage
+//-(void) cutTheImage
+//{
+//    float imageRatio = page.image.size.width/ page.image.size.height;
+//    float imageViewRatio = page.frame.size.width / page.frame.size.height;
+//    
+//    float width = 0, height = 0, yoffset = 0, xoffset = 0;
+//    if (imageRatio > imageViewRatio) {
+//        width = page.frame.size.width;
+//        height = width / imageRatio;
+//        assert(page.frame.size.height > height);
+//        yoffset = (page.frame.size.height - height)/2.0f;
+//    }
+//    else
+//    {
+//        height = page.frame.size.height;
+//        width = height * imageRatio;
+//        assert(page.frame.size.width > width);
+//        xoffset = (page.frame.size.width - width) / 2.0f;
+//    }
+//    pageWConstraint.constant = width;
+//    pageHConstraint.constant = height;
+//    [self.view layoutSubviews];
+//}
+
+-(CGRect) croppedPageCalculatedFrame
 {
-    float imageRatio = page.image.size.width/ page.image.size.height;
-    float imageViewRatio = page.frame.size.width / page.frame.size.height;
-    
-    float width = 0, height = 0, yoffset = 0, xoffset = 0;
-    if (imageRatio > imageViewRatio) {
-        width = page.frame.size.width;
-        height = width / imageRatio;
-        assert(page.frame.size.height > height);
-        yoffset = (page.frame.size.height - height)/2.0f;
-    }
-    else
-    {
-        height = page.frame.size.height;
-        width = height * imageRatio;
-        assert(page.frame.size.width > width);
-        xoffset = (page.frame.size.width - width) / 2.0f;
-    }
-    pageWConstraint.constant = width;
-    pageHConstraint.constant = height;
-    [self.view layoutSubviews];
+    return  [self croppedPageCalculatedFrameInParentFrame:page.frame];
 }
 
--(CGRect)scrollViewFrame
+-(CGRect) croppedPageCalculatedFrameInParentFrame:(CGRect) parentFrame
 {
     if (!self.isPageLoaded) {
-        return [self.view convertRect:page.frame toView:self.scrollView];
+        return [self.view convertRect:parentFrame toView:self.scrollView];
     }
     
     float imageRatio = img.size.width/ img.size.height;
-    float imageViewRatio = page.frame.size.width / page.frame.size.height;
+    float imageViewRatio = parentFrame.size.width / parentFrame.size.height;
     
     float width = 0, height = 0, yoffset = 0, xoffset = 0;
     if (imageRatio > imageViewRatio) {
-        width = page.frame.size.width;
+        width = parentFrame.size.width;
         height = width / imageRatio;
-        assert(page.frame.size.height > height);
-        yoffset = (page.frame.size.height - height)/2.0f;
+        assert(parentFrame.size.height >= height);
+        yoffset = (parentFrame.size.height - height)/2.0f;
     }
     else
     {
-        height = page.frame.size.height;
+        height = parentFrame.size.height;
         width = height * imageRatio;
-        assert(page.frame.size.width > width);
-        xoffset = (page.frame.size.width - width) / 2.0f;
+        assert(parentFrame.size.width >= width);
+        xoffset = (parentFrame.size.width - width) / 2.0f;
     }
     
-    CGRect imgViewFrame = page.frame;
+    CGRect imgViewFrame = parentFrame;
     imgViewFrame.size.width = width;
     imgViewFrame.size.height = height;
     imgViewFrame.origin.x += xoffset;
@@ -154,13 +170,6 @@
     _imageUrl = [imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (page) {
         [self updateImage];
-    }
-}
-
--(void) alertOnPageLoadedListeners:(BOOL) success
-{
-    for (onPageLoadedBlock _onPgLoaded in onPageLoadedBlocks) {
-        _onPgLoaded(self, success);
     }
 }
 
@@ -199,7 +208,6 @@
 
 -(void) show:(BOOL)show
 {
-//    page.contentMode = show ? UIViewContentModeScaleToFill : UIViewContentModeScaleAspectFit;
     shown = show;
     overlay.hidden = show;
 }

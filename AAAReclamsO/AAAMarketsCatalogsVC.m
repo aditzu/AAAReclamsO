@@ -634,20 +634,6 @@ const float maxBlurRadius = 20;
     return 10;
 }
 
-//-(int) numberOfItemsPerSpace
-//{
-//    CGSize markViewSize = [self marketCellSize];
-//    int noOfItems = marketViewsCollectionView.bounds.size.width / markViewSize.width;
-//    float space = marketViewsCollectionView.bounds.size.width - (noOfItems * markViewSize.width);
-//    float spaceBetweenTwoItems = space / noOfItems;
-//    if (spaceBetweenTwoItems < space) {
-//        noOfItems--;
-//        space = marketViewsCollectionView.bounds.size.width - (noOfItems * markViewSize.width);
-//        spaceBetweenTwoItems = space / noOfItems;
-//    }
-//    return noOfItems;
-//}
-
 -(void) updateMarketCollectionDatasource
 {
     if (_isInEditMode)
@@ -738,8 +724,8 @@ const float maxBlurRadius = 20;
     }
     //save the settings
     NSData* seenCatalogsData = [NSKeyedArchiver archivedDataWithRootObject:seenCatalogs];
-//    [[NSUserDefaults standardUserDefaults] setObject:seenCatalogsData forKey:kSeenDictionaryUserDefaultsKey];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:seenCatalogsData forKey:kSeenDictionaryUserDefaultsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     _seenCatalogsDirty = YES;
 }
 
@@ -1034,25 +1020,5 @@ const float maxBlurRadius = 20;
     }
     return YES;
 }
-
-//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-//{
-//    NSArray* gestReg = marketViewsCollectionView.gestureRecognizers;
-//    
-//    if ([gestureRecognizer isEqual:marketViewsCollectionView.panGestureRecognizer]) {
-//        return YES;
-//    }
-//    editMenuPanGesture direction
-//    NSLog(@"shouldRequireFailureOfGestureRecognizer:otherGestureRecognizer %@, class: %@", otherGestureRecognizer, [otherGestureRecognizer class]);
-//    NSLog(@"shouldRequireFailureOfGestureRecognizer gestureRecognizer: %@, class: %@", gestureRecognizer, [gestureRecognizer class]);
-//    return NO;
-//}
-
-//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-//{
-//    NSLog(@"shouldRecognizeSimultaneouslyWithGestureRecognizer: otherGestureRecognizer %@, class: %@", otherGestureRecognizer, [otherGestureRecognizer class]);
-//    NSLog(@"shouldRecognizeSimultaneouslyWithGestureRecognizer gestureRecognizer: %@, class: %@", gestureRecognizer, [gestureRecognizer class]);
-//    return YES;
-//}
 
 @end
