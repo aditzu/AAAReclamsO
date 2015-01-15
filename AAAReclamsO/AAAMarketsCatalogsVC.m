@@ -73,6 +73,9 @@
     __weak IBOutlet UIView *marketsScrollSuperView;
     
     ScrollDirection _marketsViewDragDirection;
+    
+    NSMutableDictionary* seenCatalogs;
+    BOOL _seenCatalogsDirty;
 }
 
 - (IBAction)privacyButtonPressed:(UIButton *)sender;
@@ -86,6 +89,9 @@ const static BOOL ENABLE_ADD_REMOVE_MARKET = NO;
 
 NSString* const kMarketCellReuseIdentifier = @"marketViewCellReuseIdentifier";
 NSString* const kEnabledMarketsUserDefaultsKey = @"EnabledMarkets";
+NSString* const kSeenDictionaryUserDefaultsKey = @"SeenCatalogs";
+NSString* const kFirstLaunchAppUserDefaultsKey = @"FirstLaunch";
+
 static Reachability* internetReach;
 static Reachability* ownServerReach;
 
@@ -134,15 +140,7 @@ static Reachability* ownServerReach;
     bottomLimitYMarketsViewHeightConstraint = marketsViewHeightConstraint.constant;
     topLimitYMarketsViewHeightConstraint = [UIScreen mainScreen].bounds.size.height - bottomLimitYMarketsViewHeightConstraint;
 
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kEnabledMarketsUserDefaultsKey])
-    {
-        NSData* marketsDisabledData = [[NSUserDefaults standardUserDefaults] objectForKey:kEnabledMarketsUserDefaultsKey];
-        enabledMarketsUserDefaults = [NSKeyedUnarchiver unarchiveObjectWithData:marketsDisabledData];
-    }
-    else
-    {
-        enabledMarketsUserDefaults = [NSMutableDictionary dictionary];
-    }
+    [self loadUserDefaults];
 
     UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)marketViewsCollectionView.collectionViewLayout;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
@@ -153,8 +151,30 @@ static Reachability* ownServerReach;
     [blurView setUserInteractionEnabled:YES];
     
     blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
-    
     [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
+}
+
+- (void)loadUserDefaults
+{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kEnabledMarketsUserDefaultsKey])
+    {
+        NSData* marketsDisabledData = [[NSUserDefaults standardUserDefaults] objectForKey:kEnabledMarketsUserDefaultsKey];
+        enabledMarketsUserDefaults = [NSKeyedUnarchiver unarchiveObjectWithData:marketsDisabledData];
+    }
+    else
+    {
+        enabledMarketsUserDefaults = [NSMutableDictionary dictionary];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kSeenDictionaryUserDefaultsKey])
+    {
+        NSData* marketsDisabledData = [[NSUserDefaults standardUserDefaults] objectForKey:kSeenDictionaryUserDefaultsKey];
+        seenCatalogs = [NSKeyedUnarchiver unarchiveObjectWithData:marketsDisabledData];
+    }
+    else
+    {
+        seenCatalogs = [NSMutableDictionary dictionary];
+    }
 }
 
 -(void) resetCatalogs
@@ -229,6 +249,7 @@ static Reachability* ownServerReach;
             return [[NSNumber numberWithDouble:obj1.priority] compare:[NSNumber numberWithDouble:obj2.priority]];
         }]];
         [self updateEnabledMarketsDatasource];
+        [self updateSeenMarkets];
         [marketViewsCollectionView reloadData];
         if (markets.count>0) {
             currentShowingMarket = enabledMarkets[0];
@@ -245,6 +266,21 @@ static Reachability* ownServerReach;
     }];
 }
 
+-(void) updateSeenMarkets
+{
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    if (![userDefaults boolForKey:kFirstLaunchAppUserDefaultsKey])
+    {
+        for (AAAMarket* market in markets) {
+            for (AAACatalog* catalog in market.catalogs) {
+                [self setCatalogIdAsSeen:catalog.identifier forMarket:market.identifier];
+            }
+        }
+        [self trySaveSeenCatalogs];
+        [userDefaults setBool:YES forKey:kFirstLaunchAppUserDefaultsKey];
+        [userDefaults synchronize];
+    }
+}
 
 -(void) checkForInternetConnectionOnSuccess:(void(^)(void)) success onFailure:(void(^)(void)) failure
 {
@@ -639,6 +675,74 @@ const float maxBlurRadius = 20;
     }
 }
 
+-(void) seenCatalog:(int) catalogId forMarket:(int) marketid
+{
+    [self setCatalogIdAsSeen:catalogId forMarket:marketid];
+    [self trySaveSeenCatalogs];
+    
+    for (NSIndexPath* cellIndexPath in [marketViewsCollectionView indexPathsForSelectedItems])
+    {
+        AAAMarket* marketForIndexPath = (AAAMarket*) (_isInEditMode ? markets[cellIndexPath.row] : enabledMarkets[cellIndexPath.row]);
+        if (marketForIndexPath.identifier == marketid)
+        {
+            int unseenCatalogs = [self unseenCatalogsForMarket:marketForIndexPath];
+            AAAMarketCollectionViewCell* cell = (AAAMarketCollectionViewCell*) [marketViewsCollectionView cellForItemAtIndexPath:cellIndexPath];
+            [cell tryDecrementUnseenCatalogs:unseenCatalogs];
+//            [cell setUnseenCatalogs:unseenCatalogs];
+            break;
+        }
+    }
+}
+
+-(int) unseenCatalogsForMarket:(AAAMarket*) market
+{
+    int unseenCatalogs = 0;
+    NSArray* seenCatalogsForThisMarket = [seenCatalogs objectForKey:@(market.identifier)];
+    if (!seenCatalogsForThisMarket) {
+        return market.catalogs.count;
+    }
+    for (AAACatalog* catalog in market.catalogs)
+    {
+        if (![seenCatalogsForThisMarket containsObject:@(catalog.identifier)]) {
+            unseenCatalogs++;
+        }
+    }
+    return unseenCatalogs;
+}
+
+-(BOOL) isCatalogSeen:(int) catalogId forMarketId:(int) marketId
+{
+    NSMutableArray* seenCatalogsForThisMarket = [seenCatalogs objectForKey:@(marketId)];
+    return seenCatalogsForThisMarket && [seenCatalogsForThisMarket containsObject:@(catalogId)];
+}
+
+-(void) setCatalogIdAsSeen:(int) catalogId forMarket:(int) marketId
+{
+    NSMutableArray* seenCatalogsForThisMarket = [seenCatalogs objectForKey:@(marketId)];
+    if (!seenCatalogsForThisMarket)
+    {
+        seenCatalogsForThisMarket = [NSMutableArray array];
+    }
+    if (![seenCatalogsForThisMarket containsObject:@(catalogId)])
+    {
+        [seenCatalogsForThisMarket addObject:@(catalogId)];
+        _seenCatalogsDirty = YES;
+    }
+    [seenCatalogs setObject:seenCatalogsForThisMarket forKey:@(marketId)];
+}
+
+-(void)trySaveSeenCatalogs
+{
+    if (!_seenCatalogsDirty) {
+        return;
+    }
+    //save the settings
+    NSData* seenCatalogsData = [NSKeyedArchiver archivedDataWithRootObject:seenCatalogs];
+//    [[NSUserDefaults standardUserDefaults] setObject:seenCatalogsData forKey:kSeenDictionaryUserDefaultsKey];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+    _seenCatalogsDirty = YES;
+}
+
 #pragma mark - AAAEvents
 
 -(void)closeCatalogVC:(AAACatalogVC *)catalogVC
@@ -685,7 +789,7 @@ const float maxBlurRadius = 20;
         AAACatalog* catalog = currentShowingMarket.catalogs[index];
         catalogVC = [self.storyboard instantiateViewControllerWithIdentifier:@"catalogVC"];
         [catalogVC view];//to call viewdidload in AAACatalogVC
-        catalogVC.catalog = catalog;
+        [catalogVC setCatalog:catalog seen:[self isCatalogSeen:catalog.identifier forMarketId:currentShowingMarket.identifier]];
         [catalogVC setDelegate:self];
         [catalogVCForShowingMarket addObject:catalogVC];
         [self addChildViewController:catalogVC];
@@ -759,6 +863,8 @@ const float maxBlurRadius = 20;
                                                           FlurryParameterCatalogPriority : [NSString stringWithFormat:@"%f", catalog.priority],
                                                         FlurryParameterMarketName : currentShowingMarket.name}];
     [[AAATutorialManager instance] invalidateTutorialView:TutorialViewTapOnCatalog];
+    
+    [self seenCatalog:catalog.identifier forMarket:currentShowingMarket.identifier];
 }
 
 -(void)carouselDidScroll:(iCarousel *)_carousel
@@ -858,6 +964,7 @@ const float maxBlurRadius = 20;
     }];
     
     cell.market = market;
+    [cell setUnseenCatalogs:[self unseenCatalogsForMarket:market]];
     [cell setSelected:[market isEqual:currentShowingMarket]];
     return cell;
 }

@@ -18,6 +18,7 @@
     onActiveChangeBlock _onActiveChange;
     
     BOOL _addRemoveEnabled;
+    int _lastUnseenCatalogsCount;
 }
 
 @property(nonatomic) BOOL isInEditMode;
@@ -25,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *selectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addRemoveBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImgView;
+@property (weak, nonatomic) IBOutlet UIView *badgeView;
+@property (weak, nonatomic) IBOutlet UIImageView *badgeViewBg;
+@property (weak, nonatomic) IBOutlet UILabel *badgeViewLabel;
 
 - (IBAction)selectPressed:(UIButton *)sender;
 - (IBAction)addRemovePressed:(UIButton *)sender;
@@ -91,6 +95,66 @@ const static float DisabledMarketViewTransparency = 0.65f;
     } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
         NSLog(@"JMIMageCache failed: %@", error);
     }];
+}
+
+-(void) tryDecrementUnseenCatalogs:(int)newUnseenCatalogs
+{
+    if (newUnseenCatalogs == _lastUnseenCatalogsCount) {
+        return;
+    }
+    _lastUnseenCatalogsCount  = newUnseenCatalogs;
+    if (_lastUnseenCatalogsCount <= 0) {
+        [UIView animateWithDuration:.3f animations:^{
+            self.badgeView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0f);
+        } completion:^(BOOL finished) {
+            if (finished) {
+                self.badgeView.layer.transform = CATransform3DIdentity;
+                self.badgeView.alpha = 0.0f;
+            }
+        }];
+    }
+}
+
+-(void)setUnseenCatalogs:(int)unseenCatalogs
+{
+    if (_lastUnseenCatalogsCount == unseenCatalogs) {
+        if (_lastUnseenCatalogsCount == 0) {
+            self.badgeView.alpha = 0.0f;
+        }
+        return;
+    }
+    
+    if (unseenCatalogs <= 0) {
+        self.badgeView.layer.transform = CATransform3DIdentity;
+        self.badgeView.alpha = 0.0f;
+//        [UIView animateWithDuration:.3f animations:^{
+//            self.badgeView.layer.transform = CATransform3DMakeScale(0.0f, 0.0f, 1.0f);
+//        } completion:^(BOOL finished) {
+//            if (finished) {
+//                self.badgeView.layer.transform = CATransform3DIdentity;
+//                self.badgeView.alpha = 0.0f;
+//            }
+//        }];
+    }
+    else
+    {
+        self.badgeView.layer.transform = CATransform3DIdentity;
+        [UIView animateWithDuration:.3f animations:^{
+            self.badgeView.alpha = 1.0f;
+            self.badgeViewLabel.alpha = 0.0f;
+            self.badgeViewLabel.text = [NSString stringWithFormat:@"%i", unseenCatalogs];
+            self.badgeViewLabel.alpha = 1.0f;
+        }];
+        
+        UIViewAnimationOptions animOptions = UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse|UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction;
+        
+        [UIView animateWithDuration:.4f delay:.3f options:animOptions animations:^{
+            self.badgeView.layer.transform = CATransform3DMakeScale(.95f, .95f, 1.0f);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    _lastUnseenCatalogsCount = unseenCatalogs;
 }
 
 -(void) setSelected:(BOOL)selected

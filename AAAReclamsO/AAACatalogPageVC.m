@@ -16,19 +16,11 @@
     IBOutlet UIView* spinnerView;
     IBOutlet UIView* overlay;
     
-//    IBOutlet NSLayoutConstraint* pageYConstraint;
-//    IBOutlet NSLayoutConstraint* pageXConstraint;
     IBOutlet NSLayoutConstraint* pageWConstraint;
     IBOutlet NSLayoutConstraint* pageHConstraint;
     
     BOOL shown;
     UIImage* img;
-    
-    BOOL animating;
-    
-    BOOL pageResetToScrollViewBounds;
-    BOOL didCutImage;
-    __weak IBOutlet UIView *bannerSuperView;
     
     NSMutableArray* onPageLoadedBlocks;
 }
@@ -66,7 +58,12 @@
     [self.scrollView addGestureRecognizer:tapGesture];
     [self show:shown];
     self.view.clipsToBounds = NO;
- //   page.contentMode = UIViewContentModeScaleAspectFit | UIViewContentModeBottom;
+}
+
+-(void)setIsPageLoaded:(BOOL)isPageLoaded
+{
+    _isPageLoaded = isPageLoaded;
+    [self alertOnPageLoadedListeners:isPageLoaded];
 }
 
 -(void)addOnPageLoaded:(onPageLoadedBlock)onPageLoaded
@@ -92,21 +89,7 @@
             }
         }
         [self.view layoutIfNeeded];
-        pageResetToScrollViewBounds = YES;
-        
-//        if (!didCutImage)
-//        {
-//            [self cutTheImage];
-//            didCutImage = YES;
-//        }
         self.scrollView.zoomScale = 1.0f;
-//        page.layer.masksToBounds = NO;
-//        page.layer.shadowColor = [UIColor blackColor].CGColor;
-//        page.layer.shadowOffset = CGSizeMake(0, 3);
-//        page.layer.shadowOpacity = .5;
-//        page.layer.shadowRadius = 1.0f;
-        
-//        [self.view layoutSubviews];
     }
 }
 
@@ -131,13 +114,15 @@
     }
     pageWConstraint.constant = width;
     pageHConstraint.constant = height;
-//    pageXConstraint.constant += xoffset;
-//    pageYConstraint.constant += yoffset;
     [self.view layoutSubviews];
 }
 
 -(CGRect)scrollViewFrame
 {
+    if (!self.isPageLoaded) {
+        return [self.view convertRect:page.frame toView:self.scrollView];
+    }
+    
     float imageRatio = img.size.width/ img.size.height;
     float imageViewRatio = page.frame.size.width / page.frame.size.height;
     
@@ -152,7 +137,7 @@
     {
         height = page.frame.size.height;
         width = height * imageRatio;
-        assert(page.frame.size.width > width); //daca pagina nu e incarcata, aici o sa dea creeesh
+        assert(page.frame.size.width > width);
         xoffset = (page.frame.size.width - width) / 2.0f;
     }
     
@@ -186,10 +171,9 @@
             img = image;
             spinnerView.hidden = YES;
             self.isPageLoaded = YES;
-            [self alertOnPageLoadedListeners:YES];
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
             NSLog(@"Failed to download catalog page: %@", self.imageUrl);
-            [self alertOnPageLoadedListeners:NO];
+            self.isPageLoaded = NO;
         }];
     }
 }
@@ -206,10 +190,9 @@
             spinnerView.hidden = YES;
             [page setImage: image];
             self.isPageLoaded = YES;
-            [self alertOnPageLoadedListeners:YES];
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
             NSLog(@"Failed to download catalog page: %@", self.imageUrl);
-            [self alertOnPageLoadedListeners:NO];
+            self.isPageLoaded = NO;
         }];
     }
 }
@@ -236,9 +219,9 @@
     return zoomRect;
 }
 
-- (void)handleDoubleTapFrom:(UITapGestureRecognizer *)recognizer {
+- (void)handleDoubleTapFrom:(UITapGestureRecognizer *)recognizer
+{
     page.translatesAutoresizingMaskIntoConstraints = NO;
-
     float newScale = self.scrollView.zoomScale * 4.0;
     
     if (self.scrollView.zoomScale > self.scrollView.minimumZoomScale)

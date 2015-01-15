@@ -25,11 +25,11 @@
 @interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, AAASharedBannerDelegate>{
 }
 
-@property(nonatomic, strong) AAACatalog* catalog;
+@property(nonatomic, strong, readonly) AAACatalog* catalog;
 //@property(nonatomic, strong) IBOutlet UIView* containerView;
 
 -(void) setDelegate:(id<AAACatalogVCEvents>) _delegate;
--(void) setCatalog:(AAACatalog*) catalog;
+-(void)setCatalog:(AAACatalog *)catalog seen:(BOOL) seen;
 -(void) minimize;
 -(void) finishedMinimized;
 -(void) maximize;

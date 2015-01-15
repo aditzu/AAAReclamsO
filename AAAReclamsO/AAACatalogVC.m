@@ -43,10 +43,15 @@
     UIView* discoverCatalogTutorial;
     UIView* zoomCatalogTutorial;
     UIView* closeCatalogTutorial;
+    __weak IBOutlet UILabel *newViewLabel;
     __weak IBOutlet UIView *fromToBottomBar;
     __weak IBOutlet UILabel *fromToLabel;
     __weak IBOutlet NSLayoutConstraint *fromToDistanceToBottomConstraint;
+    __weak IBOutlet UIView *newView;
+    __weak IBOutlet UIImageView *newViewImage;
 }
+
+@property(nonatomic) BOOL catalogIsSeen;
 
 -(IBAction) closePressed:(id)sender;
 
@@ -59,7 +64,7 @@ const static int PicturesToPreload = 3;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateSettingsFromCatalog:self.catalog];
+    [self updateSettingsFromCatalog:self.catalog seen:self.catalogIsSeen];
     [self minimize];
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     tapGesture.delegate = self;
@@ -76,6 +81,8 @@ const static int PicturesToPreload = 3;
     zoomCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewZoomOnCatalog
                                                          withDependecies:@[@(TutorialViewExploreCatalog)]
                                                                 atCenter:self.view.center];
+    
+//    newViewLabel.transform  = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/4);
 //    closeCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewCloseCatalog
 //                                                          withDependecies:@[@(TutorialViewExploreCatalog), @(TutorialViewZoomOnCatalog)]
 //                                                                 atCenter:closeBtn.center];
@@ -111,17 +118,23 @@ const static int PicturesToPreload = 3;
     }
 }
 
--(void)setCatalog:(AAACatalog *)catalog
+-(void)setCatalog:(AAACatalog *)catalog seen:(BOOL) seen
 {
     _catalog = catalog;
-    [self updateSettingsFromCatalog:catalog];
+    self.catalogIsSeen = seen;
+    [self updateSettingsFromCatalog:catalog seen:seen];
 }
 
 -(CGRect) pageControllerFullFrame
 {
     CGRect myBounds = self.view.bounds;
-    if (isMinimized) {
+    if (isMinimized)
+    {
         myBounds.size.height = fromToBottomBar.frame.origin.y;
+    }
+    else if(adBannerLoaded)
+    {
+        myBounds.size.height = gadBannerViewContainer.frame.origin.y;
     }
     return myBounds;
 }
@@ -142,7 +155,19 @@ const static int PicturesToPreload = 3;
     fromToDistanceToBottomConstraint.constant = fromToBottomBar.frame.size.height;
 }
 
--(void) updateSettingsFromCatalog:(AAACatalog*) catalog
+- (void)setNewViewEffect
+{
+    if (!self.catalogIsSeen) {        
+        CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotationAnimation.toValue = @(M_PI * 2.0);
+        rotationAnimation.duration = 5;
+        rotationAnimation.autoreverses = NO;
+        rotationAnimation.repeatCount = HUGE_VALF;
+        [newViewImage.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    }
+}
+
+-(void) updateSettingsFromCatalog:(AAACatalog*) catalog seen:(BOOL) seen
 {
     if (!self.isViewLoaded || !catalog)
     {
@@ -190,6 +215,7 @@ const static int PicturesToPreload = 3;
         [self.view addSubview:pageViewController.view];
         [self.view bringSubviewToFront:topBarView];
         [self.view bringSubviewToFront:fromToBottomBar];
+        [self.view bringSubviewToFront:newView];
         pageViewController.view.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
         for (int i =0; i< catalog.imagesURLs.count; i++)
         {
@@ -226,6 +252,12 @@ const static int PicturesToPreload = 3;
             [self setProgress:1 outOf:(int)pages.count];
         }
     }];
+    
+    [UIView animateWithDuration:.3f animations:^{
+        newView.alpha = self.catalogIsSeen ? 0.0f : 1.0f;
+    }];
+    
+    [self setNewViewEffect];
 }
 
 -(void) setProgress:(int) progress outOf:(int) total
@@ -322,6 +354,9 @@ const static int PicturesToPreload = 3;
 -(void)maximize
 {
     isMinimized = NO;
+    [UIView animateWithDuration:.3f animations:^{
+        newView.alpha = 0.0f;
+    }];
     for (AAACatalogPageVC* page in pages) {
         [page show:YES];
     }

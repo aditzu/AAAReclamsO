@@ -19,4 +19,6 @@ typedef BOOL(^onActiveChangeBlock)(AAAMarketCollectionViewCell* cell);
 -(void) onSelected:(onSelectedBlock) onSelectedBlock;
 -(void) onActiveChanged:(onActiveChangeBlock) onActiveChangeBlock;
 -(void) enableAddRemoveFeature:(BOOL) enable;
+-(void) setUnseenCatalogs:(int) unseenCatalogs;
+-(void) tryDecrementUnseenCatalogs: (int) newUnseenCatalogs;
 @end
