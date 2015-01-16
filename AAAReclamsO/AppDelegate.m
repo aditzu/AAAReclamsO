@@ -28,6 +28,13 @@
         UIUserNotificationSettings* notifSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:notifSettings];
     }
+    
+    NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (notification) {
+        [Flurry logEvent:FlurryEventStartedFromNotification];
+    }
+    
+    
     [[AAANotificationsHandler instance] scheduleNextLocalNotifications];
     return YES;
 }
@@ -59,12 +66,12 @@
 
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    
+    [Flurry logEvent:FlurryEventDidRegisterForNotification withParameters:@{FlurryParameterBOOL:@YES}];
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    
+    [Flurry logEvent:FlurryEventDidRegisterForNotification withParameters:@{FlurryParameterBOOL:@NO}];
 }
 
 @end

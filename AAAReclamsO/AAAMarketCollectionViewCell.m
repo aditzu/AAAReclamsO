@@ -64,7 +64,7 @@ const static float DisabledMarketViewTransparency = 0.65f;
 //        self.selectBtn.hidden = !on;
         self.selectBtn.hidden = YES;
         self.addRemoveBtn.hidden = _addRemoveEnabled ? !on : YES;
-        self.logoImgView.layer.transform = on ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
+//        self.logoImgView.layer.transform = on && self.market ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
         [self updateEnabledView];
     }];
 }
@@ -88,6 +88,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
     if (!market) {
         return;
     }
+//    self.logoImgView.layer.transform = self.isInEditMode ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
+    
     NSURL* imagURL = [NSURL URLWithString:market.miniLogoURL];
     [[JMImageCache sharedCache] imageForURL:imagURL completionBlock:^(UIImage *image) {
 //        UIImage* newImage = [AAAGlobals imageWithShadowForImage:image];
@@ -168,6 +170,8 @@ const static float DisabledMarketViewTransparency = 0.65f;
     self.logoImgView.alpha = self.isSelected ? 1.0f : DisabledMarketViewTransparency;
 //    self.logoImgView.alpha = (self.isInEditMode && self.isActive) || (!self.isInEditMode && self.isSelected) ? 1.0f:DisabledMarketViewTransparency;
     self.selectBtn.alpha =  self.isInEditMode ? (self.isActive ? 1.0f : 0.0f) : 0.0f;
+//    NSLog(@"IsInEditMOde: %i market:%@", self.isInEditMode, self.market.name);
+//    self.logoImgView.layer.transform = self.isInEditMode && self.market ? CATransform3DMakeScale(.9f, .9f, 1): CATransform3DIdentity;
 }
 
 - (IBAction)selectPressed:(UIButton *)sender

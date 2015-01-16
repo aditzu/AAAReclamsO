@@ -181,6 +181,7 @@ static Reachability* ownServerReach;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         markets = [NSMutableArray array];
+        enabledMarkets = [NSMutableArray array];
         for (NSString* key in [catalogsVCs allKeys]) {
             NSArray* catalogVcsForMarket = catalogsVCs[key];
             for (AAACatalogVC* catalogVC in catalogVcsForMarket) {
@@ -188,6 +189,7 @@ static Reachability* ownServerReach;
             }
         }
         catalogsVCs = [NSMutableDictionary dictionary];
+        [marketViewsCollectionView reloadData];
     });
 }
 
@@ -227,6 +229,7 @@ static Reachability* ownServerReach;
             [self wwwErrorOccured];
             isDownloadingCatalogs = NO;
             loadingView.hidden = YES;
+            [Flurry logError:FlurryEventErrorFromServer message:@"DownloadCatalogs" error:error];
             return;
         }
         errorView.hidden = YES;
@@ -318,6 +321,7 @@ static Reachability* ownServerReach;
             errorViewMessageLabel.text = @"Aplicația necesită o conexiune stabilă la internet.\nVă rugăm să reîncercați după ce ați facut setările necesare!";
             errorView.hidden = NO;
             errorViewLoadingBlock(NO);
+            [Flurry logError:FlurryEventErrorNoInternet message:@"CheckForInternetConnection" error:nil];
         });
         failure();
     };
@@ -331,6 +335,7 @@ static Reachability* ownServerReach;
                 errorViewMessageLabel.text = @"Momentan lucrăm pentru a îmbunătăți experiența dumneavoastră în aplicație.\nVă rugăm să reveniți mai târziu!";
                 errorView.hidden = NO;
                 errorViewLoadingBlock(NO);
+                [Flurry logError:FlurryEventErrorFromServer message:@"CheckForInternetConnection" error:nil];
             });
             [reachability stopNotifier];
             failure();
@@ -368,6 +373,7 @@ static Reachability* ownServerReach;
 
 - (IBAction)privacyButtonPressed:(UIButton *)sender
 {
+    [Flurry logEvent:FlurryEventPrivacyPolicyOpened];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[AAAGlobals sharedInstance] privacyPolicyURL]]];
 }
 
@@ -375,6 +381,7 @@ static Reachability* ownServerReach;
 {
     if (!lastTimeRefreshButtonWasPressed || [[NSDate date] timeIntervalSinceDate:lastTimeRefreshButtonWasPressed] > MIN_SECONDS_TO_RELOAD_DATA)
     {
+        [Flurry logEvent:FlurryEventMarketsReloadedManually];
         lastTimeRefreshButtonWasPressed = [NSDate date];
         [self checkForInternetConnectionOnSuccess:^{
             if (!isDownloadingCatalogs) {
@@ -416,33 +423,32 @@ static Reachability* ownServerReach;
 
 -(void) setMarketViewAsSelected:(UIView*) btn
 {
-    int scaleDiff = 2;
-    int indexOfCurrentMarket = _isInEditMode ? [markets indexOfObject:currentShowingMarket] : [enabledMarkets indexOfObject: currentShowingMarket];
-    UIView* currentShownMarketView = [marketViewsCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexOfCurrentMarket inSection:0]];
-    CGRect currentShowingMarketBtnNewFrame = currentShownMarketView ? currentShownMarketView.frame : CGRectZero;
-    currentShowingMarketBtnNewFrame.origin.x += scaleDiff;
-    currentShowingMarketBtnNewFrame.origin.y += scaleDiff;
-    currentShowingMarketBtnNewFrame.size.width -= scaleDiff*2;
-    currentShowingMarketBtnNewFrame.size.height -= scaleDiff*2;
-    
-    CGRect newMarketBtnFrame = btn.frame;
-    newMarketBtnFrame.origin.x -= scaleDiff;
-    newMarketBtnFrame.origin.y -= scaleDiff;
-    newMarketBtnFrame.size.height += scaleDiff*2;
-    newMarketBtnFrame.size.width += scaleDiff*2;
-    
-    
-    [UIView animateWithDuration:.1f animations:^{
-        if (currentShownMarketView) {
-            currentShownMarketView.frame = currentShowingMarketBtnNewFrame;
-//            currentShownMarketView.alpha = DisabledMarketViewTransparency;
-        }
-        btn.frame = newMarketBtnFrame;
-        btn.alpha = 1.0f;
-    } completion:^(BOOL finished)
-     {
-//        currentShownMarketView = btn;
-    }];
+//    int scaleDiff = 2;
+//    int indexOfCurrentMarket = _isInEditMode ? [markets indexOfObject:currentShowingMarket] : [enabledMarkets indexOfObject: currentShowingMarket];
+//    UIView* currentShownMarketView = [marketViewsCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:indexOfCurrentMarket inSection:0]];
+//    CGRect currentShowingMarketBtnNewFrame = currentShownMarketView ? currentShownMarketView.frame : CGRectZero;
+//    currentShowingMarketBtnNewFrame.origin.x += scaleDiff;
+//    currentShowingMarketBtnNewFrame.origin.y += scaleDiff;
+//    currentShowingMarketBtnNewFrame.size.width -= scaleDiff*2;
+//    currentShowingMarketBtnNewFrame.size.height -= scaleDiff*2;
+//    
+//    CGRect newMarketBtnFrame = btn.frame;
+//    newMarketBtnFrame.origin.x -= scaleDiff;
+//    newMarketBtnFrame.origin.y -= scaleDiff;
+//    newMarketBtnFrame.size.height += scaleDiff*2;
+//    newMarketBtnFrame.size.width += scaleDiff*2;
+//    
+//    
+//    [UIView animateWithDuration:.1f animations:^{
+//        if (currentShownMarketView) {
+//            currentShownMarketView.frame = currentShowingMarketBtnNewFrame;
+//        }
+//        btn.frame = newMarketBtnFrame;
+//        btn.alpha = 1.0f;
+//    } completion:^(BOOL finished)
+//     {
+////        currentShownMarketView = btn;
+//    }];
 }
 
 const static int catalogSubviewTag = 21341;
@@ -588,15 +594,11 @@ const float maxBlurRadius = 20;
     {
         [blurView addGestureRecognizer:blurViewTapGesture];
         [blurView addGestureRecognizer:editMenuPanGestureBlurView];
-        
         [marketViewsCollectionView removeGestureRecognizer:editMenuPanGesture];
+        [Flurry logEvent:FlurryEventEditMenuOpened];
     }
     
     [blurView updateAsynchronously:NO completion:nil];
-    [UIView animateWithDuration:.4f animations:^{
-//        [marketViewsCollectionView reloadItemsAtIndexPaths:marketViewsCollectionView.indexPathsForVisibleItems];
-//        [marketViewsCollectionView reloadData];
-    }];
     
     [UIView animateWithDuration:.5f animations:^{
         marketsViewHeightConstraint.constant = close ? bottomLimitYMarketsViewHeightConstraint : topLimitYMarketsViewHeightConstraint;
@@ -893,7 +895,7 @@ const float maxBlurRadius = 20;
     selectCurrentCell = ^{
         currentShowingMarket = enabledMarkets[indexPath.row]; //it should not be possible to select cells in normal mode, only during edit
         [self setTheCatalogsForMarket:currentShowingMarket];
-        [self setMarketViewAsSelected:selectedCell];
+//        [self setMarketViewAsSelected:selectedCell];
         [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
         
         //handle tutorial
@@ -922,34 +924,34 @@ const float maxBlurRadius = 20;
     AAAMarket* market = (AAAMarket*) (_isInEditMode ? markets[indexPath.row] : enabledMarkets[indexPath.row]);
     [cell enableAddRemoveFeature:ENABLE_ADD_REMOVE_MARKET];
     cell.isActive = [enabledMarketsUserDefaults objectForKey:@(market.identifier)] ? [[enabledMarketsUserDefaults objectForKey:@(market.identifier)] boolValue] : YES;
-    [cell setupEditModeOn:_isInEditMode];
-    [cell onSelected:^(AAAMarket* _market) {
-        [self changeEditMenuStateToClosed:YES onCompletion:^{
-            [self selectMarketInCollectionView:_market];
-        }];
-    }];
-    [cell onActiveChanged:^(AAAMarketCollectionViewCell *cell) {
-        BOOL thereIsAtLeastOneOtherActiveMarket = NO;
-        for (AAAMarket* mark in markets) {
-            if (![enabledMarketsUserDefaults objectForKey:@(mark.identifier)] || [[enabledMarketsUserDefaults objectForKey:@(mark.identifier)] boolValue]) {
-                if (mark.identifier != cell.market.identifier) {
-                    thereIsAtLeastOneOtherActiveMarket = YES;
-                    break;
-                }
-            }
-        }
-        if (thereIsAtLeastOneOtherActiveMarket) {
-            [enabledMarketsUserDefaults setObject:@(cell.isActive) forKey:@(market.identifier)];
-        }
-        else
-        {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Atenție" message:@"Nu este posibil sa ascunzi toate marketurile!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-        return thereIsAtLeastOneOtherActiveMarket;
-    }];
+//    [cell onSelected:^(AAAMarket* _market) {
+//        [self changeEditMenuStateToClosed:YES onCompletion:^{
+//            [self selectMarketInCollectionView:_market];
+//        }];
+//    }];
+//    [cell onActiveChanged:^(AAAMarketCollectionViewCell *cell) {
+//        BOOL thereIsAtLeastOneOtherActiveMarket = NO;
+//        for (AAAMarket* mark in markets) {
+//            if (![enabledMarketsUserDefaults objectForKey:@(mark.identifier)] || [[enabledMarketsUserDefaults objectForKey:@(mark.identifier)] boolValue]) {
+//                if (mark.identifier != cell.market.identifier) {
+//                    thereIsAtLeastOneOtherActiveMarket = YES;
+//                    break;
+//                }
+//            }
+//        }
+//        if (thereIsAtLeastOneOtherActiveMarket) {
+//            [enabledMarketsUserDefaults setObject:@(cell.isActive) forKey:@(market.identifier)];
+//        }
+//        else
+//        {
+//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Atenție" message:@"Nu este posibil sa ascunzi toate marketurile!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//            [alert show];
+//        }
+//        return thereIsAtLeastOneOtherActiveMarket;
+//    }];
     
     cell.market = market;
+    [cell setupEditModeOn:_isInEditMode];
     [cell setUnseenCatalogs:[self unseenCatalogsForMarket:market]];
     [cell setSelected:[market isEqual:currentShowingMarket]];
     return cell;
@@ -997,7 +999,7 @@ const float maxBlurRadius = 20;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
 {
     if (_isInEditMode) {
-        return CGSizeZero;
+        return CGSizeMake(0.0f, 10.0f);
     }
     return [self collectionViewPadding:collectionView withLayout:collectionViewLayout];
 }

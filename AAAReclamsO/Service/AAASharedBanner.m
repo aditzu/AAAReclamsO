@@ -136,13 +136,13 @@
             if (self.delegate && [self.delegate respondsToSelector:@selector(adRequestSuccesful)]) {
                 [self.delegate adRequestSuccesful];
             }
-            NSLog(@"AD REQUEST SUCCEEDED");
+//            NSLog(@"AD REQUEST SUCCEEDED");
         }
         else {
             if (self.delegate && [self.delegate respondsToSelector:@selector(adRequestFailedWithError:)]) {
                 [self.delegate adRequestFailedWithError:error];
             }
-            NSLog(@"AD REQUEST FAILED WITH ERROR %@", error);
+//            NSLog(@"AD REQUEST FAILED WITH ERROR %@", error);
         }
     }];
 }
@@ -182,14 +182,14 @@
         [self.delegate adWasTapped:adType apId:apid];
     }
     
-    NSLog(@"AD WAS TAPPED");
-    NSLog(@"TAPPED AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
-    NSLog(@"TAPPED AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
-    NSLog(@"TAPPED AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
+//    NSLog(@"AD WAS TAPPED");
+//    NSLog(@"TAPPED AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
+//    NSLog(@"TAPPED AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
+//    NSLog(@"TAPPED AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
     
-    if ([[notification userInfo] objectForKey:MillennialMediaAdObjectKey] == self.mmBannerAdView) {
-        NSLog(@"TAPPED AD IS THE _bannerAdView INSTANCE VARIABLE");
-    }
+//    if ([[notification userInfo] objectForKey:MillennialMediaAdObjectKey] == self.mmBannerAdView) {
+//        NSLog(@"TAPPED AD IS THE _bannerAdView INSTANCE VARIABLE");
+//    }
 }
 
 - (void)applicationWillTerminateFromAd:(NSNotification *)notification
@@ -197,7 +197,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(applicationWillTerminateFromAd)]) {
         [self.delegate applicationWillTerminateFromAd];
     }
-    NSLog(@"AD WILL OPEN SAFARI");
+//    NSLog(@"AD WILL OPEN SAFARI");
     // No User Info is passed for this notification
 }
 
@@ -210,10 +210,10 @@
         [self.delegate adModalWillDismiss:adType apId:apid];
     }
     
-    NSLog(@"AD MODAL WILL DISMISS");
-    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
-    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
-    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
+//    NSLog(@"AD MODAL WILL DISMISS");
+//    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
+//    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
+//    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
 }
 
 - (void)adModalDidDismiss:(NSNotification *)notification
@@ -225,10 +225,10 @@
         [self.delegate adModalDidDismiss:adType apId:apid];
     }
     
-    NSLog(@"AD MODAL DID DISMISS");
-    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
-    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
-    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
+//    NSLog(@"AD MODAL DID DISMISS");
+//    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
+//    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
+//    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
 }
 
 - (void)adModalWillAppear:(NSNotification *)notification
@@ -240,10 +240,10 @@
         [self.delegate adModalWillAppear:adType apId:apid];
     }
     
-    NSLog(@"AD MODAL WILL APPEAR");
-    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
-    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
-    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
+//    NSLog(@"AD MODAL WILL APPEAR");
+//    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
+//    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
+//    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
 }
 
 - (void)adModalDidAppear:(NSNotification *)notification
@@ -255,10 +255,10 @@
         [self.delegate adModalDidAppear:adType apId:apid];
     }
     
-    NSLog(@"AD MODAL DID APPEAR");
-    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
-    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
-    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
+//    NSLog(@"AD MODAL DID APPEAR");
+//    NSLog(@"AD IS TYPE %@", [[notification userInfo] objectForKey:MillennialMediaAdTypeKey]);
+//    NSLog(@"AD APID IS %@", [[notification userInfo] objectForKey:MillennialMediaAPIDKey]);
+//    NSLog(@"AD IS OBJECT %@", [[notification userInfo] objectForKey:MillennialMediaAdObjectKey]);
 }
 
 #pragma mark - CLLOcationmanager Delegate

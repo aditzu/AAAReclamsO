@@ -82,25 +82,12 @@ const static int PicturesToPreload = 3;
                                                          withDependecies:@[@(TutorialViewExploreCatalog)]
                                                                 atCenter:self.view.center];
     
-//    newViewLabel.transform  = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI/4);
-//    closeCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewCloseCatalog
-//                                                          withDependecies:@[@(TutorialViewExploreCatalog), @(TutorialViewZoomOnCatalog)]
-//                                                                 atCenter:closeBtn.center];
-
-    
-//    fromToBottomBar.layer.masksToBounds = NO;
-//    fromToBottomBar.layer.shadowColor = [UIColor blackColor].CGColor;
-//    fromToBottomBar.layer.shadowOffset = CGSizeMake(0, 3);
-//    fromToBottomBar.layer.shadowOpacity = .5;
-//    fromToBottomBar.layer.shadowRadius = 1.0f;
-    
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f) {
-////        closeBtnTopConstraint.constant = 0.0f;
-//    }
-//    else
-//    {
-////        closeBtnTopConstraint.constant = 20.0f;
-//    }
+//    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.view.layer.shadowOffset = CGSizeMake(2, 2);
+//    self.view.layer.shadowRadius = 3;
+//    self.view.layer.shadowPath = CGPathCreateWithRect(self.view.bounds, nil);
+//    self.view.layer.shadowOpacity = .3f;
+//    self.view.layer.masksToBounds = YES;
 }
 
 -(void)dealloc
@@ -420,19 +407,21 @@ const static int PicturesToPreload = 3;
 
 -(void) updateTopBarPosition
 {
-    AAACatalogPageVC* currentPage=  [self currentPage];
-    if (!currentPage) {
-        return;
-    }
-    CGRect frame = pageViewController.view.frame;
-    float constant = frame.origin.y > topBarView.frame.size.height + 20 ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
-    if (constant < 20) {
-        constant = 20;
-        
-    }
-    [UIView animateWithDuration:.2f animations:^{
-        topBarTopConstraint.constant = constant;
-    }];
+    topBarTopConstraint.constant = 20.0f;
+    
+//    AAACatalogPageVC* currentPage=  [self currentPage];
+//    if (!currentPage) {
+//        return;
+//    }
+//    CGRect frame = pageViewController.view.frame;
+//    float constant = frame.origin.y > topBarView.frame.size.height + 20 ? frame.origin.y - topBarView.frame.size.height : frame.origin.y;
+//    if (constant < 20) {
+//        constant = 20;
+//        
+//    }
+//    [UIView animateWithDuration:.2f animations:^{
+//        topBarTopConstraint.constant = constant;
+//    }];
 }
 
 
@@ -636,6 +625,7 @@ const static int PicturesToPreload = 3;
 {
     adBannerLoaded = NO;
     [self layoutBanner:NO animated:YES];
+    [Flurry logError:FlurryEventAdFailedToLoad message:@"Ad Request Failed" error:error];
 }
 
 -(void)adRequestSuccesful
@@ -645,6 +635,7 @@ const static int PicturesToPreload = 3;
         [self layoutBanner:YES animated:YES];
         [self updateTopBarPosition];
     }
+    [Flurry logEvent:FlurryEventAdServed];
 }
 
 -(void)adModalDidDismiss:(NSString *)adType apId:(NSString *)apId
@@ -656,13 +647,19 @@ const static int PicturesToPreload = 3;
 {
     [self showTopBar:[NSNumber numberWithBool:NO]];
     [self showPageViewController:NO animated:YES];
+    [Flurry logEvent:FlurryEventAdOpened];
 }
 
 -(void)applicationWillTerminateFromAd
 {
     [self showTopBar:[NSNumber numberWithBool:NO]];
     [self showPageViewController:NO animated:YES];
+    [Flurry logEvent:FlurryEventAdOpened];
+}
 
+-(void)adWasTapped:(NSString *)adType apId:(NSString *)apId
+{
+    [Flurry logEvent:FlurryEventAdOpened];
 }
 
 @end

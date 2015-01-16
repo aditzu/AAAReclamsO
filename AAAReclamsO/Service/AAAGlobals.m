@@ -59,13 +59,13 @@ static AAAGlobals* _instance;
 
 -(NSString *)flurryId
 {
-    return @"QNVNYDDJXCM9FR583Q4T";
+    return @"MKCBQ4PX57GQJS36H878";
 }
 
 -(NSString*) apId
 {
 //    return @"ca-app-pub-3940256099942544/2934735716";// @"ca-app-pub-2163416701589769/7779082332"; //gad
-    return @"190102"; //millenial
+    return @"190723"; //millenial
 }
 
 -(NSString *)privacyPolicyURL

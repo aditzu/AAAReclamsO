@@ -149,31 +149,31 @@ static AAATutorialManager* _instance;
     switch (tutorialViewType) {
         case TutorialViewDiscoverMarkets:
         {
-            [tutorialVC setImage:[UIImage imageNamed:@"swipe_left_right"] text:@"Descopera Magazinele" id:[self idForTutorialView:tutorialViewType]];
+            [tutorialVC setImage:[UIImage imageNamed:@"swipe_left_right"] text:@"Alege magazinul" id:[self idForTutorialView:tutorialViewType]];
             tutorialVC.animationType = TutorialAnimationTypeMoveLeftRight;
             break;
         }
         case TutorialViewTapOnMarket:
         {
-            [tutorialVC setImage:[UIImage imageNamed:@"tap"] text:@"Selecteaza Magazinul" id:[self idForTutorialView:tutorialViewType]];
+            [tutorialVC setImage:[UIImage imageNamed:@"tap"] text:@"Vezi oferta" id:[self idForTutorialView:tutorialViewType]];
             tutorialVC.animationType = TutorialAnimationTypePulsing;
             break;
         }
             case TutorialViewDiscoverCatalogs:
         {
-            [tutorialVC setImage:[UIImage imageNamed:@"swipe_left_right"] text:@"Descopera Oferta" id:[self idForTutorialView:tutorialViewType]];
+            [tutorialVC setImage:[UIImage imageNamed:@"swipe_left_right"] text:@"Alege catalogul" id:[self idForTutorialView:tutorialViewType]];
             tutorialVC.animationType = TutorialAnimationTypeMoveLeftRight;
             break;
         }
             case TutorialViewTapOnCatalog:
         {
-            [tutorialVC setImage:[UIImage imageNamed:@"tap"] text:@"Selecteaza Oferta" id:[self idForTutorialView:tutorialViewType]];
+            [tutorialVC setImage:[UIImage imageNamed:@"tap"] text:@"Deschide catalogul" id:[self idForTutorialView:tutorialViewType]];
             tutorialVC.animationType = TutorialAnimationTypePulsing;
             break;
         }
             case TutorialViewExploreCatalog:
         {
-            [tutorialVC setImage:[UIImage imageNamed:@"swipe_left_right"] text:@"Exploreaza Catalogul" id:[self idForTutorialView:tutorialViewType]];
+            [tutorialVC setImage:[UIImage imageNamed:@"swipe_left_right"] text:@"Răsfoiește catalogul" id:[self idForTutorialView:tutorialViewType]];
             tutorialVC.animationType = TutorialAnimationTypeMoveLeftRight;
             break;
         }

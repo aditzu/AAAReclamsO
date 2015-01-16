@@ -9,6 +9,8 @@
 #import "AAACatalogPageVC.h"
 #import "JMImageCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Flurry.h"
+#import "AAAGlobals.h"
 
 @implementation AAACatalogPageVC
 {
@@ -182,6 +184,7 @@
             self.isPageLoaded = YES;
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
             NSLog(@"Failed to download catalog page: %@", self.imageUrl);
+            [Flurry logError:FlurryEventErrorFromServer message:@"downloadImage" error:error];
             self.isPageLoaded = NO;
         }];
     }
@@ -200,6 +203,7 @@
             [page setImage: image];
             self.isPageLoaded = YES;
         } failureBlock:^(NSURLRequest *request, NSURLResponse *response, NSError *error) {
+            [Flurry logError:FlurryEventErrorFromServer message:@"updateImage" error:error];
             NSLog(@"Failed to download catalog page: %@", self.imageUrl);
             self.isPageLoaded = NO;
         }];

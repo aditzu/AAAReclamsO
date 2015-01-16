@@ -12,11 +12,19 @@
 
 #pragma mark - Flurry
 
-static NSString* const FlurryEventAdOpened = @"ad opened";
+static NSString* const FlurryEventAdOpened = @"Ad opened";
+static NSString* const FlurryEventAdFailedToLoad = @"Ad failed to load";
+static NSString* const FlurryEventAdServed = @"Ad served";
 static NSString* const FlurryEventCatalogOpened = @"Catalog watched";
 static NSString* const FlurryEventMarketOpened = @"Market opened";
 static NSString* const FlurryEventCatalogPercentageSeen = @"Percentage of catalog seen";
-static NSString* const FlurryEventAdServed = @"ad served";
+static NSString* const FlurryEventPrivacyPolicyOpened = @"Privacy Policy opened";
+static NSString* const FlurryEventMarketsReloadedManually = @"Markets reloaded manually";
+static NSString* const FlurryEventEditMenuOpened = @"Opened Edit Menu";
+static NSString* const FlurryEventErrorFromServer = @"Server error";
+static NSString* const FlurryEventErrorNoInternet = @"No internet";
+static NSString* const FlurryEventStartedFromNotification = @"Started from notification";
+static NSString* const FlurryEventDidRegisterForNotification = @"Did Register For Notification";
 
 static NSString* const FlurryParameterPercentage = @"Percentage";
 static NSString* const FlurryParameterMarketName = @"Market";
@@ -24,6 +32,7 @@ static NSString* const FlurryParameterMarketPriority = @"Market priority";
 static NSString* const FlurryParameterCatalogIndex = @"Catalog index";
 static NSString* const FlurryParameterCatalogPriority = @"Catalog priority";
 static NSString* const FlurryParameterCatalogId = @"Catalog id";
+static NSString* const FlurryParameterBOOL = @"boolean";
 
 @interface AAAGlobals : NSObject
 
