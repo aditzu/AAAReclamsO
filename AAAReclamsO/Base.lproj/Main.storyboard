@@ -430,6 +430,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Puh-i2-aYf" userLabel="bg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="568" id="hVK-66-5LM"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-3i-5Ko" userLabel="gBannerContainer">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -625,9 +632,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qcP-3i-5Ko" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="3Gt-W7-Gy5"/>
+                            <constraint firstItem="Puh-i2-aYf" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="3qF-z9-VFT"/>
+                            <constraint firstItem="Puh-i2-aYf" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="Fb6-kl-rz1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4kb-VH-gPv" secondAttribute="trailing" id="MFF-pL-T9h"/>
                             <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="abi-aW-6Zb" secondAttribute="bottom" constant="3" id="MWC-Lh-ifg"/>
                             <constraint firstAttribute="trailing" secondItem="T3b-25-tZs" secondAttribute="trailing" id="Mrp-AC-1Dh"/>
+                            <constraint firstAttribute="trailing" secondItem="Puh-i2-aYf" secondAttribute="trailing" id="NpP-Lw-6Nw"/>
                             <constraint firstItem="abi-aW-6Zb" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="R7i-L0-oGK"/>
                             <constraint firstItem="4kb-VH-gPv" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="TWK-XB-GJ5"/>
                             <constraint firstAttribute="trailing" secondItem="Tlq-bV-F4K" secondAttribute="trailing" id="ULC-pv-C5a"/>
@@ -643,6 +653,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="4uG-Av-5Np"/>
                     <connections>
+                        <outlet property="bgImageView" destination="Puh-i2-aYf" id="ZK0-Ax-1S7"/>
+                        <outlet property="bgImageViewHeightConstraint" destination="hVK-66-5LM" id="E7b-7v-6Bh"/>
+                        <outlet property="bgImageViewTopConstraint" destination="Fb6-kl-rz1" id="QCk-4d-WcQ"/>
                         <outlet property="closeBtn" destination="Hn9-nY-wld" id="Obb-XU-x3W"/>
                         <outlet property="fromToBottomBar" destination="abi-aW-6Zb" id="7tO-B9-1KR"/>
                         <outlet property="fromToDistanceToBottomConstraint" destination="MWC-Lh-ifg" id="LfA-5D-hVJ"/>

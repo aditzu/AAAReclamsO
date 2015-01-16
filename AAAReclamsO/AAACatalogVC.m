@@ -49,6 +49,9 @@
     __weak IBOutlet NSLayoutConstraint *fromToDistanceToBottomConstraint;
     __weak IBOutlet UIView *newView;
     __weak IBOutlet UIImageView *newViewImage;
+    __weak IBOutlet UIImageView *bgImageView;
+    __weak IBOutlet NSLayoutConstraint *bgImageViewHeightConstraint;
+    __weak IBOutlet NSLayoutConstraint *bgImageViewTopConstraint;
 }
 
 @property(nonatomic) BOOL catalogIsSeen;
@@ -249,7 +252,9 @@ const static int PicturesToPreload = 3;
                 catalogPage.onScrollViewHeightConstraintChange = ^(AAACatalogPageVC* page)
                 {
                     if (page.isPageLoaded) {
-                        pageViewController.view.frame = [self pageViewControllerFrame];
+                        CGRect pageVcFrame = [self pageViewControllerFrame];
+                        pageViewController.view.frame = pageVcFrame;
+                        [self setBgImageViewConstraintsForPageControllerFrame:pageVcFrame];
                         [self setBottomBarYPosition];
                         page.onScrollViewHeightConstraintChange = nil;
                     }
@@ -283,6 +288,18 @@ const static int PicturesToPreload = 3;
     }];
     
     [self setNewViewEffect];
+}
+
+-(void) setBgImageViewConstraintsForPageControllerFrame:(CGRect) pageViewControllerFrame
+{
+//    UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState;
+//    [UIView animateWithDuration:.3f delay:.0f options:options animations:^{
+        bgImageViewTopConstraint.constant = pageViewControllerFrame.origin.y;
+        bgImageViewHeightConstraint.constant = pageViewControllerFrame.size.height;
+        [bgImageView layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 -(void) setProgress:(int) progress outOf:(int) total
@@ -350,6 +367,9 @@ const static int PicturesToPreload = 3;
 
 -(void)minimize
 {
+    [UIView animateWithDuration:.1f animations:^{
+        bgImageView.alpha = .3f;
+    }];
     isMinimized = YES;
     [sharedBannerView stop];
     [sharedBannerView.bannerView removeFromSuperview];
@@ -360,13 +380,18 @@ const static int PicturesToPreload = 3;
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
     if (pageViewController) {
-//        [UIView animateWithDuration:.1f animations:^{
-            pageViewController.view.frame= [self pageViewControllerFrame];
-//        }];
+        
+        [UIView animateWithDuration:.2f delay:.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
+            CGRect pageVcFrame = [self pageViewControllerFrame];
+            pageViewController.view.frame= pageVcFrame;
+            [self setBgImageViewConstraintsForPageControllerFrame:pageVcFrame];
+            [pageViewController.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            
+        }];
 //        [self setBottomBarYPosition];
     }
     
-    [self showView:fromToBottomBar show:YES];
     if (pageViewController && pageViewController.viewControllers && pageViewController.viewControllers.count > 0) {
         float percentageSeen = [pages indexOfObject:pageViewController.viewControllers[0]] * 100 / pages.count;
         [Flurry logEvent:FlurryEventCatalogPercentageSeen withParameters:@{FlurryParameterPercentage : [NSString stringWithFormat:@"%f", percentageSeen]}];
@@ -376,11 +401,15 @@ const static int PicturesToPreload = 3;
 -(void) finishedMinimized
 {
     [self setBottomBarYPosition];
+    [self showView:fromToBottomBar show:YES];
 }
 
 -(void)maximize
 {
     isMinimized = NO;
+    [UIView animateWithDuration:.1f animations:^{
+        bgImageView.alpha = 0.0f;
+    }];
     [UIView animateWithDuration:.3f animations:^{
         newView.alpha = 0.0f;
     }];
@@ -399,7 +428,12 @@ const static int PicturesToPreload = 3;
     [gadBannerViewContainer addSubview:sharedBannerView.bannerView];
     sharedBannerView.bannerView.hidden = NO;
     [sharedBannerView start];
-    [self updatePageViewControllerForCurrentPage];
+    [UIView animateWithDuration:.2f delay:.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
+        [self updatePageViewControllerForCurrentPage];
+        [pageViewController.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
     [self layoutBanner:adBannerLoaded animated:adBannerLoaded];
     [self updateTopBarPosition];
     [self showTopBar:[NSNumber numberWithBool:YES]];
@@ -437,7 +471,9 @@ const static int PicturesToPreload = 3;
     AAACatalogPageVC* currentPage=  [self currentPage];
     if (currentPage.isPageLoaded)
     {
-        pageViewController.view.frame = [self pageViewControllerFrameForPage:currentPage];
+        CGRect pageVCFrame = [self pageViewControllerFrameForPage:currentPage];
+        pageViewController.view.frame = pageVCFrame;
+        [self setBgImageViewConstraintsForPageControllerFrame:pageVCFrame];
     }
 }
 
@@ -526,7 +562,7 @@ const static int PicturesToPreload = 3;
     {
         currentFrame.origin.y -= self.view.bounds.size.height;
     }
-    [UIView animateWithDuration:.25f delay: show ? 0.0f : 0.40f options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:.25f delay: show ? 0.0f : 0.40f options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState animations:^{
         pageViewController.view.frame = currentFrame;
     } completion:nil];
 }
@@ -547,7 +583,14 @@ const static int PicturesToPreload = 3;
         //        [self updateFavoriteButton];
         AAACatalogPageVC* page = [self currentPage];
         if (page.isPageLoaded) {
-            _pageViewController.view.frame = [self pageViewControllerFrame];
+            UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState;
+            [UIView animateWithDuration:.2f delay:0.0f options:options animations:^{
+                _pageViewController.view.frame = [self pageViewControllerFrame];
+                [_pageViewController.view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+              }];
+            
             [self updateTopBarPosition];
         }
         [self showTopBar:[NSNumber numberWithBool:YES]];
@@ -604,7 +647,9 @@ const static int PicturesToPreload = 3;
 -(void)catalogPage:(AAACatalogPageVC *)catalogPage pageLoaded:(BOOL)pageLoaded
 {
 //    [UIView animateWithDuration:.3f animations:^{
-        pageViewController.view.frame = [self pageViewControllerFrame];
+    CGRect pageVCFrame = [self pageViewControllerFrame];
+    pageViewController.view.frame = pageVCFrame;
+    [self setBgImageViewConstraintsForPageControllerFrame:pageVCFrame];
 //    }];
 }
 
