@@ -133,11 +133,16 @@ const static int PicturesToPreload = 3;
     {
         pageVCFrame.size.height -= fromToBottomBar.frame.size.height;
     }
-    else if(adBannerLoaded)
+//    else if(adBannerLoaded)
+//    {
+//        pageVCFrame.size.height -= gadBannerViewContainer.frame.size.height;
+//    }
+    pageVCFrame = [page croppedPageCalculatedFrameInParentFrame:pageVCFrame];
+    if (!isMinimized && adBannerLoaded && pageVCFrame.size.height > self.view.bounds.size.height - gadBannerViewContainer.frame.size.height)
     {
         pageVCFrame.size.height -= gadBannerViewContainer.frame.size.height;
+        pageVCFrame = [page croppedPageCalculatedFrameInParentFrame:pageVCFrame];
     }
-    pageVCFrame = [page croppedPageCalculatedFrameInParentFrame:pageVCFrame];
     return pageVCFrame;
 }
 
@@ -355,7 +360,9 @@ const static int PicturesToPreload = 3;
     tapGesture.enabled = NO;
     [self showTopBar:[NSNumber numberWithBool:NO]];
     if (pageViewController) {
-        pageViewController.view.frame= [self pageViewControllerFrame];
+//        [UIView animateWithDuration:.1f animations:^{
+            pageViewController.view.frame= [self pageViewControllerFrame];
+//        }];
 //        [self setBottomBarYPosition];
     }
     

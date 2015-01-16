@@ -65,7 +65,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBQ-9U-Cwl" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="40" width="320" height="440"/>
+                                <rect key="frame" x="0.0" y="40" width="320" height="426"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="Nb9-c7-gHZ"/>
@@ -81,10 +81,10 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGx-Nj-mhU" userLabel="marketsscroll">
-                                <rect key="frame" x="0.0" y="480" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="466" width="320" height="102"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9q-ee-rAx" userLabel="bottom_bar_bg_VIEW">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="markets_bg_back_top.png" translatesAutoresizingMaskIntoConstraints="NO" id="BgF-31-V9S" userLabel="top_shadow">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="6"/>
@@ -93,7 +93,7 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="markets_bg_back_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="cPv-b4-pmI" userLabel="markets ImgView">
-                                                <rect key="frame" x="0.0" y="6" width="320" height="82"/>
+                                                <rect key="frame" x="0.0" y="6" width="320" height="96"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </imageView>
                                         </subviews>
@@ -109,7 +109,7 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k0x-hS-Keu">
-                                        <rect key="frame" x="0.0" y="4" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="14" width="320" height="92"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HW3-TT-FT8">
                                             <size key="itemSize" width="86" height="86"/>
@@ -205,7 +205,7 @@
                                         </connections>
                                     </collectionView>
                                     <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-49-Hvk" userLabel="markets ScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                         <subviews>
                                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltw-j1-7ei">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
@@ -215,7 +215,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </scrollView>
                                     <view userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HH4-4s-Jzk" userLabel="bottom_bar_overlay_VIEW">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marketbar_overlay_top.png" translatesAutoresizingMaskIntoConstraints="NO" id="oB4-Lf-Pcg" userLabel="top_shadow">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="6"/>
@@ -224,7 +224,7 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marketbar_overlay_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="QBD-dM-JF4" userLabel="markets ImgView">
-                                                <rect key="frame" x="0.0" y="6" width="320" height="82"/>
+                                                <rect key="frame" x="0.0" y="6" width="320" height="96"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </imageView>
                                         </subviews>
@@ -245,7 +245,7 @@
                                     <constraint firstItem="j9q-ee-rAx" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="41e-Wx-iPe"/>
                                     <constraint firstItem="1IV-49-Hvk" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="AgP-hc-AFM"/>
                                     <constraint firstItem="k0x-hS-Keu" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="C70-6z-Qk4"/>
-                                    <constraint firstItem="k0x-hS-Keu" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="4" id="D1w-GX-JmE"/>
+                                    <constraint firstItem="k0x-hS-Keu" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="14" id="DRI-5a-Mdp"/>
                                     <constraint firstItem="HH4-4s-Jzk" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="GIy-Fd-W15"/>
                                     <constraint firstItem="HH4-4s-Jzk" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="IFL-Mu-CSp"/>
                                     <constraint firstAttribute="bottom" secondItem="1IV-49-Hvk" secondAttribute="bottom" id="IM0-LQ-Ueg"/>
@@ -257,19 +257,22 @@
                                     <constraint firstAttribute="bottom" secondItem="j9q-ee-rAx" secondAttribute="bottom" id="jJU-nP-ut8"/>
                                     <constraint firstItem="1IV-49-Hvk" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="pdm-P8-JgT"/>
                                     <constraint firstAttribute="bottom" secondItem="k0x-hS-Keu" secondAttribute="bottom" constant="-4" id="sIF-gA-g3C"/>
-                                    <constraint firstAttribute="height" constant="88" id="v9D-Cx-ECY"/>
+                                    <constraint firstAttribute="height" constant="102" id="v9D-Cx-ECY"/>
                                     <constraint firstAttribute="trailing" secondItem="j9q-ee-rAx" secondAttribute="trailing" id="zjt-HH-pre"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiU-qH-vpQ" userLabel="selectView">
-                                <rect key="frame" x="0.0" y="465" width="320" height="30"/>
+                                <rect key="frame" x="0.0" y="463" width="320" height="30"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="burger_btn.png" translatesAutoresizingMaskIntoConstraints="NO" id="OTs-Gh-tq8">
-                                        <rect key="frame" x="150" y="11" width="20" height="12"/>
+                                    <imageView alpha="0.79999999999999982" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="burger_btn.png" translatesAutoresizingMaskIntoConstraints="NO" id="OTs-Gh-tq8">
+                                        <rect key="frame" x="148" y="11" width="24" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="hUb-AD-IFb"/>
+                                            <constraint firstAttribute="width" constant="24" id="hUb-AD-IFb"/>
                                             <constraint firstAttribute="height" constant="12" id="iGA-B6-AdU"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="5Ay-3d-hBZ" appends="YES" id="Ef4-az-Lm7"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -349,7 +352,7 @@
                             <constraint firstItem="213-o3-14Y" firstAttribute="top" secondItem="Sa3-S0-tZS" secondAttribute="top" id="0Cx-g9-xJl"/>
                             <constraint firstAttribute="centerX" secondItem="grI-65-opn" secondAttribute="centerX" id="3DJ-ML-VjK"/>
                             <constraint firstAttribute="trailing" secondItem="VBQ-9U-Cwl" secondAttribute="trailing" id="3kV-tD-6UD"/>
-                            <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="VBQ-9U-Cwl" secondAttribute="bottom" constant="88" id="5a3-8b-xkL"/>
+                            <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="VBQ-9U-Cwl" secondAttribute="bottom" constant="102" id="5a3-8b-xkL"/>
                             <constraint firstItem="MOv-vo-MmQ" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="ASb-2L-kJn"/>
                             <constraint firstItem="VBQ-9U-Cwl" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="Ajo-h4-fHy"/>
                             <constraint firstAttribute="centerX" secondItem="IiU-qH-vpQ" secondAttribute="centerX" id="DOX-md-Jub"/>
@@ -361,7 +364,7 @@
                             <constraint firstAttribute="centerY" secondItem="grI-65-opn" secondAttribute="centerY" id="PoA-O4-Xll"/>
                             <constraint firstItem="T6R-v1-bcj" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="bottom" id="STK-bc-rYt"/>
                             <constraint firstAttribute="trailing" secondItem="213-o3-14Y" secondAttribute="trailing" id="ZFI-S7-u6f"/>
-                            <constraint firstItem="IiU-qH-vpQ" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="-15" id="cBM-qC-epA"/>
+                            <constraint firstItem="IiU-qH-vpQ" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="-3" id="cBM-qC-epA"/>
                             <constraint firstItem="213-o3-14Y" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="dkG-bK-rWd"/>
                             <constraint firstItem="MOv-vo-MmQ" firstAttribute="top" secondItem="Sa3-S0-tZS" secondAttribute="top" id="jIP-ir-ozb"/>
                             <constraint firstItem="AGx-Nj-mhU" firstAttribute="leading" secondItem="Sa3-S0-tZS" secondAttribute="leading" id="jgA-7r-SMA"/>
@@ -373,6 +376,7 @@
                     <tabBarItem key="tabBarItem" title="Item" image="first" id="q9j-H4-nzW"/>
                     <connections>
                         <outlet property="blurView" destination="213-o3-14Y" id="Ba8-CE-g08"/>
+                        <outlet property="burgerImageView" destination="OTs-Gh-tq8" id="uHm-4c-rSt"/>
                         <outlet property="carousel" destination="VBQ-9U-Cwl" id="6RL-ED-eUL"/>
                         <outlet property="editMenuPanGesture" destination="6h2-jK-qyO" id="s5z-g1-CBc"/>
                         <outlet property="editMenuPanGestureBlurView" destination="bYy-G0-lnx" id="pt1-xC-7XS"/>
@@ -395,7 +399,7 @@
                         <action selector="editViewDrag:" destination="7zJ-Rv-Ayp" id="hoe-Cy-nET"/>
                     </connections>
                 </panGestureRecognizer>
-                <panGestureRecognizer delaysTouchesBegan="YES" minimumNumberOfTouches="1" id="6h2-jK-qyO" userLabel="marketsCollectionView -Pan Gesture Recognizer">
+                <panGestureRecognizer enabled="NO" delaysTouchesBegan="YES" minimumNumberOfTouches="1" id="6h2-jK-qyO" userLabel="marketsCollectionView -Pan Gesture Recognizer">
                     <connections>
                         <action selector="editViewDrag:" destination="7zJ-Rv-Ayp" id="b22-2b-y2m"/>
                         <outlet property="delegate" destination="7zJ-Rv-Ayp" id="ijo-8H-fH9"/>
@@ -406,6 +410,11 @@
                         <action selector="editViewDrag:" destination="7zJ-Rv-Ayp" id="kU8-Pu-DnJ"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="5Ay-3d-hBZ" userLabel="burgerView -Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="openCloseMenuTapped:" destination="7zJ-Rv-Ayp" id="yTP-Ke-cvh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="617" y="-348"/>
         </scene>

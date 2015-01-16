@@ -70,6 +70,7 @@
     IBOutlet UIPanGestureRecognizer *editMenuPanGesture;
     IBOutlet UIPanGestureRecognizer *editMenuPanGestureBlurView;
     __weak IBOutlet UIView *selectView;
+    __weak IBOutlet UIImageView *burgerImageView;
     __weak IBOutlet UIView *marketsScrollSuperView;
     
     ScrollDirection _marketsViewDragDirection;
@@ -572,6 +573,17 @@ const float maxBlurRadius = 20;
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
+- (IBAction)openCloseMenuTapped:(UITapGestureRecognizer *)sender
+{
+    BOOL edit =_isInEditMode;
+    [self goToEditMode:!edit];
+    [self changeEditMenuStateToClosed:edit onCompletion:^{
+        if (edit) {
+            [self selectMarketInCollectionView:currentShowingMarket];
+        }
+    }];
+}
+
 
 -(void) blurViewTapped:(UITapGestureRecognizer*) tapGesture
 {
@@ -999,7 +1011,7 @@ const float maxBlurRadius = 20;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
 {
     if (_isInEditMode) {
-        return CGSizeMake(0.0f, 10.0f);
+        return CGSizeMake(0.0f, 5.0f);
     }
     return [self collectionViewPadding:collectionView withLayout:collectionViewLayout];
 }
@@ -1012,15 +1024,15 @@ const float maxBlurRadius = 20;
     return [self collectionViewPadding:collectionView withLayout:collectionViewLayout];
 }
 
-#pragma mark - UIGestureRecognizer
-
--(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    if ([gestureRecognizer.view isEqual:marketViewsCollectionView] && [gestureRecognizer isEqual:editMenuPanGesture]) {
-        CGPoint vel = [editMenuPanGesture velocityInView:self.view];
-        return abs(vel.y) >= 300;
-    }
-    return YES;
-}
+//#pragma mark - UIGestureRecognizer
+//
+//-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+//{
+//    if ([gestureRecognizer.view isEqual:marketViewsCollectionView] && [gestureRecognizer isEqual:editMenuPanGesture]) {
+//        CGPoint vel = [editMenuPanGesture velocityInView:self.view];
+//        return abs(vel.y) >= 300;
+//    }
+//    return YES;
+//}
 
 @end
