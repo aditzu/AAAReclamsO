@@ -51,8 +51,8 @@ static AAATutorialManager* _instance;
 {
     if ([self isValidToPerform:tutorialToInvalidate])
     {
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[self idForTutorialView:tutorialToInvalidate]];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[self idForTutorialView:tutorialToInvalidate]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [tutViewsSeen setObject:[NSNumber numberWithBool:YES] forKey:@(tutorialToInvalidate)];
         AAATutorialVC* tutorialVC = [tutorialViews objectForKey:@(tutorialToInvalidate)];
         if (tutorialVC) {

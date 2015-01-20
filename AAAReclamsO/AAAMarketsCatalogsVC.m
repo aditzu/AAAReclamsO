@@ -470,7 +470,14 @@ const static int catalogSubviewTag = 21341;
     {
         //open edit view
         [self goToEditMode:YES];
+        
         [marketViewsCollectionView reloadData];
+//        [UIView animateWithDuration:.3f delay:.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
+//            [marketViewsCollectionView reloadData];
+//            [marketViewsCollectionView layoutIfNeeded];
+//        } completion:^(BOOL finished) {
+        
+//        }];
     }
     
     if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateFailed || sender.state == UIGestureRecognizerStateCancelled)
