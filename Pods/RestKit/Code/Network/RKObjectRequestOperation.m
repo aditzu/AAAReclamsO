@@ -75,7 +75,7 @@ static NSString *RKStringFromStreamStatus(NSStreamStatus streamStatus)
     return nil;
 }
 
-inline NSString *RKStringDescribingStream(NSStream *stream)
+static NSString *RKStringDescribingStream(NSStream *stream)
 {
     NSString *errorDescription = ([stream streamStatus] == NSStreamStatusError) ? [NSString stringWithFormat:@", error=%@", [stream streamError]] : @"";
     if ([stream isKindOfClass:[NSInputStream class]]) {
@@ -276,7 +276,7 @@ static void RKDecrementNetworkAcitivityIndicator()
     #endif
 }
 
-inline NSString *RKDescriptionForRequest(NSURLRequest *request)
+static inline NSString *RKDescriptionForRequest(NSURLRequest *request)
 {
     return [NSString stringWithFormat:@"%@ '%@'", request.HTTPMethod, [request.URL absoluteString]];
 }

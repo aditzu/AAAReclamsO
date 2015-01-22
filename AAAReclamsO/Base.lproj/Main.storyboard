@@ -451,6 +451,9 @@
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Puh-i2-aYf" userLabel="bg">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="568" id="OFN-m0-Xnx"/>
+                                </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-3i-5Ko" userLabel="gBannerContainer">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
@@ -677,7 +680,6 @@
                             <constraint firstItem="qcP-3i-5Ko" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="3Gt-W7-Gy5"/>
                             <constraint firstItem="Puh-i2-aYf" firstAttribute="leading" secondItem="cvK-JU-ARK" secondAttribute="leading" id="3qF-z9-VFT"/>
                             <constraint firstItem="Puh-i2-aYf" firstAttribute="top" secondItem="cvK-JU-ARK" secondAttribute="top" id="Fb6-kl-rz1"/>
-                            <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="Puh-i2-aYf" secondAttribute="bottom" id="IIS-TW-9On"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4kb-VH-gPv" secondAttribute="trailing" id="MFF-pL-T9h"/>
                             <constraint firstItem="IAa-8M-9Lg" firstAttribute="top" secondItem="abi-aW-6Zb" secondAttribute="bottom" constant="3" id="MWC-Lh-ifg"/>
                             <constraint firstAttribute="trailing" secondItem="T3b-25-tZs" secondAttribute="trailing" id="Mrp-AC-1Dh"/>
@@ -698,6 +700,7 @@
                     <navigationItem key="navigationItem" id="4uG-Av-5Np"/>
                     <connections>
                         <outlet property="bgImageView" destination="Puh-i2-aYf" id="ZK0-Ax-1S7"/>
+                        <outlet property="bgImageViewHeightConstraint" destination="OFN-m0-Xnx" id="d7i-fG-NgT"/>
                         <outlet property="bgImageViewTopConstraint" destination="Fb6-kl-rz1" id="QCk-4d-WcQ"/>
                         <outlet property="closeBtn" destination="Hn9-nY-wld" id="Obb-XU-x3W"/>
                         <outlet property="fromToBottomBar" destination="abi-aW-6Zb" id="7tO-B9-1KR"/>

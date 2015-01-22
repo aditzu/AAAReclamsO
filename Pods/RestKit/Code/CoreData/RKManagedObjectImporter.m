@@ -239,7 +239,6 @@
 
     NSUInteger aggregateObjectCount = 0;
     for (NSString *entry in entries) {
-    #pragma unused (entry)
         NSUInteger objectCount = [self importObjectsFromFileAtPath:path withMapping:mapping keyPath:keyPath error:&localError];
         if (objectCount == NSNotFound) {
             if (error) *error = localError;

@@ -42,7 +42,7 @@ id RKTransformedValueWithClass(id value, Class destinationType, NSValueTransform
 NSArray *RKApplyNestingAttributeValueToMappings(NSString *attributeName, id value, NSArray *propertyMappings);
 
 // Return YES if the entity is identified by an attribute that acts as the nesting key in the source representation
-inline BOOL RKEntityMappingIsIdentifiedByNestingAttribute(RKEntityMapping *entityMapping)
+static BOOL RKEntityMappingIsIdentifiedByNestingAttribute(RKEntityMapping *entityMapping)
 {
     for (NSAttributeDescription *attribute in [entityMapping identificationAttributes]) {
         RKAttributeMapping *attributeMapping = [[entityMapping propertyMappingsByDestinationKeyPath] objectForKey:[attribute name]];

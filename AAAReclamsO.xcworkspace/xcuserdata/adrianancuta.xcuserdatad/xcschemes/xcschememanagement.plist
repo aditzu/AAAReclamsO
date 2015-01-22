@@ -3,18 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict/>
-	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>9E2650C31A11192F005B546B</key>
+		<key>AAAReclamsO.xcscheme</key>
 		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9E2650DF1A11192F005B546B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<key>orderHint</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 </dict>
