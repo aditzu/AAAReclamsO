@@ -28,6 +28,7 @@
         UIUserNotificationSettings* notifSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:notifSettings];
     }
+    application.applicationIconBadgeNumber = 0;
     
     NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notification) {

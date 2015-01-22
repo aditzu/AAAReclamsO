@@ -164,6 +164,7 @@ static Reachability* ownServerReach;
 {
     if (!_loadedTutorialViews) {
         [self loadTutorialViews];
+        [self.view layoutSubviews];
     }
 }
 
@@ -648,7 +649,7 @@ const float maxBlurRadius = 20;
 
 -(void) selectMarketInCollectionView:(AAAMarket*) market
 {
-    int row = [enabledMarkets containsObject:market] ? [enabledMarkets indexOfObject:market] : (enabledMarkets.count > 0 ? 0 : -1);
+    int row = [enabledMarkets containsObject:market] ? (int)[enabledMarkets indexOfObject:market] : (enabledMarkets.count > 0 ? 0 : -1);
     if (row >= 0) {
         NSIndexPath* lastSelectedIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
         [marketViewsCollectionView selectItemAtIndexPath:lastSelectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
@@ -717,7 +718,7 @@ const float maxBlurRadius = 20;
     int unseenCatalogs = 0;
     NSArray* seenCatalogsForThisMarket = [seenCatalogs objectForKey:@(market.identifier)];
     if (!seenCatalogsForThisMarket) {
-        return market.catalogs.count;
+        return (int)market.catalogs.count;
     }
     for (AAACatalog* catalog in market.catalogs)
     {
