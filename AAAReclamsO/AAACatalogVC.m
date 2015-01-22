@@ -85,7 +85,6 @@ const static int PicturesToPreload = 3;
     zoomCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewZoomOnCatalog
                                                          withDependecies:@[@(TutorialViewExploreCatalog)]
                                                                 atCenter:self.view.center];
-    
 //    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
 //    self.view.layer.shadowOffset = CGSizeMake(2, 2);
 //    self.view.layer.shadowRadius = 3;

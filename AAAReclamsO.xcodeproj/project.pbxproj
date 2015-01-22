@@ -16,6 +16,7 @@
 		9E2651661A136FD6005B546B /* AAACatalogVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2651651A136FD6005B546B /* AAACatalogVC.m */; };
 		9E2EF0DC1A43044C000DD30F /* AAATutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2EF0DB1A43044C000DD30F /* AAATutorialVC.m */; };
 		9E2EF0DF1A430A9B000DD30F /* AAATutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2EF0DE1A430A9B000DD30F /* AAATutorialManager.m */; };
+		9E612DB61A712F3900567557 /* splash-ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB51A712F3900567557 /* splash-ios.png */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
 		9E7A064E1A6046900054FBC2 /* AAAMarketCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7A064D1A6046900054FBC2 /* AAAMarketCollectionViewCell.m */; };
 		9E7A06511A604B800054FBC2 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7A064F1A604B800054FBC2 /* add@2x.png */; };
@@ -112,6 +113,7 @@
 		9E2EF0DB1A43044C000DD30F /* AAATutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAATutorialVC.m; sourceTree = "<group>"; };
 		9E2EF0DD1A430A9B000DD30F /* AAATutorialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAATutorialManager.h; sourceTree = "<group>"; };
 		9E2EF0DE1A430A9B000DD30F /* AAATutorialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAATutorialManager.m; sourceTree = "<group>"; };
+		9E612DB51A712F3900567557 /* splash-ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-ios.png"; sourceTree = "<group>"; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
 		9E7172D51A1C92410078870E /* AAAwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAwww.m; sourceTree = "<group>"; };
 		9E7A064C1A6046900054FBC2 /* AAAMarketCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketCollectionViewCell.h; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 		9E2651591A134C64005B546B /* gfx */ = {
 			isa = PBXGroup;
 			children = (
+				9E612DB51A712F3900567557 /* splash-ios.png */,
 				9EFF17911A694A7A00E3AA2F /* marketbar_overlay_bottom@2x.png */,
 				9EFF17921A694A7A00E3AA2F /* marketbar_overlay_top@2x.png */,
 				9EFF17931A694A7A00E3AA2F /* markets_bg_back_bottom@2x.png */,
@@ -580,6 +583,7 @@
 				9EE091581A24BA2B006789F0 /* bottom_bar_overlay@2x.png in Resources */,
 				9E9C08301A59684F004AA7DE /* lock@2x.png in Resources */,
 				9E7A06511A604B800054FBC2 /* add@2x.png in Resources */,
+				9E612DB61A712F3900567557 /* splash-ios.png in Resources */,
 				9EFF17901A69286200E3AA2F /* bottom_bar_overlay_bottom@2x.png in Resources */,
 				9EFF178F1A69286200E3AA2F /* bottom_bar_bg_bottom@2x.png in Resources */,
 				9EFF17881A691CAC00E3AA2F /* burger_btn@2x.png in Resources */,
@@ -790,7 +794,7 @@
 			baseConfigurationReference = 9D5C279E41EB04FFDDACAF8D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageyo;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -816,7 +820,7 @@
 			baseConfigurationReference = C2F365147BEC56749C74C9C3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageyo;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

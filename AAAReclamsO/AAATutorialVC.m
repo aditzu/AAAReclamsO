@@ -31,6 +31,7 @@
 {
     _image = image;
     _text = text;
+    self.label.numberOfLines = 0;
     [self setProperties];
     identifier = _identifier;
 }

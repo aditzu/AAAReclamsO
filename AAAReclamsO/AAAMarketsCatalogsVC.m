@@ -141,6 +141,7 @@ static Reachability* ownServerReach;
     
     blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
     [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
+    errorViewMessageLabel.numberOfLines = 0;
 }
 
 - (void)loadTutorialViews
