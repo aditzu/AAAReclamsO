@@ -65,8 +65,8 @@ static AAAGlobals* _instance;
 
 -(NSString*) apId
 {
-    return @"1234";// @"ca-app-pub-2163416701589769/7779082332"; //gad
-//    return @"190723"; //millenial
+//    return @"1234";// @"ca-app-pub-2163416701589769/7779082332"; //gad
+    return @"190723"; //millenial
 }
 
 -(NSString *)privacyPolicyURL

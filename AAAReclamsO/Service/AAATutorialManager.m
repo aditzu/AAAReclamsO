@@ -191,7 +191,7 @@ static AAATutorialManager* _instance;
 
 -(NSString*) idForTutorialView:(TutorialView)tutView
 {
-    return [NSString stringWithFormat:@"%li", tutView];
+    return [NSString stringWithFormat:@"%i", tutView];
 }
 
 @end

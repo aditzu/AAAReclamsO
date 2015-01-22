@@ -31,7 +31,6 @@
 {
     _image = image;
     _text = text;
-    self.label.numberOfLines = 0;
     [self setProperties];
     identifier = _identifier;
 }
@@ -92,6 +91,7 @@
     if (!self.isStarted) {
         self.view.hidden = YES;
     }
+    self.label.numberOfLines = 0;
     [self setProperties];
 }
 
