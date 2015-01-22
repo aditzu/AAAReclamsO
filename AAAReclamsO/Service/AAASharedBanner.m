@@ -15,7 +15,6 @@
 
 #import <MillennialMedia/MMSDK.h>
 #import <MillennialMedia/MMAdView.h>
-//#import "GADRequest.h"
 
 @interface AAASharedBanner()
 {
@@ -76,13 +75,19 @@
                                                    object:nil];
         
         CGRect rootVCFrame = rootVC.view.bounds;
-        CGRect mmBannerFrame = CGRectMake((rootVCFrame.size.width - MILLENNIAL_AD_VIEW_FRAME.size.width)/2, rootVCFrame.size.height - MILLENNIAL_AD_VIEW_FRAME.size.height, MILLENNIAL_AD_VIEW_FRAME.size.width, MILLENNIAL_AD_VIEW_FRAME.size.height);
+        CGSize bannerSize = [self bannerFrameSize];
+        CGRect banerFrame = CGRectMake((rootVCFrame.size.width - MILLENNIAL_AD_VIEW_FRAME.size.width)/2, rootVCFrame.size.height - MILLENNIAL_AD_VIEW_FRAME.size.height, bannerSize.width, bannerSize.height);
         // Returns an autoreleased MMAdView object
-        self.mmBannerAdView = [[MMAdView alloc] initWithFrame:mmBannerFrame
+        self.mmBannerAdView = [[MMAdView alloc] initWithFrame:banerFrame
                                                    apid:adUnitId
                                      rootViewController:rootVC];        
     }
     return self;
+}
+
+-(CGSize) bannerFrameSize
+{
+    return CGSizeMake(MILLENNIAL_AD_VIEW_FRAME.size.width, MILLENNIAL_AD_VIEW_FRAME.size.height);
 }
 
 -(NSTimer *)adsTimer

@@ -52,6 +52,7 @@
     __weak IBOutlet UIImageView *bgImageView;
     __weak IBOutlet NSLayoutConstraint *bgImageViewHeightConstraint;
     __weak IBOutlet NSLayoutConstraint *bgImageViewTopConstraint;
+    __weak IBOutlet NSLayoutConstraint *gadBannerContainerHeightConstraint;
 }
 
 @property(nonatomic) BOOL catalogIsSeen;
@@ -425,6 +426,7 @@ const static int PicturesToPreload = 3;
 {
     sharedBannerView = [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
     sharedBannerView.delegate = self;
+    gadBannerContainerHeightConstraint.constant = [sharedBannerView bannerFrameSize].height;
     [gadBannerViewContainer addSubview:sharedBannerView.bannerView];
     sharedBannerView.bannerView.hidden = NO;
     [sharedBannerView start];

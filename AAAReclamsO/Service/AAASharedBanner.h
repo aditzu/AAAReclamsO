@@ -31,5 +31,5 @@
 - (void) setRootViewController:(UIViewController*) vc;
 - (void) start;
 - (void) stop;
-
+-(CGSize) bannerFrameSize;
 @end

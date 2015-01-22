@@ -18,7 +18,6 @@
 #import "AAATutorialManager.h"
 #import "AAAMarketCollectionViewCell.h"
 #import "FXBlurView.h"
-#import "AAASharedBanner.h"
 
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
 
@@ -77,6 +76,7 @@
     
     NSMutableDictionary* seenCatalogs;
     BOOL _seenCatalogsDirty;
+    BOOL _loadedTutorialViews;
 }
 
 - (IBAction)privacyButtonPressed:(UIButton *)sender;
@@ -125,18 +125,6 @@ static Reachability* ownServerReach;
     } onFailure:^{
         [self resetCatalogs];
     }];
-
-    [[AAATutorialManager instance] setupWithStoryboard:self.storyboard];
-    UIView* dragMarketsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverMarkets withDependecies:@[] atCenter:marketsScrollView.superview.center];
-    [self.view addSubview:dragMarketsTutorial];
-    UIView* tapMarketTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnMarket withDependecies:@[@(TutorialViewDiscoverMarkets)] atCenter:marketsScrollView.superview.center];
-    [self.view addSubview:tapMarketTutorial];
-    UIView* dragCatalogsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverCatalogs withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
-    [self.view addSubview:dragCatalogsTutorial];
-    UIView* tapCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnCatalog withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
-    [self.view addSubview:tapCatalogTutorial];
-    
-    [self showNextTutorialView];
     
     bottomLimitYMarketsViewHeightConstraint = marketsViewHeightConstraint.constant;
     topLimitYMarketsViewHeightConstraint = [UIScreen mainScreen].bounds.size.height - bottomLimitYMarketsViewHeightConstraint;
@@ -153,6 +141,29 @@ static Reachability* ownServerReach;
     
     blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
     [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
+}
+
+- (void)loadTutorialViews
+{
+    [[AAATutorialManager instance] setupWithStoryboard:self.storyboard];
+    UIView* dragMarketsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverMarkets withDependecies:@[] atCenter:marketsScrollView.superview.center];
+    [self.view addSubview:dragMarketsTutorial];
+    UIView* tapMarketTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnMarket withDependecies:@[@(TutorialViewDiscoverMarkets)] atCenter:marketsScrollView.superview.center];
+    [self.view addSubview:tapMarketTutorial];
+    UIView* dragCatalogsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverCatalogs withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
+    [self.view addSubview:dragCatalogsTutorial];
+    UIView* tapCatalogTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnCatalog withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
+    [self.view addSubview:tapCatalogTutorial];
+    
+    [self showNextTutorialView];
+    _loadedTutorialViews = YES;
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if (!_loadedTutorialViews) {
+        [self loadTutorialViews];
+    }
 }
 
 - (void)loadUserDefaults
@@ -280,9 +291,8 @@ static Reachability* ownServerReach;
                 [self setCatalogIdAsSeen:catalog.identifier forMarket:market.identifier];
             }
         }
-        [self trySaveSeenCatalogs];
         [userDefaults setBool:YES forKey:kFirstLaunchAppUserDefaultsKey];
-        [userDefaults synchronize];
+        [self trySaveSeenCatalogs];
     }
 }
 
@@ -743,6 +753,7 @@ const float maxBlurRadius = 20;
     if (!_seenCatalogsDirty) {
         return;
     }
+    
     //save the settings
     NSData* seenCatalogsData = [NSKeyedArchiver archivedDataWithRootObject:seenCatalogs];
     [[NSUserDefaults standardUserDefaults] setObject:seenCatalogsData forKey:kSeenDictionaryUserDefaultsKey];

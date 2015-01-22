@@ -33,9 +33,6 @@
     if (notification) {
         [Flurry logEvent:FlurryEventStartedFromNotification];
     }
-    
-    
-    [[AAANotificationsHandler instance] scheduleNextLocalNotifications];
     return YES;
 }
 
@@ -56,7 +53,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [[AAANotificationsHandler instance] scheduleNextLocalNotifications];
     application.applicationIconBadgeNumber = 0;
 }
 
@@ -66,6 +62,7 @@
 
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
+    [[AAANotificationsHandler instance] scheduleNextLocalNotifications];
     [Flurry logEvent:FlurryEventDidRegisterForNotification withParameters:@{FlurryParameterBOOL:@YES}];
 }
 
