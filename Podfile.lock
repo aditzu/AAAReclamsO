@@ -24,10 +24,10 @@ DEPENDENCIES:
   - RestKit (~> 0.20.0rc)
 
 SPEC CHECKSUMS:
-  AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
-  JMImageCache: ae1342abeb16d8c4f05c79c926fc49dc07f84dad
-  RestKit: 7f9490e709ee745e166c4d2aa7a8d132831275b0
-  SOCKit: d8d0dd3688ae1026c12367570da8fa8e1a6980fb
-  TransitionKit: b573f93c422f6aedf7d40e93e7c2f202d1295063
+  AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
+  JMImageCache: fac25eb168a25b29ac130fee6a6b17ea463c1d86
+  RestKit: ddc3c3a2b6cbe4578c4193d8e0dfe93d79333c3b
+  SOCKit: c7376ac262bea9115b8f749358f762522a47d392
+  TransitionKit: aec4d65b2be460fec0db04f905e8bedca601d669
 
-COCOAPODS: 0.35.0.rc2
+COCOAPODS: 0.38.2

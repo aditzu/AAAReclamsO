@@ -11,7 +11,7 @@
 #import "AAAMarket.h"
 #import <RestKit/RestKit.h>
 
-static NSString* baseURL = @"http://marklogj-andreioprea.rhcloud.com";
+static NSString* baseURL = @"https://marklogj-andreioprea.rhcloud.com";
 static NSString* downloadMarketsURL = @"/markets/list";
 static NSString* downloadCatalogsURL = @"/catalogs/list/active";
 static NSString* downloadCatalogPagesUrl = @"/pages";
@@ -89,7 +89,8 @@ static AAAwww* _instance;
 
 -(NSString *)host
 {
-    return [baseURL stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+    return  baseURL;
+//    return [baseURL stringByReplacingOccurrencesOfString:@"http://" withString:@""];
 }
 
 @end
