@@ -21,6 +21,7 @@
 		9E5B600C1BC3EB2B003F75F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600A1BC3EB2B003F75F3 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
 		9E5B600E1BC3EBE0003F75F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */; };
 		9E5B60101BC3EBEC003F75F3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600F1BC3EBEC003F75F3 /* libz.tbd */; };
+		9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */; settings = {ASSET_TAGS = (); }; };
 		9E612DB61A712F3900567557 /* splash-ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB51A712F3900567557 /* splash-ios.png */; };
 		9E612DB81A712F9800567557 /* splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB71A712F9800567557 /* splash_logo.png */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
@@ -31,7 +32,6 @@
 		9E7A06581A6318090054FBC2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E7A06571A6318090054FBC2 /* Accelerate.framework */; };
 		9E8654291A36127B00ECEE62 /* AAAGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8654281A36127B00ECEE62 /* AAAGlobals.m */; };
 		9E8654621A364B6600ECEE62 /* AAAAds.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8654611A364B6600ECEE62 /* AAAAds.m */; };
-		9E8654661A3743E000ECEE62 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8654651A3743E000ECEE62 /* libFlurry_5.4.0.a */; };
 		9E8654681A3743F100ECEE62 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8654671A3743F100ECEE62 /* Security.framework */; };
 		9E86548D1A38D4EE00ECEE62 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E86544E1A36214400ECEE62 /* AdSupport.framework */; };
 		9E86548E1A38D4F300ECEE62 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8654501A36214A00ECEE62 /* AudioToolbox.framework */; };
@@ -125,6 +125,7 @@
 		9E5B600A1BC3EB2B003F75F3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9E5B600F1BC3EBEC003F75F3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.2.1.a; sourceTree = "<group>"; };
 		9E612DB51A712F3900567557 /* splash-ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-ios.png"; sourceTree = "<group>"; };
 		9E612DB71A712F9800567557 /* splash_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_logo.png; sourceTree = "<group>"; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
@@ -152,7 +153,6 @@
 		9E8654601A364B6600ECEE62 /* AAAAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAAds.h; sourceTree = "<group>"; };
 		9E8654611A364B6600ECEE62 /* AAAAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAAds.m; sourceTree = "<group>"; };
 		9E8654641A3743E000ECEE62 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		9E8654651A3743E000ECEE62 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
 		9E8654671A3743F100ECEE62 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E8654AC1A3DED8A00ECEE62 /* swipe_left_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swipe_left_right@2x.png"; sourceTree = "<group>"; };
 		9E8654AE1A3DEFAA00ECEE62 /* tap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tap@2x.png"; sourceTree = "<group>"; };
@@ -222,6 +222,7 @@
 				9E8654931A38D51000ECEE62 /* EventKitUI.framework in Frameworks */,
 				9E8654921A38D51000ECEE62 /* EventKit.framework in Frameworks */,
 				9E8654901A38D4FF00ECEE62 /* CoreGraphics.framework in Frameworks */,
+				9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */,
 				9EC559271BBADEEA0066A9D9 /* CoreMedia.framework in Frameworks */,
 				9E5B600B1BC3EB2B003F75F3 /* Bolts.framework in Frameworks */,
 				9E86548F1A38D4F800ECEE62 /* AVFoundation.framework in Frameworks */,
@@ -241,7 +242,6 @@
 				9E8654941A38D51600ECEE62 /* MessageUI.framework in Frameworks */,
 				9E8654911A38D50A00ECEE62 /* CoreTelephony.framework in Frameworks */,
 				9EFF176C1A65575700E3AA2F /* SpeechKit.framework in Frameworks */,
-				9E8654661A3743E000ECEE62 /* libFlurry_5.4.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				9E8654641A3743E000ECEE62 /* Flurry.h */,
-				9E8654651A3743E000ECEE62 /* libFlurry_5.4.0.a */,
+				9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";
