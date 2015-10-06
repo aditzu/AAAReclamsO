@@ -23,25 +23,34 @@
     // Override point for customization after application launch.
     [Flurry startSession:[[AAAGlobals sharedInstance] flurryId]];
     
-//    if([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
-//    {
-//        UIUserNotificationType types = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-//        UIUserNotificationSettings* notifSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-//        [[UIApplication sharedApplication] registerUserNotificationSettings:notifSettings];
-        
-        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        #ifdef __IPHONE_8_0
-            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
-                                                                                                 | UIUserNotificationTypeBadge
-                                                                                                 | UIUserNotificationTypeSound) categories:nil];
-            [application registerUserNotificationSettings:settings];
-            [application registerForRemoteNotifications];
-        #endif
-        } else {
-            UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-            [application registerForRemoteNotificationTypes:myTypes];
+    [Parse setApplicationId:@"7OJjQorhEeo52BlycAYTzpBRKrhDMg4oXE4hTNcR" clientKey:@"SN9159nLpY2eH0Auue8AZiCVDBike83WRZbLMbNm"];
+    
+    if (application.applicationState != UIApplicationStateBackground) {
+        // Track an app open here if we launch with a push, unless
+        // "content_available" was used to trigger a background push (introduced
+        // in iOS 7). In that case, we skip tracking here to avoid double
+        // counting the app-open.
+        BOOL preBackgroundPush = ![application respondsToSelector:@selector(backgroundRefreshStatus)];
+        BOOL oldPushHandlerOnly = ![self respondsToSelector:@selector(application:didReceiveRemoteNotification:fetchCompletionHandler:)];
+        BOOL noPushPayload = ![launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
+            [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
         }
-//    }
+    }
+    
+
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+    #ifdef __IPHONE_8_0
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
+                                                                                             | UIUserNotificationTypeBadge
+                                                                                             | UIUserNotificationTypeSound) categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    #endif
+    } else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
     
     NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notification) {
@@ -67,6 +76,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (currentInstallation.badge != 0) {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -77,7 +91,25 @@
 {
     [[AAANotificationsHandler instance] scheduleNextLocalNotifications];
     application.applicationIconBadgeNumber = 0;
-//    [Flurry logEvent:FlurryEventDidRegisterForNotification withParameters:@{FlurryParameterBOOL:@YES}];
+    [Flurry logEvent:FlurryEventDidRegisterForNotification withParameters:@{FlurryParameterBOOL:@YES}];
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if (application.applicationState == UIApplicationStateInactive) {
+        // The application was just brought from the background to the foreground,
+        // so we consider the app as having been "opened by a push notification."
+        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    if (application.applicationState == UIApplicationStateInactive) {
+        // The application was just brought from the background to the foreground,
+        // so we consider the app as having been "opened by a push notification."
+        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -87,6 +119,7 @@
 
 -(void) registerToParseWithDeviceToken:(NSData*) deviceToken
 {
+    [[PFInstallation currentInstallation] saveInBackground];
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[ @"global" ];

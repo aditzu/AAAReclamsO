@@ -17,11 +17,12 @@
 		9E2EF0DC1A43044C000DD30F /* AAATutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2EF0DB1A43044C000DD30F /* AAATutorialVC.m */; };
 		9E2EF0DF1A430A9B000DD30F /* AAATutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2EF0DE1A430A9B000DD30F /* AAATutorialManager.m */; };
 		9E514D331A716FE3003FAFBC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E514D321A716FE3003FAFBC /* libPods.a */; };
+		9E5B600B1BC3EB2B003F75F3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60091BC3EB2B003F75F3 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		9E5B600C1BC3EB2B003F75F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600A1BC3EB2B003F75F3 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		9E5B600E1BC3EBE0003F75F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */; };
+		9E5B60101BC3EBEC003F75F3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600F1BC3EBEC003F75F3 /* libz.tbd */; };
 		9E612DB61A712F3900567557 /* splash-ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB51A712F3900567557 /* splash-ios.png */; };
 		9E612DB81A712F9800567557 /* splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB71A712F9800567557 /* splash_logo.png */; };
-		9E6CC8CB1BBAAE39006F1BF3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6CC8CA1BBAAE39006F1BF3 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
-		9E6CC8CD1BBAAF14006F1BF3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6CC8CC1BBAAF14006F1BF3 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
-		9E6CC8CF1BBAAFE7006F1BF3 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6CC8CE1BBAAFE7006F1BF3 /* libsqlite3.0.tbd */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
 		9E7A064E1A6046900054FBC2 /* AAAMarketCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7A064D1A6046900054FBC2 /* AAAMarketCollectionViewCell.m */; };
 		9E7A06511A604B800054FBC2 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7A064F1A604B800054FBC2 /* add@2x.png */; };
@@ -120,11 +121,12 @@
 		9E514D381A717005003FAFBC /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		9E514D391A717005003FAFBC /* libPods-SOCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SOCKit.a"; path = "Pods/build/Debug-iphoneos/libPods-SOCKit.a"; sourceTree = "<group>"; };
 		9E514D3A1A717005003FAFBC /* libPods-TransitionKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-TransitionKit.a"; path = "Pods/build/Debug-iphoneos/libPods-TransitionKit.a"; sourceTree = "<group>"; };
+		9E5B60091BC3EB2B003F75F3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		9E5B600A1BC3EB2B003F75F3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		9E5B600F1BC3EBEC003F75F3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9E612DB51A712F3900567557 /* splash-ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-ios.png"; sourceTree = "<group>"; };
 		9E612DB71A712F9800567557 /* splash_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_logo.png; sourceTree = "<group>"; };
-		9E6CC8CA1BBAAE39006F1BF3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		9E6CC8CC1BBAAF14006F1BF3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		9E6CC8CE1BBAAFE7006F1BF3 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
 		9E7172D51A1C92410078870E /* AAAwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAwww.m; sourceTree = "<group>"; };
 		9E7A064C1A6046900054FBC2 /* AAAMarketCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketCollectionViewCell.h; sourceTree = "<group>"; };
@@ -212,23 +214,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5B60101BC3EBEC003F75F3 /* libz.tbd in Frameworks */,
+				9E5B600E1BC3EBE0003F75F3 /* libsqlite3.tbd in Frameworks */,
+				9EFF176A1A65572F00E3AA2F /* Social.framework in Frameworks */,
 				9EB845D81A31B96F008EB324 /* SystemConfiguration.framework in Frameworks */,
 				9EFF176E1A65575E00E3AA2F /* StoreKit.framework in Frameworks */,
 				9E8654931A38D51000ECEE62 /* EventKitUI.framework in Frameworks */,
 				9E8654921A38D51000ECEE62 /* EventKit.framework in Frameworks */,
 				9E8654901A38D4FF00ECEE62 /* CoreGraphics.framework in Frameworks */,
 				9EC559271BBADEEA0066A9D9 /* CoreMedia.framework in Frameworks */,
+				9E5B600B1BC3EB2B003F75F3 /* Bolts.framework in Frameworks */,
 				9E86548F1A38D4F800ECEE62 /* AVFoundation.framework in Frameworks */,
 				9E86548E1A38D4F300ECEE62 /* AudioToolbox.framework in Frameworks */,
+				9E5B600C1BC3EB2B003F75F3 /* Parse.framework in Frameworks */,
 				9E86548D1A38D4EE00ECEE62 /* AdSupport.framework in Frameworks */,
-				9E6CC8CF1BBAAFE7006F1BF3 /* libsqlite3.0.tbd in Frameworks */,
 				9E514D331A716FE3003FAFBC /* libPods.a in Frameworks */,
 				9EFF176F1A65576700E3AA2F /* UIKit.framework in Frameworks */,
-				9EFF176A1A65572F00E3AA2F /* Social.framework in Frameworks */,
 				9E8654681A3743F100ECEE62 /* Security.framework in Frameworks */,
 				9EFF17661A65571F00E3AA2F /* MobileCoreServices.framework in Frameworks */,
 				9EFF17641A65571500E3AA2F /* MediaPlayer.framework in Frameworks */,
-				9E6CC8CD1BBAAF14006F1BF3 /* Bolts.framework in Frameworks */,
 				9EFF17621A65570E00E3AA2F /* Foundation.framework in Frameworks */,
 				9EFF17611A65570200E3AA2F /* CoreLocation.framework in Frameworks */,
 				9EFF175F1A6556F400E3AA2F /* CFNetwork.framework in Frameworks */,
@@ -237,7 +241,6 @@
 				9E8654941A38D51600ECEE62 /* MessageUI.framework in Frameworks */,
 				9E8654911A38D50A00ECEE62 /* CoreTelephony.framework in Frameworks */,
 				9EFF176C1A65575700E3AA2F /* SpeechKit.framework in Frameworks */,
-				9E6CC8CB1BBAAE39006F1BF3 /* Parse.framework in Frameworks */,
 				9E8654661A3743E000ECEE62 /* libFlurry_5.4.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,16 +453,17 @@
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E5B60091BC3EB2B003F75F3 /* Bolts.framework */,
+				9E5B600A1BC3EB2B003F75F3 /* Parse.framework */,
 				9EC559261BBADEEA0066A9D9 /* CoreMedia.framework */,
-				9E6CC8CE1BBAAFE7006F1BF3 /* libsqlite3.0.tbd */,
+				9E5B600F1BC3EBEC003F75F3 /* libz.tbd */,
+				9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */,
 				9E514D381A717005003FAFBC /* libPods-AFNetworking.a */,
 				9E514D391A717005003FAFBC /* libPods-SOCKit.a */,
 				9E514D3A1A717005003FAFBC /* libPods-TransitionKit.a */,
 				9E514D361A716FFF003FAFBC /* libPods-RestKit.a */,
 				9E514D341A716FFB003FAFBC /* libPods-JMImageCache.a */,
 				9E514D321A716FE3003FAFBC /* libPods.a */,
-				9E6CC8CC1BBAAF14006F1BF3 /* Bolts.framework */,
-				9E6CC8CA1BBAAE39006F1BF3 /* Parse.framework */,
 				9EFF176D1A65575E00E3AA2F /* StoreKit.framework */,
 				9EFF176B1A65575700E3AA2F /* SpeechKit.framework */,
 				9EFF17691A65572F00E3AA2F /* Social.framework */,

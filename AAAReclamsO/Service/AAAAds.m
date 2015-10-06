@@ -95,7 +95,7 @@
 
 -(void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    NSLog(@"didFailToReceiveAdWithError: %@", error);
+//    NSLog(@"didFailToReceiveAdWithError: %@", error);
     if (self.delegate && [self.delegate respondsToSelector:@selector(adRequestFailedWithError:adType:)])
     {
         [self.delegate adRequestFailedWithError:error adType:AdTypeBanner];
@@ -104,7 +104,7 @@
 
 -(void)adViewDidDismissScreen:(GADBannerView *)bannerView
 {
-    NSLog(@"adViewDidDismissScreen");
+//    NSLog(@"adViewDidDismissScreen");
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adModalDidDismiss: adType:)])
     {
@@ -114,7 +114,7 @@
 
 -(void)adViewDidReceiveAd:(GADBannerView *)bannerView
 {
-    NSLog(@"adViewDidReceiveAd");
+//    NSLog(@"adViewDidReceiveAd");
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(adRequestSuccesfulForAdType:)])
     {
@@ -124,7 +124,7 @@
 
 -(void)adViewWillDismissScreen:(GADBannerView *)bannerView
 {
-    NSLog(@"adViewWillDismissScreen");
+//    NSLog(@"adViewWillDismissScreen");
     if (self.delegate && [self.delegate respondsToSelector:@selector(adModalWillDismiss:adType:)])
     {
         [self.delegate adModalWillDismiss:self.gadBannerAdView.adUnitID adType:AdTypeBanner];
@@ -133,7 +133,7 @@
 
 -(void)adViewWillLeaveApplication:(GADBannerView *)bannerView
 {
-    NSLog(@"adViewWillLeaveApplication");
+//    NSLog(@"adViewWillLeaveApplication");
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWasTapped:adType:)])
     {
         [self.delegate adWasTapped:self.gadBannerAdView.adUnitID adType:AdTypeBanner];
@@ -142,7 +142,7 @@
 
 -(void)adViewWillPresentScreen:(GADBannerView *)bannerView
 {
-    NSLog(@"adViewWillPresentScreen");
+//    NSLog(@"adViewWillPresentScreen");
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWasTapped:adType:)])
     {
@@ -161,7 +161,7 @@
 /// application such as when transitioning between view controllers.
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad
 {
-    NSLog(@"interstitialDidReceiveAd");
+//    NSLog(@"interstitialDidReceiveAd");
     if(self.delegate && [self.delegate respondsToSelector:@selector(adRequestSuccesfulForAdType:)])
     {
         [self.delegate adRequestSuccesfulForAdType:AdTypeInterstitial];
@@ -172,7 +172,7 @@
 /// show. This is common since interstitials are shown sparingly to users.
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    NSLog(@"interstitial didFailToReceiveAdWithError");
+//    NSLog(@"interstitial didFailToReceiveAdWithError");
     if(self.delegate && [self.delegate respondsToSelector:@selector(adRequestFailedWithError:adType:)])
     {
         [self.delegate adRequestFailedWithError:error adType:AdTypeInterstitial];
@@ -186,7 +186,7 @@
 /// Store from a link on the interstitial).
 - (void)interstitialWillPresentScreen:(GADInterstitial *)ad
 {
-    NSLog(@"interstitialWillPresentScreen");
+//    NSLog(@"interstitialWillPresentScreen");
     if(self.delegate && [self.delegate respondsToSelector:@selector(adModalWillAppear:adType:)])
     {
         [self.delegate adModalWillAppear:_interstitialId adType:AdTypeInterstitial];
@@ -196,7 +196,7 @@
 /// Called before the interstitial is to be animated off the screen.
 - (void)interstitialWillDismissScreen:(GADInterstitial *)ad
 {
-    NSLog(@"interstitialWillDismissScreen");
+//    NSLog(@"interstitialWillDismissScreen");
     self.interstitialView = [self createAndLoadInterstitial];
     if(self.delegate && [self.delegate respondsToSelector:@selector(adModalWillDismiss:adType:)])
     {
@@ -207,7 +207,7 @@
 /// Called just after dismissing an interstitial and it has animated off the screen.
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad
 {
-    NSLog(@"interstitialDidDismissScreen");
+//    NSLog(@"interstitialDidDismissScreen");
     if(self.delegate && [self.delegate respondsToSelector:@selector(adModalDidDismiss:adType:)])
     {
         [self.delegate adModalDidDismiss:_interstitialId adType:AdTypeInterstitial];
@@ -220,7 +220,7 @@
 /// before this.
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
 {
-    NSLog(@"interstitialWillLeaveApplication");
+//    NSLog(@"interstitialWillLeaveApplication");
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWasTapped:adType:)]) {
         [self.delegate adWasTapped:_interstitialId adType:AdTypeInterstitial];
     }
