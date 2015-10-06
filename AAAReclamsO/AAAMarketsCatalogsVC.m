@@ -140,7 +140,7 @@ static Reachability* ownServerReach;
     [blurView setUserInteractionEnabled:YES];
     
     blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
-    [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
+    [[AAAGlobals sharedInstance].ads setBannerRootViewController:self];
     errorViewMessageLabel.numberOfLines = 0;
 }
 
@@ -878,7 +878,7 @@ const float maxBlurRadius = 20;
         [catalogVC finishedMaximized];
     }];
     AAACatalog* catalog = catalogVC.catalog;
-    [Flurry logEvent:FlurryEventAdOpened withParameters:@{FlurryParameterCatalogId : [NSString stringWithFormat:@"%i",catalog.identifier],
+    [Flurry logEvent:FlurryEventCatalogOpened withParameters:@{FlurryParameterCatalogId : [NSString stringWithFormat:@"%i",catalog.identifier],
                                                           FlurryParameterCatalogIndex : [NSString stringWithFormat:@"%li", (long)index],
                                                           FlurryParameterCatalogPriority : [NSString stringWithFormat:@"%f", catalog.priority],
                                                         FlurryParameterMarketName : currentShowingMarket.name}];

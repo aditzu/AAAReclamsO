@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@class AAASharedBanner;
+@class AAAAds;
 
 #pragma mark - Flurry
 
 static NSString* const FlurryEventAdOpened = @"Ad opened";
+static NSString* const FlurryEventAdTapped = @"Ad tapped";//this is exactly as the one above, but that event name was not used properly, so this is a try to fix that
 static NSString* const FlurryEventAdFailedToLoad = @"Ad failed to load";
 static NSString* const FlurryEventAdServed = @"Ad served";
 static NSString* const FlurryEventCatalogOpened = @"Catalog watched";
@@ -26,6 +27,7 @@ static NSString* const FlurryEventErrorNoInternet = @"No internet";
 static NSString* const FlurryEventStartedFromNotification = @"Started from notification";
 static NSString* const FlurryEventDidRegisterForNotification = @"Did Register For Notification";
 
+static NSString* const FlurryParameterAdType = @"AD type";
 static NSString* const FlurryParameterPercentage = @"Percentage";
 static NSString* const FlurryParameterMarketName = @"Market";
 static NSString* const FlurryParameterMarketPriority = @"Market priority";
@@ -36,8 +38,10 @@ static NSString* const FlurryParameterBOOL = @"boolean";
 
 @interface AAAGlobals : NSObject
 
+@property (nonatomic, strong) AAAAds* ads;
+
 +(AAAGlobals*) sharedInstance;
--(AAASharedBanner *)sharedBannerViewWithRootViewController:(UIViewController*) rootViewController;
+//-(AAAAds *)adsViewWithRootViewController:(UIViewController*) rootViewController;
 +(UIImage*)imageWithShadowForImage:(UIImage *)initialImage;
 -(NSString*) flurryId;
 -(NSString*) privacyPolicyURL;

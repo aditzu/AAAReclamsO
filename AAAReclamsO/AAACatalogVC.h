@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AAACatalog.h"
 #import "AAACatalogPageVC.h"
-#import "AAASharedBanner.h"
+#import "AAAAds.h"
 
 //#import "GADBannerView.h"
 //#import "GADRequest.h"
@@ -22,7 +22,7 @@
 
 @end
 
-@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, AAASharedBannerDelegate>{
+@interface AAACatalogVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate, AAACatalogPageVCDelegate, AAAAdsDelegate>{
 }
 
 @property(nonatomic, strong, readonly) AAACatalog* catalog;

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A756B0A7278EFAF691C23C0A"
+               BlueprintIdentifier = "0CD2B6D124C21CA55A0BE3A6"
                BuildableName = "libJMImageCache.a"
                BlueprintName = "JMImageCache"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -10,6 +10,7 @@
 #import "Flurry.h"
 #import "AAAGlobals.h"
 #import "AAANotificationsHandler.h"
+#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -22,12 +23,25 @@
     // Override point for customization after application launch.
     [Flurry startSession:[[AAAGlobals sharedInstance] flurryId]];
     
-    if([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
-    {
-        UIUserNotificationType types = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-        UIUserNotificationSettings* notifSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:notifSettings];
-    }
+//    if([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
+//    {
+//        UIUserNotificationType types = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+//        UIUserNotificationSettings* notifSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:notifSettings];
+        
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        #ifdef __IPHONE_8_0
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
+                                                                                                 | UIUserNotificationTypeBadge
+                                                                                                 | UIUserNotificationTypeSound) categories:nil];
+            [application registerUserNotificationSettings:settings];
+            [application registerForRemoteNotifications];
+        #endif
+        } else {
+            UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+            [application registerForRemoteNotificationTypes:myTypes];
+        }
+//    }
     
     NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notification) {
@@ -64,6 +78,19 @@
     [[AAANotificationsHandler instance] scheduleNextLocalNotifications];
     application.applicationIconBadgeNumber = 0;
 //    [Flurry logEvent:FlurryEventDidRegisterForNotification withParameters:@{FlurryParameterBOOL:@YES}];
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [self registerToParseWithDeviceToken:deviceToken];
+}
+
+-(void) registerToParseWithDeviceToken:(NSData*) deviceToken
+{
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[ @"global" ];
+    [currentInstallation saveInBackground];
 }
 
 -(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error

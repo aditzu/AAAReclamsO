@@ -7,10 +7,10 @@
 //
 
 #import "AAAGlobals.h"
-#import "AAASharedBanner.h"
+#import "AAAAds.h"
 @interface AAAGlobals()
 {
-    AAASharedBanner* bannerView;
+    AAAAds* adView;
 }
 @end
 
@@ -26,16 +26,12 @@ static AAAGlobals* _instance;
     return _instance;
 }
 
--(AAASharedBanner *)sharedBannerViewWithRootViewController:(UIViewController*) rootViewController
+-(AAAAds *)ads
 {
-    if (!bannerView) {
-        bannerView = [[AAASharedBanner alloc] initWithAdUnitId:[self apId] andRootViewController:rootViewController];
+    if (!adView) {
+        adView = [[AAAAds alloc] initWithBannerAdUnitId:[self bannerUnitId] andInterstitialUnitId:[self interstitialApId]];
     }
-    else
-    {
-        [bannerView setRootViewController:rootViewController];
-    }
-    return bannerView;
+   return adView;
 }
 
 +(UIImage*)imageWithShadowForImage:(UIImage *)initialImage
@@ -63,10 +59,16 @@ static AAAGlobals* _instance;
     return @"MKCBQ4PX57GQJS36H878";
 }
 
--(NSString*) apId
+-(NSString*) bannerUnitId
 {
 //    return @"1234";// @"ca-app-pub-2163416701589769/7779082332"; //gad
-    return @"190723"; //millenial
+    return @"ca-app-pub-2163416701589769/2830834336";
+//    return @"190723"; //millenial
+}
+
+-(NSString*) interstitialApId
+{
+    return @"ca-app-pub-2163416701589769/6702630730";
 }
 
 -(NSString *)privacyPolicyURL

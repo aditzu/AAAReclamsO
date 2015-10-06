@@ -35,7 +35,7 @@
 //    IBOutlet UIView* bannerViewContainer;
 //    ADBannerView* bannerView;
     BOOL bannerIsShown;
-    AAASharedBanner *sharedBannerView;
+    AAAAds *sharedBannerView;
     __weak IBOutlet UIView *gadBannerViewContainer;
     BOOL adBannerLoaded;
     __weak IBOutlet UIImageView *progressViewBgImage;
@@ -371,7 +371,7 @@ const static int PicturesToPreload = 3;
         bgImageView.alpha = .3f;
     }];
     isMinimized = YES;
-    [sharedBannerView stop];
+//    [sharedBannerView stop];
     [sharedBannerView.bannerView removeFromSuperview];
     [self layoutBanner:NO animated:NO];
     for (AAACatalogPageVC* page in pages) {
@@ -423,12 +423,13 @@ const static int PicturesToPreload = 3;
 
 -(void)finishedMaximized
 {
-    sharedBannerView = [[AAAGlobals sharedInstance] sharedBannerViewWithRootViewController:self];
+    sharedBannerView = [AAAGlobals sharedInstance].ads;
+    [sharedBannerView setBannerRootViewController:self];
     sharedBannerView.delegate = self;
     gadBannerContainerHeightConstraint.constant = [sharedBannerView bannerFrameSize].height;
     [gadBannerViewContainer addSubview:sharedBannerView.bannerView];
     sharedBannerView.bannerView.hidden = NO;
-    [sharedBannerView start];
+//    [sharedBannerView start];
     [UIView animateWithDuration:.2f delay:.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveLinear animations:^{
         [self updatePageViewControllerForCurrentPage];
         [pageViewController.view layoutIfNeeded];
@@ -582,6 +583,7 @@ const static int PicturesToPreload = 3;
         int indexOfVC = (int)[pages indexOfObject: _pageViewController.viewControllers[0]];
         [self setProgress:indexOfVC+1 outOf:(int)pages.count];
         //        [self updateFavoriteButton];
+        [self showTopBar:@YES];
         AAACatalogPageVC* page = [self currentPage];
         if (page.isPageLoaded) {
             UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState;
@@ -593,8 +595,11 @@ const static int PicturesToPreload = 3;
               }];
             
             [self updateTopBarPosition];
+            if (indexOfVC == (pages.count - 1)) {
+                [[AAAGlobals sharedInstance].ads tryShowInterstitialWithRootController:pageViewController];
+            }
         }
-        [self showTopBar:[NSNumber numberWithBool:YES]];
+        
         [[AAATutorialManager instance] invalidateTutorialView:TutorialViewExploreCatalog];
         [[AAATutorialManager instance] showTutorialView:TutorialViewZoomOnCatalog];
     }
@@ -674,45 +679,52 @@ const static int PicturesToPreload = 3;
 
 #pragma mark - AAASharedBannerDelegate
 
--(void)adRequestFailedWithError:(NSError *)error
+-(void)adRequestFailedWithError:(NSError *)error adType:(AdType)adType
 {
-    adBannerLoaded = NO;
-    [self layoutBanner:NO animated:YES];
+    if(adType == AdTypeBanner)
+    {
+        adBannerLoaded = NO;
+        [self layoutBanner:NO animated:YES];
+    }
     [Flurry logError:FlurryEventAdFailedToLoad message:@"Ad Request Failed" error:error];
 }
 
--(void)adRequestSuccesful
+-(void)adRequestSuccesfulForAdType:(AdType)adType
 {
-    adBannerLoaded = YES;
-    if (!isMinimized) {
-        [self layoutBanner:YES animated:YES];
-        [self updateTopBarPosition];
+    if(adType == AdTypeBanner)
+    {
+        adBannerLoaded = YES;
+        if (!isMinimized) {
+            [self layoutBanner:YES animated:YES];
+            [self updateTopBarPosition];
+        }
     }
-    [Flurry logEvent:FlurryEventAdServed];
+    [Flurry logEvent:FlurryEventAdServed withParameters:@{FlurryParameterAdType:[NSNumber numberWithInt:adType]}];
 }
 
--(void)adModalDidDismiss:(NSString *)adType apId:(NSString *)apId
+-(void)adModalDidDismiss:(NSString *)apId adType:(AdType)_adType
 {
     [self showPageViewController:YES animated:YES];
+    tapGesture.enabled = YES;
 }
 
--(void)adModalWillAppear:(NSString *)adType apId:(NSString *)apId
+-(void)adModalWillAppear:(NSString *)apId adType:(AdType)_adType
 {
-    [self showTopBar:[NSNumber numberWithBool:NO]];
+    [self showTopBar:@NO];
     [self showPageViewController:NO animated:YES];
-    [Flurry logEvent:FlurryEventAdOpened];
+    tapGesture.enabled = NO;
 }
 
 -(void)applicationWillTerminateFromAd
 {
-    [self showTopBar:[NSNumber numberWithBool:NO]];
+    [self showTopBar:@NO];
     [self showPageViewController:NO animated:YES];
-    [Flurry logEvent:FlurryEventAdOpened];
+    tapGesture.enabled = YES;
 }
 
--(void)adWasTapped:(NSString *)adType apId:(NSString *)apId
+-(void)adWasTapped:(NSString *)apId adType:(AdType)_adType
 {
-    [Flurry logEvent:FlurryEventAdOpened];
+    [Flurry logEvent:FlurryEventAdTapped withParameters:@{FlurryParameterAdType:[NSNumber numberWithInt:_adType]}];
 }
 
 @end
