@@ -26,6 +26,10 @@ static NSString* const FlurryEventErrorFromServer = @"Server error";
 static NSString* const FlurryEventErrorNoInternet = @"No internet";
 static NSString* const FlurryEventStartedFromNotification = @"Started from notification";
 static NSString* const FlurryEventDidRegisterForNotification = @"Did Register For Notification";
+static NSString* const FlurryEventDidTryToBuyNoAds = @"Did try to buy no ads";
+static NSString* const FlurryEventDidBuyNoAds = @"Did buy no ads";
+static NSString* const FlurryEventDidTryToRestore = @"Did try to restore purchases";
+static NSString* const FlurryEventDidRestore = @"Did restore purchases";
 
 static NSString* const FlurryParameterAdType = @"AD type";
 static NSString* const FlurryParameterPercentage = @"Percentage";

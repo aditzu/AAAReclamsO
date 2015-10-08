@@ -22,6 +22,9 @@
 		9E5B600E1BC3EBE0003F75F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */; };
 		9E5B60101BC3EBEC003F75F3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600F1BC3EBEC003F75F3 /* libz.tbd */; };
 		9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */; settings = {ASSET_TAGS = (); }; };
+		9E5B60161BC403DF003F75F3 /* AAAPurchasesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B60151BC403DF003F75F3 /* AAAPurchasesHandler.m */; settings = {ASSET_TAGS = (); }; };
+		9E5B60191BC42F96003F75F3 /* buy_no_ads_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B60181BC42F95003F75F3 /* buy_no_ads_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
+		9E5B601B1BC4328E003F75F3 /* restore_purchases@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601A1BC4328E003F75F3 /* restore_purchases@2x.png */; settings = {ASSET_TAGS = (); }; };
 		9E612DB61A712F3900567557 /* splash-ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB51A712F3900567557 /* splash-ios.png */; };
 		9E612DB81A712F9800567557 /* splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB71A712F9800567557 /* splash_logo.png */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
@@ -126,6 +129,10 @@
 		9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9E5B600F1BC3EBEC003F75F3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.2.1.a; sourceTree = "<group>"; };
+		9E5B60151BC403DF003F75F3 /* AAAPurchasesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAPurchasesHandler.m; sourceTree = "<group>"; };
+		9E5B60171BC403F9003F75F3 /* AAAPurchasesHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAAPurchasesHandler.h; sourceTree = "<group>"; };
+		9E5B60181BC42F95003F75F3 /* buy_no_ads_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy_no_ads_btn@2x.png"; sourceTree = "<group>"; };
+		9E5B601A1BC4328E003F75F3 /* restore_purchases@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "restore_purchases@2x.png"; sourceTree = "<group>"; };
 		9E612DB51A712F3900567557 /* splash-ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-ios.png"; sourceTree = "<group>"; };
 		9E612DB71A712F9800567557 /* splash_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_logo.png; sourceTree = "<group>"; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
@@ -343,6 +350,8 @@
 		9E2651591A134C64005B546B /* gfx */ = {
 			isa = PBXGroup;
 			children = (
+				9E5B601A1BC4328E003F75F3 /* restore_purchases@2x.png */,
+				9E5B60181BC42F95003F75F3 /* buy_no_ads_btn@2x.png */,
 				9E612DB71A712F9800567557 /* splash_logo.png */,
 				9E612DB51A712F3900567557 /* splash-ios.png */,
 				9EFF17911A694A7A00E3AA2F /* marketbar_overlay_bottom@2x.png */,
@@ -406,6 +415,8 @@
 				9E2EF0DE1A430A9B000DD30F /* AAATutorialManager.m */,
 				9EFF17701A66A52F00E3AA2F /* AAANotificationsHandler.h */,
 				9EFF17711A66A52F00E3AA2F /* AAANotificationsHandler.m */,
+				9E5B60171BC403F9003F75F3 /* AAAPurchasesHandler.h */,
+				9E5B60151BC403DF003F75F3 /* AAAPurchasesHandler.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -546,10 +557,13 @@
 						DevelopmentTeam = AC77PLNEMF;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Passbook = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -598,9 +612,11 @@
 				9E612DB61A712F3900567557 /* splash-ios.png in Resources */,
 				9EFF17901A69286200E3AA2F /* bottom_bar_overlay_bottom@2x.png in Resources */,
 				9EFF178F1A69286200E3AA2F /* bottom_bar_bg_bottom@2x.png in Resources */,
+				9E5B601B1BC4328E003F75F3 /* restore_purchases@2x.png in Resources */,
 				9EFF17881A691CAC00E3AA2F /* burger_btn@2x.png in Resources */,
 				9E2650DB1A11192F005B546B /* LaunchScreen.xib in Resources */,
 				9E2650D81A11192F005B546B /* Images.xcassets in Resources */,
+				9E5B60191BC42F96003F75F3 /* buy_no_ads_btn@2x.png in Resources */,
 				9E7A06521A604B800054FBC2 /* remove@2x.png in Resources */,
 				9EFF178C1A69277F00E3AA2F /* bottom_bar_overlay_top_gradient@2x.png in Resources */,
 				9EF059B01A5170390083A04F /* zoom@2x.png in Resources */,
@@ -669,6 +685,7 @@
 				9E2650CA1A11192F005B546B /* main.m in Sources */,
 				9E2EF0DF1A430A9B000DD30F /* AAATutorialManager.m in Sources */,
 				9E8654291A36127B00ECEE62 /* AAAGlobals.m in Sources */,
+				9E5B60161BC403DF003F75F3 /* AAAPurchasesHandler.m in Sources */,
 				9EB4288D1A1A1DC900700D96 /* AAACatalogPageVC.m in Sources */,
 				9EB845BA1A2F1F67008EB324 /* AAACatalog.m in Sources */,
 				9E2EF0DC1A43044C000DD30F /* AAATutorialVC.m in Sources */,

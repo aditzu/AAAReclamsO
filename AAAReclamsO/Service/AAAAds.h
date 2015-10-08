@@ -34,5 +34,6 @@ typedef enum AdType{None, AdTypeBanner, AdTypeInterstitial} AdType;
 - (id) initWithBannerAdUnitId:(NSString*) bannerId andInterstitialUnitId:(NSString*) interstitialId;
 - (void) setBannerRootViewController:(UIViewController*) vc;
 - (void) tryShowInterstitialWithRootController:(UIViewController*) vc;
+- (void) disable;
 -(CGSize) bannerFrameSize;
 @end

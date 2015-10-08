@@ -10,12 +10,10 @@
 
 @interface AAAAds()
 {
-    BOOL didFailToLoadLocation;
-    BOOL isStarted;
+    BOOL _enabled;
     NSString* _interstitialId;
 }
 
-@property (nonatomic, strong) CLLocationManager* locationManager;
 @property (nonatomic, strong) GADBannerView* gadBannerAdView;
 @property (nonatomic, strong) GADInterstitial* interstitialView;
 @end
@@ -26,11 +24,7 @@
 {
     if(self = [super init])
     {
-        self.locationManager = [[CLLocationManager alloc] init];
-        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-        self.locationManager.delegate = self;
-        [self.locationManager startUpdatingLocation];
-        
+        _enabled = YES;
         self.gadBannerAdView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
         self.gadBannerAdView.adUnitID = bannerId;
         self.gadBannerAdView.delegate = self;
@@ -70,12 +64,14 @@
 
 -(void)setBannerRootViewController:(UIViewController *)vc
 {
+    if(!_enabled) return;
     self.gadBannerAdView.rootViewController = vc;
     [self.gadBannerAdView loadRequest:[self gadRequest]];
 }
 
 -(void)tryShowInterstitialWithRootController:(UIViewController *)vc
 {
+    if(!_enabled) return;
     if(self.interstitialView && self.interstitialView.isReady){
         [self.interstitialView presentFromRootViewController:vc];
     }
@@ -84,11 +80,11 @@
     }
 }
 
-#pragma mark - CLLOcationmanager Delegate
-
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+-(void) disable
 {
-    didFailToLoadLocation = YES;
+    self.gadBannerAdView = nil;
+    self.interstitialView = nil;
+    _enabled = NO;
 }
 
 #pragma mark - GadBannerDelegate

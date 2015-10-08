@@ -11,6 +11,7 @@
 #import "AAAGlobals.h"
 #import "AAANotificationsHandler.h"
 #import <Parse/Parse.h>
+#import "AAAPurchasesHandler.h"
 
 @interface AppDelegate ()
 
@@ -23,8 +24,9 @@
     // Override point for customization after application launch.
     [Flurry startSession:[[AAAGlobals sharedInstance] flurryId]];
     
+    [Parse enableLocalDatastore];
     [Parse setApplicationId:@"7OJjQorhEeo52BlycAYTzpBRKrhDMg4oXE4hTNcR" clientKey:@"SN9159nLpY2eH0Auue8AZiCVDBike83WRZbLMbNm"];
-    
+    [AAAPurchasesHandler instance];
     if (application.applicationState != UIApplicationStateBackground) {
         // Track an app open here if we launch with a push, unless
         // "content_available" was used to trigger a background push (introduced
@@ -56,6 +58,7 @@
     if (notification) {
         [Flurry logEvent:FlurryEventStartedFromNotification];
     }
+    
     return YES;
 }
 
@@ -95,15 +98,6 @@
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    if (application.applicationState == UIApplicationStateInactive) {
-        // The application was just brought from the background to the foreground,
-        // so we consider the app as having been "opened by a push notification."
-        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-    }
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     if (application.applicationState == UIApplicationStateInactive) {
         // The application was just brought from the background to the foreground,
