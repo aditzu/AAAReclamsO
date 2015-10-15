@@ -17,8 +17,6 @@
 		9E2EF0DC1A43044C000DD30F /* AAATutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2EF0DB1A43044C000DD30F /* AAATutorialVC.m */; };
 		9E2EF0DF1A430A9B000DD30F /* AAATutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2EF0DE1A430A9B000DD30F /* AAATutorialManager.m */; };
 		9E514D331A716FE3003FAFBC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E514D321A716FE3003FAFBC /* libPods.a */; };
-		9E5B600B1BC3EB2B003F75F3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60091BC3EB2B003F75F3 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
-		9E5B600C1BC3EB2B003F75F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600A1BC3EB2B003F75F3 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
 		9E5B600E1BC3EBE0003F75F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */; };
 		9E5B60101BC3EBEC003F75F3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600F1BC3EBEC003F75F3 /* libz.tbd */; };
 		9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */; settings = {ASSET_TAGS = (); }; };
@@ -27,6 +25,8 @@
 		9E5B601B1BC4328E003F75F3 /* restore_purchases@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601A1BC4328E003F75F3 /* restore_purchases@2x.png */; settings = {ASSET_TAGS = (); }; };
 		9E5B601D1BCECCF1003F75F3 /* like_fb_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601C1BCECCF0003F75F3 /* like_fb_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
 		9E5B60201BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B601F1BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m */; settings = {ASSET_TAGS = (); }; };
+		9E5B60231BCFD854003F75F3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60211BCFD854003F75F3 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		9E5B60241BCFD854003F75F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60221BCFD854003F75F3 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
 		9E612DB61A712F3900567557 /* splash-ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB51A712F3900567557 /* splash-ios.png */; };
 		9E612DB81A712F9800567557 /* splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB71A712F9800567557 /* splash_logo.png */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
@@ -126,8 +126,6 @@
 		9E514D381A717005003FAFBC /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		9E514D391A717005003FAFBC /* libPods-SOCKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SOCKit.a"; path = "Pods/build/Debug-iphoneos/libPods-SOCKit.a"; sourceTree = "<group>"; };
 		9E514D3A1A717005003FAFBC /* libPods-TransitionKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-TransitionKit.a"; path = "Pods/build/Debug-iphoneos/libPods-TransitionKit.a"; sourceTree = "<group>"; };
-		9E5B60091BC3EB2B003F75F3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		9E5B600A1BC3EB2B003F75F3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		9E5B600F1BC3EBEC003F75F3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.2.1.a; sourceTree = "<group>"; };
@@ -138,6 +136,8 @@
 		9E5B601C1BCECCF0003F75F3 /* like_fb_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like_fb_btn@2x.png"; sourceTree = "<group>"; };
 		9E5B601E1BCF98BA003F75F3 /* AAAMarketsCatalogsTopBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAMarketsCatalogsTopBarVC.h; sourceTree = "<group>"; };
 		9E5B601F1BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAMarketsCatalogsTopBarVC.m; sourceTree = "<group>"; };
+		9E5B60211BCFD854003F75F3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		9E5B60221BCFD854003F75F3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9E612DB51A712F3900567557 /* splash-ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-ios.png"; sourceTree = "<group>"; };
 		9E612DB71A712F9800567557 /* splash_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_logo.png; sourceTree = "<group>"; };
 		9E7172D41A1C92410078870E /* AAAwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAwww.h; sourceTree = "<group>"; };
@@ -236,13 +236,13 @@
 				9E8654901A38D4FF00ECEE62 /* CoreGraphics.framework in Frameworks */,
 				9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */,
 				9EC559271BBADEEA0066A9D9 /* CoreMedia.framework in Frameworks */,
-				9E5B600B1BC3EB2B003F75F3 /* Bolts.framework in Frameworks */,
+				9E5B60241BCFD854003F75F3 /* Parse.framework in Frameworks */,
 				9E86548F1A38D4F800ECEE62 /* AVFoundation.framework in Frameworks */,
 				9E86548E1A38D4F300ECEE62 /* AudioToolbox.framework in Frameworks */,
-				9E5B600C1BC3EB2B003F75F3 /* Parse.framework in Frameworks */,
 				9E86548D1A38D4EE00ECEE62 /* AdSupport.framework in Frameworks */,
 				9E514D331A716FE3003FAFBC /* libPods.a in Frameworks */,
 				9EFF176F1A65576700E3AA2F /* UIKit.framework in Frameworks */,
+				9E5B60231BCFD854003F75F3 /* Bolts.framework in Frameworks */,
 				9E8654681A3743F100ECEE62 /* Security.framework in Frameworks */,
 				9EFF17661A65571F00E3AA2F /* MobileCoreServices.framework in Frameworks */,
 				9EFF17641A65571500E3AA2F /* MediaPlayer.framework in Frameworks */,
@@ -472,8 +472,8 @@
 		B12D8FDC54BE22921F8A83FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9E5B60091BC3EB2B003F75F3 /* Bolts.framework */,
-				9E5B600A1BC3EB2B003F75F3 /* Parse.framework */,
+				9E5B60211BCFD854003F75F3 /* Bolts.framework */,
+				9E5B60221BCFD854003F75F3 /* Parse.framework */,
 				9EC559261BBADEEA0066A9D9 /* CoreMedia.framework */,
 				9E5B600F1BC3EBEC003F75F3 /* libz.tbd */,
 				9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */,
@@ -834,8 +834,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -893,7 +893,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = OfertaMea;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6c52b1e7-6955-4d3b-92b6-c260676ae886";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -905,8 +905,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -964,7 +964,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = OfertaMea;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6c52b1e7-6955-4d3b-92b6-c260676ae886";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

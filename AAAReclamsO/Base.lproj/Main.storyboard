@@ -1154,7 +1154,7 @@
                                             <action selector="likeFb:" destination="SaY-oS-NCd" eventType="touchUpInside" id="8m7-08-OIT"/>
                                         </connections>
                                     </button>
-                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du0-eq-6Xd" userLabel="busyView">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du0-eq-6Xd" userLabel="busyView">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="UJu-br-sTd">

@@ -26,6 +26,7 @@
     
     [Parse enableLocalDatastore];
     [Parse setApplicationId:@"7OJjQorhEeo52BlycAYTzpBRKrhDMg4oXE4hTNcR" clientKey:@"SN9159nLpY2eH0Auue8AZiCVDBike83WRZbLMbNm"];
+
     [AAAPurchasesHandler instance];
     if (application.applicationState != UIApplicationStateBackground) {
         // Track an app open here if we launch with a push, unless
