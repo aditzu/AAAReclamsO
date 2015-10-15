@@ -43,10 +43,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoV-eo-E5d" userLabel="purchasables">
-                                        <rect key="frame" x="110" y="0.0" width="100" height="30"/>
+                                        <rect key="frame" x="90" y="0.0" width="140" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woe-CU-lbz" userLabel="NoAds">
-                                                <rect key="frame" x="12" y="0.0" width="30" height="30"/>
+                                                <rect key="frame" x="15" y="0.0" width="30" height="30"/>
                                                 <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="A73-WX-Pz1"/>
@@ -58,7 +58,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daS-vd-54t" userLabel="Restore">
-                                                <rect key="frame" x="58" y="0.0" width="30" height="30"/>
+                                                <rect key="frame" x="55" y="0.0" width="30" height="30"/>
                                                 <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="9Vt-Lq-uvE"/>
@@ -69,8 +69,17 @@
                                                     <action selector="restorePurchases:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="FxU-6T-Epx"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QA1-9G-8EZ" userLabel="fb">
+                                                <rect key="frame" x="95" y="0.0" width="30" height="30"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="fsf-rK-15L"/>
+                                                    <constraint firstAttribute="width" constant="30" id="qn2-gb-FAT"/>
+                                                </constraints>
+                                                <state key="normal" image="like_fb_btn.png"/>
+                                            </button>
                                             <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BkO-3K-UTk" userLabel="busyView">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Rur-S6-KhG">
                                                         <rect key="frame" x="40" y="5" width="20" height="20"/>
@@ -78,7 +87,7 @@
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <animations/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                             </view>
                                         </subviews>
                                         <animations/>
@@ -86,13 +95,15 @@
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="BkO-3K-UTk" secondAttribute="trailing" id="3tr-eC-eqM"/>
+                                            <constraint firstItem="daS-vd-54t" firstAttribute="leading" secondItem="ZoV-eo-E5d" secondAttribute="leading" constant="55" id="84L-65-54I"/>
                                             <constraint firstItem="BkO-3K-UTk" firstAttribute="top" secondItem="ZoV-eo-E5d" secondAttribute="top" id="8n5-wJ-idq"/>
-                                            <constraint firstItem="woe-CU-lbz" firstAttribute="centerX" secondItem="ZoV-eo-E5d" secondAttribute="centerX" constant="-23" id="g0d-VS-4Jx"/>
+                                            <constraint firstAttribute="trailing" secondItem="QA1-9G-8EZ" secondAttribute="trailing" id="CgJ-0c-m9b"/>
+                                            <constraint firstItem="QA1-9G-8EZ" firstAttribute="centerY" secondItem="ZoV-eo-E5d" secondAttribute="centerY" id="hKo-Li-4hQ"/>
+                                            <constraint firstItem="woe-CU-lbz" firstAttribute="leading" secondItem="ZoV-eo-E5d" secondAttribute="leading" constant="15" id="oQ4-U2-kmZ"/>
                                             <constraint firstAttribute="bottom" secondItem="BkO-3K-UTk" secondAttribute="bottom" id="odK-SR-krb"/>
                                             <constraint firstItem="daS-vd-54t" firstAttribute="centerY" secondItem="ZoV-eo-E5d" secondAttribute="centerY" id="qag-uY-QFB"/>
                                             <constraint firstItem="woe-CU-lbz" firstAttribute="centerY" secondItem="ZoV-eo-E5d" secondAttribute="centerY" id="tCc-l5-nHd"/>
-                                            <constraint firstAttribute="width" constant="100" id="un3-Sr-6O5"/>
-                                            <constraint firstItem="daS-vd-54t" firstAttribute="centerX" secondItem="ZoV-eo-E5d" secondAttribute="centerX" constant="23" id="yL4-WS-gXK"/>
+                                            <constraint firstAttribute="width" constant="140" id="un3-Sr-6O5"/>
                                             <constraint firstItem="BkO-3K-UTk" firstAttribute="leading" secondItem="ZoV-eo-E5d" secondAttribute="leading" id="zkn-s9-bpp"/>
                                         </constraints>
                                     </view>
@@ -486,6 +497,7 @@
                     <connections>
                         <outlet property="blurView" destination="213-o3-14Y" id="Ba8-CE-g08"/>
                         <outlet property="burgerImageView" destination="OTs-Gh-tq8" id="uHm-4c-rSt"/>
+                        <outlet property="buyNoAdsButton" destination="woe-CU-lbz" id="ehl-h5-tgq"/>
                         <outlet property="carousel" destination="VBQ-9U-Cwl" id="6RL-ED-eUL"/>
                         <outlet property="editMenuPanGesture" destination="6h2-jK-qyO" id="s5z-g1-CBc"/>
                         <outlet property="editMenuPanGestureBlurView" destination="bYy-G0-lnx" id="pt1-xC-7XS"/>
@@ -493,14 +505,17 @@
                         <outlet property="errorViewMessageLabel" destination="YRz-aK-n53" id="Uwy-pp-Mxf"/>
                         <outlet property="errorViewRetryButton" destination="KPV-bk-bIm" id="sA6-SE-gFw"/>
                         <outlet property="errorViewSpinner" destination="7aB-FQ-lv0" id="1jQ-Oj-Kwa"/>
+                        <outlet property="likeFbButton" destination="QA1-9G-8EZ" id="MBK-hj-5p9"/>
                         <outlet property="loadingView" destination="h6O-Se-vnM" id="eVv-eH-1tC"/>
                         <outlet property="marketViewsCollectionView" destination="k0x-hS-Keu" id="1yt-2a-27e"/>
                         <outlet property="marketsScrollSuperView" destination="AGx-Nj-mhU" id="L8L-Yf-eDI"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
                         <outlet property="marketsViewHeightConstraint" destination="v9D-Cx-ECY" id="Fu7-O5-MCV"/>
                         <outlet property="noAdsBusyView" destination="BkO-3K-UTk" id="hab-Id-i0s"/>
+                        <outlet property="restorePurchasesButton" destination="daS-vd-54t" id="86b-k4-g11"/>
                         <outlet property="selectView" destination="IiU-qH-vpQ" id="Wni-R3-vVW"/>
                         <outlet property="topBar" destination="M2j-Gx-z10" id="0b4-7Z-xlD"/>
+                        <outlet property="topBarPurchasablesFBWidthConstraint" destination="un3-Sr-6O5" id="1zm-Im-CaB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzr-UZ-Jrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1154,6 +1169,7 @@
         <image name="burger_btn.png" width="62" height="44"/>
         <image name="buy_no_ads_btn.png" width="205" height="205"/>
         <image name="first" width="30" height="30"/>
+        <image name="like_fb_btn.png" width="205" height="205"/>
         <image name="lock.png" width="44" height="58"/>
         <image name="lock_highlight.png" width="44" height="58"/>
         <image name="marketbar_overlay_bottom.png" width="320" height="75"/>
