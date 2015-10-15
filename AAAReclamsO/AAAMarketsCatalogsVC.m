@@ -71,12 +71,6 @@
     __weak IBOutlet UIView *selectView;
     __weak IBOutlet UIImageView *burgerImageView;
     __weak IBOutlet UIView *marketsScrollSuperView;
-    __weak IBOutlet UIView *noAdsBusyView;
-    
-    __weak IBOutlet UIButton *likeFbButton;
-    __weak IBOutlet UIButton *buyNoAdsButton;
-    __weak IBOutlet UIButton *restorePurchasesButton;
-    __weak IBOutlet NSLayoutConstraint *topBarPurchasablesFBWidthConstraint;
     
     ScrollDirection _marketsViewDragDirection;
     
@@ -88,8 +82,6 @@
 - (IBAction)privacyButtonPressed:(UIButton *)sender;
 - (IBAction)refreshButtonPressed:(UIButton *)sender;
 - (IBAction)errorViewRetryPressed:(UIButton*)sender;
-- (IBAction)buyAdsBtnPressed:(UIButton*)sender;
-- (IBAction)restorePurchases:(UIButton*)sender;
 @end
 
 @implementation AAAMarketsCatalogsVC
@@ -100,9 +92,6 @@ NSString* const kMarketCellReuseIdentifier = @"marketViewCellReuseIdentifier";
 NSString* const kEnabledMarketsUserDefaultsKey = @"EnabledMarkets";
 NSString* const kSeenDictionaryUserDefaultsKey = @"SeenCatalogs";
 NSString* const kFirstLaunchAppUserDefaultsKey = @"FirstLaunch";
-
-int const kTopBarButtonWidth=30;
-int const kTopBarButtonMargin=10;
 
 static Reachability* internetReach;
 static Reachability* ownServerReach;
@@ -153,14 +142,6 @@ static Reachability* ownServerReach;
     blurViewTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
     [[AAAGlobals sharedInstance].ads setBannerRootViewController:self];
     errorViewMessageLabel.numberOfLines = 0;
-    
-    noAdsBusyView.layer.cornerRadius = 5.0f;
-    [[AAAPurchasesHandler instance] addDelegate:self];
-    if (![AAAPurchasesHandler hasAdsEnabled]) {
-        [[AAAGlobals sharedInstance].ads disable];
-        
-        
-    }
 }
 
 - (void)loadTutorialViews
@@ -436,20 +417,6 @@ static Reachability* ownServerReach;
     }onFailure:^{
         [self resetCatalogs];
     }];
-}
-
--(void)buyAdsBtnPressed:(UIButton *)sender
-{
-    [Flurry logEvent:FlurryEventDidTryToBuyNoAds];
-    noAdsBusyView.hidden = NO;
-    [[AAAPurchasesHandler instance] purchaseNoads];
-}
-
--(void) restorePurchases:(UIButton *)sender
-{
-    [Flurry logEvent:FlurryEventDidTryToRestore];
-    noAdsBusyView.hidden = NO;
-    [[AAAPurchasesHandler instance] restorePurchases];
 }
 
 #pragma mark - UIViewController
@@ -1081,44 +1048,5 @@ const float maxBlurRadius = 20;
     return [self collectionViewPadding:collectionView withLayout:collectionViewLayout];
 }
 
-#pragma mark - AAAPurchasesDelegate
-
--(void)purchaseSuccesfully:(NSString *)productId
-{
-    noAdsBusyView.hidden =YES;
-    [[AAAGlobals sharedInstance].ads disable];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Felicitări" message:@"Felicitări! Reclamele au fost dezactivate pentru telefonul tău." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
-    [Flurry logEvent:FlurryEventDidBuyNoAds];
-}
-
--(void)purchaseFailed:(NSString *)productId withError:(NSError *)error
-{
-    noAdsBusyView.hidden =YES;
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Eroare!" message:@"Aplicația nu se poate conecta la iTunes Store. Încearcă mai târziu!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
-}
-
--(void)restoreFinishedForProductWithId:(NSString *)productId withError:(NSError *)error
-{
-    noAdsBusyView.hidden =YES;
-    if(error)
-    {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Eroare!" message:@"Aplicația nu se poate conecta la iTunes Store. Încearcă mai târziu!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-    }
-    else if([AAAPurchasesHandler hasAdsEnabled])
-    {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"iTunes Store" message:@"Nu a fost nimic de restituit." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-    }
-    else
-    {
-        [[AAAGlobals sharedInstance].ads disable];
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Felicitări!" message:@"Reclamele au fost dezactivate pentru telefonul tău." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        [Flurry logEvent:FlurryEventDidRestore];
-    }
-}
 
 @end

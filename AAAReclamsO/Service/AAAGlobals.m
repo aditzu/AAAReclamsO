@@ -76,4 +76,14 @@ static AAAGlobals* _instance;
     return @"http://alphaappers.com/ofertamea/disclaimer.html";
 }
 
+-(NSString *)fbPageURLOpenSafari
+{
+    return @"https://www.facebook.com/Alpha-Appers-803631623016706/?ref=ofertameaios";
+}
+
+-(NSString *)fbPageURLOpenApp
+{
+    return @"fb://profile/803631623016706/?ref=ofertameaiosApp";
+}
+
 @end

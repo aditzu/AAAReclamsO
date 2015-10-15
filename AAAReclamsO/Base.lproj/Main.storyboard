@@ -27,6 +27,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2j-Gx-z10" userLabel="topbar">
                                 <rect key="frame" x="0.0" y="20" width="320" height="30"/>
                                 <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfb-11-6Mx" userLabel="purchasables">
+                                        <rect key="frame" x="90" y="0.0" width="140" height="30"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="GT4-4a-VPI"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="SaY-oS-NCd" kind="embed" id="wl7-eT-1Jw"/>
+                                        </connections>
+                                    </containerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8b-n6-xzn" userLabel="privacy Button">
                                         <rect key="frame" x="10" y="0.0" width="23" height="30"/>
                                         <animations/>
@@ -42,71 +54,6 @@
                                             <action selector="privacyButtonPressed:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="yV1-HW-gNp"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoV-eo-E5d" userLabel="purchasables">
-                                        <rect key="frame" x="90" y="0.0" width="140" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woe-CU-lbz" userLabel="NoAds">
-                                                <rect key="frame" x="15" y="0.0" width="30" height="30"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="A73-WX-Pz1"/>
-                                                    <constraint firstAttribute="width" constant="30" id="Tdt-8o-Bp2"/>
-                                                </constraints>
-                                                <state key="normal" image="buy_no_ads_btn.png"/>
-                                                <connections>
-                                                    <action selector="buyAdsBtnPressed:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="aJW-7e-9f0"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daS-vd-54t" userLabel="Restore">
-                                                <rect key="frame" x="55" y="0.0" width="30" height="30"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="9Vt-Lq-uvE"/>
-                                                    <constraint firstAttribute="height" constant="30" id="qoO-ne-qa5"/>
-                                                </constraints>
-                                                <state key="normal" image="restore_purchases.png"/>
-                                                <connections>
-                                                    <action selector="restorePurchases:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="FxU-6T-Epx"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QA1-9G-8EZ" userLabel="fb">
-                                                <rect key="frame" x="95" y="0.0" width="30" height="30"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="fsf-rK-15L"/>
-                                                    <constraint firstAttribute="width" constant="30" id="qn2-gb-FAT"/>
-                                                </constraints>
-                                                <state key="normal" image="like_fb_btn.png"/>
-                                            </button>
-                                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BkO-3K-UTk" userLabel="busyView">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
-                                                <subviews>
-                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Rur-S6-KhG">
-                                                        <rect key="frame" x="40" y="5" width="20" height="20"/>
-                                                        <animations/>
-                                                    </activityIndicatorView>
-                                                </subviews>
-                                                <animations/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                            </view>
-                                        </subviews>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="BkO-3K-UTk" secondAttribute="trailing" id="3tr-eC-eqM"/>
-                                            <constraint firstItem="daS-vd-54t" firstAttribute="leading" secondItem="ZoV-eo-E5d" secondAttribute="leading" constant="55" id="84L-65-54I"/>
-                                            <constraint firstItem="BkO-3K-UTk" firstAttribute="top" secondItem="ZoV-eo-E5d" secondAttribute="top" id="8n5-wJ-idq"/>
-                                            <constraint firstAttribute="trailing" secondItem="QA1-9G-8EZ" secondAttribute="trailing" id="CgJ-0c-m9b"/>
-                                            <constraint firstItem="QA1-9G-8EZ" firstAttribute="centerY" secondItem="ZoV-eo-E5d" secondAttribute="centerY" id="hKo-Li-4hQ"/>
-                                            <constraint firstItem="woe-CU-lbz" firstAttribute="leading" secondItem="ZoV-eo-E5d" secondAttribute="leading" constant="15" id="oQ4-U2-kmZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="BkO-3K-UTk" secondAttribute="bottom" id="odK-SR-krb"/>
-                                            <constraint firstItem="daS-vd-54t" firstAttribute="centerY" secondItem="ZoV-eo-E5d" secondAttribute="centerY" id="qag-uY-QFB"/>
-                                            <constraint firstItem="woe-CU-lbz" firstAttribute="centerY" secondItem="ZoV-eo-E5d" secondAttribute="centerY" id="tCc-l5-nHd"/>
-                                            <constraint firstAttribute="width" constant="140" id="un3-Sr-6O5"/>
-                                            <constraint firstItem="BkO-3K-UTk" firstAttribute="leading" secondItem="ZoV-eo-E5d" secondAttribute="leading" id="zkn-s9-bpp"/>
-                                        </constraints>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1N-sK-0Vg" userLabel="refresh Button">
                                         <rect key="frame" x="280" y="0.0" width="30" height="30"/>
                                         <animations/>
@@ -127,13 +74,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="E1N-sK-0Vg" secondAttribute="trailing" constant="10" id="7jW-3M-M2p"/>
+                                    <constraint firstItem="kfb-11-6Mx" firstAttribute="top" secondItem="M2j-Gx-z10" secondAttribute="top" id="K0j-QJ-FJU"/>
+                                    <constraint firstItem="kfb-11-6Mx" firstAttribute="centerX" secondItem="M2j-Gx-z10" secondAttribute="centerX" id="Lbu-ga-2xA"/>
                                     <constraint firstAttribute="bottom" secondItem="j8b-n6-xzn" secondAttribute="bottom" id="Pfb-zf-YIx"/>
-                                    <constraint firstItem="ZoV-eo-E5d" firstAttribute="top" secondItem="M2j-Gx-z10" secondAttribute="top" id="VuR-lC-lXM"/>
+                                    <constraint firstItem="kfb-11-6Mx" firstAttribute="centerY" secondItem="M2j-Gx-z10" secondAttribute="centerY" id="Uqd-rG-crK"/>
                                     <constraint firstItem="E1N-sK-0Vg" firstAttribute="top" secondItem="M2j-Gx-z10" secondAttribute="top" id="XiC-4S-STH"/>
+                                    <constraint firstAttribute="bottom" secondItem="kfb-11-6Mx" secondAttribute="bottom" id="c5S-Br-36W"/>
                                     <constraint firstItem="j8b-n6-xzn" firstAttribute="leading" secondItem="M2j-Gx-z10" secondAttribute="leading" constant="10" id="kxx-hb-UpA"/>
                                     <constraint firstItem="j8b-n6-xzn" firstAttribute="top" secondItem="M2j-Gx-z10" secondAttribute="top" id="m3Q-wg-oQo"/>
-                                    <constraint firstItem="ZoV-eo-E5d" firstAttribute="centerX" secondItem="M2j-Gx-z10" secondAttribute="centerX" id="nxo-Q2-vzD"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZoV-eo-E5d" secondAttribute="bottom" id="oZR-As-wK0"/>
                                     <constraint firstAttribute="bottom" secondItem="E1N-sK-0Vg" secondAttribute="bottom" id="vO1-0v-but"/>
                                 </constraints>
                             </view>
@@ -497,7 +445,6 @@
                     <connections>
                         <outlet property="blurView" destination="213-o3-14Y" id="Ba8-CE-g08"/>
                         <outlet property="burgerImageView" destination="OTs-Gh-tq8" id="uHm-4c-rSt"/>
-                        <outlet property="buyNoAdsButton" destination="woe-CU-lbz" id="ehl-h5-tgq"/>
                         <outlet property="carousel" destination="VBQ-9U-Cwl" id="6RL-ED-eUL"/>
                         <outlet property="editMenuPanGesture" destination="6h2-jK-qyO" id="s5z-g1-CBc"/>
                         <outlet property="editMenuPanGestureBlurView" destination="bYy-G0-lnx" id="pt1-xC-7XS"/>
@@ -505,17 +452,13 @@
                         <outlet property="errorViewMessageLabel" destination="YRz-aK-n53" id="Uwy-pp-Mxf"/>
                         <outlet property="errorViewRetryButton" destination="KPV-bk-bIm" id="sA6-SE-gFw"/>
                         <outlet property="errorViewSpinner" destination="7aB-FQ-lv0" id="1jQ-Oj-Kwa"/>
-                        <outlet property="likeFbButton" destination="QA1-9G-8EZ" id="MBK-hj-5p9"/>
                         <outlet property="loadingView" destination="h6O-Se-vnM" id="eVv-eH-1tC"/>
                         <outlet property="marketViewsCollectionView" destination="k0x-hS-Keu" id="1yt-2a-27e"/>
                         <outlet property="marketsScrollSuperView" destination="AGx-Nj-mhU" id="L8L-Yf-eDI"/>
                         <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
                         <outlet property="marketsViewHeightConstraint" destination="v9D-Cx-ECY" id="Fu7-O5-MCV"/>
-                        <outlet property="noAdsBusyView" destination="BkO-3K-UTk" id="hab-Id-i0s"/>
-                        <outlet property="restorePurchasesButton" destination="daS-vd-54t" id="86b-k4-g11"/>
                         <outlet property="selectView" destination="IiU-qH-vpQ" id="Wni-R3-vVW"/>
                         <outlet property="topBar" destination="M2j-Gx-z10" id="0b4-7Z-xlD"/>
-                        <outlet property="topBarPurchasablesFBWidthConstraint" destination="un3-Sr-6O5" id="1zm-Im-CaB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzr-UZ-Jrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1161,6 +1104,114 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewc-PG-woB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2391" y="-406"/>
+        </scene>
+        <!--Markets Catalogs Top BarVC-->
+        <scene sceneID="BYs-b5-Udo">
+            <objects>
+                <viewController id="SaY-oS-NCd" customClass="AAAMarketsCatalogsTopBarVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eBT-4S-zFE">
+                        <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" semanticContentAttribute="spatial" translatesAutoresizingMaskIntoConstraints="NO" id="eP9-cK-6b8" userLabel="Parent">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhs-XS-YfF" userLabel="NoAds">
+                                        <rect key="frame" x="15" y="0.0" width="30" height="30"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="9Ni-Xx-e58"/>
+                                            <constraint firstAttribute="width" constant="30" id="V8Y-nY-lXC"/>
+                                        </constraints>
+                                        <state key="normal" image="buy_no_ads_btn.png"/>
+                                        <connections>
+                                            <action selector="buyAdsBtnPressed:" destination="SaY-oS-NCd" eventType="touchUpInside" id="7RX-Vk-bEt"/>
+                                            <action selector="buyAdsBtnPressed:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="CUz-un-f5i"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLv-pj-nLR" userLabel="Restore">
+                                        <rect key="frame" x="55" y="0.0" width="30" height="30"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="3yb-d9-nTO"/>
+                                            <constraint firstAttribute="height" constant="30" id="9Wi-0f-WEY"/>
+                                        </constraints>
+                                        <state key="normal" image="restore_purchases.png"/>
+                                        <connections>
+                                            <action selector="restorePurchases:" destination="SaY-oS-NCd" eventType="touchUpInside" id="7dX-WR-PZx"/>
+                                            <action selector="restorePurchases:" destination="7zJ-Rv-Ayp" eventType="touchUpInside" id="ocu-rM-rrg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ib9-ra-XJ0" userLabel="fb">
+                                        <rect key="frame" x="95" y="0.0" width="30" height="30"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="g6K-Uo-6is"/>
+                                            <constraint firstAttribute="width" constant="30" id="mCE-X5-FCd"/>
+                                        </constraints>
+                                        <state key="normal" image="like_fb_btn.png"/>
+                                        <connections>
+                                            <action selector="likeFb:" destination="SaY-oS-NCd" eventType="touchUpInside" id="8m7-08-OIT"/>
+                                        </connections>
+                                    </button>
+                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du0-eq-6Xd" userLabel="busyView">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="UJu-br-sTd">
+                                                <rect key="frame" x="60" y="5" width="20" height="20"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="czl-An-ERe"/>
+                                                    <constraint firstAttribute="height" constant="20" id="oAX-Nu-Gaa"/>
+                                                </constraints>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="UJu-br-sTd" firstAttribute="centerY" secondItem="Du0-eq-6Xd" secondAttribute="centerY" id="LT4-5w-tLB"/>
+                                            <constraint firstItem="UJu-br-sTd" firstAttribute="centerX" secondItem="Du0-eq-6Xd" secondAttribute="centerX" id="m7L-6N-6dS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="rLv-pj-nLR" firstAttribute="centerY" secondItem="eP9-cK-6b8" secondAttribute="centerY" id="GX7-GZ-m5n"/>
+                                    <constraint firstAttribute="bottom" secondItem="Du0-eq-6Xd" secondAttribute="bottom" id="SA3-cA-suT"/>
+                                    <constraint firstItem="Du0-eq-6Xd" firstAttribute="leading" secondItem="eP9-cK-6b8" secondAttribute="leading" id="Y4B-SA-QHK"/>
+                                    <constraint firstAttribute="width" constant="140" id="aF2-lv-mSh"/>
+                                    <constraint firstItem="ib9-ra-XJ0" firstAttribute="centerY" secondItem="eP9-cK-6b8" secondAttribute="centerY" id="bGR-9n-o6R"/>
+                                    <constraint firstItem="Du0-eq-6Xd" firstAttribute="top" secondItem="eP9-cK-6b8" secondAttribute="top" id="fP1-xs-l2h"/>
+                                    <constraint firstItem="vhs-XS-YfF" firstAttribute="centerY" secondItem="eP9-cK-6b8" secondAttribute="centerY" id="hLy-pg-frL"/>
+                                    <constraint firstItem="vhs-XS-YfF" firstAttribute="leading" secondItem="eP9-cK-6b8" secondAttribute="leading" constant="15" id="hrW-rs-FfP"/>
+                                    <constraint firstItem="rLv-pj-nLR" firstAttribute="leading" secondItem="eP9-cK-6b8" secondAttribute="leading" constant="55" id="i1Y-oa-Iif"/>
+                                    <constraint firstAttribute="trailing" secondItem="ib9-ra-XJ0" secondAttribute="trailing" constant="15" id="qpY-Gj-w0s"/>
+                                    <constraint firstAttribute="trailing" secondItem="Du0-eq-6Xd" secondAttribute="trailing" id="vbY-pz-Ddv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eP9-cK-6b8" firstAttribute="centerX" secondItem="eBT-4S-zFE" secondAttribute="centerX" id="RGe-Cx-ck6"/>
+                            <constraint firstItem="eP9-cK-6b8" firstAttribute="bottom" secondItem="eBT-4S-zFE" secondAttribute="bottomMargin" id="sYA-uY-lNg"/>
+                            <constraint firstItem="eP9-cK-6b8" firstAttribute="top" secondItem="eBT-4S-zFE" secondAttribute="topMargin" id="wwA-gZ-t72"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buyNoAdsButton" destination="vhs-XS-YfF" id="iLX-sP-Qrh"/>
+                        <outlet property="likeFbButton" destination="ib9-ra-XJ0" id="1P4-vz-MsO"/>
+                        <outlet property="restorePurchasesButton" destination="rLv-pj-nLR" id="GJW-MF-zgQ"/>
+                        <outlet property="topBar" destination="eP9-cK-6b8" id="zIH-Wc-1Jo"/>
+                        <outlet property="topBarBusyView" destination="Du0-eq-6Xd" id="clm-tQ-uHR"/>
+                        <outlet property="topBarPurchasablesFBWidthConstraint" destination="aF2-lv-mSh" id="ac5-cT-FI5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="crQ-Fe-QuI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="-736"/>
         </scene>
     </scenes>
     <resources>

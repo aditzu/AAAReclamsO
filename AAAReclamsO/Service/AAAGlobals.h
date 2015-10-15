@@ -30,6 +30,7 @@ static NSString* const FlurryEventDidTryToBuyNoAds = @"Did try to buy no ads";
 static NSString* const FlurryEventDidBuyNoAds = @"Did buy no ads";
 static NSString* const FlurryEventDidTryToRestore = @"Did try to restore purchases";
 static NSString* const FlurryEventDidRestore = @"Did restore purchases";
+static NSString* const FlurryEventDidPressLikePage = @"Did press like";
 
 static NSString* const FlurryParameterAdType = @"AD type";
 static NSString* const FlurryParameterPercentage = @"Percentage";
@@ -49,4 +50,6 @@ static NSString* const FlurryParameterBOOL = @"boolean";
 +(UIImage*)imageWithShadowForImage:(UIImage *)initialImage;
 -(NSString*) flurryId;
 -(NSString*) privacyPolicyURL;
+-(NSString*) fbPageURLOpenApp;
+-(NSString*) fbPageURLOpenSafari;
 @end

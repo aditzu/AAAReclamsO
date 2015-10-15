@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AAACatalogVC.h"
 #import "iCarousel.h"
-#import "AAAPurchasesHandler.h"
 
 typedef enum ScrollDirection {
     ScrollDirectionNone,
@@ -20,6 +19,6 @@ typedef enum ScrollDirection {
     ScrollDirectionCrazy,
 } ScrollDirection;
 
-@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate, AAAPurchaseHandlerDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
+@interface AAAMarketsCatalogsVC : UIViewController<AAACatalogVCEvents, iCarouselDataSource, iCarouselDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
 
 @end
