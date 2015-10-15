@@ -236,18 +236,6 @@
                                             <outletCollection property="gestureRecognizers" destination="6h2-jK-qyO" appends="YES" id="pfl-Rt-7Wb"/>
                                         </connections>
                                     </collectionView>
-                                    <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-49-Hvk" userLabel="markets ScrollView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
-                                        <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltw-j1-7ei">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
-                                                <animations/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </scrollView>
                                     <view userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HH4-4s-Jzk" userLabel="bottom_bar_overlay_VIEW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                         <subviews>
@@ -281,19 +269,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="j9q-ee-rAx" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="41e-Wx-iPe"/>
-                                    <constraint firstItem="1IV-49-Hvk" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="AgP-hc-AFM"/>
                                     <constraint firstItem="k0x-hS-Keu" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="C70-6z-Qk4"/>
                                     <constraint firstItem="k0x-hS-Keu" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" constant="14" id="DRI-5a-Mdp"/>
                                     <constraint firstItem="HH4-4s-Jzk" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="GIy-Fd-W15"/>
                                     <constraint firstItem="HH4-4s-Jzk" firstAttribute="top" secondItem="AGx-Nj-mhU" secondAttribute="top" id="IFL-Mu-CSp"/>
-                                    <constraint firstAttribute="bottom" secondItem="1IV-49-Hvk" secondAttribute="bottom" id="IM0-LQ-Ueg"/>
                                     <constraint firstAttribute="trailing" secondItem="HH4-4s-Jzk" secondAttribute="trailing" id="a9K-Lb-ST0"/>
                                     <constraint firstItem="j9q-ee-rAx" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="aG2-HS-qMe"/>
                                     <constraint firstAttribute="trailing" secondItem="k0x-hS-Keu" secondAttribute="trailing" id="cjx-2c-H7K"/>
-                                    <constraint firstAttribute="trailing" secondItem="1IV-49-Hvk" secondAttribute="trailing" id="eGS-7s-HiY"/>
                                     <constraint firstAttribute="bottom" secondItem="HH4-4s-Jzk" secondAttribute="bottom" id="elt-v9-X8B"/>
                                     <constraint firstAttribute="bottom" secondItem="j9q-ee-rAx" secondAttribute="bottom" id="jJU-nP-ut8"/>
-                                    <constraint firstItem="1IV-49-Hvk" firstAttribute="leading" secondItem="AGx-Nj-mhU" secondAttribute="leading" id="pdm-P8-JgT"/>
                                     <constraint firstAttribute="bottom" secondItem="k0x-hS-Keu" secondAttribute="bottom" constant="-4" id="sIF-gA-g3C"/>
                                     <constraint firstAttribute="height" constant="102" id="v9D-Cx-ECY"/>
                                     <constraint firstAttribute="trailing" secondItem="j9q-ee-rAx" secondAttribute="trailing" id="zjt-HH-pre"/>
@@ -455,7 +439,6 @@
                         <outlet property="loadingView" destination="h6O-Se-vnM" id="eVv-eH-1tC"/>
                         <outlet property="marketViewsCollectionView" destination="k0x-hS-Keu" id="1yt-2a-27e"/>
                         <outlet property="marketsScrollSuperView" destination="AGx-Nj-mhU" id="L8L-Yf-eDI"/>
-                        <outlet property="marketsScrollView" destination="1IV-49-Hvk" id="9HP-L5-lbO"/>
                         <outlet property="marketsViewHeightConstraint" destination="v9D-Cx-ECY" id="Fu7-O5-MCV"/>
                         <outlet property="selectView" destination="IiU-qH-vpQ" id="Wni-R3-vVW"/>
                         <outlet property="topBar" destination="M2j-Gx-z10" id="0b4-7Z-xlD"/>
@@ -1154,7 +1137,7 @@
                                             <action selector="likeFb:" destination="SaY-oS-NCd" eventType="touchUpInside" id="8m7-08-OIT"/>
                                         </connections>
                                     </button>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du0-eq-6Xd" userLabel="busyView">
+                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du0-eq-6Xd" userLabel="busyView">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="UJu-br-sTd">

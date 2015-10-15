@@ -25,7 +25,7 @@
 {
     NSMutableArray* markets;
     NSMutableArray* enabledMarkets;
-    IBOutlet UIScrollView* marketsScrollView;
+//    IBOutlet UIScrollView* marketsScrollView;
     
     AAAMarket* currentShowingMarket;
     NSMutableArray* currentShowingCatalogs;
@@ -109,7 +109,7 @@ static Reachability* ownServerReach;
     
     loadingView.hidden = YES;
     
-    marketsScrollView.delegate = self;
+//    marketsScrollView.delegate = self;
     
     errorView.layer.cornerRadius = 5.0f;
     errorViewRetryButton.layer.cornerRadius = 5.0f;
@@ -147,9 +147,9 @@ static Reachability* ownServerReach;
 - (void)loadTutorialViews
 {
     [[AAATutorialManager instance] setupWithStoryboard:self.storyboard];
-    UIView* dragMarketsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverMarkets withDependecies:@[] atCenter:marketsScrollView.superview.center];
+    UIView* dragMarketsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverMarkets withDependecies:@[] atCenter:marketViewsCollectionView.superview.center];
     [self.view addSubview:dragMarketsTutorial];
-    UIView* tapMarketTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnMarket withDependecies:@[@(TutorialViewDiscoverMarkets)] atCenter:marketsScrollView.superview.center];
+    UIView* tapMarketTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewTapOnMarket withDependecies:@[@(TutorialViewDiscoverMarkets)] atCenter:marketViewsCollectionView.superview.center];
     [self.view addSubview:tapMarketTutorial];
     UIView* dragCatalogsTutorial = [[AAATutorialManager instance] addTutorialView:TutorialViewDiscoverCatalogs withDependecies:@[@(TutorialViewDiscoverMarkets), @(TutorialViewTapOnMarket)] atCenter:carousel.center];
     [self.view addSubview:dragCatalogsTutorial];
