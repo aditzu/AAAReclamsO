@@ -19,14 +19,14 @@
 		9E514D331A716FE3003FAFBC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E514D321A716FE3003FAFBC /* libPods.a */; };
 		9E5B600E1BC3EBE0003F75F3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600D1BC3EBE0003F75F3 /* libsqlite3.tbd */; };
 		9E5B60101BC3EBEC003F75F3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B600F1BC3EBEC003F75F3 /* libz.tbd */; };
-		9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */; settings = {ASSET_TAGS = (); }; };
-		9E5B60161BC403DF003F75F3 /* AAAPurchasesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B60151BC403DF003F75F3 /* AAAPurchasesHandler.m */; settings = {ASSET_TAGS = (); }; };
-		9E5B60191BC42F96003F75F3 /* buy_no_ads_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B60181BC42F95003F75F3 /* buy_no_ads_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
-		9E5B601B1BC4328E003F75F3 /* restore_purchases@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601A1BC4328E003F75F3 /* restore_purchases@2x.png */; settings = {ASSET_TAGS = (); }; };
-		9E5B601D1BCECCF1003F75F3 /* like_fb_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601C1BCECCF0003F75F3 /* like_fb_btn@2x.png */; settings = {ASSET_TAGS = (); }; };
-		9E5B60201BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B601F1BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m */; settings = {ASSET_TAGS = (); }; };
-		9E5B60231BCFD854003F75F3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60211BCFD854003F75F3 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
-		9E5B60241BCFD854003F75F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60221BCFD854003F75F3 /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		9E5B60141BC3FF67003F75F3 /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60131BC3FF67003F75F3 /* libFlurry_7.2.1.a */; };
+		9E5B60161BC403DF003F75F3 /* AAAPurchasesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B60151BC403DF003F75F3 /* AAAPurchasesHandler.m */; };
+		9E5B60191BC42F96003F75F3 /* buy_no_ads_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B60181BC42F95003F75F3 /* buy_no_ads_btn@2x.png */; };
+		9E5B601B1BC4328E003F75F3 /* restore_purchases@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601A1BC4328E003F75F3 /* restore_purchases@2x.png */; };
+		9E5B601D1BCECCF1003F75F3 /* like_fb_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5B601C1BCECCF0003F75F3 /* like_fb_btn@2x.png */; };
+		9E5B60201BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5B601F1BCF98D8003F75F3 /* AAAMarketsCatalogsTopBarVC.m */; };
+		9E5B60231BCFD854003F75F3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60211BCFD854003F75F3 /* Bolts.framework */; };
+		9E5B60241BCFD854003F75F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5B60221BCFD854003F75F3 /* Parse.framework */; };
 		9E612DB61A712F3900567557 /* splash-ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB51A712F3900567557 /* splash-ios.png */; };
 		9E612DB81A712F9800567557 /* splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E612DB71A712F9800567557 /* splash_logo.png */; };
 		9E7172D61A1C92410078870E /* AAAwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E7172D51A1C92410078870E /* AAAwww.m */; };
@@ -195,6 +195,7 @@
 		9EE091561A24BA2B006789F0 /* bottom_bar_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottom_bar_overlay@2x.png"; sourceTree = "<group>"; };
 		9EE0915A1A25D2B8006789F0 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		9EE0915B1A25D2B8006789F0 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		9EED09ED1E1BB53300D9FE1C /* OfertaMea.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OfertaMea.entitlements; sourceTree = "<group>"; };
 		9EF059AD1A4F45430083A04F /* minimize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minimize@2x.png"; sourceTree = "<group>"; };
 		9EF059AF1A5170390083A04F /* zoom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zoom@2x.png"; sourceTree = "<group>"; };
 		9EFF175E1A6556F400E3AA2F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -291,6 +292,7 @@
 		9E2650C61A11192F005B546B /* AAAReclamsO */ = {
 			isa = PBXGroup;
 			children = (
+				9EED09ED1E1BB53300D9FE1C /* OfertaMea.entitlements */,
 				9E7A06531A6312C60054FBC2 /* FXBlurView */,
 				9E8654631A3743E000ECEE62 /* Flurry */,
 				9EB845D91A31B99C008EB324 /* Reachability */,
@@ -557,12 +559,13 @@
 		9E2650BC1A11192F005B546B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Adrian Ancuta";
 				TargetAttributes = {
 					9E2650C31A11192F005B546B = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = AC77PLNEMF;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -577,6 +580,7 @@
 					};
 					9E2650DF1A11192F005B546B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = AC77PLNEMF;
 						TestTargetID = 9E2650C31A11192F005B546B;
 					};
 				};
@@ -762,15 +766,21 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adrian Ancuta (ARZ7PB597J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adrian Ancuta (ARZ7PB597J)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = AC77PLNEMF;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -783,9 +793,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -804,23 +816,30 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adrian Ancuta (ARZ7PB597J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adrian Ancuta (ARZ7PB597J)";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = AC77PLNEMF;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -834,15 +853,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
+				CODE_SIGN_ENTITLEMENTS = AAAReclamsO/OfertaMea.entitlements;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = AC77PLNEMF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = AAAReclamsO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -892,8 +913,10 @@
 					"\"AdSupport\"",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.alphaappers.ofertamea;
 				PRODUCT_NAME = OfertaMea;
-				PROVISIONING_PROFILE = "6c52b1e7-6955-4d3b-92b6-c260676ae886";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -905,15 +928,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.alphaappers.ofertamea";
+				CODE_SIGN_ENTITLEMENTS = AAAReclamsO/OfertaMea.entitlements;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = AC77PLNEMF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = AAAReclamsO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -963,8 +988,10 @@
 					"\"AdSupport\"",
 					"-all_load",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.alphaappers.ofertamea;
 				PRODUCT_NAME = OfertaMea;
-				PROVISIONING_PROFILE = "6c52b1e7-6955-4d3b-92b6-c260676ae886";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -983,6 +1010,7 @@
 				);
 				INFOPLIST_FILE = AAAReclamsOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "aa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AAAReclamsO.app/AAAReclamsO";
 			};
@@ -998,6 +1026,7 @@
 				);
 				INFOPLIST_FILE = AAAReclamsOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "aa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AAAReclamsO.app/AAAReclamsO";
 			};
