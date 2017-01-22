@@ -29,7 +29,7 @@
 //@property(nonatomic, strong) IBOutlet UIView* containerView;
 
 -(void) setDelegate:(id<AAACatalogVCEvents>) _delegate;
--(void)setCatalog:(AAACatalog *)catalog seen:(BOOL) seen;
+-(void) setCatalog:(AAACatalog *)catalog seen:(BOOL) seen;
 -(void) minimize;
 -(void) finishedMinimized;
 -(void) maximize;

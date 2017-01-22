@@ -190,6 +190,12 @@ const static int PicturesToPreload = 3;
 
 - (void)setFromToDatesForCatalog:(AAACatalog *)catalog
 {
+    if (![self shouldShowFromToBottomBar] )
+    {
+        fromToBottomBar.hidden = YES;
+        return;
+    }
+    
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy"];
     NSDate* from = [NSDate dateWithTimeIntervalSince1970:catalog.activeFrom/1000.0f];
@@ -398,10 +404,15 @@ const static int PicturesToPreload = 3;
     }
 }
 
+-(BOOL) shouldShowFromToBottomBar
+{
+    return self.catalog.activeFrom > 0 && self.catalog.activeTo > 0;
+}
+
 -(void) finishedMinimized
 {
     [self setBottomBarYPosition];
-    [self showView:fromToBottomBar show:YES];
+    [self showView:fromToBottomBar show:[self shouldShowFromToBottomBar]];
 }
 
 -(void)maximize
