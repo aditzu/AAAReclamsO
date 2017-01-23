@@ -74,7 +74,6 @@
 		9EFF17641A65571500E3AA2F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFF17631A65571500E3AA2F /* MediaPlayer.framework */; };
 		9EFF17661A65571F00E3AA2F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFF17651A65571E00E3AA2F /* MobileCoreServices.framework */; };
 		9EFF176A1A65572F00E3AA2F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFF17691A65572F00E3AA2F /* Social.framework */; };
-		9EFF176C1A65575700E3AA2F /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFF176B1A65575700E3AA2F /* SpeechKit.framework */; };
 		9EFF176E1A65575E00E3AA2F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFF176D1A65575E00E3AA2F /* StoreKit.framework */; };
 		9EFF176F1A65576700E3AA2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8654251A36125D00ECEE62 /* UIKit.framework */; };
 		9EFF17721A66A52F00E3AA2F /* AAANotificationsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF17711A66A52F00E3AA2F /* AAANotificationsHandler.m */; };
@@ -254,7 +253,6 @@
 				9E8654B11A3EEAA000ECEE62 /* QuartzCore.framework in Frameworks */,
 				9E8654941A38D51600ECEE62 /* MessageUI.framework in Frameworks */,
 				9E8654911A38D50A00ECEE62 /* CoreTelephony.framework in Frameworks */,
-				9EFF176C1A65575700E3AA2F /* SpeechKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,7 +861,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = AAAReclamsO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -938,7 +936,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = AAAReclamsO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

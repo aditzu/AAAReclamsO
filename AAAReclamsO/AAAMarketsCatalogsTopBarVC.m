@@ -109,12 +109,21 @@ NSString* const kHasLikedFacebookKey = @"hasLikedFb";
 
 #pragma mark - AAAPurchasesDelegate
 
+-(void) showAlertWithTitle:(NSString *) alertTitle message: (NSString *) alertMessage cancelButtonText: (NSString *) cancelBtnText
+{
+    UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:cancelBtnText style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertCtrl dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertCtrl addAction:okButton];
+    [self presentViewController:alertCtrl animated:YES completion:nil];
+}
+
 -(void)purchaseSuccesfully:(NSString *)productId
 {
     topBarBusyView.hidden =YES;
     [[AAAGlobals sharedInstance].ads disable];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Felicitări" message:@"Felicitări! Reclamele au fost dezactivate pentru telefonul tău." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    [self showAlertWithTitle:@"Felicitări" message:@"Felicitări! Reclamele au fost dezactivate pentru telefonul tău." cancelButtonText:@"Ok"];
     [Flurry logEvent:FlurryEventDidBuyNoAds];
     [self resetTopbar];
 }
@@ -122,8 +131,7 @@ NSString* const kHasLikedFacebookKey = @"hasLikedFb";
 -(void)purchaseFailed:(NSString *)productId withError:(NSError *)error
 {
     topBarBusyView.hidden =YES;
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Eroare!" message:@"Aplicația nu se poate conecta la iTunes Store. Încearcă mai târziu!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    [self showAlertWithTitle:@"Eroare!" message:@"Aplicația nu se poate conecta la iTunes Store. Încearcă mai târziu!" cancelButtonText:@"Ok"];
 }
 
 -(void)restoreFinishedForProductWithId:(NSString *)productId withError:(NSError *)error
@@ -131,19 +139,16 @@ NSString* const kHasLikedFacebookKey = @"hasLikedFb";
     topBarBusyView.hidden =YES;
     if(error)
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Eroare!" message:@"Aplicația nu se poate conecta la iTunes Store. Încearcă mai târziu!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [self showAlertWithTitle:@"Eroare!" message:@"Aplicația nu se poate conecta la iTunes Store. Încearcă mai târziu!" cancelButtonText:@"Ok"];
     }
     else if([AAAPurchasesHandler hasAdsEnabled])
     {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"iTunes Store" message:@"Nu a fost nimic de restituit." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [self showAlertWithTitle:@"iTunes Store" message:@"Nu a fost nimic de restituit." cancelButtonText:@"Ok"];
     }
     else
     {
         [[AAAGlobals sharedInstance].ads disable];
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Felicitări!" message:@"Reclamele au fost dezactivate pentru telefonul tău." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        [self showAlertWithTitle:@"Felicitări!" message:@"Reclamele au fost dezactivate pentru telefonul tău." cancelButtonText:@"Ok"];
         [Flurry logEvent:FlurryEventDidRestore];
         [self resetTopbar];
     }

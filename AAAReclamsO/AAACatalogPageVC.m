@@ -169,7 +169,9 @@
 
 -(void)setImageUrl:(NSString *)imageUrl
 {
-    _imageUrl = [imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:imageUrl];
+    urlComponents.path = [urlComponents.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    _imageUrl = [urlComponents string];
     if (page) {
         [self updateImage];
     }

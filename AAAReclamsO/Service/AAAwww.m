@@ -12,6 +12,7 @@
 #import <RestKit/RestKit.h>
 
 static NSString* baseURL = @"https://marklogj-andreioprea.rhcloud.com";
+//static NSString* baseURL = @"http://marklogjtest-andreioprea.rhcloud.com";
 static NSString* downloadMarketsURL = @"/markets/list";
 static NSString* downloadCatalogsURL = @"/catalogs/list/active";
 static NSString* downloadCatalogPagesUrl = @"/pages";

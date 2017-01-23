@@ -32,16 +32,19 @@
 
 -(void)setLogoURL:(NSString *)_logoURL
 {
-//    logoURL = [_logoURL stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
-//    logoURL = [logoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        logoURL = [_logoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:_logoURL];
+    urlComponents.path = [urlComponents.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    logoURL = [urlComponents string];
 }
 
 -(void)setMiniLogoURL:(NSString *)_miniLogoURL
 {
 //    miniLogoURL = [_miniLogoURL stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
-//    miniLogoURL = [miniLogoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    miniLogoURL = [_miniLogoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:_miniLogoURL];
+    urlComponents.path = [urlComponents.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    miniLogoURL = [urlComponents string];
 }
 
 -(BOOL)isEqual:(id)object

@@ -180,9 +180,10 @@ const static int PicturesToPreload = 3;
 {
     if (!self.catalogIsSeen) {        
         CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-        rotationAnimation.toValue = @(M_PI * 2.0);
-        rotationAnimation.duration = 5;
-        rotationAnimation.autoreverses = NO;
+//        rotationAnimation.toValue = @(M_PI * 2.0);
+        rotationAnimation.toValue = @(M_PI / 6.0);
+        rotationAnimation.duration = .4;
+        rotationAnimation.autoreverses = YES;
         rotationAnimation.repeatCount = HUGE_VALF;
         [newViewImage.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     }
