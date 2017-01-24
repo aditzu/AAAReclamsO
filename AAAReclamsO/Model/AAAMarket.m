@@ -7,6 +7,7 @@
 //
 
 #import "AAAMarket.h"
+#import "AAAwww.h"
 
 @implementation AAAMarket
 
@@ -32,19 +33,20 @@
 
 -(void)setLogoURL:(NSString *)_logoURL
 {
-    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:_logoURL];
-    urlComponents.path = [urlComponents.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-    logoURL = [urlComponents string];
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http://.*\\.com/" options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:_logoURL options:0 range:NSMakeRange(0, [_logoURL length]) withTemplate:@""];
+    logoURL = [NSString stringWithFormat:@"%@/%@",[[AAAwww instance] host], [modifiedString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]]];
 }
 
 -(void)setMiniLogoURL:(NSString *)_miniLogoURL
 {
-//    miniLogoURL = [_miniLogoURL stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http://.*\\.com/" options:NSRegularExpressionCaseInsensitive error:&error];
     
-    
-    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:_miniLogoURL];
-    urlComponents.path = [urlComponents.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-    miniLogoURL = [urlComponents string];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:_miniLogoURL options:0 range:NSMakeRange(0, [_miniLogoURL length]) withTemplate:@""];
+    miniLogoURL = [NSString stringWithFormat:@"%@/%@",[[AAAwww instance] host], [modifiedString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]]];
 }
 
 -(BOOL)isEqual:(id)object

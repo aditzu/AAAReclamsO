@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Flurry.h"
 #import "AAAGlobals.h"
+#import "AAAwww.h"
 
 @implementation AAACatalogPageVC
 {
@@ -169,9 +170,11 @@
 
 -(void)setImageUrl:(NSString *)imageUrl
 {
-    NSURLComponents *urlComponents = [NSURLComponents componentsWithString:imageUrl];
-    urlComponents.path = [urlComponents.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-    _imageUrl = [urlComponents string];
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http://.*\\.com/" options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:imageUrl options:0 range:NSMakeRange(0, [imageUrl length]) withTemplate:@""];
+    _imageUrl = [NSString stringWithFormat:@"%@/%@",[[AAAwww instance] host], [modifiedString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]]];
     if (page) {
         [self updateImage];
     }
